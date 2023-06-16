@@ -1,0 +1,35 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.title{
+    border-bottom: 1px solid #58a12638;
+    display: flex;
+    justify-content: flex-start; 
+    padding-bottom: 12px;
+
+    &__iconContainer{
+        padding-right: 10px;
+
+        &__icon{
+            font-size: 25px;
+            padding-top: 3px;
+        }
+    }
+
+    &__titlesContainer{
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        font-family: $montserrat;
+
+        &__subTitle{
+            font-size: 13px;
+            font-weight: $light-montserrat-weight;
+        }
+
+        &__title{
+            font-size: 25px;
+        }
+
+    }
+}

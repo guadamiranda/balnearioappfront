@@ -3,11 +3,13 @@ import style from './encabezado.module.scss'
 
 interface IEncabezado{
     title: string,
+    alignment?: 'left' | 'center' | 'right'
 }
 
-const Encabezado: React.FC<IEncabezado> = ({title}) => {
+const Encabezado: React.FC<IEncabezado> = ({title, alignment}) => {
+    const styleHeader = style[`encabezado${alignment? `-${alignment}`: '-left'}`]
     return(
-        <div className={style.encabezado}>
+        <div className={styleHeader}>
             <span><b>{title}</b></span>
         </div>
     )

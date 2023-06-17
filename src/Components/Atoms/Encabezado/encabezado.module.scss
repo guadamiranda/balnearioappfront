@@ -2,6 +2,20 @@
 @import '../../../app/Variables/Fonts/fonts.module.scss';
 
 .encabezado{
+    display: flex;
     font-family: $montserrat;
     margin-bottom: 3px;
+    width: 100%;
+    
+        &-left {
+            text-align: left;
+        }
+    
+        &-center {
+            text-align: center;
+        }
+    
+        &-right {
+            text-align: right;
+        }
 }

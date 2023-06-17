@@ -1,0 +1,55 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.button {
+    align-items: center;
+    border: 1px solid $borderGrey;
+    border-radius: 8px;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    margin-top: 5px;
+    padding: 0px 5px;
+    width: 300px;
+
+    &-primary {
+        border: 1px solid $green;
+        color: $green;
+
+        &:hover {
+            background-color: $green;
+            color: white;
+        }
+    }
+
+    &-secondary {
+        border: 1px solid $secondary;
+        color: $secondary;
+
+        &:hover {
+            background-color: $secondary;
+            color: white;
+        }
+    }
+
+    &-danger {
+        border: 1px solid $danger;
+        color: $danger;
+
+        &:hover {
+            background-color: $danger;
+            color: white;
+        }
+    }
+
+
+    &__text {
+        font-family: $montserrat;
+        font-size: 14px;
+        font-weight: $regular-montserrat-weight;
+    }
+}
+
+.-fullWidth {
+    width: 100%;
+}

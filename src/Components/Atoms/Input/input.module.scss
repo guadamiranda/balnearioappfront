@@ -14,7 +14,7 @@
         justify-content: flex-start;
         margin-top: 5px;
         padding: 0px 5px;
-        width: 250px;
+        width: 100%;
 
         &:hover{
             border: 1px solid #53b953;
@@ -51,5 +51,9 @@
         font-family: $montserrat;
         font-size: 12px;
         font-weight: $regular-montserrat-weight;
+    }
+
+    &-fullWidth{
+        width: 100%;
     }
 }

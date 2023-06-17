@@ -19,6 +19,13 @@
             width: 100%;
             padding: 10px 3px;
 
+            &__vehiculos {
+                min-height: 0px;
+                max-height: 250px;
+                overflow-y: auto;
+                padding: 5px;
+            }
+
             &__inputs{
                 display: flex;
                 justify-content: space-between;

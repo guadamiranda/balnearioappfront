@@ -4,10 +4,12 @@ import style from './input.module.scss'
 interface IInput{
     icon: any,
     placeholder: string,
-    title: string
+    title: string,
+    type: string,
+    useStateFunction: any
 }
 
-const Input: React.FC<IInput> = ({icon, placeholder, title}) => {
+const Input: React.FC<IInput> = ({icon, placeholder, title, type, useStateFunction}) => {
     return(
         <div className={style.inputContainer}>
             <span className={style.inputContainer__title}>{title}</span>
@@ -15,7 +17,7 @@ const Input: React.FC<IInput> = ({icon, placeholder, title}) => {
                 <div className={style.inputContainer__input__icon}>
                     {icon}
                 </div>
-                <input placeholder={placeholder} className={style.inputContainer__input__input}></input>
+                <input placeholder={placeholder} type={type} className={style.inputContainer__input__input} onChange={e => useStateFunction(e.target.value)}></input>
             </div>
         </div>
     )

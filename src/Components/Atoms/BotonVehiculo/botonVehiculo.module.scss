@@ -1,0 +1,26 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.botonVehiculo{
+    align-items: center;
+    border: 1px solid $borderGrey;
+    border-radius: 8px;
+    background-color: $lightGrey;
+    color: $iconGrey;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-family: $montserrat;
+    font-size: 12px;
+    height: 40px;
+    justify-content: center;
+    margin-right: 3px;
+    margin-top: 4px;
+    min-width: 40px;
+    padding: 4px;
+
+    &:hover{
+        border: 1px solid $green;
+        color: $green;
+    }
+}

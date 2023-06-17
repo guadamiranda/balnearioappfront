@@ -17,11 +17,11 @@
         width: 250px;
 
         &:hover{
-            border: 1px solid #53b953;
+            border: 1px solid $green;
         }
 
         &:hover &__icon {
-            color: #53b953;
+            color: $green;
         }
 
         &__icon{

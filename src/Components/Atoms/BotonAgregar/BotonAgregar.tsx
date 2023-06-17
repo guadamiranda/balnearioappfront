@@ -1,16 +1,18 @@
 import React from 'react'
 import style from './botonAgregar.module.scss'
-import { VscAdd } from 'react-icons/vsc'
+
 
 interface IBotonAgregar{
-    title: string,
+    title?: string,
+    icon: any,
+    onClickFunction: () => void
 }
 
-const BotonAgregar: React.FC<IBotonAgregar> = ({title}) => {
+const BotonAgregar: React.FC<IBotonAgregar> = ({title, icon, onClickFunction}) => {
     return(
         <div className={style.botonAgregar}>
-            <span className={style.botonAgregar__label}>Agregar {title}</span>
-            <div className={style.botonAgregar__button}><VscAdd/></div>
+            { title ? <span className={style.botonAgregar__label}>Agregar {title}</span> : <></>}
+            <div className={style.botonAgregar__button} onClick={() => onClickFunction()}>{icon}</div>
         </div>
     )
 }

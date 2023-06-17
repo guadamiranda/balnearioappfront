@@ -1,0 +1,50 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.cantidadPersonas{
+    display: flex;
+    font-family: $montserrat;
+    font-size: 12px;
+    margin-top: 5px;
+
+    &__precioContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 44%;
+
+        &__price{
+            align-items: center;
+            display: flex;
+            height: 100%;
+        }
+
+        &__space{
+            margin-left: 4px;
+        }
+    }
+
+    &__totalContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 15%;
+
+        &__totalPrice{
+            align-items: center;
+            display: flex;
+            width: 25%; 
+            height: 100%;
+
+            &__price{
+                align-items: center;
+                display: flex;
+                height: 100%;
+            }           
+        }
+
+        &__space{
+            margin-left: 4px;
+        }
+    }
+}

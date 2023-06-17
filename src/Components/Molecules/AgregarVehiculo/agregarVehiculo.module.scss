@@ -1,0 +1,46 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.agregarVehiculo{
+    border: 1px solid $borderGrey;
+    border-radius: 8px;
+    display: flex;
+    min-height: 60px;
+    font-family: $montserrat;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+
+    &__botonesContainer{
+        width: 80%;
+
+        &__buttons{
+            display: flex;
+        }
+    }
+
+    &__eliminarContainer{
+        display: flex;
+        justify-content: flex-end;
+        width: 10%;
+    }
+
+    &__precioContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 10%;
+
+        &__price{
+            align-items: center;
+            display: flex;
+            height: 100%;
+        }
+
+        &__space{
+            margin-left: 4px;
+        }
+    }
+
+}

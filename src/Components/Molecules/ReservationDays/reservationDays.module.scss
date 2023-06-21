@@ -1,0 +1,9 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.reservationDays{
+    display: flex;
+    font-family: $montserrat;
+    font-size: 12px;
+    margin-top: 15px;
+}

@@ -19,9 +19,9 @@ const AgregarVehiculo: React.FC<IAgregarVehiculo> = ({index, onClickDelete}) => 
             <div className={style.agregarVehiculo__botonesContainer}>
                 <span className={style.agregarVehiculo__botonesContainer__title}>{index} - Tipo de vehiculo:</span>
                 <div className={style.agregarVehiculo__botonesContainer__buttons}>
-                    <BotonVehiculo icon={<FaCarSide/>} text='Auto' onClickFunction={() => setPrice(1000)}/>
-                    <BotonVehiculo icon={<FaTruckPickup/>} text='Camioneta' onClickFunction={() => setPrice(2000)}/>
-                    <BotonVehiculo icon={<FaTruckMoving/>} text='Camión' onClickFunction={() => setPrice(3000)}/>
+                    <BotonVehiculo icon={<FaCarSide/>} text='Auto' onClickFunction={() => setPrice(1000)} priceSelected={1000} price={price}/>
+                    <BotonVehiculo icon={<FaTruckPickup/>} text='Camioneta' onClickFunction={() => setPrice(2000)} priceSelected={2000} price={price}/>
+                    <BotonVehiculo icon={<FaTruckMoving/>} text='Camión' onClickFunction={() => setPrice(3000)} priceSelected={3000} price={price}/>
                 </div>
             </div>
 

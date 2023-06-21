@@ -25,9 +25,9 @@ const RegistrarEstadia = () => {
 
     const deleteVehiculeComponent = (index:number) => {
         console.log(index)
-        console.log(vehiculesComponent)
-        //const newAddVehiculeComponent = [...vehiculesComponent]
-        //newAddVehiculeComponent.splice(index, 1)
+        console.log([...vehiculesComponent])
+        const newAddVehiculeComponent = [...vehiculesComponent]
+        newAddVehiculeComponent.splice(index, 1)
         //setVehiculesComponent(newAddVehiculeComponent)
     }
     
@@ -40,28 +40,25 @@ const RegistrarEstadia = () => {
 
     return(
         <div className={style.registrarEstadiaContainer}>
-            <Title icon={<BiLeaf/>} subTitle='Ingresa los datos para registrar la estadía.' title='Registrar Estadía'/>
-            <div className={style.registrarEstadiaContainer__formContainer}>
-                <div className={style.registrarEstadiaContainer__formContainer__section}>
-                    <Encabezado title='Encargado del Grupo'/>
-                    <div className={style.registrarEstadiaContainer__formContainer__section__inputs}>
-                        <Input useStateFunction={setNumeroDocumento} type='number' icon={<HiOutlineIdentification/>} placeholder='99999999' title='Número de Documento'/>
-                        <Input useStateFunction={setNumeroPatente} type='text' icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo'/>
-                    </div>
+            <div className={style.registrarEstadiaContainer__section}>
+                <Encabezado title='Encargado del Grupo'/>
+                <div className={style.registrarEstadiaContainer__section__inputs}>
+                    <Input useStateFunction={setNumeroDocumento} type='number' icon={<HiOutlineIdentification/>} placeholder='99999999' title='Número de Documento'/>
+                    <Input useStateFunction={setNumeroPatente} type='text' icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo'/>
                 </div>
-                <div className={style.registrarEstadiaContainer__formContainer__section}>
-                    <Encabezado title='Datos del Vehiculo'/>
-                    <BotonAgregar title='Vehiculo' icon={<VscAdd/>} onClickFunction={() => addVehiculeComponent()}/>
-                    <div className={style.registrarEstadiaContainer__formContainer__section__vehiculos}>
-                        {vehiculesComponent.map((vehiculeComponent, index) => <div key={index} >{vehiculeComponent}</div>)}
-                    </div>
+            </div>
+            <div className={style.registrarEstadiaContainer__section}>
+                <Encabezado title='Datos del Vehiculo'/>
+                <BotonAgregar title='Vehiculo' icon={<VscAdd/>} onClickFunction={() => addVehiculeComponent()}/>
+                <div className={style.registrarEstadiaContainer__section__vehiculos}>
+                    {vehiculesComponent.map((vehiculeComponent, index) => <div key={index} >{vehiculeComponent}</div>)}
                 </div>
-                <div className={style.registrarEstadiaContainer__formContainer__section}>
-                    <Encabezado title='Datos de la Estadía'/>
-                    <div className={style.registrarEstadiaContainer__formContainer__section__estadia}>
-                        <CantidadPersonas useStateFunction={setFinalPriceAllPeople} finalPriceAllPeople={finalPriceAllPeople}/>
-                        <ReservationDays setFechaDesdeFunction={setFechaDesde} setFechaHastaFunction={setFechaHasta}/>
-                    </div>
+            </div>
+            <div className={style.registrarEstadiaContainer__section}>
+                <Encabezado title='Datos de la Estadía'/>
+                <div className={style.registrarEstadiaContainer__section__estadia}>
+                    <CantidadPersonas useStateFunction={setFinalPriceAllPeople} finalPriceAllPeople={finalPriceAllPeople}/>
+                    <ReservationDays setFechaDesdeFunction={setFechaDesde} setFechaHastaFunction={setFechaHasta}/>
                 </div>
             </div>
         </div>

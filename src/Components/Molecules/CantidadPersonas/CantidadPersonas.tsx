@@ -17,14 +17,17 @@ const CantidadPersonas: React.FC<ICantidadPersonas> = ({useStateFunction, finalP
             <div>
                 <Input icon={<AiOutlineUser/>} placeholder='Ej. 5' title='Cantidad de personas:' type='number' useStateFunction={useStateFunction}/>
             </div>
-            <div className={style.cantidadPersonas__precioContainer}>
-                <span>Precio por persona:</span>
-                <span className={style.cantidadPersonas__precioContainer__price}>$ <b className={style.cantidadPersonas__precioContainer__space}>{price}</b></span>
+            <div className={style.cantidadPersonas__precioTotalContainer}>
+                <div className={style.cantidadPersonas__precioTotalContainer__precioContainer}>
+                    <span>Precio por persona:</span>
+                    <span className={style.cantidadPersonas__precioTotalContainer__precioContainer__price}>$ <b className={style.cantidadPersonas__precioTotalContainer__space}>{price}</b></span>
+                </div>
+                <div className={style.cantidadPersonas__precioTotalContainer__totalContainer}>
+                    <span><b>Total:</b></span>
+                    <span className={style.cantidadPersonas__precioTotalContainer__totalContainer__totalPrice}>$ <b className={style.cantidadPersonas__precioTotalContainer__space}>{finalPriceAllPeople * price}</b></span>
+                </div>
             </div>
-            <div className={style.cantidadPersonas__totalContainer}>
-                <span><b>Total:</b></span>
-                <span className={style.cantidadPersonas__totalContainer__totalPrice}>$ <b className={style.cantidadPersonas__totalContainer__space}>{finalPriceAllPeople * price}</b></span>
-            </div>
+            
         </div>
     )
 }

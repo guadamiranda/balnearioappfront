@@ -1,17 +1,8 @@
 @import '../../../app/Variables/Colors/colors.module.scss';
 
 .registrarEstadiaContainer{
-    background-color: $white;
-    border-radius: 18px;
-    box-shadow: var(--boxShadow);
-    min-height: 85vh;
-    padding: 25px 20px;
-    width: 700px;
-
-    &__formContainer {
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
+    display: flex;
+    flex-direction: column;
 
         &__section{
             display: flex;
@@ -32,5 +23,27 @@
             }
             
         }
-    }
 }
+
+
+@media (max-width: 700px) {
+    .registrarEstadiaContainer{
+        &__section{
+            display: flex;
+            width: 100%;
+            padding: 10px 3px;
+
+            &__vehiculos {
+                max-height: 150px;
+            }
+
+            &__inputs{
+                display: flex;
+                flex-direction: column;
+            }
+            
+        }
+    }
+
+}
+

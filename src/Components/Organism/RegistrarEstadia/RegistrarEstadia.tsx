@@ -24,7 +24,8 @@ const RegistrarEstadia = () => {
     console.log(vehiculesComponent)
 
     const deleteVehiculeComponent = (index:number) => {
-        
+        console.log(index)
+        console.log(vehiculesComponent)
         //const newAddVehiculeComponent = [...vehiculesComponent]
         //newAddVehiculeComponent.splice(index, 1)
         //setVehiculesComponent(newAddVehiculeComponent)

@@ -5,16 +5,18 @@ interface IInput {
   icon: any;
   placeholder: string;
   title: string;
+  type?: 'number'
   isFullWidth?: boolean;
-  onChange?: () => void;
+  useStateFunction: (value: string) => void;
 }
 
 const Input: React.FC<IInput> = ({
   icon,
   placeholder,
   title,
+  type,
   isFullWidth,
-  onChange,
+  useStateFunction,
 }) => {
   const fullWidthProp = isFullWidth ? "-fullWidth" : "";
   const styleInputContainer = style[`inputContainer${fullWidthProp}`];
@@ -25,7 +27,8 @@ const Input: React.FC<IInput> = ({
         <div className={style.inputContainer__input__icon}>{icon}</div>
         <input
           placeholder={placeholder}
-          onChange={onChange}
+          onChange={e => useStateFunction(e.target.value)}
+          type={type}
           className={style.inputContainer__input__input}
         ></input>
       </div>

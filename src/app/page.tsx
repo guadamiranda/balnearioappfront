@@ -1,10 +1,10 @@
 import styles from './page.module.css'
-import RegistrarEstadia from '@/Components/Organism/RegistrarEstadia/RegistrarEstadia'
+import QueryReserve from '@/Components/Organism/queryReserve/queryReserve'
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <RegistrarEstadia/>
+      <QueryReserve/>
     </main>
   )
 }

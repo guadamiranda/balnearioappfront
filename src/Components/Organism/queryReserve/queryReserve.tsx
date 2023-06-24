@@ -1,9 +1,9 @@
 'use client'
 
-
 import ABMTemplate from "@/Components/templates/abmTemplate/ABMTemplate";
 import Encabezado from "@/Components/Atoms/Encabezado/Encabezado";
 import Separator from "@/Components/Atoms/Separator/separator";
+import InfoReserve from "../infoReserve/infoReserve";
 import { HiOutlineIdentification } from "react-icons/hi";
 import Input from "@/Components/Atoms/Input/input";
 import style from "./queryReserve.module.scss";
@@ -54,6 +54,7 @@ const QueryReserve = () => {
             <Separator/>
             <div className={style.formContainer__reserveZone}>
                 <Encabezado title='Datos de la estadia' alignment="center"/>
+
             </div>
         </ABMTemplate>
     );

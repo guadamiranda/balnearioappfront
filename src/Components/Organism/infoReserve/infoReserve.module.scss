@@ -1,0 +1,15 @@
+
+.reserveContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    &__gaugers{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &__date{
+        background-color: black;
+    }
+}

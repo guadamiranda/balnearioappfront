@@ -10,8 +10,7 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
     const todayDate = new Date()
     const initDate = new Date(initDateUnix)
     const finishDate = new Date(finishDateUnix)
-    console.log(todayDate.getFullYear())
-    console.log(initDate.getUTCFullYear())
+
     const getStateNamePeriodByDates = (todayUnix:number, initDateUnix:number, finishDateUnix:number): String => {
         return (
             initDate < todayDate && 

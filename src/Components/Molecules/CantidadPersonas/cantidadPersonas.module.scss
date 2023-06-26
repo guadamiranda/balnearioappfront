@@ -10,7 +10,7 @@
     &__precioTotalContainer{
         align-items: center;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         width: 100%;
 
         &__precioContainer{
@@ -58,6 +58,15 @@
 
             &__precioContainer{
                 margin-right: 15px;
+            }
+
+            &__totalContainer{
+                align-items: flex-end;
+                width: 25%;
+
+                &__totalPrice{
+                    justify-content: flex-end;
+                }
             }
 
         }

@@ -15,7 +15,7 @@
         margin-bottom: 5px;
         margin-top: 5px;
         padding: 0px 5px;
-        width: 250px;
+        width: 100%;
 
         &:hover{
             border: 1px solid $green;
@@ -52,5 +52,15 @@
         font-family: $montserrat;
         font-size: 12px;
         font-weight: $regular-montserrat-weight;
+    }
+
+    &-fullWidth{
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .inputContainer {
+        width: 100%;
     }
 }

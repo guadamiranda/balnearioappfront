@@ -1,6 +1,7 @@
 import styles from './page.module.css'
 import ABMTemplate from '@/Components/templates/abmTemplate/ABMTemplate'
 import RegistrarEstadia from '@/Components/Organism/RegistrarEstadia/RegistrarEstadia'
+import QueryReserve from '@/Components/Organism/queryReserve/queryReserve'
 
 export default function Home() {
   return (

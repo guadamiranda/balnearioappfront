@@ -3,6 +3,17 @@
 .registrarEstadiaContainer{
     display: flex;
     flex-direction: column;
+    height: 70vh;
+
+        &__buttonsContainer{
+            display: flex;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        &__footer{
+            height: 100%;
+        }
 
         &__section{
             display: flex;
@@ -10,40 +21,55 @@
             width: 100%;
             padding: 10px 3px;
 
-            &__vehiculos {
-                min-height: 0px;
-                max-height: 250px;
-                overflow-y: auto;
-                padding: 5px;
-            }
-
             &__inputs{
                 display: flex;
                 justify-content: space-between;
             }
-            
+
+            &__vehiculos {
+                min-height: 0px;
+                max-height: 200px;
+                overflow-y: auto;
+                padding: 5px;
+            }
         }
+
+        &__sectionTotal{
+            display: flex;
+            height: 60px;
+        }
+        
+        &__spaceButton{
+            margin: 0px 10px;
+        }  
+            
 }
 
 
 @media (max-width: 700px) {
     .registrarEstadiaContainer{
+
+        &__buttonsContainer{
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
         &__section{
             display: flex;
             width: 100%;
             padding: 10px 3px;
 
-            &__vehiculos {
-                max-height: 150px;
-            }
-
             &__inputs{
                 display: flex;
                 flex-direction: column;
             }
-            
-        }
-    }
 
+            &__vehiculos {
+                max-height: 150px;
+            }
+        }       
+    }
 }
 

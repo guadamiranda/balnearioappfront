@@ -3,12 +3,11 @@ import { useState } from 'react'
 import style from './registrarEstadia.module.scss'
 import AgregarVehiculo from '@/Components/Molecules/AgregarVehiculo/AgregarVehiculo'
 import BotonAgregar from '@/Components/Atoms/BotonAgregar/BotonAgregar'
+import Button from '@/Components/Atoms/button/button'
 import CantidadPersonas from '@/Components/Molecules/CantidadPersonas/CantidadPersonas'
 import Encabezado from '@/Components/Atoms/Encabezado/Encabezado' 
 import Input from '@/Components/Atoms/Input/input'
 import ReservationDays from '@/Components/Molecules/ReservationDays/ReservationDays'
-import Title from '@/Components/Atoms/Titulo/Titulo'
-import { BiLeaf } from 'react-icons/bi'
 import { AiOutlineCar } from 'react-icons/ai'
 import { HiOutlineIdentification } from 'react-icons/hi'
 import { VscAdd } from 'react-icons/vsc'
@@ -44,7 +43,7 @@ const RegistrarEstadia = () => {
                 <Encabezado title='Encargado del Grupo'/>
                 <div className={style.registrarEstadiaContainer__section__inputs}>
                     <Input useStateFunction={setNumeroDocumento} type='number' icon={<HiOutlineIdentification/>} placeholder='99999999' title='Número de Documento'/>
-                    <Input useStateFunction={setNumeroPatente} type='text' icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo'/>
+                    <Input useStateFunction={setNumeroPatente} icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo'/>
                 </div>
             </div>
             <div className={style.registrarEstadiaContainer__section}>
@@ -61,6 +60,17 @@ const RegistrarEstadia = () => {
                     <ReservationDays setFechaDesdeFunction={setFechaDesde} setFechaHastaFunction={setFechaHasta}/>
                 </div>
             </div>
+            <div className={style.registrarEstadiaContainer__footer}>
+                <div className={style.registrarEstadiaContainer__sectionTotal}>
+                    TOTAL
+                </div>
+                <div className={style.registrarEstadiaContainer__buttonsContainer}>
+                    <Button text='Limpiar datos' type='secondary' onClickFunction={() => console.log('hi')} isFullWidth={true}></Button>
+                    <div className={style.registrarEstadiaContainer__spaceButton}></div>
+                    <Button text='Registrar Reserva' type='primary' onClickFunction={() => console.log('hi')} isFullWidth={true}></Button>
+                </div>
+            </div>
+            
         </div>
     )
 }

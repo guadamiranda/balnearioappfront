@@ -1,19 +1,16 @@
 import { HiOutlineIdentification } from "react-icons/hi";
 import style from "./gaugerReserve.module.scss";
-import Button from '../../Atoms/button/button';
-import { FaTruckMoving, FaTruckPickup, FaCarSide } from "react-icons/fa"
+import { FaCarSide } from "react-icons/fa"
 import { AiOutlineUser } from "react-icons/ai";
 import { useState } from "react";
 
 const iconEntitys: { [entityName: string]: JSX.Element} = {
-    truck: <></>,
-    pickup: <></>,
-    car: <></>,
-    person: <></>
+    car: <FaCarSide></FaCarSide>,
+    resident: <AiOutlineUser></AiOutlineUser>
 }
 
 interface IGaugerReserve {
-    entityName: 'truck' | 'pickup' | 'car' | 'person', 
+    entityName: 'car' | 'resident',
     amount: number
 }
 

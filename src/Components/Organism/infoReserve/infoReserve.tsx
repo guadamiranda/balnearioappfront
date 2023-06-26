@@ -1,17 +1,16 @@
-import GaugerReserve from './gaugerReserve'
+import GaugerReserve from '../../Molecules/gaugerReserve/gaugerReserve'
 import style from "./infoReserve.module.scss";
 import Button from '../../Atoms/button/button';
+import PeriodReserve from '../../Molecules/periodReserve/periodReserve';
 
 const InfoReserve = () => {
 
     const getInfoReserve = (cardPlate: string, dni: string) => {
         return {
-            amountTruck: Math.floor(Math.random() * 5),
-            amountPickup: Math.floor(Math.random() * 5),
-            amountCars: Math.floor(Math.random() * 5),
-            amountPerson: Math.floor(Math.random() * 5),
-            initReserve: '12/05/2023',
-            finishReserve: '15/05/2023'
+            dniResidents: ['45.552.653', '35.306.215', '13.568.986'],
+            cardPlates: ['AB 349 FIO', 'BD 493 PE'],
+            initReserve: 1687478400000,
+            finishReserve: 1687910400000
         }
     }
 
@@ -19,11 +18,9 @@ const InfoReserve = () => {
 
     return (
         <div className={style.reserveContainer}>
-            <div className={style.gaugers}>
-                <GaugerReserve entityName='truck' amount={infoReserve.amountTruck}></GaugerReserve>
-                <GaugerReserve entityName='pickup' amount={infoReserve.amountPickup}></GaugerReserve>
-                <GaugerReserve entityName='car' amount={infoReserve.amountCars}></GaugerReserve>
-                <GaugerReserve entityName='person' amount={infoReserve.amountPerson}></GaugerReserve>
+            <PeriodReserve initDateUnix={infoReserve.initReserve} finishDateUnix={infoReserve.finishReserve}></PeriodReserve>
+            <div className={style.reserveContainer__gaugers}>
+
             </div>
         </div>
     );

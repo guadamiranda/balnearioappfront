@@ -1,0 +1,74 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.periodReserve {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    height: 70px;
+    justify-content: space-around;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid black;
+    font-family: $montserrat;
+
+    &__dateInfo {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        justify-content: center;
+        height: 100%;
+    }
+
+    &__todayDate {
+        height: 100%;
+        position: relative;
+        width: 70%;
+    }
+
+    &__lineToday {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $borderGrey;
+        border-top: 1px solid $lightGrey;
+    }
+
+    &__dotToday {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+
+        &-inRange {
+            background-color: $success;
+        }
+
+        &-outRange {
+            background-color: $danger;
+        }
+    }
+
+    &__today {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    &-inRange {
+        border-color: $success;
+    }
+
+    &-outRange {
+        border-color: $danger;
+    }
+}

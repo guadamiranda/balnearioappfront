@@ -1,0 +1,25 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.addResidentContainer{
+    border: 1px solid $borderGrey;
+    border-radius: 8px;
+    display: flex;
+    min-height: 60px;
+    font-family: $montserrat;
+    font-size: 12px;
+    justify-content: space-between;
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+
+    &__inputConteiner{
+        display: flex;
+    }
+
+    &__eliminarContainer{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+}

@@ -1,35 +1,38 @@
 'use client'
-import React, { useState } from 'react'
-import style from './cantidadPersonas.module.scss'
-import Input from '@/Components/Atoms/Input/input'
-import { AiOutlineUser } from 'react-icons/ai'
+import React, { useState, useEffect } from 'react'
+import style from './agregarVehiculo.module.scss'
+import BotonAgregar from '@/Components/Atoms/ButtonAdd/BotonAgregar'
+import { IoMdClose } from 'react-icons/io'
 
-interface ICantidadPersonas{
-    useStateFunction: any,
-    finalPriceAllPeople: number
+interface IPeopleAmount{
+    index: number,
+    deleteComponent: () => void,
 }
 
-const CantidadPersonas: React.FC<ICantidadPersonas> = ({useStateFunction, finalPriceAllPeople}) => {
-    const [ price, setPrice ] = useState(1000)
+const PeopleAmount: React.FC<IPeopleAmount> = ({index, deleteComponent}) => {
+
+    const [price, setPrice] = useState(0) 
 
     return(
-        <div className={style.cantidadPersonas}>
-            <div>
-                <Input icon={<AiOutlineUser/>} placeholder='Ej. 5' title='Cantidad de personas:' type='number' useStateFunction={useStateFunction}/>
+        <div key={index} className={style.agregarVehiculo}>
+            <div className={style.agregarVehiculo__botonesContainer}>
+                <span className={style.agregarVehiculo__botonesContainer__title}>{index} - Tipo de vehiculo:</span>
+
             </div>
-            <div className={style.cantidadPersonas__precioTotalContainer}>
-                <div className={style.cantidadPersonas__precioTotalContainer__precioContainer}>
-                    <span>Precio por persona:</span>
-                    <span className={style.cantidadPersonas__precioTotalContainer__precioContainer__price}>$ <b className={style.cantidadPersonas__precioTotalContainer__space}>{price}</b></span>
-                </div>
-                <div className={style.cantidadPersonas__precioTotalContainer__totalContainer}>
-                    <span><b>Total:</b></span>
-                    <span className={style.cantidadPersonas__precioTotalContainer__totalContainer__totalPrice}>$ <b className={style.cantidadPersonas__precioTotalContainer__space}>{finalPriceAllPeople * price}</b></span>
+
+            <div className={style.agregarVehiculo__precioContainer}>
+                <span>Precio:</span>
+                <span className={style.agregarVehiculo__precioContainer__price}>$ <b className={style.agregarVehiculo__precioContainer__space}>{price}</b></span>
+            </div>
+
+            <div className={style.agregarVehiculo__eliminarContainer}>
+                <div className={style.agregarVehiculo__eliminarContainer}>
+                    <BotonAgregar onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
                 </div>
             </div>
-            
         </div>
     )
 }
 
-export default CantidadPersonas
+export default PeopleAmount
+

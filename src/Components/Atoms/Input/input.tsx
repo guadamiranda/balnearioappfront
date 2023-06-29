@@ -7,7 +7,8 @@ interface IInput {
   title: string;
   type?: 'number' | 'date'
   isFullWidth?: boolean;
-  useStateFunction: (value: string) => void;
+  useStateFunction: any;
+  value?: any;
 }
 
 const Input: React.FC<IInput> = ({
@@ -17,6 +18,7 @@ const Input: React.FC<IInput> = ({
   type,
   isFullWidth,
   useStateFunction,
+  value
 }) => {
   const fullWidthProp = isFullWidth ? "-fullWidth" : "";
   const styleInputContainer = style[`inputContainer${fullWidthProp}`];
@@ -30,6 +32,7 @@ const Input: React.FC<IInput> = ({
           onChange={e => useStateFunction(e.target.value)}
           type={type}
           className={style.inputContainer__input__input}
+          value= {value}
         ></input>
       </div>
     </div>

@@ -1,0 +1,31 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.containerCheckbox{
+    display: flex;
+
+    &__designCheckbox, &__designCheckboxChecked {
+        align-items: center;
+        border-radius: 4px;
+        display: flex;
+        height: 15px;
+        justify-content: center;
+        margin-right: 5px;
+        width: 15px;
+    }
+
+    &__designCheckbox{
+        border: 1px solid $borderGrey;
+    }
+
+    &__designCheckboxChecked{
+        border: 1px solid $green;
+        color: $green;
+    }
+
+    &__titleCheckbox{
+        font-family: $montserrat;
+        font-size: 12px;
+
+    }
+}

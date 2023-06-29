@@ -1,0 +1,31 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.botonAgregar{
+    align-items: center;
+    display: flex;
+    margin: 4px 0px;
+
+    &__label{
+        font-family: $montserrat;
+        font-size: 12px;
+    }
+
+    &__button{
+        align-items: center;
+        background-color: $lightGrey;
+        border: 1px solid $borderGrey;
+        border-radius: 90px;
+        color: $borderGrey;
+        cursor: pointer;
+        display: flex;
+        font-size: 12px;
+        margin-right: 5px;
+        padding: 3px;  
+
+        &:hover{
+            border: 1px solid $green; 
+            color: $green;
+        }
+    }
+}

@@ -1,7 +1,6 @@
-import GaugerReserve from '../../Molecules/gaugerReserve/gaugerReserve'
-import style from "./infoReserve.module.scss";
-import Button from '../../Atoms/button/button';
+import CardInfoEntity from '../../Molecules/residentReserve/cardInfoEntity';
 import PeriodReserve from '../../Molecules/periodReserve/periodReserve';
+import style from "./infoReserve.module.scss";
 
 const InfoReserve = () => {
 
@@ -10,7 +9,7 @@ const InfoReserve = () => {
             dniResidents: ['45.552.653', '35.306.215', '13.568.986'],
             cardPlates: ['AB 349 FIO', 'BD 493 PE'],
             initReserve: 1687478400000,
-            finishReserve: 1687910400000
+            finishReserve: 1688165531000
         }
     }
 
@@ -19,9 +18,8 @@ const InfoReserve = () => {
     return (
         <div className={style.reserveContainer}>
             <PeriodReserve initDateUnix={infoReserve.initReserve} finishDateUnix={infoReserve.finishReserve}></PeriodReserve>
-            <div className={style.reserveContainer__gaugers}>
-
-            </div>
+            <CardInfoEntity typeInfoName={'dni'} infoNames={infoReserve.dniResidents}/>
+            <CardInfoEntity typeInfoName={'carPlate'} infoNames={infoReserve.cardPlates}/>
         </div>
     );
 };

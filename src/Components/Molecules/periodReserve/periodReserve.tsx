@@ -1,4 +1,3 @@
-import { HiOutlineIdentification } from "react-icons/hi";
 import style from "./periodReserve.module.scss";
 
 interface IPeriodReserve {
@@ -13,8 +12,8 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
 
     const getStateNamePeriodByDates = (todayUnix:number, initDateUnix:number, finishDateUnix:number): String => {
         return (
-            initDate < todayDate && 
-            todayDate < finishDate ? 
+            initDateUnix < todayUnix && 
+            todayUnix < finishDateUnix ? 
             'inRange' : 'outRange'
         )
     }

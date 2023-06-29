@@ -31,10 +31,6 @@ const QueryReserve = () => {
         if(!dni && !cardPlate){
             alert('Debe ingresar al menos un valor')
         }
-
-        console.log(dni)
-        console.log(cardPlate)
-
     }
 
     return (

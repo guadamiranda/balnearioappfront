@@ -1,10 +1,10 @@
 @import '../../../app/Variables/Colors/colors.module.scss';
 
 .ABMContainer {
-    background-color: $white;
+    background-color: #ffffff;
     border-radius: 18px;
     box-shadow: var(--boxShadow);
-    height: 90vh;
+    min-height: 80vh;
     padding: 25px 20px;
     width: 700px;
 
@@ -12,13 +12,13 @@
         display: flex;
         flex-direction: column;
         padding: 15px;
-        height: 95%;
+        min-height: 80vh;
         width: 100%;
     }
 
     @media (max-width: 700px) {
-        min-height: 90vh;
+        
+        margin: 10px 10px;
         width: 100%;
-        margin: 0px 10px;
     }
 }

@@ -16,9 +16,14 @@ const Checkbox: React.FC<ICheckbox> = ({title, isChecked, setIsChecked, setPrice
     const classNameNormal = `${style.containerCheckbox__designCheckbox}`
     const classNameChecked = `${style.containerCheckbox__designCheckboxChecked}`
 
-    const setPriceAndChecked = () => {
-        setIsChecked(!isChecked)
-        setPrice(isChecked? (totalPrice + price) : (totalPrice === 0 ? 0 : (totalPrice - price)))
+    const setPriceAndChecked = () => { 
+        const newIsChecked = !isChecked
+        
+        console.log(totalPrice)
+        console.log(price)
+        console.log(newIsChecked)
+        setPrice(newIsChecked? (totalPrice === 0 ? 0 : (totalPrice - price)) : (totalPrice + price))
+        setIsChecked(newIsChecked)
         setDNIorPartnerNumberDefault? setDNIorPartnerNumberDefault('') : null
     }
 

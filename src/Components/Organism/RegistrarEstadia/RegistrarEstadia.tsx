@@ -22,6 +22,7 @@ const RegistrarEstadia = () => {
     const [dateFrom, setDateFrom] = useState('')
     const [dateTo, setDateTo] = useState('')
     const [isChecked, setIsChecked] = useState(false)
+    const [isCheckedOneDay, setIsCheckedOneDay] = useState(false)
     const [isCheckedPerson, setIsCheckedPerson] = useState(false)
     const [lastName, setLastName] = useState('')
     const [numeroDocumento, setNumeroDocumento] = useState('')
@@ -29,10 +30,12 @@ const RegistrarEstadia = () => {
     const [numeroSocio, setNumeroSocio] = useState('')
     const [name, setName] = useState('')
     const [pricePerPerson, setPricePerPerson] = useState(1000)
+    const [priceOneDay, setPriceOneDay] = useState(2000)
     const [residentsIndex, setResidentsIndex] = useState<IResidentIndex[]>([])
     const [residentIndex, setResidentIndex] = useState(0)
     const [vehiculesIndex, setVehiculesIndex] = useState<IResidentIndex[]>([])
     const [vehiculeIndex, setVehiculeIndex] = useState(0)
+    console.log(isCheckedOneDay)
 
     const [totalPrice, setTotalPrice] = useState(pricePerPerson)
     
@@ -99,6 +102,8 @@ const RegistrarEstadia = () => {
         setTotalPrice(isChecked? 0 : pricePerPerson)
     }
 
+    
+
     useEffect(() => {
         setTotalPrice(isCheckedPerson? (totalPrice - pricePerPerson) : totalPrice )
         setIsCheckedPerson(false)
@@ -109,11 +114,12 @@ const RegistrarEstadia = () => {
             <div className={style.registrarEstadiaContainer__headerSection}>
                 <div className={style.registrarEstadiaContainer__section}>
                     <Encabezado title='Encargado del Grupo'/>
-                    <Checkbox title='¿Es socio?' isChecked={isChecked} 
-                                                 setIsChecked={setIsChecked} 
-                                                 setPrice={setTotalPrice} 
-                                                 price={pricePerPerson} 
-                                                 totalPrice={totalPrice}/>
+                    <Checkbox title='¿Es socio?' 
+                              isChecked={isChecked} 
+                              setIsChecked={setIsChecked} 
+                              setPrice={setTotalPrice} 
+                              price={pricePerPerson} 
+                              totalPrice={totalPrice}/>
                                                  
                     <div className={style.registrarEstadiaContainer__section__inputs}>
                         <Input useStateFunction={setNumeroDocumento} type='number' icon={<HiOutlineIdentification/>} placeholder='99999999' title='Número de Documento' value={numeroDocumento}/>
@@ -162,6 +168,13 @@ const RegistrarEstadia = () => {
 
                 <div className={style.registrarEstadiaContainer__section}>
                     <Encabezado title='Datos de la Estadía'/>
+                    <Checkbox title='¿Se queda menos de un día?' 
+                              isChecked={isCheckedOneDay} 
+                              setIsChecked={setIsCheckedOneDay}
+                              setPrice={setTotalPrice} 
+                              price={priceOneDay}
+                              totalPrice={totalPrice}/>
+                              
                     <div className={style.registrarEstadiaContainer__section__estadia}>
                         <ReservationDays setFechaDesdeFunction={setDateFrom} 
                                          setFechaHastaFunction={setDateTo} 

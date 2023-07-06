@@ -17,7 +17,8 @@ interface IResidentSection {
 type IResident = {
     index: number,
     key: number,
-    dniOrPartnerNumber: number,
+    dniNumber: number,
+    partnerNumber: number,
     isPartner: boolean
 }
 
@@ -34,7 +35,8 @@ const ResidentSection: React.FC<IResidentSection> = ({
     const addResidentComponent = () => {
         const newResident = {key: residentIndex, 
                             index: residentIndex, 
-                            dniOrPartnerNumber: 0, 
+                            dniNumber: 0, 
+                            partnerNumber: 0,
                             isPartner: false}
         setResidents([...residents, newResident])
         setResidentsInRegister([...residents, newResident])
@@ -49,11 +51,14 @@ const ResidentSection: React.FC<IResidentSection> = ({
         setTotalPrice(isCheckedResident? totalPrice : (totalPrice === 0 ? 0 : (totalPrice - pricePerPerson)))
     }
 
-    const handleDNIorPartnerNumber = (index: number, newDNIorPartnerNumber: number, isPartner: boolean) => {
+    const handleDNIorPartnerNumber = (index: number, dniNumber: number, partnerNumber: number, isPartner: boolean) => {
         setResidents(
             residents.map((resident) => {
             if(resident.index === index){
-                return { ...resident, dniOrPartnerNumber: newDNIorPartnerNumber, isPartner }
+                return { ...resident, 
+                            dniNumber: dniNumber , 
+                            partnerNumber: partnerNumber,
+                            isPartner: isPartner}
             }
             return resident;
             })
@@ -62,6 +67,13 @@ const ResidentSection: React.FC<IResidentSection> = ({
     }
 
     const cleanDataResidentSection = () => {
+        let restPrice = 0
+        residents.map((resident) => {
+            if(resident.isPartner === false){
+                restPrice += pricePerPerson
+            }
+        })
+        setTotalPrice(totalPrice - restPrice)
         setResidents([])
         setResidentIndex(0)
         setResidentsInRegister([])

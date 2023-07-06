@@ -27,12 +27,12 @@ const AddResident: React.FC<IAddResident> = ({
     setTotalPrice}) => {
 
     const [isCheckedPartner, setIsCheckedPartner] = useState(false)
-    const [partnerOrDniNumber, setPartnerOrDniNumber] = useState()
+    const [dniNumber, setDniNumber] = useState<number>(0)
+    const [partnerNumber, setPartnerNumber] = useState<number>(0)
 
     const deleteComponentAndComprobateChecked = () => {
         deleteComponent(index, isCheckedPartner)
     }
-
 
     const setPriceAndChecked = () => { 
         setIsCheckedPartner(!isCheckedPartner)
@@ -40,25 +40,30 @@ const AddResident: React.FC<IAddResident> = ({
     }
 
     useEffect(() => {
-        handleDNIorPartnerNumber(index, partnerOrDniNumber, isCheckedPartner)
-    }, [partnerOrDniNumber, isCheckedPartner])
+        handleDNIorPartnerNumber(index, dniNumber, partnerNumber, isCheckedPartner)
+    }, [partnerNumber, dniNumber, isCheckedPartner])
+
+    useEffect(() => {
+        isCheckedPartner? setDniNumber(0) : setPartnerNumber(0)
+    }, [isCheckedPartner])
 
 
     return(
         <div key={index} className={style.addResidentContainer}>
             <div className={style.addResidentContainer__inputConteiner}>
-                {isCheckedPartner? <Input value={partnerOrDniNumber} 
+                {isCheckedPartner? <Input value={partnerNumber === 0 ? '' : partnerNumber} 
                                           icon={<AiOutlineUser/>} 
                                           placeholder='99999999' 
                                           title='Número de Socio' 
                                           type= 'number'
-                                          useStateFunction={setPartnerOrDniNumber}/> : 
-                                   <Input value={partnerOrDniNumber} 
+                                          useStateFunction={setPartnerNumber}/> : 
+
+                                   <Input value={dniNumber === 0 ? '' : dniNumber} 
                                           icon={<HiOutlineIdentification/>} 
                                           placeholder='99999999' 
                                           title='Número de Documento' 
                                           type= 'number'
-                                          useStateFunction={setPartnerOrDniNumber}/>}
+                                          useStateFunction={setDniNumber}/>}
 
                 <Checkbox title='¿Es socio?' 
                           onClickFunction={setPriceAndChecked}/>

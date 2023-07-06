@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import style from './addResident.module.scss'
-import BotonAgregar from '@/Components/Atoms/ButtonAdd/BotonAgregar'
+import ButtonAction from '@/Components/Atoms/ButtonAction/ButtonAction'
 import Checkbox from '@/Components/Atoms/Checkbox/Checkbox'
 import Input from '@/Components/Atoms/Input/input'
 import { AiOutlineUser } from 'react-icons/ai'
@@ -10,22 +10,33 @@ import { IoMdClose } from 'react-icons/io'
 
 interface IAddResident{
     index: number,
-    deleteComponent: () => void,
-    setResidentsDni?: () => void,
-    setPriceChecked: any,
-    price: number,
+    handleDNIorPartnerNumber?: any ,
+    pricePerPerson: number,
     totalPrice: number,
-    setIsCheckedPerson: any,
-    handleDNIorPartnerNumber?: any 
+    deleteComponent: (index: number, isCheckedResident:boolean) => void,
+    setResidentsDni?: () => void,
+    setTotalPrice: (price: number) => void
 }
 
-const AddResident: React.FC<IAddResident> = ({index, deleteComponent, setPriceChecked, price, totalPrice, setIsCheckedPerson, handleDNIorPartnerNumber}) => {
+const AddResident: React.FC<IAddResident> = ({
+    index, 
+    handleDNIorPartnerNumber, 
+    pricePerPerson,
+    totalPrice,
+    deleteComponent,
+    setTotalPrice}) => {
+
     const [isCheckedPartner, setIsCheckedPartner] = useState(false)
     const [partnerOrDniNumber, setPartnerOrDniNumber] = useState()
 
     const deleteComponentAndComprobateChecked = () => {
-        setIsCheckedPerson(isCheckedPartner? false : true)
-        deleteComponent()
+        deleteComponent(index, isCheckedPartner)
+    }
+
+
+    const setPriceAndChecked = () => { 
+        setIsCheckedPartner(!isCheckedPartner)
+        setTotalPrice(isCheckedPartner? (totalPrice + pricePerPerson) : (totalPrice === 0 ? 0 : (totalPrice - pricePerPerson)))
     }
 
     useEffect(() => {
@@ -40,25 +51,22 @@ const AddResident: React.FC<IAddResident> = ({index, deleteComponent, setPriceCh
                                           icon={<AiOutlineUser/>} 
                                           placeholder='99999999' 
                                           title='Número de Socio' 
+                                          type= 'number'
                                           useStateFunction={setPartnerOrDniNumber}/> : 
                                    <Input value={partnerOrDniNumber} 
                                           icon={<HiOutlineIdentification/>} 
                                           placeholder='99999999' 
                                           title='Número de Documento' 
+                                          type= 'number'
                                           useStateFunction={setPartnerOrDniNumber}/>}
 
                 <Checkbox title='¿Es socio?' 
-                          isChecked={isCheckedPartner} 
-                          setIsChecked={setIsCheckedPartner} 
-                          setPrice={setPriceChecked} 
-                          price={price} 
-                          totalPrice={totalPrice}
-                          setDNIorPartnerNumberDefault={setPartnerOrDniNumber}/>
+                          onClickFunction={setPriceAndChecked}/>
             </div>
 
             <div className={style.addResidentContainer__eliminarContainer}>
                 <div className={style.addResidentContainer__eliminarContainer}>
-                    <BotonAgregar onClickFunction={() => deleteComponentAndComprobateChecked()}
+                    <ButtonAction onClickFunction={() => deleteComponentAndComprobateChecked()}
                                   icon={<IoMdClose/>}/>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import style from './agregarVehiculo.module.scss'
-import BotonAgregar from '@/Components/Atoms/ButtonAdd/BotonAgregar'
+import ButtonAction from '@/Components/Atoms/ButtonAction/ButtonAction'
 import { IoMdClose } from 'react-icons/io'
 
 interface IPeopleAmount{
@@ -27,7 +27,7 @@ const PeopleAmount: React.FC<IPeopleAmount> = ({index, deleteComponent}) => {
 
             <div className={style.agregarVehiculo__eliminarContainer}>
                 <div className={style.agregarVehiculo__eliminarContainer}>
-                    <BotonAgregar onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
+                    <ButtonAction onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
                 </div>
             </div>
         </div>

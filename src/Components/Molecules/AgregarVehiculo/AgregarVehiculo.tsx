@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import style from './agregarVehiculo.module.scss'
-import BotonAgregar from '@/Components/Atoms/ButtonAdd/BotonAgregar'
+import ButtonAction from '@/Components/Atoms/ButtonAction/ButtonAction'
 import BotonVehiculo from '@/Components/Atoms/BotonVehiculo/BotonVehiculo'
 import { FaCarSide, FaTruckPickup, FaTruckMoving } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
@@ -49,7 +49,7 @@ const AgregarVehiculo: React.FC<IAgregarVehiculo> = ({index, deleteComponent}) =
 
             <div className={style.agregarVehiculo__eliminarContainer}>
                 <div className={style.agregarVehiculo__eliminarContainer}>
-                    <BotonAgregar onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
+                    <ButtonAction onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
                 </div>
             </div>
         </div>

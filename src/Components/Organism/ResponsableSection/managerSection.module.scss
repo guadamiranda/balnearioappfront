@@ -1,0 +1,37 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.managerSection{
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+    justify-content: space-between;
+
+        &__section{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        &__inputs{
+            display: flex;
+            justify-content: space-between;
+        }         
+}
+
+
+@media (max-width: 700px) {
+    .managerSection{
+        &__section{
+            display: flex;
+            width: 100%;
+            padding: 10px 3px;
+        }   
+        
+        &__inputs{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+

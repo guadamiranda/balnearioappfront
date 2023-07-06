@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import style from './addVehicule.module.scss'
-import BotonAgregar from '@/Components/Atoms/ButtonAdd/BotonAgregar'
+import ButtonAction from '@/Components/Atoms/ButtonAction/ButtonAction'
 import Input from '@/Components/Atoms/Input/input'
 import { AiOutlineCar, AiOutlineUser } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
@@ -26,7 +26,7 @@ const AddVehicule: React.FC<IAddVehicule> = ({index, deleteComponent, handleCarP
             </div>
 
             <div className={style.addVehiculeContainer__eliminarContainer}>
-                    <BotonAgregar onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
+                    <ButtonAction onClickFunction={() => deleteComponent()}icon={<IoMdClose/>}/>
             </div>
         </div>
     )

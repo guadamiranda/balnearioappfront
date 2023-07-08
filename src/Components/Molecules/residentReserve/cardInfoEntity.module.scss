@@ -1,0 +1,43 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.cardEntity {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    height: 70px;
+    justify-content: space-around;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid $borderGrey;
+    font-family: $montserrat;
+
+    &__icon {
+        align-items: center;
+        border-right: 1px solid $lightGrey;
+        color: grey;
+        display: flex;
+        font-size: 30px;
+        justify-content: center;
+        height: 60px;
+        width: 10%;
+
+        @media (max-width: 700px) {
+            font-size: 20px;
+        }
+    }
+
+    &__entityContainer {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        height: 60px;
+        justify-content: space-around;
+        overflow-y: auto;
+        width: 90%;
+    }
+
+    &__entity {
+        margin: 0px 5px 5px 0px;
+    }
+}

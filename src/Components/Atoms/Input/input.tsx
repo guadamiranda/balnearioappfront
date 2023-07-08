@@ -7,7 +7,7 @@ interface IInput {
   title: string;
   type?: 'number' | 'date'
   isFullWidth?: boolean;
-  useStateFunction: any;
+  useStateFunction: (value: string) => void;
   value?: any;
 }
 

@@ -7,10 +7,10 @@ import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import { VscAdd } from 'react-icons/vsc'
 
 interface IResidentSection {
-    cleanDataFlag: boolean,
     pricePerPerson: number,
     totalPrice: number,
-    setResidentsInRegister: (resident: any) => void,
+    residents: Array<IResident>
+    setResidents: (resident: any) => void,
     setTotalPrice: (price: number) => void
 }
 
@@ -23,14 +23,14 @@ type IResident = {
 }
 
 const ResidentSection: React.FC<IResidentSection> = ({
-    cleanDataFlag,
     pricePerPerson, 
     totalPrice,
-    setResidentsInRegister,
+    residents,
+    setResidents,
     setTotalPrice}) => {
 
-    const [residents, setResidents] = useState<IResident[]>([])
     const [residentIndex, setResidentIndex] = useState(0)
+    console.log(residents)
 
     const addResidentComponent = () => {
         const newResident = {key: residentIndex, 
@@ -39,7 +39,6 @@ const ResidentSection: React.FC<IResidentSection> = ({
                             partnerNumber: 0,
                             isPartner: false}
         setResidents([...residents, newResident])
-        setResidentsInRegister([...residents, newResident])
         setResidentIndex(residentIndex + 1)
         setTotalPrice(totalPrice + pricePerPerson)
     }
@@ -63,25 +62,7 @@ const ResidentSection: React.FC<IResidentSection> = ({
             return resident;
             })
         )
-        setResidentsInRegister({...residents})
     }
-
-    const cleanDataResidentSection = () => {
-        let restPrice = 0
-        residents.map((resident) => {
-            if(resident.isPartner === false){
-                restPrice += pricePerPerson
-            }
-        })
-        setTotalPrice(totalPrice - restPrice)
-        setResidents([])
-        setResidentIndex(0)
-        setResidentsInRegister([])
-    } 
-
-    useEffect(() => {
-        cleanDataResidentSection()
-    }, [cleanDataFlag])
 
     return(
         <div className={style.residentSection__section}>

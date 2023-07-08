@@ -1,5 +1,5 @@
 import style from './managerSection.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Checkbox from '@/Components/Atoms/Checkbox/Checkbox'
 import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import Input from '@/Components/Atoms/Input/input'
@@ -8,6 +8,7 @@ import { AiOutlineCar, AiOutlineUser } from 'react-icons/ai'
 import { HiOutlineIdentification } from 'react-icons/hi'
 
 interface IManagerSection{
+    cleanDataFlag: boolean,
     carPlateNumber: string,
     dniNumber: number,
     partnerNumber: number,
@@ -24,6 +25,7 @@ interface IManagerSection{
 }
 
 const ManagerSection: React.FC<IManagerSection> = ({
+    cleanDataFlag,
     carPlateNumber,
     dniNumber, 
     partnerNumber,
@@ -48,17 +50,22 @@ const ManagerSection: React.FC<IManagerSection> = ({
         setTotalPrice(isCheckedPartner? (totalPrice + pricePerPerson) : totalPrice === 0 ? 0 : (totalPrice - pricePerPerson))
     }
 
+    useEffect(() => {
+        setIsChecked(false)
+    }, [cleanDataFlag])
+
     return(
         <div className={style.managerSection__section}>
             <Encabezado title='Encargado del Grupo'/>
-            <Checkbox title='¿Es socio?' 
+            <Checkbox cleanDataFlag={cleanDataFlag}
+                      title='¿Es socio?' 
                       onClickFunction={setPriceAndChecked}/>
                                                  
             <div className={style.managerSection__inputs}>
             {isChecked? <Input useStateFunction={setPartnerNumber} icon={<AiOutlineUser/>} placeholder='123456789' title='Número de Socio' value={partnerNumber === 0 ? '' : partnerNumber}/> :
                         <Input useStateFunction={setDocumentNumber} type='number' icon={<HiOutlineIdentification/>} placeholder='99999999' title='Número de Documento' value={dniNumber === 0 ? '' : dniNumber}
                         />}
-                <Input useStateFunction={setCarPlateNumber} icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo' value={carPlateNumber}/>
+                        <Input useStateFunction={setCarPlateNumber} icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo' value={carPlateNumber}/>
                 
             </div>
                     

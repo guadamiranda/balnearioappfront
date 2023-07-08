@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './checkbox.module.scss'
 import { BsCheck } from 'react-icons/bs'
 
 interface ICheckbox{
+    cleanDataFlag: boolean,
     title: string,
     onClickFunction: () => void
 }
 
-const Checkbox: React.FC<ICheckbox> = ({ title, onClickFunction}) => {
+const Checkbox: React.FC<ICheckbox> = ({cleanDataFlag, title, onClickFunction}) => {
     const [isChecked, setIsChecked] = useState<Boolean>(false)
     const classNameNormal = `${style.containerCheckbox__designCheckbox}`
     const classNameChecked = `${style.containerCheckbox__designCheckboxChecked}`
@@ -16,6 +17,10 @@ const Checkbox: React.FC<ICheckbox> = ({ title, onClickFunction}) => {
         setIsChecked(!isChecked)
         onClickFunction()
     }
+
+    useEffect(() => {
+        setIsChecked(false)
+    }, [cleanDataFlag])
 
     return(
         <div className={style.containerCheckbox}>

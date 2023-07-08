@@ -7,8 +7,8 @@ import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import { VscAdd } from 'react-icons/vsc'
 
 interface IVehiculeSection {
-    cleanDataFlag: boolean,
-    setVehiculesInRegister: (vehicule: any) => void,
+    vehicules: Array<IVehicule>,
+    setVehicules: (vehicule: any) => void,
 }
 
 type IVehicule = {
@@ -18,11 +18,10 @@ type IVehicule = {
 }
 
 const VehiculeSection: React.FC<IVehiculeSection> = ({
-    cleanDataFlag,
-    setVehiculesInRegister
+    vehicules,
+    setVehicules
     }) => {
 
-    const [vehicules, setVehicules] = useState<IVehicule[]>([])
     const [vehiculeIndex, setVehiculeIndex] = useState(0)
 
     const addVehiculeComponent = () => {
@@ -39,24 +38,13 @@ const VehiculeSection: React.FC<IVehiculeSection> = ({
     const handleCarPlateNumber = (index: number, carPlateNumber: string) => {
         setVehicules(
             vehicules.map((vehicule) => {
-            if(vehicule.index === index){
-                return { ...vehicule, carPlate: carPlateNumber }
-            }
-            return vehicule;
-            })
+                if(vehicule.index === index){
+                    return { ...vehicule, carPlate: carPlateNumber }
+                }
+                return vehicule;
+                })
         )
-        setVehiculesInRegister({...vehicules})
     }
-
-    const cleanDataVehiculeSection = () => {
-        setVehicules([])
-        setVehiculeIndex(0)
-        setVehiculesInRegister([])
-    }
-
-    useEffect(() => {
-        cleanDataVehiculeSection()
-    }, [cleanDataFlag])
 
     return(
         <div className={style.vehiculeSection__section}>

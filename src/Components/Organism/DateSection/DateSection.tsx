@@ -80,13 +80,15 @@ const DateSection: React.FC<IDateSection> = ({
     }, [dateFrom, dateTo]) 
 
     useEffect(() => {
+        setIsCheckedOneDay(false)
         cleanDataDateSection()
     }, [cleanDataFlag])
 
     return(
         <div className={style.registrarEstadiaContainer__section}>
             <Encabezado title='Datos de la Estadía'/>
-            <Checkbox title='¿Se queda menos de un día?' 
+            <Checkbox cleanDataFlag={cleanDataFlag}
+                      title='¿Se queda menos de un día?' 
                       onClickFunction={setPriceAndChecked}/>
                               
             {isCheckedOneDay? <></> : 

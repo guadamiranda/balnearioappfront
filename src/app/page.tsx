@@ -5,7 +5,11 @@ import QueryReserve from '@/Components/Organism/queryReserve/queryReserve'
 export default function Home() {
   return (
     <main className={styles.main}>
-      <ABMTemplate title='Registrar Estadía' subTitle='Ingresa los datos para registrar la estadía.' children={<RegistrarEstadia/>}/>
+      <QueryReserve/>
+      
     </main>
   )
 }
+
+/*
+<ABMTemplate title='Registrar Estadía' subTitle='Ingresa los datos para registrar la estadía.' children={<QueryReserve/>}/>*/

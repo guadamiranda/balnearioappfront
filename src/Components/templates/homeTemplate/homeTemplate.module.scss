@@ -4,15 +4,15 @@
     background-color: #ffffff;
     border-radius: 18px;
     box-shadow: var(--boxShadow);
-    min-height: 55vh;
+    height: 55vh;
     padding: 25px 20px;
-    width: 1000px;
+    width: 900px;
 
     &__childContainer {
         display: flex;
         flex-direction: column;
         padding: 15px;
-        min-height: 55vh;
+        height: 85%;
         width: 100%;
     }
 

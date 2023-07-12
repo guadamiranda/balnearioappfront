@@ -1,0 +1,16 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.profilePhotoContainer{
+    height: 150px;
+    border-radius: 90px;
+    width: 150px;
+    overflow: hidden;
+
+    &__img{
+        width: 100%;
+        height: auto;
+        object-fit: cover; 
+        border-radius: 50%;
+    }
+}

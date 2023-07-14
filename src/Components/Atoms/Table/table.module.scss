@@ -1,0 +1,36 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+
+.tableContainer{
+
+    &__tableHeader {
+        background-color: $lightGrey;
+        border: 1px solid $borderGrey;
+        border-radius: 5px;
+        color: $iconGrey;
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 15px;
+        width: 100%;
+    }
+
+    &__tableBody{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 5px 15px;
+    }
+
+    &__tableItem{
+        align-items: center;
+        border-bottom: 1px solid #58a12638;
+        display: flex;
+        font-size: 15px;
+        justify-content: space-between;
+        padding: 11px 0px;
+    }
+
+    &__tableColumns{
+        display: flex;
+        width: 25%;
+    }
+}

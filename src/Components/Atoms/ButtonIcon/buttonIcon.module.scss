@@ -1,0 +1,36 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.buttonIconContainer {
+    align-items: center;
+    border: 1px solid $borderGrey;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    font-size: 13px;
+    justify-content: center;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 3px 4px;
+
+    &-info {
+        border: 1px solid $info;
+        color: $info;
+
+        &:hover {
+            background-color: $info;
+            color: white;
+        }
+    }
+
+    &-danger {
+        border: 1px solid $danger;
+        color: $danger;
+
+        &:hover {
+            background-color: $danger;
+            color: white;
+        }
+    }
+}
+

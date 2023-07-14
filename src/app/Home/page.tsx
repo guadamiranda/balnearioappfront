@@ -22,7 +22,7 @@ const HomeComponent = () => {
                 <div className={style.homeContainer__rightSide}>
                     <Button text='Estadías' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/RegistrarEstadia') }/>
                     <Button text='Buscar Estadía' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/queryReserve')}/>
-                    <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Precios')}/>
+                    <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMPrice')}/>
                     <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Descuentos')}/>
                     <Button text='Empelados' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Empleados')}/>
                     <Button text='Reportes' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Reportes')}/>

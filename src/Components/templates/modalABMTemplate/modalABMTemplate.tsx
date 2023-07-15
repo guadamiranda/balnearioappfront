@@ -4,7 +4,7 @@ import { MdOutlineClose } from 'react-icons/md'
 interface IModalABMTemplate {
     title: string,
     children: React.ReactNode,
-    closeFunction: any
+    closeFunction: any,
 }
 
 const ModalABMTemplate: React.FC<IModalABMTemplate> = ({ title, children, closeFunction }) => {

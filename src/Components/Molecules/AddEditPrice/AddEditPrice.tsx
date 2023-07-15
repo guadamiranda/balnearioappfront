@@ -9,19 +9,18 @@ import { useState } from 'react'
 interface IAddEditPrice {
     valueName?: string,
     valuePrice?: number,
-    updateTable: any,
-    dataUpdateTable: any
+    updateTable: any
+
 }
 
-const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTable, dataUpdateTable }) => {
+const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTable }) => {
     const [ newName, setNewName ] = useState('')
     const [ newAmount, setNewAmount ] = useState('')
 
     async function postPrice() {
         const newPrice= {name: newName, amount: parseInt(newAmount)}
         await priceServices.postPrice(newPrice)
-
-        updateTable([...dataUpdateTable, newPrice])
+        updateTable()
     }
 
     return(

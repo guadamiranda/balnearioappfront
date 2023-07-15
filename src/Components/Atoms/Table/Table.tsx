@@ -3,14 +3,27 @@ import style from './table.module.scss'
 import { FaTrashAlt } from 'react-icons/fa'
 import { RiEdit2Fill } from 'react-icons/ri' 
 import ButtonIcon from '../ButtonIcon/ButtonIcon'
+import priceServices from '@/Services/priceServices'
 
 interface ITable{
     columns: Array<string>,
+    completeTableData: any,
     tableData: Array<any>,
-    openModalFunction: any
+    openModalFunction: any,
+    setRender:any,
+    render: any
 }
 
-const Table: React.FC<ITable> = ({columns, tableData, openModalFunction}) => {
+const Table: React.FC<ITable> = ({columns, tableData, completeTableData, openModalFunction, setRender, render}) => {
+
+    async function deleteFunction(index:number) {
+        setRender(!render)
+        const elementToDelete = completeTableData[index]
+        
+        await priceServices.deletePrice(elementToDelete.id)
+        console.log(elementToDelete.id)
+    }   
+
     return(
         <div className={style.tableContainer}>
             <div className={style.tableContainer__tableHeader}>
@@ -25,7 +38,7 @@ const Table: React.FC<ITable> = ({columns, tableData, openModalFunction}) => {
                     ))}
                     <div className={style.tableContainer__tableColumns}>
                         <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openModalFunction(true)}/>
-                        <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => console.log('BUAG')}/>
+                        <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteFunction(index)}/>
                     </div>
                 </div>
                 )}

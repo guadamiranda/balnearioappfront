@@ -6,7 +6,7 @@ import style from './buttonIcon.module.scss'
 interface IButton {
   icon: any;
   onClickFunction: () => void;
-  type: 'info' | 'danger';
+  type: 'info' | 'danger' | 'secondary';
 }
 
 const ButtonIcon: React.FC<IButton> = ({

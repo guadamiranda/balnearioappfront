@@ -3,8 +3,8 @@ import style from './titulo.module.scss'
 
 interface ITitle{
     title: string,
-    icon: any,
-    subTitle: string,
+    icon?: any,
+    subTitle?: string,
 }
 
 const Title: React.FC<ITitle> = ({title, icon, subTitle}) => {

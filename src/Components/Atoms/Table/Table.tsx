@@ -6,10 +6,11 @@ import ButtonIcon from '../ButtonIcon/ButtonIcon'
 
 interface ITable{
     columns: Array<string>,
-    tableData: Array<any>
+    tableData: Array<any>,
+    openModalFunction: any
 }
 
-const Table: React.FC<ITable> = ({columns, tableData}) => {
+const Table: React.FC<ITable> = ({columns, tableData, openModalFunction}) => {
     return(
         <div className={style.tableContainer}>
             <div className={style.tableContainer__tableHeader}>
@@ -23,7 +24,7 @@ const Table: React.FC<ITable> = ({columns, tableData}) => {
                     <div className={style.tableContainer__tableColumns} key={key}>{data[key]}</div>
                     ))}
                     <div className={style.tableContainer__tableColumns}>
-                        <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => console.log('BUAG')}/>
+                        <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openModalFunction(true)}/>
                         <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => console.log('BUAG')}/>
                     </div>
                 </div>

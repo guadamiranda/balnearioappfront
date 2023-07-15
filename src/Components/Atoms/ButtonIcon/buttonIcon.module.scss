@@ -32,5 +32,15 @@
             color: white;
         }
     }
+
+    &-secondary {
+        border: 1px solid $secondary;
+        color: $secondary;
+
+        &:hover {
+            background-color: $secondary;
+            color: white;
+        }
+    }
 }
 

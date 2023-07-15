@@ -4,7 +4,7 @@
     background-color: #ffffff;
     border-radius: 18px;
     box-shadow: var(--boxShadow);
-    min-height: 80vh;
+    height: 80vh;
     padding: 25px 20px;
     width: 700px;
 
@@ -12,13 +12,21 @@
         display: flex;
         flex-direction: column;
         padding: 15px;
-        min-height: 80vh;
+        height: 100%;
         width: 100%;
     }
 
     @media (max-width: 700px) {
-        
         margin: 10px 10px;
         width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .ABMContainer {
+    
+        &__childContainer {
+            height: 95%;
+        }
     }
 }

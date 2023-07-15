@@ -1,6 +1,7 @@
 @import '../../../app/Variables/Colors/colors.module.scss';
 
 .tableContainer{
+    height: 100%;
 
     &__tableHeader {
         background-color: $lightGrey;
@@ -9,6 +10,7 @@
         color: $iconGrey;
         display: flex;
         justify-content: space-between;
+        margin-top: 3px;
         padding: 5px 15px;
         width: 100%;
     }
@@ -16,7 +18,9 @@
     &__tableBody{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        height: 90%;
+        justify-content: flex-start;
+        overflow-y: auto;
         padding: 5px 15px;
     }
 

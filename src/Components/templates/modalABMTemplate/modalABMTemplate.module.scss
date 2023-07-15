@@ -1,0 +1,63 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.ABMContainer {
+    align-items: center; 
+    background-color: rgba(0, 0, 0, 0.301);
+    display: flex;
+    height: 100%;
+    justify-content: center; 
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+
+    &__closeButton{
+        color: $borderGrey;
+        cursor: pointer;
+    }
+
+    &__header{
+        border-bottom: 1px solid #58a12638;
+        display: flex;
+        justify-content: space-between;
+        font-family: $montserrat;
+        font-size: 20px;
+        padding-bottom: 12px;
+    }
+
+    &__modal{
+        background-color: #ffffff;
+        border-radius: 18px;
+        height: 37vh;
+        padding: 25px 20px;
+        width: 650px;
+    }
+
+    &__childContainer {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        height: 96%;
+        width: 100%;
+    }
+
+    @media (max-width: 700px) {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .ABMContainer {
+    
+        &__childContainer {
+            height: 95%;
+        }
+
+        &__modal{
+            margin: 15px;
+        }
+    
+    }
+}

@@ -4,34 +4,35 @@ import Input from "@/Components/Atoms/Input/input";
 import style from "./addEditPrice.module.scss";
 import { ImPriceTag } from 'react-icons/im';
 import { BiDollar } from 'react-icons/bi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface IAddEditPrice {
     valueName?: string,
-    valuePrice?: number,
-    updateTable: any
-
+    valuePrice?: string,
+    updateTable: any,
+    editIndexPrice?: string
 }
 
-const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTable }) => {
-    const [ newName, setNewName ] = useState('')
-    const [ newAmount, setNewAmount ] = useState('')
+const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTable, editIndexPrice }) => {
+    const [ newName, setNewName ] = useState(valueName)
+    const [ newAmount, setNewAmount ] = useState<any>(valuePrice)
+    console.log(valuePrice)
 
     async function postPrice() {
         const newPrice= {name: newName, amount: parseInt(newAmount)}
-        await priceServices.postPrice(newPrice)
+        valueName? (await priceServices.editPrice(editIndexPrice, newPrice)) : (await priceServices.postPrice(newPrice))
         updateTable()
     }
 
     return(
         <div className={style.addEditPriceContainer}>
             <div className={style.addEditPriceContainer__inputContainer}>
-                <Input icon={<ImPriceTag/>} placeholder="Nombre del precio" title='Nombre' useStateFunction={setNewName} isFullWidth={true}></Input>
+                <Input icon={<ImPriceTag/>} value={newName} placeholder="Nombre del precio" title='Nombre' useStateFunction={setNewName} isFullWidth={true}></Input>
                 <br/>
-                <Input icon={<BiDollar/>} type='number' placeholder="Precio" title='Precio' useStateFunction={setNewAmount} isFullWidth={true}></Input>
+                <Input icon={<BiDollar/>} value={valuePrice} type='number' placeholder="Precio" title='Precio' useStateFunction={setNewAmount} isFullWidth={true}></Input>
             </div>
             <div className={style.addEditPriceContainer__buttonContainer}>
-                <Button text="Crear Precio" type='primary' onClickFunction={() => postPrice()} isFullWidth={true}></Button>
+                <Button text={valueName === '' ? "Crear Precio" : 'Editar Precio'} type='primary' onClickFunction={() => postPrice()} isFullWidth={true}></Button>
             </div>
         </div>
     )

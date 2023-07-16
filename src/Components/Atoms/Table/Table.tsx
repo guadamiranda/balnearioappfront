@@ -11,18 +11,28 @@ interface ITable{
     tableData: Array<any>,
     openModalFunction: any,
     setRender:any,
-    render: any
+    render: boolean,
+    setEditName: any,
+    setEditPrice: any,
+    setEditId: any
 }
 
-const Table: React.FC<ITable> = ({columns, tableData, completeTableData, openModalFunction, setRender, render}) => {
+const Table: React.FC<ITable> = ({columns, tableData, completeTableData, openModalFunction, setRender, render, setEditName, setEditPrice, setEditId}) => {
 
     async function deleteFunction(index:number) {
         setRender(!render)
         const elementToDelete = completeTableData[index]
         
         await priceServices.deletePrice(elementToDelete.id)
-        console.log(elementToDelete.id)
     }   
+
+    const openModal = (index:number) => {
+        const elementToEdit = completeTableData[index]
+        setEditName(elementToEdit.name)
+        setEditPrice(elementToEdit.amount)
+        setEditId(elementToEdit.id)
+        openModalFunction(true)
+    }
 
     return(
         <div className={style.tableContainer}>
@@ -32,12 +42,12 @@ const Table: React.FC<ITable> = ({columns, tableData, completeTableData, openMod
             </div>
             <div className={style.tableContainer__tableBody}>
                 {tableData.map((data, index) => 
-                <div className={style.tableContainer__tableItem}>
+                <div key={index} className={style.tableContainer__tableItem}>
                     {Object.keys(data).map((key) => (
                     <div className={style.tableContainer__tableColumns} key={key}>{data[key]}</div>
                     ))}
                     <div className={style.tableContainer__tableColumns}>
-                        <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openModalFunction(true)}/>
+                        <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openModal(index)}/>
                         <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteFunction(index)}/>
                     </div>
                 </div>

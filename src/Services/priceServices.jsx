@@ -26,6 +26,15 @@ const priceServices = {
           } catch (error) {
             console.error(error);
         } 
+    },
+
+    editPrice: async(idPrice, body) => {
+        try {
+            await axios.put(`http://localhost:3001/balneario/api/reserve/price/${idPrice}`, body);
+
+          } catch (error) {
+            console.error(error);
+        } 
     }
 }
 

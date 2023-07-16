@@ -11,12 +11,14 @@ import priceServices from '../../Services/priceServices'
 
 const ABMPrice = () => {
     const columns = ["Nombre", "Precio"]
-    const [openModal, setOpenModal] = useState(false)
+    const [openModalCreate, setOpenModalCreate] = useState(false)
+    const [openModalEdit, setOpenModalEdit] = useState(false)
     const [pricesData, setPricesData] = useState([{ name: '', amount: 0 }]);
     const [pricesAllData, setPricesAllData] = useState()
     const [render, setRender] = useState(false)
     const [editName, setEditName] = useState('')
-    const [editPrice, setEditPrice] = useState(0)
+    const [editPrice, setEditPrice] = useState('')
+    const [editIdPrice, setEditIdPrice] = useState('')
     
 
     async function getPrices() {
@@ -39,14 +41,24 @@ const ABMPrice = () => {
             <LittleABMTemplate title="Administración de Precios" subTitle="">
                 <div className={style.abmPriceContainer}>
                     <div className={style.abmPriceContainer__tableContainer}>
-                        <Table columns={columns} tableData={pricesData} completeTableData={pricesAllData} openModalFunction={setOpenModal} setRender={setRender} render={render}/>
+                        <Table 
+                            columns={columns} 
+                            tableData={pricesData} 
+                            completeTableData={pricesAllData} 
+                            openModalFunction={setOpenModalEdit} 
+                            setRender={setRender} 
+                            render={render}
+                            setEditName={setEditName}
+                            setEditPrice={setEditPrice}
+                            setEditId={setEditIdPrice}/>
                     </div>
                     <div className={style.abmPriceContainer__buttonContainer}>
-                        <Button text="Crear nuevo Precio" type='primary'  onClickFunction={() => setOpenModal(true)} isFullWidth={true}></Button>
+                        <Button text="Crear nuevo Precio" type='primary'  onClickFunction={() => setOpenModalCreate(true)} isFullWidth={true}></Button>
                     </div>
                 </div>
             </LittleABMTemplate>
-            {openModal && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices}/>} closeFunction={setOpenModal} ></ModalABMTemplate>}
+            {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} valueName={''} valuePrice={''}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
+            {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} valueName={editName} valuePrice={editPrice} editIndexPrice={editIdPrice}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
         </>
        
         

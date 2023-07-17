@@ -1,4 +1,5 @@
 @import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
 
 .tableContainer{
     height: 100%;
@@ -9,6 +10,7 @@
         border-radius: 5px;
         color: $iconGrey;
         display: flex;
+        font-family: $montserrat;
         justify-content: space-between;
         margin-top: 3px;
         padding: 5px 15px;
@@ -18,6 +20,7 @@
     &__tableBody{
         display: flex;
         flex-direction: column;
+        font-family: $montserrat;
         height: 90%;
         justify-content: flex-start;
         overflow-y: auto;

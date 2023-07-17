@@ -2,9 +2,11 @@ import Button from "@/Components/Atoms/button/button";
 import priceServices from "@/Services/priceServices";
 import Input from "@/Components/Atoms/Input/input";
 import style from "./addEditPrice.module.scss";
+import ReactDOMServer from 'react-dom/server'
 import { ImPriceTag } from 'react-icons/im';
 import { BiDollar } from 'react-icons/bi'
 import { useState } from 'react'
+import Swal from 'sweetalert2'
 
 interface IAddEditPrice {
     valueName?: string,
@@ -17,10 +19,28 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTa
     const [ newName, setNewName ] = useState(valueName)
     const [ newAmount, setNewAmount ] = useState<any>(valuePrice)
 
+    const validateMissingData = () => {
+        let allMissingData = []
+        if(newName === '') allMissingData.push('Nombre del Precio')
+        if(newAmount === '') allMissingData.push('Precio')
+        return allMissingData
+    }
+
     async function postPrice() {
+        const missingData = validateMissingData()
+        const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
         const newPrice= {name: newName, amount: parseInt(newAmount)}
-        valueName? (await priceServices.editPrice(editIndexPrice, newPrice)) : (await priceServices.postPrice(newPrice))
-        updateTable()
+        if (missingData.length === 0) {
+            valueName? (await priceServices.editPrice(editIndexPrice, newPrice)) : (await priceServices.postPrice(newPrice))
+            updateTable()
+        } else {
+            Swal.fire({
+                title: 'Faltan rellenar datos',
+                html: "Faltan los siguientes datos: " + missingDataFormatedInHTML,
+                icon: 'error',
+                confirmButtonText: 'Entendido'
+              });
+        } 
     }
 
     return(

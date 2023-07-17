@@ -1,54 +1,58 @@
 'use client'
-import ReactDOMServer from 'react-dom/server'
-import Swal from 'sweetalert2'
-import { useState } from 'react'
-import style from './registrarEstadia.module.scss'
+
 import ManagerSection from '@/Components/Organism/ResponsableSection/ManagerSection'
-import Button from '@/Components/Atoms/button/button'
-import DateSection from '@/Components/Organism/DateSection/DateSection'
-import ResidentSection from '@/Components/Organism/GroupSection/ResidentSection'
 import VehiculeSection from '@/Components/Organism/VehiculeSection/VehiculeSection'
+import ResidentSection from '@/Components/Organism/GroupSection/ResidentSection'
 import ABMTemplate from '@/Components/templates/abmTemplate/ABMTemplate'
+import DateSection from '@/Components/Organism/DateSection/DateSection'
+import Button from '@/Components/Atoms/button/button'
+import style from './registrarEstadia.module.scss'
+import ReactDOMServer from 'react-dom/server'
+import { useState } from 'react'
+import Swal from 'sweetalert2'
+
 type IVehicule = {
+    carPlate: string,
     index: number,
-    key: number,
-    carPlate: string
+    key: number,   
 }
 
 type IResident = {
+    partnerNumber: number, 
+    isPartner: boolean,
+    dniNumber: number, 
     index: number,
     key: number,
-    dniNumber: number, 
-    partnerNumber: number, 
-    isPartner: boolean
 }
 
 const RegistrarEstadia = () => {
-    const [cleanDataFlag, setCleanDataFlag] = useState(false)
-    const [dateFrom, setDateFrom] = useState(0)
-    const [dateTo, setDateTo] = useState(0)
     const [managerLastName, setManagerLastName] = useState<string>('')
-    const [dniNumber, setdniNumber] = useState<number>(0)
     const [carPlateNumber, setCarPlateNumber] = useState<string>('')
     const [partnerNumber, setPartnerNumber] = useState<number>(0)
-    const [managerName, setManagerName] = useState<string>('')
-    const [pricePerPerson, setPricePerPerson] = useState(1000)
-    const [priceOneDay, setPriceOneDay] = useState(2000)
     const [residents, setResidents] = useState<IResident[]>([])
     const [vehicules, setVehicules] = useState<IVehicule[]>([])
+    const [managerName, setManagerName] = useState<string>('')
+    const [pricePerPerson, setPricePerPerson] = useState(1000)
+    const [cleanDataFlag, setCleanDataFlag] = useState(false)
+    const [dniNumber, setdniNumber] = useState<number>(0)
+    const [priceOneDay, setPriceOneDay] = useState(2000) 
+    const [dateFrom, setDateFrom] = useState(0)
+    const [dateTo, setDateTo] = useState(0)
+
     const [totalPrice, setTotalPrice] = useState(pricePerPerson)
 
     const cleanData = () => {
         setCleanDataFlag(!cleanDataFlag)
-        setCarPlateNumber('')
-        setDateFrom(0)
-        setDateTo(0)
-        setdniNumber(0)
         setManagerLastName('')
-        setManagerName('')
+        setCarPlateNumber('')
         setPartnerNumber(0)
+        setManagerName('')
         setResidents([])
         setVehicules([])
+        setdniNumber(0)
+        setDateFrom(0)
+        setDateTo(0)
+        
         setTotalPrice(pricePerPerson)
     }
 
@@ -68,7 +72,6 @@ const RegistrarEstadia = () => {
     const registerData = () => {
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
-        console.log(missingDataFormatedInHTML)
         if (missingData.length === 0) {
             console.log("Nombre del Encargado: ", managerName);
             console.log("Apellido del Encargado: ", managerLastName);

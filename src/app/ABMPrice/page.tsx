@@ -73,8 +73,8 @@ const ABMPrice = () => {
                         </div>
                     </div>
                 </LittleABMTemplate>
-                {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} valueName={''} valuePrice={''}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
-                {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} valueName={editName} valuePrice={editPrice} editIndexPrice={editIdPrice}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
+                {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} valueName={''} valuePrice={''} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
+                {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} valueName={editName} valuePrice={editPrice} editIndexPrice={editIdPrice} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
 

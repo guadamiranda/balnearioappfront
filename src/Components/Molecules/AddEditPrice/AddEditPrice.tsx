@@ -12,10 +12,11 @@ interface IAddEditPrice {
     valueName?: string,
     valuePrice?: string,
     updateTable: any,
-    editIndexPrice?: string
+    editIndexPrice?: string,
+    closeFunction: any
 }
 
-const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTable, editIndexPrice }) => {
+const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTable, editIndexPrice, closeFunction }) => {
     const [ newName, setNewName ] = useState(valueName)
     const [ newAmount, setNewAmount ] = useState<any>(valuePrice)
 
@@ -33,6 +34,15 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ valueName, valuePrice, updateTa
         if (missingData.length === 0) {
             valueName? (await priceServices.editPrice(editIndexPrice, newPrice)) : (await priceServices.postPrice(newPrice))
             updateTable()
+            Swal.fire({
+                title: valueName === '' ? "¡El nuevo precio fue creado!" : '¡El precio fue editado!',
+                icon: 'success',
+                confirmButtonText: 'Cerrar',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    closeFunction(false)
+                } 
+              })
         } else {
             Swal.fire({
                 title: 'Faltan rellenar datos',

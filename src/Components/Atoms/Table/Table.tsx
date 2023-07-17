@@ -9,15 +9,20 @@ interface ITable{
     columns: Array<string>,
     completeTableData: any,
     tableData: Array<any>,
-    openModalFunction: any,
+    openModalEditFunction: any,
     setRender:any,
     render: boolean,
-    setEditName: any,
-    setEditPrice: any,
-    setEditId: any
+    setFullElementToEdit: any
 }
 
-const Table: React.FC<ITable> = ({columns, tableData, completeTableData, openModalFunction, setRender, render, setEditName, setEditPrice, setEditId}) => {
+const Table: React.FC<ITable> = ({
+    columns, 
+    tableData, 
+    completeTableData, 
+    openModalEditFunction, 
+    setRender, 
+    render, 
+    setFullElementToEdit}) => {
 
     async function deleteFunction(index:number) {
         setRender(!render)
@@ -27,11 +32,9 @@ const Table: React.FC<ITable> = ({columns, tableData, completeTableData, openMod
     }   
 
     const openModal = (index:number) => {
-        const elementToEdit = completeTableData[index]
-        setEditName(elementToEdit.name)
-        setEditPrice(elementToEdit.amount)
-        setEditId(elementToEdit.id)
-        openModalFunction(true)
+        setFullElementToEdit(completeTableData[index])
+        console.log(completeTableData[index])
+        openModalEditFunction()
     }
 
     return(

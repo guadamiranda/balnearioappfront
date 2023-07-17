@@ -31,7 +31,7 @@ const Table: React.FC<ITable> = ({
         await priceServices.deletePrice(elementToDelete.id)
     }   
 
-    const openModal = (index:number) => {
+    const openEditModal = (index:number) => {
         setFullElementToEdit(completeTableData[index])
         console.log(completeTableData[index])
         openModalEditFunction()
@@ -50,7 +50,7 @@ const Table: React.FC<ITable> = ({
                     <div className={style.tableContainer__tableColumns} key={key}>{data[key]}</div>
                     ))}
                     <div className={style.tableContainer__tableColumns}>
-                        <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openModal(index)}/>
+                        <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openEditModal(index)}/>
                         <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteFunction(index)}/>
                     </div>
                 </div>

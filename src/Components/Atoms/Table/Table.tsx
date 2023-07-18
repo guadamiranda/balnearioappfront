@@ -3,16 +3,14 @@ import style from './table.module.scss'
 import { FaTrashAlt } from 'react-icons/fa'
 import { RiEdit2Fill } from 'react-icons/ri' 
 import ButtonIcon from '../ButtonIcon/ButtonIcon'
-import priceServices from '@/Services/priceServices'
 
 interface ITable{
     columns: Array<string>,
     completeTableData: any,
     tableData: Array<any>,
     openModalEditFunction: any,
-    setRender:any,
-    render: boolean,
-    setFullElementToEdit: any
+    setFullElement: any,
+    deleteElementFunction: any
 }
 
 const Table: React.FC<ITable> = ({
@@ -20,20 +18,11 @@ const Table: React.FC<ITable> = ({
     tableData, 
     completeTableData, 
     openModalEditFunction, 
-    setRender, 
-    render, 
-    setFullElementToEdit}) => {
-
-    async function deleteFunction(index:number) {
-        setRender(!render)
-        const elementToDelete = completeTableData[index]
-        
-        await priceServices.deletePrice(elementToDelete.id)
-    }   
+    setFullElement,
+    deleteElementFunction}) => {
 
     const openEditModal = (index:number) => {
-        setFullElementToEdit(completeTableData[index])
-        console.log(completeTableData[index])
+        setFullElement(completeTableData[index])
         openModalEditFunction()
     }
 
@@ -51,7 +40,7 @@ const Table: React.FC<ITable> = ({
                     ))}
                     <div className={style.tableContainer__tableColumns}>
                         <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openEditModal(index)}/>
-                        <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteFunction(index)}/>
+                        <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteElementFunction(index)}/>
                     </div>
                 </div>
                 )}

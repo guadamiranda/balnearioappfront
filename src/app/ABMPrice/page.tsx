@@ -3,11 +3,18 @@
 import LittleABMTemplate from "@/Components/templates/littleAbmTemplate/LittleABMTemplate";
 import ModalABMTemplate from "@/Components/templates/modalABMTemplate/modalABMTemplate";
 import AddEditPrice from "@/Components/Molecules/AddEditPrice/AddEditPrice";
+import priceServices from '../../Services/priceServices'
 import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
-import style from './ABMPrice.module.scss'
 import { useEffect, useState } from "react";
-import priceServices from '../../Services/priceServices'
+import style from './ABMPrice.module.scss'
+import Swal from 'sweetalert2'
+
+type IAllPrices = {
+    id: number,
+    name: string,
+    amount: number
+}
 
 const ABMPrice = () => {
     const columns = ["Nombre", "Precio"]
@@ -16,18 +23,22 @@ const ABMPrice = () => {
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [pricesData, setPricesData] = useState([{ name: '', amount: 0 }]);
-    const [pricesAllData, setPricesAllData] = useState()
-    const [render, setRender] = useState(false)
+    const [pricesAllData, setPricesAllData] = useState<IAllPrices[]>([])
     
     async function getPrices() {
         const allPrices = await priceServices.getPrices()
-        const dataPricesInTable = allPrices.map((price:any) => ({
+
+        const dataPricesInTable = formatPricesToTable(allPrices)
+        setPricesAllData(allPrices)
+        setPricesData(dataPricesInTable)
+    }
+
+    const formatPricesToTable = (prices:any) => {
+        const dataPricesInTable = prices.map((price:any) => ({
             name: price.name,
             amount: price.amount
         }))
-
-        setPricesAllData(allPrices)
-        setPricesData(dataPricesInTable)
+        return dataPricesInTable
     }
 
     const openModalEditFunction = () => {
@@ -39,9 +50,20 @@ const ABMPrice = () => {
         setOpenModalCreate(true)
     }
 
-    useEffect(() => {
-        getPrices()
-    }, [render])
+    async function deleteElementFunction(index:number) {
+        const elementToDelete = pricesAllData[index]
+        const newPricesAllData = pricesAllData.filter((obj) => obj.id !== elementToDelete.id);
+        const dataPricesInTable = formatPricesToTable(newPricesAllData)
+        setPricesAllData(newPricesAllData)
+        setPricesData(dataPricesInTable)
+
+        await priceServices.deletePrice(elementToDelete.id)
+        Swal.fire({
+            title: 'El Precio ha sido eliminado',
+            icon: 'success',
+            confirmButtonText: 'Cerrar',
+          })
+    } 
     
     useEffect(() => {
         getPrices()
@@ -69,9 +91,8 @@ const ABMPrice = () => {
                                 tableData={pricesData} 
                                 completeTableData={pricesAllData} 
                                 openModalEditFunction={openModalEditFunction} 
-                                setRender={setRender} 
-                                render={render}
-                                setFullElementToEdit={setFullPriceToEdit}/>
+                                setFullElement={setFullPriceToEdit}
+                                deleteElementFunction={deleteElementFunction}/>
                         </div>
                         <div className={style.abmPriceContainer__buttonContainer}>
                             <Button text="Crear nuevo Precio" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>

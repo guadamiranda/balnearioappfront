@@ -8,6 +8,14 @@ import Table from "@/Components/Atoms/Table/Table";
 import style from './ABMDiscounts.module.scss'
 import { useEffect, useState } from "react";
 import discountServices from '../../Services/discountServices'
+import Swal from 'sweetalert2'
+
+
+type IAllDiscounts = {
+    id: number,
+    name: string,
+    amount: number
+}
 
 const ABMDiscount = () => {
     const columns = ["Nombre", "Descuento"]
@@ -16,20 +24,39 @@ const ABMDiscount = () => {
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [discountsData, setDiscountsData] = useState([{ name: '', percentage: 0 }]);
-    const [discountsAllData, setDiscountsAllData] = useState()
-    const [render, setRender] = useState(false)
+    const [discountsAllData, setDiscountsAllData] = useState<IAllDiscounts[]>([])
     
     async function getDiscounts() {
         const allDiscounts = await discountServices.getDiscounts()
-        const dataDiscountInTable = allDiscounts.map((discount:any) => ({
-            name: discount.name,
-            percentage: discount.percentage
-
-        }))
+        const dataDiscountInTable = formatDiscountToTable(allDiscounts)
 
         setDiscountsAllData(allDiscounts)
         setDiscountsData(dataDiscountInTable)
     }
+
+    const formatDiscountToTable = (discount:any) => {
+        const dataDiscountInTable = discount.map((discount:any) => ({
+            name: discount.name,
+            percentage: discount.percentage
+
+        }))
+        return dataDiscountInTable
+    }
+
+    async function deleteElementFunction(index:number) {
+        const elementToDelete = discountsAllData[index]
+        const newDiscountsAllData = discountsAllData.filter((obj) => obj.id !== elementToDelete.id);
+        const dataPricesInTable = formatDiscountToTable(newDiscountsAllData)
+        setDiscountsAllData(newDiscountsAllData)
+        setDiscountsData(dataPricesInTable)
+
+        await discountServices.deleteDiscount(elementToDelete.id)
+        Swal.fire({
+            title: 'El Descuento ha sido eliminado',
+            icon: 'success',
+            confirmButtonText: 'Cerrar',
+          })
+    } 
 
     const openModalEditFunction = () => {
         setOpenModalEdit(true)
@@ -40,9 +67,6 @@ const ABMDiscount = () => {
         setOpenModalCreate(true)
     }
 
-    useEffect(() => {
-        getDiscounts()
-    }, [render])
     
     useEffect(() => {
         getDiscounts()
@@ -70,9 +94,8 @@ const ABMDiscount = () => {
                                 tableData={discountsData} 
                                 completeTableData={discountsAllData} 
                                 openModalEditFunction={openModalEditFunction} 
-                                setRender={setRender} 
-                                render={render}
-                                setFullElementToEdit={setFullDiscountToEdit}/>
+                                setFullElement={setFullDiscountToEdit}
+                                deleteElementFunction={deleteElementFunction}/>
                         </div>
                         <div className={style.abmPriceContainer__buttonContainer}>
                             <Button text="Crear nuevo Descuento" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>

@@ -12,7 +12,8 @@ const priceServices = {
 
     postPrice: async(body) => {
         try {
-            await axios.post('http://localhost:3001/balneario/api/reserve/price', body);
+            const result = await axios.post('http://localhost:3001/balneario/api/reserve/price', body);
+            console.log(result)
 
           } catch (error) {
             console.error(error);

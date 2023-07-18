@@ -24,6 +24,7 @@ const HomeComponent = () => {
                     <Button text='Buscar Estadía' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/queryReserve')}/>
                     <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMPrice')}/>
                     <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMDiscounts')}/>
+                    <Button text='Roles' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Roles')}/>
                     <Button text='Empelados' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Empleados')}/>
                     <Button text='Reportes' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Reportes')}/>
                 </div>

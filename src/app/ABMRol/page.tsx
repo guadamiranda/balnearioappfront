@@ -2,12 +2,12 @@
 
 import LittleABMTemplate from "@/Components/templates/littleAbmTemplate/LittleABMTemplate";
 import ModalABMTemplate from "@/Components/templates/modalABMTemplate/modalABMTemplate";
-import AddEditPrice from "@/Components/Molecules/AddEditPrice/AddEditPrice";
+import AddEditRol from "@/Components/Molecules/AddEditRol/AddEditRol";
 import Button from "@/Components/Atoms/button/button";
 import rolServices from '../../Services/rolServices';
 import Table from "@/Components/Atoms/Table/Table";
 import { useEffect, useState } from "react";
-import style from './ABMPrice.module.scss'
+import style from './ABMRol.module.scss'
 import Swal from 'sweetalert2'
 
 type IAllRol = {
@@ -97,8 +97,8 @@ const ABMPrice = () => {
                         </div>
                     </div>
                 </LittleABMTemplate>
-                {openModalCreate && <ModalABMTemplate title='Crear Rol' children={<AddEditPrice updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
-                {openModalEdit && <ModalABMTemplate title='Editar Rol' children={<AddEditPrice updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
+                {openModalCreate && <ModalABMTemplate title='Crear Rol' children={<AddEditRol updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
+                {openModalEdit && <ModalABMTemplate title='Editar Rol' children={<AddEditRol updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
 

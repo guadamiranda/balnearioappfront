@@ -3,7 +3,7 @@ import axios from 'axios';
 const rolServices = {
     getRols: async() => {
         try {
-            const response = await axios.get('http://localhost:3001/balneario/api/reserve/rol');
+            const response = await axios.get('http://localhost:3001/balneario/api/user/role');
             return response.data
             
           } catch (error) {
@@ -13,7 +13,7 @@ const rolServices = {
 
     postRol: async(body) => {
         try {
-            await axios.post('http://localhost:3001/balneario/api/reserve/rol', body);
+            await axios.post('http://localhost:3001/balneario/api/user/role', body);
 
           } catch (error) {
             console.error(error);
@@ -22,7 +22,7 @@ const rolServices = {
 
     deleteRol: async(idRol) => {
         try {
-            await axios.delete(`http://localhost:3001/balneario/api/reserve/rol/${idRol}`);
+            await axios.delete(`http://localhost:3001/balneario/api/user/role/${idRol}`);
 
           } catch (error) {
             console.error(error);
@@ -31,7 +31,7 @@ const rolServices = {
 
     editRol: async(idRol, body) => {
         try {
-            await axios.put(`http://localhost:3001/balneario/api/reserve/rol/${idRol}`, body);
+            await axios.put(`http://localhost:3001/balneario/api/user/role/${idRol}`, body);
 
           } catch (error) {
             console.error(error);

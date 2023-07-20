@@ -3,7 +3,7 @@ import style from './checkbox.module.scss'
 import { BsCheck } from 'react-icons/bs'
 
 interface ICheckbox{
-    cleanDataFlag: boolean,
+    cleanDataFlag?: boolean,
     title: string,
     onClickFunction: () => void
 }

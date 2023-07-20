@@ -2,7 +2,7 @@ import React from 'react'
 import style from './input.module.scss'
 
 interface IInput {
-  icon: any;
+  icon?: any;
   placeholder: string;
   title: string;
   type?: 'number' | 'date'

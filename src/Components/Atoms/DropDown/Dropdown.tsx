@@ -7,12 +7,13 @@ type Option = {
 }
 
 interface IDropdown {
-    title: string;
-    options: Array<Option>;
-    titleDropdown: string
+    title: string,
+    options: Array<Option>,
+    titleDropdown: string,
+    selectedValueFunction: (name:string) => void
 }
 
-const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown }) => {
+const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selectedValueFunction }) => {
     const className = `${dropdownStyle.dropdown}`
     const classNameTitle = `${dropdownStyle.dropdown} ${dropdownStyle[`dropdown__title`]}`
     const classNameTitleClicked = `${dropdownStyle.dropdown} ${dropdownStyle[`dropdown__title`]} ${dropdownStyle[`dropdown__titleClicked`]}`
@@ -33,6 +34,7 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown }) => {
 
     const closeAndSelectValue = (option: string) => {
         setSelectedValue(option)
+        selectedValueFunction(option)
         setOptionItemClassName(classNameOptionItem)
         setIsOpenDropDown(false)
     }

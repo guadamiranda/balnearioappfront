@@ -7,10 +7,14 @@ import { ImPriceTag } from 'react-icons/im';
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 
+type iFullElementToEdit = {
+    id: string,
+    name: string,
+}
 interface IAddEditRol {
-    updateTable: any,
-    closeFunction: any,
-    fullElementToEdit?: any,
+    updateTable: () => void,
+    closeFunction: (isColse:boolean) => void,
+    fullElementToEdit: iFullElementToEdit,
 }
 
 const AddEditRol: React.FC<IAddEditRol> = ({ fullElementToEdit, updateTable, closeFunction }) => {

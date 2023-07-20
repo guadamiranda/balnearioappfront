@@ -17,25 +17,28 @@ type IAllRol = {
 
 const ABMPrice = () => {
     const columns = ["Nombre"]
+
     const [fullRolToEdit, setFullRolToEdit] = useState({ id: '', name: ''})
-    const [isLoading, setIsLoading] = useState(true)
+    const [rolAllData, setRolAllData] = useState<IAllRol[]>([])
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [rolData, setRolData] = useState([{ name: ''}]);
-    const [rolAllData, setRolAllData] = useState<IAllRol[]>([])
+    const [isLoading, setIsLoading] = useState(true)
     
+
     async function getRols() {
         const allRols = await rolServices.getRols()
-
         const dataRolInTable = formatRolToTable(allRols)
+
         setRolAllData(allRols)
         setRolData(dataRolInTable)
     }
 
-    const formatRolToTable = (rols:any) => {
-        const dataRolInTable = rols.map((rol:any) => ({
+    const formatRolToTable = (rols:Array<IAllRol>) => {
+        const dataRolInTable = rols.map((rol) => ({
             name: rol.name,
         }))
+
         return dataRolInTable
     }
 
@@ -52,10 +55,12 @@ const ABMPrice = () => {
         const elementToDelete = rolAllData[index]
         const newRolsAllData = rolAllData.filter((obj) => obj.id !== elementToDelete.id);
         const dataRolInTable = formatRolToTable(newRolsAllData)
+
         setRolAllData(newRolsAllData)
         setRolData(dataRolInTable)
 
         await rolServices.deleteRol(elementToDelete.id)
+
         Swal.fire({
             title: 'El Rol ha sido eliminado',
             icon: 'success',
@@ -101,7 +106,6 @@ const ABMPrice = () => {
                 {openModalEdit && <ModalABMTemplate title='Editar Rol' children={<AddEditRol updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
-
         </>
     );
 };

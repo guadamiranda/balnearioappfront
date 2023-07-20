@@ -8,10 +8,15 @@ import { BiDollar } from 'react-icons/bi'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 
+type iFullElementToEdit = {
+    id: string,
+    name: string,
+    percentage: any
+}
 interface IAddEditDiscount {
-    updateTable: any,
-    closeFunction: any,
-    fullElementToEdit?: any,
+    updateTable: () => void,
+    closeFunction: (isColse:boolean) => void,
+    fullElementToEdit: iFullElementToEdit,
 }
 
 const AddEditDiscount: React.FC<IAddEditDiscount> = ({ fullElementToEdit, updateTable, closeFunction }) => {

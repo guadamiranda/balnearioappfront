@@ -19,33 +19,39 @@ type IAllEmployeesData = {
     id: number,
     name: string,
     lastName: string,
+    documentNumber: any,
+    email: string,
+    password: string,
     rol: IRol
 }
 
 const ABMDiscount = () => {
     const columns = ["Nombre", "Apellido", 'Rol']
-    const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: '', name: '', lastName: '', rol: {}})
-    const [isLoading, setIsLoading] = useState(false)
+
+    const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: '', name: '', lastName: '', documentNumber: '', email: '', password: '', rol: {}})
+    const [employeeData, setEmployeeData] = useState([{ name: '', lastName: '', documentNumber: '', email: '', password: '', rol: {} }]);
+    const [employeeAllData, setEmployeesAllData] = useState<IAllEmployeesData[]>([])
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
-    const [employeeData, setEmployeeData] = useState([{ name: '', lastName: '', rol: {} }]);
-    const [employeeAllData, setEmployeesAllData] = useState<IAllEmployeesData[]>([])
+    const [isLoading, setIsLoading] = useState(false)
+    
     
     /*
     async function getEmployee() {
-        //const allDiscounts = await discountServices.getDiscounts()
-        const dataDiscountInTable = formatDiscountToTable(allDiscounts)
+        const allEmployees = await employeeServices.getEmployees()
+        const dataEmployeeInTable = formatDiscountToTable(allEmployees)
 
-        setDiscountsAllData(allDiscounts)
-        setEmployeeData(dataDiscountInTable)
+        setEmployeesAllData(allEmployees)
+        setEmployeeData(dataEmployeeInTable)
     }
     */
 
     /*
-    const formatDiscountToTable = (discount:any) => {
-        const dataDiscountInTable = discount.map((discount:any) => ({
-            name: discount.name,
-            percentage: discount.percentage
+    const formatEmployeeToTable = (employees:Array<IAllEmployeesData>) => {
+        const dataEmployeeInTable = employees.map((employee) => ({
+            name: employee.name,
+            lastName: employee.lastName,
+
 
         }))
         return dataDiscountInTable
@@ -72,7 +78,7 @@ const ABMDiscount = () => {
     }
 
     const openModalCreateFunction = () => {
-        //setFullEmployeeToEdit({ id: '', name: '', lastName: '', rol: {}})
+        //setFullEmployeeToEdit({ name: '', lastName: '', documentNumber: '', email: '', password: '', rol: {} })
         setOpenModalCreate(true)
     }
 
@@ -96,13 +102,13 @@ const ABMDiscount = () => {
             </div> :
             
             <>
-                <LittleABMTemplate title="Administración de Descuentos" subTitle="">
+                <LittleABMTemplate title="Administración de Empleados" subTitle="">
                     <div className={style.abmPriceContainer}>
                         <div className={style.abmPriceContainer__tableContainer}>
                             
                         </div>
                         <div className={style.abmPriceContainer__buttonContainer}>
-                            <Button text="Crear nuevo Descuento" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
+                            <Button text="Crear nuevo Empleado" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
                         </div>
                     </div>
                 </LittleABMTemplate>
@@ -110,7 +116,6 @@ const ABMDiscount = () => {
                 {openModalEdit && <ModalABMTemplate title='Editar Empleado' children={<AddEditEmployee fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
-
         </>
     );
 };

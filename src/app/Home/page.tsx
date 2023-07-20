@@ -1,10 +1,10 @@
 'use client'
 
+import HomeTemplate from '@/Components/templates/homeTemplate/homeTemplate';
+import HomeProfile from '@/Components/Molecules/HomeProfile/HomeProfile';
+import Button from '@/Components/Atoms/button/button';
 import { useRouter } from 'next/navigation';
 import style from './home.module.scss'
-import HomeTemplate from '@/Components/templates/homeTemplate/homeTemplate';
-import Button from '@/Components/Atoms/button/button';
-import HomeProfile from '@/Components/Molecules/HomeProfile/HomeProfile';
 
 const HomeComponent = () => {
     const router = useRouter();

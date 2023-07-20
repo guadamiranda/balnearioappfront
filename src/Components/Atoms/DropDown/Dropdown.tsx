@@ -47,7 +47,7 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
                 <div className={dropdownStyle.dropdown__iconArrow}>{arrow}</div>
             </div>
             <div className={optionItemsClassName}>
-                {options.map(option => <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue(option.name)}>{option.name}</div>)}
+                {options.map(option => <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue(option.name)} key={option.name}>{option.name}</div>)}
             </div>
         </div>
     )

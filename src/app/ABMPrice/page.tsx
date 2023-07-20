@@ -19,25 +19,26 @@ type IAllPrices = {
 const ABMPrice = () => {
     const columns = ["Nombre", "Precio"]
     const [fullPriceToEdit, setFullPriceToEdit] = useState({ id: '', name: '', amount: ''})
-    const [isLoading, setIsLoading] = useState(true)
-    const [openModalCreate, setOpenModalCreate] = useState(false)
-    const [openModalEdit, setOpenModalEdit] = useState(false)
     const [pricesData, setPricesData] = useState([{ name: '', amount: 0 }]);
     const [pricesAllData, setPricesAllData] = useState<IAllPrices[]>([])
+    const [openModalCreate, setOpenModalCreate] = useState(false)
+    const [openModalEdit, setOpenModalEdit] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     
     async function getPrices() {
         const allPrices = await priceServices.getPrices()
-
         const dataPricesInTable = formatPricesToTable(allPrices)
+
         setPricesAllData(allPrices)
         setPricesData(dataPricesInTable)
     }
 
-    const formatPricesToTable = (prices:any) => {
+    const formatPricesToTable = (prices:Array<IAllPrices>) => {
         const dataPricesInTable = prices.map((price:any) => ({
             name: price.name,
             amount: price.amount
         }))
+
         return dataPricesInTable
     }
 
@@ -54,10 +55,12 @@ const ABMPrice = () => {
         const elementToDelete = pricesAllData[index]
         const newPricesAllData = pricesAllData.filter((obj) => obj.id !== elementToDelete.id);
         const dataPricesInTable = formatPricesToTable(newPricesAllData)
+
         setPricesAllData(newPricesAllData)
         setPricesData(dataPricesInTable)
 
         await priceServices.deletePrice(elementToDelete.id)
+
         Swal.fire({
             title: 'El Precio ha sido eliminado',
             icon: 'success',
@@ -103,7 +106,6 @@ const ABMPrice = () => {
                 {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
-
         </>
     );
 };

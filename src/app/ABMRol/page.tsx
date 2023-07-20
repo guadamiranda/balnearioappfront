@@ -9,6 +9,7 @@ import Table from "@/Components/Atoms/Table/Table";
 import { useEffect, useState } from "react";
 import style from './ABMRol.module.scss'
 import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation';
 
 type IAllRol = {
     id: number,
@@ -17,6 +18,9 @@ type IAllRol = {
 
 const ABMPrice = () => {
     const columns = ["Nombre"]
+    const usuarioAutenticado = false;
+    const router = useRouter();
+
     const [fullRolToEdit, setFullRolToEdit] = useState({ id: '', name: ''})
     const [isLoading, setIsLoading] = useState(true)
     const [openModalCreate, setOpenModalCreate] = useState(false)
@@ -64,6 +68,9 @@ const ABMPrice = () => {
     } 
     
     useEffect(() => {
+        if (!usuarioAutenticado) {
+            router.push('/RegistrarEstadia');
+          }
         getRols()
         setTimeout(() => {
             setIsLoading(false)

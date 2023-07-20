@@ -60,6 +60,7 @@ const AddEditDiscount: React.FC<IAddEditDiscount> = ({ fullElementToEdit, update
                 <Input icon={<BiDollar/>} value={newPercentaje} type='number' placeholder="Porcentaje" title='Porcentaje de Descuento' useStateFunction={setNewPercentaje} isFullWidth={true}></Input>
             </div>
             <div className={style.addEditPriceContainer__buttonContainer}>
+                <br/>
                 <Button text={fullElementToEdit.id === '' ? "Crear Descuento" : 'Editar Descuento'} type='primary' onClickFunction={() => postDiscount()} isFullWidth={true}></Button>
             </div>
         </div>

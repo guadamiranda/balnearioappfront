@@ -1,0 +1,76 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    font-family: $montserrat;
+    position: relative;
+
+    &__titleDropdown{
+        font-family: $montserrat;
+        font-size: 12px;
+        font-weight: $regular-montserrat-weight;
+        margin-bottom: 5px;
+    }
+
+    &__title {
+        height: 30px;
+        width: 100%;
+        font-weight: $light-montserrat-weight;
+        background-color: $lightGrey;
+        border: 1px solid $borderGrey;
+        border-radius: 8px;
+        padding: 0px 10px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    &__title:hover {
+        background-color: $lightGrey;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    &__titleClicked {
+        background-color: $lightGrey;
+        border: 1px solid $green;
+    }
+
+    &__iconArrow {
+        font-size: 20px;
+        display: flex;
+    }
+
+    &__optionsHidden {
+        display: none;
+    }
+
+    &__options {
+        background-color: $lightGrey;
+        border: 1px solid $borderGrey;
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 15px;
+        margin-top: 54px;
+        box-shadow: 0px 0px 11px -4px rgba(15, 15, 15, 1);
+        position: absolute;
+        z-index: 5;
+        width: 100%;
+
+        &__item {
+            padding: 5px 7px;
+            font-weight: $light-montserrat-weight;
+            border-radius: 8px;
+        }
+
+        &__item:hover {
+            color: $green;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+    }
+}

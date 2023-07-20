@@ -5,7 +5,7 @@ interface IInput {
   icon: any;
   placeholder: string;
   title: string;
-  type?: 'number' | 'date'
+  type?: 'number' | 'date' | 'password'
   isFullWidth?: boolean;
   useStateFunction: (value: any) => void;
   value?: any;

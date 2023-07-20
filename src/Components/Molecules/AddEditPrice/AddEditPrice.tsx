@@ -60,6 +60,7 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable,
                 <Input icon={<BiDollar/>} value={newAmount} type='number' placeholder="Precio" title='Precio' useStateFunction={setNewAmount} isFullWidth={true}></Input>
             </div>
             <div className={style.addEditPriceContainer__buttonContainer}>
+                <br/>
                 <Button text={fullElementToEdit.id === '' ? "Crear Precio" : 'Editar Precio'} type='primary' onClickFunction={() => postPrice()} isFullWidth={true}></Button>
             </div>
         </div>

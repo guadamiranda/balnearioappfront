@@ -56,6 +56,7 @@ const AddEditRol: React.FC<IAddEditRol> = ({ fullElementToEdit, updateTable, clo
                 <br/>
             </div>
             <div className={style.addEditPriceContainer__buttonContainer}>
+                <br/>
                 <Button text={fullElementToEdit.id === '' ? "Crear Rol" : 'Editar Rol'} type='primary' onClickFunction={() => postRol()} isFullWidth={true}></Button>
             </div>
         </div>

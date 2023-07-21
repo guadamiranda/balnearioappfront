@@ -1,0 +1,50 @@
+
+.reservesContainer{
+    display: flex;
+    flex-direction: column;
+    height: 95%;
+    justify-content: space-between;
+
+    &__actualReserve{
+        display: flex;
+        height: 85%;
+    }
+
+    &__buttonContainer{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__tableContainer{
+        height: 90%;
+    }
+
+    &__spaceButton{
+        margin: 0px 10px;
+    }  
+
+    &__loaderContainer{
+        height: 100px;
+        width: 100px;
+    }
+
+    &__loader{
+        background-image: url('../../Assets/loader100px.gif');
+        height: 100%;
+        object-fit: cover;
+        background-repeat: no-repeat; 
+        background-attachment: fixed;
+        background-position: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .abmPriceContainer{
+
+        &__buttonContainer{
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+}

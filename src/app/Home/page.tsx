@@ -22,7 +22,7 @@ const HomeComponent = () => {
                     <HomeProfile/>
                 </div>
                 <div className={style.homeContainer__rightSide}>
-                    <Button text='Estadías' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/RegistrarEstadia') }/>
+                    <Button text='Estadías' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/Reserves') }/>
                     <Button text='Buscar Estadía' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/queryReserve')}/>
                     <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMPrice')}/>
                     <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMDiscounts')}/>

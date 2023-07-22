@@ -1,17 +1,18 @@
 'use client'
-
+import Encabezado from '../../Components/Atoms/Encabezado/Encabezado';
+import Button from "@/Components/Atoms/button/button";
 import Title from "@/Components/Atoms/Titulo/Titulo";
+import loginServices from "@/Services/loginServices";
+import Input from "@/Components/Atoms/Input/input";
+import { useRouter } from "next/navigation";
 import style from "./login.module.scss"
 import { useState } from "react";
-import Encabezado from '../../Components/Atoms/Encabezado/Encabezado';
-import Input from "@/Components/Atoms/Input/input";
-import Button from "@/Components/Atoms/button/button";
-import loginServices from "@/Services/loginServices";
 import Swal from "sweetalert2";
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
+    const router = useRouter()
 
     const logIn = async () => {
         const {status, data: userData} = await loginServices.authUser(email,password)
@@ -26,8 +27,9 @@ const LoginPage = () => {
               });
             return
         }
-
+        
         localStorage.setItem('userData', JSON.stringify(userData));
+        router.push('/')
     }
 
     return (

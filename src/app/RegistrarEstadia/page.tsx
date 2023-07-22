@@ -10,6 +10,7 @@ import style from './registrarEstadia.module.scss'
 import ReactDOMServer from 'react-dom/server'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import GuardLogin from '@/utils/guardLogin'
 
 type IVehicule = {
     carPlate: string,
@@ -98,6 +99,7 @@ const RegistrarEstadia = () => {
     }
 
     return(
+    <GuardLogin>
         <ABMTemplate title="Registrar Estadía" subTitle="Ingresa los datos para registrar la estadía.">
             <div className={style.registrarEstadiaContainer}>
                 <div className={style.registrarEstadiaContainer__headerSection}>
@@ -163,6 +165,7 @@ const RegistrarEstadia = () => {
                 
             </div>
         </ABMTemplate>
+    </GuardLogin>
     )
 }
 

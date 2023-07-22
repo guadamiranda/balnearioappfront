@@ -9,6 +9,7 @@ import Table from "@/Components/Atoms/Table/Table";
 import { useEffect, useState } from "react";
 import style from './ABMPrice.module.scss'
 import Swal from 'sweetalert2'
+import GuardLogin from "@/utils/guardLogin";
 
 type IAllPrices = {
     id: number,
@@ -73,7 +74,7 @@ const ABMPrice = () => {
     }, [])
 
     return (
-        <>
+        <GuardLogin>
         {
             isLoading? 
             <div className={style.abmPriceContainer}>
@@ -103,8 +104,7 @@ const ABMPrice = () => {
                 {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
-
-        </>
+        </GuardLogin>
     );
 };
 

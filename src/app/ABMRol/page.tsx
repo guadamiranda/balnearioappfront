@@ -9,6 +9,7 @@ import Table from "@/Components/Atoms/Table/Table";
 import { useEffect, useState } from "react";
 import style from './ABMRol.module.scss'
 import Swal from 'sweetalert2'
+import GuardLogin from "@/utils/guardLogin";
 
 type IAllRol = {
     id: number,
@@ -71,7 +72,7 @@ const ABMPrice = () => {
     }, [])
 
     return (
-        <>
+        <GuardLogin>
         {
             isLoading? 
             <div className={style.abmPriceContainer}>
@@ -101,8 +102,7 @@ const ABMPrice = () => {
                 {openModalEdit && <ModalABMTemplate title='Editar Rol' children={<AddEditRol updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
-
-        </>
+    </GuardLogin>
     );
 };
 

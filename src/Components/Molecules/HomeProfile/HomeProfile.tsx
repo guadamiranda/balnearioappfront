@@ -1,7 +1,9 @@
 import ProfilePhoto from '@/Components/Atoms/ProfilePhoto/ProfilePhoto';
+import loginServices from '@/Services/loginServices';
 import style from './homeProfile.module.scss';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import React from 'react'
 
 interface IHomeProfile {
@@ -12,7 +14,6 @@ const HomeProfile: React.FC<IHomeProfile> = () => {
   const [lastName, setLastName] = useState('')
   const [roleName, setRoleName] = useState('')
   const router = useRouter()
-
 
   const setInformationUser = () => {
     let userData = localStorage.getItem('userData')
@@ -25,10 +26,25 @@ const HomeProfile: React.FC<IHomeProfile> = () => {
   }
 
 
-  const logout = () => {
-    localStorage.removeItem('userData')
-    router.push('/login')
+  const logout = async() => {
+    const {value: observacion, isConfirmed} = await Swal.fire({
+      title: "Cierre de turno",
+      text: "¿Está seguro de que desea finalizar su turno laboral?",
+      input: 'textarea',
+      inputLabel: 'Observación:',
+      inputPlaceholder: 'Alguna observación que considere',
+      confirmButtonText: 'Finalizar',
+      showCancelButton: true,
+      denyButtonText: `Cancelar`,
+    })
+    
+    if(isConfirmed) {
+      await loginServices.logOutUser(observacion);
+      localStorage.removeItem('userData')
+      router.push('/login')
+    }
   }
+  
   useEffect(()=> {
     setInformationUser()
   },[])

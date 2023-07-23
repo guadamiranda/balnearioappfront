@@ -27,6 +27,16 @@ const LoginPage = () => {
               });
             return
         }
+
+        if(status == 500) {
+            Swal.fire({
+                title: 'Error',
+                text: 'El servidor no respondio como debia, por favor contactese con los desarrolladores',
+                icon: 'error',
+                confirmButtonText: 'Entendido'
+              });
+            return
+        }
         
         localStorage.setItem('userData', JSON.stringify(userData));
         router.push('/')
@@ -40,8 +50,8 @@ const LoginPage = () => {
                     <Encabezado title="Ingrese sus datos para comenzar su turno"></Encabezado>
                 </div>
                 <div className={style['loginContainer-inputSection']}>
-                    <Input isFullWidth={true} title="Email" useStateFunction={setEmail} placeholder="usuario@hotmail.com"></Input>
-                    <Input isFullWidth={true} title="Contraseña" useStateFunction={setPassword} placeholder="Mi Contraseña"></Input>
+                    <Input isFullWidth={true} title="Email" useStateFunction={setEmail} placeholder="usuario@hotmail.com" icon={undefined}></Input>
+                    <Input isFullWidth={true} title="Contraseña" useStateFunction={setPassword} placeholder="Mi Contraseña" icon={undefined}></Input>
                 </div>
                 <div className={style['loginContainer-buttonSection']}>
                     <Button text={"Iniciar Turno"} type={"primary"} onClickFunction={() => logIn()}></Button>

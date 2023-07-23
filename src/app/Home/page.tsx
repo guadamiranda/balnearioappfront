@@ -5,6 +5,7 @@ import HomeProfile from '@/Components/Molecules/HomeProfile/HomeProfile';
 import Button from '@/Components/Atoms/button/button';
 import { useRouter } from 'next/navigation';
 import style from './home.module.scss'
+import GuardLogin from '@/utils/guardLogin';
 
 const HomeComponent = () => {
     const router = useRouter();
@@ -14,13 +15,14 @@ const HomeComponent = () => {
     }
 
     return (
+    <GuardLogin>
         <HomeTemplate title="BalnearioApp" subTitle="Administración">
             <div className={style.homeContainer}>
                 <div className={style.homeContainer__leftSide}>
                     <HomeProfile/>
                 </div>
                 <div className={style.homeContainer__rightSide}>
-                    <Button text='Estadías' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/RegistrarEstadia') }/>
+                    <Button text='Estadías' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/Reserves') }/>
                     <Button text='Buscar Estadía' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/queryReserve')}/>
                     <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMPrice')}/>
                     <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMDiscounts')}/>
@@ -30,6 +32,7 @@ const HomeComponent = () => {
                 </div>
             </div>
         </HomeTemplate>
+    </GuardLogin>
     );
 };
 

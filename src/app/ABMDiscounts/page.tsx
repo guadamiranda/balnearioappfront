@@ -9,6 +9,7 @@ import Table from "@/Components/Atoms/Table/Table";
 import style from './ABMDiscounts.module.scss'
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2'
+import GuardLogin from "@/utils/guardLogin";
 
 type IAllDiscounts = {
     id: string,
@@ -78,7 +79,7 @@ const ABMDiscount = () => {
     }, [])
 
     return (
-        <>
+        <GuardLogin>
         {
             isLoading? 
             <div className={style.abmPriceContainer}>
@@ -108,8 +109,7 @@ const ABMDiscount = () => {
                 {openModalEdit && <ModalABMTemplate title='Editar Descuento' children={<AddEditDiscount updateTable={getDiscounts} fullElementToEdit={fullDiscountToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
-
-        </>
+        </GuardLogin>
     );
 };
 

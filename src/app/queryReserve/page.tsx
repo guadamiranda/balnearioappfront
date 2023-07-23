@@ -10,6 +10,7 @@ import style from "./queryReserve.module.scss";
 import Button from "@/Components/Atoms/button/button";
 import { AiOutlineCar } from "react-icons/ai";
 import { useState } from "react";
+import GuardLogin from "@/utils/guardLogin";
 
 const QueryReserve = () => {
     const [dni, setDni] = useState(0);
@@ -34,6 +35,7 @@ const QueryReserve = () => {
     }
 
     return (
+    <GuardLogin>
         <ABMTemplate title="Consultar Estadia" subTitle="Ingresa los datos para consultar la estadia">
             <div className={style.formContainer}>
                 <Encabezado title='Encargado del Grupo'/>
@@ -53,6 +55,7 @@ const QueryReserve = () => {
                 <InfoReserve></InfoReserve>
             </div>
         </ABMTemplate>
+    </GuardLogin>
     );
 };
 

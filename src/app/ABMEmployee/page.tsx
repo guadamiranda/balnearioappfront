@@ -7,7 +7,7 @@ import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
 import style from './ABMEmployee.module.scss'
 import { useEffect, useState } from "react";
-//import employeeServices from '../../Services/employeeServices'
+import employeeServices from '../../Services/employeeServices'
 import Swal from 'sweetalert2'
 
 type IRol = {
@@ -19,53 +19,50 @@ type IAllEmployeesData = {
     id: number,
     name: string,
     lastName: string,
-    documentNumber: any,
+    documentNumber: string,
     email: string,
     password: string,
     rol: IRol
 }
 
-const ABMDiscount = () => {
-    const columns = ["Nombre", "Apellido", 'Rol']
+const ABMEmployee= () => {
+    const columns = ['Nombre', 'Apellido', 'Documento', 'Rol']
 
-    const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: '', name: '', lastName: '', documentNumber: '', email: '', password: '', rol: {}})
-    const [employeeData, setEmployeeData] = useState([{ name: '', lastName: '', documentNumber: '', email: '', password: '', rol: {} }]);
+    const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: 0, name: '', lastName: '', documentNumber: '', email: '', password: '', rol: { id: 0, name: '' } })
     const [employeeAllData, setEmployeesAllData] = useState<IAllEmployeesData[]>([])
+    const [employeeData, setEmployeeData] = useState([{ name: '', lastName: '', documentNumber: '', rol: {name: '' } }])
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     
-    
-    /*
-    async function getEmployee() {
-        const allEmployees = await employeeServices.getEmployees()
-        const dataEmployeeInTable = formatDiscountToTable(allEmployees)
+    async function getEmployees() {
+        const allEmployees = await employeeServices.getEmployee()
+        console.log(allEmployees)
+        const dataEmployeeInTable = formatEmployeeToTable(allEmployees)
 
         setEmployeesAllData(allEmployees)
         setEmployeeData(dataEmployeeInTable)
     }
-    */
 
-    /*
     const formatEmployeeToTable = (employees:Array<IAllEmployeesData>) => {
         const dataEmployeeInTable = employees.map((employee) => ({
             name: employee.name,
             lastName: employee.lastName,
-
-
+            documentNumber: employee.documentNumber,
+            rol:{name: employee.rol.name} 
         }))
-        return dataDiscountInTable
+        return dataEmployeeInTable
     }
-    */
 
     async function deleteElementFunction(index:number) {
         const elementToDelete = employeeAllData[index]
         const newEmployeesAllData = employeeAllData.filter((obj) => obj.id !== elementToDelete.id);
-        //const dataEmployeeInTable = formatDiscountToTable(newEmployeesAllData)
-        setEmployeesAllData(newEmployeesAllData)
-        //setEmployeeData(dataEmployeeInTable)
+        const dataEmployeeInTable = formatEmployeeToTable(newEmployeesAllData)
 
-        //await discountServices.deleteDiscount(elementToDelete.id)
+        setEmployeesAllData(newEmployeesAllData)
+        setEmployeeData(dataEmployeeInTable)
+
+        await employeeServices.deleteEmployee(elementToDelete.id)
         Swal.fire({
             title: 'El Empleado ha sido eliminado',
             icon: 'success',
@@ -78,18 +75,16 @@ const ABMDiscount = () => {
     }
 
     const openModalCreateFunction = () => {
-        //setFullEmployeeToEdit({ name: '', lastName: '', documentNumber: '', email: '', password: '', rol: {} })
+        //setFullEmployeeToEdit({ name: '', lastName: '', documentNumber: '', email: '', password: '' })
         setOpenModalCreate(true)
     }
 
-    /*
     useEffect(() => {
-        getDiscounts()
+        getEmployees()
         setTimeout(() => {
             setIsLoading(false)
         }, 1000)
     }, [])
-    */
 
     return (
         <>
@@ -112,28 +107,23 @@ const ABMDiscount = () => {
                         </div>
                     </div>
                 </LittleABMTemplate>
-                {openModalCreate && <ModalABMTemplate title='Crear Empleado' children={<AddEditEmployee fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
-                {openModalEdit && <ModalABMTemplate title='Editar Empleado' children={<AddEditEmployee fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
+                {openModalCreate && <ModalABMTemplate title='Crear Empleado' children={<AddEditEmployee updateTable={getEmployees} fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
+                {openModalEdit && <ModalABMTemplate title='Editar Empleado' children={<AddEditEmployee updateTable={getEmployees} fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
         }  
         </>
     );
 };
 
-export default ABMDiscount;
+export default ABMEmployee;
 
 /*
 <Table 
                                 columns={columns} 
-                                tableData={discountsData} 
-                                completeTableData={discountsAllData} 
+                                tableData={employeeData} 
+                                completeTableData={employeeAllData} 
                                 openModalEditFunction={openModalEditFunction} 
                                 setFullElement={setFullEmployeeToEdit}
-                                deleteElementFunction={deleteElementFunction}/>
-                                */
-
-/*
-{openModalCreate && <ModalABMTemplate title='Crear Empleado' children={<AddEditEmployee updateTable={getEmployee} fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
-                {openModalEdit && <ModalABMTemplate title='Editar Empleado' children={<AddEditEmployee updateTable={getEmployee} fullElementToEdit={fullEmployeeToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
-            </>
-            */
+                                deleteElementFunction={deleteElementFunction}
+                            />
+                            */

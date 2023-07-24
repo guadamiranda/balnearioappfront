@@ -31,7 +31,7 @@ const ABMEmployee= () => {
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
     const [allRoles, setAllRoles] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     async function getEmployeeRolData() {
         const allEmployeesData = await employeeServices.getEmployee()

@@ -41,5 +41,10 @@
             align-items: center;
             flex-direction: column;
         }
+
+        &__tableContainer{
+            height: 70%;
+            overflow-x: auto;
+        }
     }
 }

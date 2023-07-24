@@ -24,7 +24,10 @@
 
 @media (max-width: 700px) {
     .ABMContainer {
-    
+        height: 70vh;
+        overflow: hidden;
+        width: 93%;
+
         &__childContainer {
             height: 95%;
         }

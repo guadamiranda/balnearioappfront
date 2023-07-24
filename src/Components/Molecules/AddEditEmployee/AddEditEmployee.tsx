@@ -9,10 +9,19 @@ import { ImPriceTag } from 'react-icons/im';
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 
+type iFullElementToEdit = {
+    id: string,
+    firstName: string,
+    lastName: string,
+    dni: string,
+    email: string,
+    password: string,
+    roleId: any
+}
 interface IAddEditEmployee {
-    updateTable?: any,
-    closeFunction: any,
-    fullElementToEdit?: any,
+    updateTable: () => void,
+    closeFunction: (isColse:boolean) => void,
+    fullElementToEdit: iFullElementToEdit,
 }
 
 type IAllRoles = {
@@ -21,34 +30,38 @@ type IAllRoles = {
 }
 
 const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable, closeFunction }) => {
-    const [ newNameEmployee, setNewNameEmployee ] = useState(fullElementToEdit.name)
-    const [ newLastNameEmployee, setNewLastNameEmployee ] = useState(fullElementToEdit.lastname)
-    const [ newDocumentNumberEmployee, setNewDocumentNumberEmployee ] = useState(fullElementToEdit.documentNumber)
-    const [ newRoleEmployee, setNewRoleEmployee ] = useState(fullElementToEdit.role)
-    const [ newMailEmployee, setNewMailEmployee ] = useState(fullElementToEdit.mail)
+    const [ newNameEmployee, setNewNameEmployee ] = useState(fullElementToEdit.firstName)
+    const [ newLastNameEmployee, setNewLastNameEmployee ] = useState(fullElementToEdit.lastName)
+    const [ newDocumentNumberEmployee, setNewDocumentNumberEmployee ] = useState(fullElementToEdit.dni)
+    const [ newRoleEmployee, setNewRoleEmployee ] = useState('')
+    const [ newMailEmployee, setNewMailEmployee ] = useState(fullElementToEdit.email)
     const [ newPasswordEmployee, setNewPasswordEmployee ] = useState(fullElementToEdit.password)
-    const [ allRoles, setAllRoles ] = useState<IAllRoles[]>([])
-
+    const [ allRoles, setAllRoles ] = useState<IAllRoles[]>([{id: '', name: ''}])
+    
 
     const validateMissingData = () => {
         let allMissingData = []
-        if(newNameEmployee === '') allMissingData.push('Nombre del Empleado')
-        if(newLastNameEmployee === '') allMissingData.push('Apellido del Empleado')
+        if(newNameEmployee === '') allMissingData.push('Nombre')
+        if(newLastNameEmployee === '') allMissingData.push('Apellido')
+        if(newDocumentNumberEmployee === '') allMissingData.push('DNI')
+        if(newRoleEmployee === '') allMissingData.push('Rol')
+        if(newMailEmployee === '') allMissingData.push('E-mail')
+        if(newPasswordEmployee === '') allMissingData.push('Contraseña')
         return allMissingData
     }
 
     async function postEmployee() {
-        console.log(newRoleEmployee)
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
-        const newEmployee= {firstName: newNameEmployee, 
-                            lastName: newLastNameEmployee, 
-                            dni: newDocumentNumberEmployee, 
-                            email: newMailEmployee,
-                            password: newPasswordEmployee,
-                            role: newRoleEmployee.id}
 
         if (missingData.length === 0) {
+            const newEmployee= {firstName: newNameEmployee, 
+                lastName: newLastNameEmployee, 
+                dni: newDocumentNumberEmployee, 
+                email: newMailEmployee,
+                password: newPasswordEmployee,
+                roleId: newRoleEmployee}
+
             fullElementToEdit.id === '' ? (await employeeServices.postEmployee(newEmployee)) : (await employeeServices.editEmployee(fullElementToEdit.id, newEmployee))
             updateTable()
             Swal.fire({
@@ -76,8 +89,8 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
     }
 
     const selectedValue = (rolName:string) => {
-        const newRole = allRoles.find(rol => rol.name === rolName)
-        setNewRoleEmployee(newRole)
+        const newRole = allRoles.find(rol => rol.name === rolName) || {id: 'a40f006f-6a8f-4808-aa80-08f9555e71cd', name: 'Empleado'}
+        setNewRoleEmployee(newRole.id)
     }
 
     useEffect(() => {

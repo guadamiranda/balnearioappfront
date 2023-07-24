@@ -18,25 +18,25 @@ const reserveServices = {
 
     postReserve: async(body) => {
         try {
-            await axios.post('http://localhost:3001/balneario/api/user/role', body, { headers: getDefaultsHeaders()});
+            await axios.post('http://localhost:3001/balneario/api/reserve', body, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
         } 
     },
 
-    deleteReserve: async(idRol) => {
+    deleteReserve: async(idReserve) => {
         try {
-            await axios.delete(`http://localhost:3001/balneario/api/user/role/${idRol}`, { headers: getDefaultsHeaders()});
+            await axios.delete(`http://localhost:3001/balneario/api/reserve/${idReserve}`, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
         } 
     },
 
-    editReserve: async(idRol, body) => {
+    editReserve: async(idReserve, body) => {
         try {
-            await axios.put(`http://localhost:3001/balneario/api/user/role/${idRol}`, body, { headers: getDefaultsHeaders()});
+            await axios.put(`http://localhost:3001/balneario/api/reserve/${idReserve}`, body, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);

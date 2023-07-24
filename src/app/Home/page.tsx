@@ -4,8 +4,8 @@ import HomeTemplate from '@/Components/templates/homeTemplate/homeTemplate';
 import HomeProfile from '@/Components/Molecules/HomeProfile/HomeProfile';
 import Button from '@/Components/Atoms/button/button';
 import { useRouter } from 'next/navigation';
-import style from './home.module.scss'
 import GuardLogin from '@/utils/guardLogin';
+import style from './home.module.scss'
 
 const HomeComponent = () => {
     const router = useRouter();
@@ -26,7 +26,6 @@ const HomeComponent = () => {
                     <Button text='Buscar Estadía' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/queryReserve')}/>
                     <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMPrice')}/>
                     <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMDiscounts')}/>
-                    <Button text='Roles' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMRol')}/>
                     <Button text='Empelados' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMEmployee')}/>
                     <Button text='Reportes' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Reportes')}/>
                 </div>

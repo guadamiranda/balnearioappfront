@@ -1,4 +1,5 @@
 import Dropdown from "@/Components/Atoms/DropDown/Dropdown";
+import employeeServices from "@/Services/employeeServices";
 import Button from "@/Components/Atoms/button/button";
 import Input from "@/Components/Atoms/Input/input";
 import style from "./addEditEmployee.module.scss";
@@ -37,12 +38,18 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
     }
 
     async function postEmployee() {
+        console.log(newRoleEmployee)
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
-        const newEmployee= {name: newNameEmployee, lastName: newLastNameEmployee, role: newRoleEmployee}
+        const newEmployee= {firstName: newNameEmployee, 
+                            lastName: newLastNameEmployee, 
+                            dni: newDocumentNumberEmployee, 
+                            email: newMailEmployee,
+                            password: newPasswordEmployee,
+                            role: newRoleEmployee.id}
 
         if (missingData.length === 0) {
-            fullElementToEdit.id === '' ? (await rolServices.postRol(newEmployee)) : (await rolServices.editRol(fullElementToEdit.id, newEmployee))
+            fullElementToEdit.id === '' ? (await employeeServices.postEmployee(newEmployee)) : (await employeeServices.editEmployee(fullElementToEdit.id, newEmployee))
             updateTable()
             Swal.fire({
                 title: fullElementToEdit.id === '' ? "¡El nuevo empleado fue creado!" : '¡El empleado fue editado!',

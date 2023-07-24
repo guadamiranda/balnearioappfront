@@ -21,12 +21,11 @@ interface IAddEditPrice {
 }
 
 const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable, closeFunction }) => {
-    const [ newName, setNewName ] = useState(fullElementToEdit.name)
+    //const [ newName, setNewName ] = useState(fullElementToEdit.name)
     const [ newAmount, setNewAmount ] = useState(fullElementToEdit.amount)
 
     const validateMissingData = () => {
         let allMissingData = []
-        if(newName === '') allMissingData.push('Nombre del Precio')
         if(newAmount === '') allMissingData.push('Precio')
         return allMissingData
     }
@@ -34,7 +33,7 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable,
     async function postPrice() {
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
-        const newPrice= {name: newName, amount: parseInt(newAmount)}
+        const newPrice= {amount: parseInt(newAmount)}
 
         if (missingData.length === 0) {
             fullElementToEdit.id === '' ? (await priceServices.postPrice(newPrice)) : (await priceServices.editPrice(fullElementToEdit.id, newPrice)) 
@@ -61,8 +60,6 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable,
     return(
         <div className={style.addEditPriceContainer}>
             <div className={style.addEditPriceContainer__inputContainer}>
-                <Input icon={<ImPriceTag/>} value={newName} placeholder="Nombre del precio" title='Nombre' useStateFunction={setNewName} isFullWidth={true}></Input>
-                <br/>
                 <Input icon={<BiDollar/>} value={newAmount} type='number' placeholder="Precio" title='Precio' useStateFunction={setNewAmount} isFullWidth={true}></Input>
             </div>
             <div className={style.addEditPriceContainer__buttonContainer}>
@@ -74,3 +71,7 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable,
 }
 
 export default AddEditPrice
+
+/*
+<Input icon={<ImPriceTag/>} value={newName} placeholder="Nombre del precio" title='Nombre' useStateFunction={setNewName} isFullWidth={true}></Input>
+*/

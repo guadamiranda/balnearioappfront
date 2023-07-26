@@ -11,7 +11,7 @@ interface IManagerSection{
     cleanDataFlag: boolean,
     carPlateNumber: string,
     dniNumber: number,
-    partnerNumber: number,
+    partnerNumber: string,
     managerLastName: string,
     managerName: string,
     pricePerPerson: number
@@ -19,7 +19,7 @@ interface IManagerSection{
     setTotalPrice: (arg: number) => void,
     setCarPlateNumber: (value: string) => void,
     setDocumentNumber: (value: number) => void,
-    setPartnerNumber: (value: number) => void,
+    setPartnerNumber: (value: string) => void,
     setManagerLastName: (value: string) => void,
     setManagerName: (value: string) => void,
 }
@@ -46,7 +46,7 @@ const ManagerSection: React.FC<IManagerSection> = ({
     const setPriceAndChecked = () => { 
         const isCheckedPartner = !isChecked
         setIsChecked(isCheckedPartner)
-        isCheckedPartner === true ? setDocumentNumber(0) : setPartnerNumber(0)
+        isCheckedPartner === true ? setDocumentNumber(0) : setPartnerNumber('')
         setTotalPrice(isCheckedPartner? (totalPrice + pricePerPerson) : totalPrice === 0 ? 0 : (totalPrice - pricePerPerson))
     }
 
@@ -62,7 +62,7 @@ const ManagerSection: React.FC<IManagerSection> = ({
                       onClickFunction={setPriceAndChecked}/>
                                                  
             <div className={style.managerSection__inputs}>
-            {isChecked? <Input useStateFunction={setPartnerNumber} icon={<AiOutlineUser/>} placeholder='123456789' title='Número de Socio' value={partnerNumber === 0 ? '' : partnerNumber}/> :
+            {isChecked? <Input useStateFunction={setPartnerNumber} icon={<AiOutlineUser/>} placeholder='123456789' title='Número de Socio' value={partnerNumber === '' ? '' : partnerNumber}/> :
                         <Input useStateFunction={setDocumentNumber} type='number' icon={<HiOutlineIdentification/>} placeholder='99999999' title='Número de Documento' value={dniNumber === 0 ? '' : dniNumber}
                         />}
                         <Input useStateFunction={setCarPlateNumber} icon={<AiOutlineCar/>} placeholder='AB 123 CD' title='Patente del Vehiculo' value={carPlateNumber}/>

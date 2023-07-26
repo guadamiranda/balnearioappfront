@@ -18,7 +18,8 @@ const reserveServices = {
 
     postReserve: async(body) => {
         try {
-            await axios.post('http://localhost:3001/balneario/api/reserve', body, { headers: getDefaultsHeaders()});
+            const response = await axios.post('http://localhost:3001/balneario/api/reserve', body, { headers: getDefaultsHeaders()});
+            return response
 
           } catch (error) {
             console.error(error);

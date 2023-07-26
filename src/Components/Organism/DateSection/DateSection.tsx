@@ -27,11 +27,11 @@ const DateSection: React.FC<IDateSection> = ({
     const [dateTo, setDateTo] = useState<number>(0)
 
     const calculateUnixDate = (completeDateFrom: Date, completeDateTo: Date, isOneDay: boolean) => {
-        completeDateFrom.setHours(isOneDay? 0 : completeDateFrom.getHours() + 3)
+        completeDateFrom.setHours(isOneDay? 0 : completeDateFrom.getHours())
         completeDateFrom.setMinutes(0)
         completeDateFrom.setSeconds(0)
 
-        completeDateTo.setHours(isOneDay? 23 : completeDateTo.getHours() + 26)
+        completeDateTo.setHours(isOneDay? 20 : completeDateTo.getHours())
         completeDateTo.setMinutes(59)
         completeDateTo.setSeconds(0)
         

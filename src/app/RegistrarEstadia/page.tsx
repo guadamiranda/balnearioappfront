@@ -5,12 +5,13 @@ import VehiculeSection from '@/Components/Organism/VehiculeSection/VehiculeSecti
 import ResidentSection from '@/Components/Organism/GroupSection/ResidentSection'
 import ABMTemplate from '@/Components/templates/abmTemplate/ABMTemplate'
 import DateSection from '@/Components/Organism/DateSection/DateSection'
+import reserveServices from '../../Services/reserveServices' 
 import Button from '@/Components/Atoms/button/button'
 import style from './registrarEstadia.module.scss'
 import ReactDOMServer from 'react-dom/server'
+import GuardLogin from '@/utils/guardLogin'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
-import GuardLogin from '@/utils/guardLogin'
 
 type IVehicule = {
     carPlate: string,
@@ -27,9 +28,12 @@ type IResident = {
 }
 
 const RegistrarEstadia = () => {
+    const storedUserData = localStorage.getItem('userData');
+    const userData = storedUserData ? JSON.parse(storedUserData) : null;
+
     const [managerLastName, setManagerLastName] = useState<string>('')
     const [carPlateNumber, setCarPlateNumber] = useState<string>('')
-    const [partnerNumber, setPartnerNumber] = useState<number>(0)
+    const [partnerNumber, setPartnerNumber] = useState<string>('')
     const [residents, setResidents] = useState<IResident[]>([])
     const [vehicules, setVehicules] = useState<IVehicule[]>([])
     const [managerName, setManagerName] = useState<string>('')
@@ -46,7 +50,7 @@ const RegistrarEstadia = () => {
         setCleanDataFlag(!cleanDataFlag)
         setManagerLastName('')
         setCarPlateNumber('')
-        setPartnerNumber(0)
+        setPartnerNumber('')
         setManagerName('')
         setResidents([])
         setVehicules([])
@@ -61,33 +65,34 @@ const RegistrarEstadia = () => {
         let allMissingData = []
         if(managerName === '') allMissingData.push('Nombre del Responsable')
         if(managerLastName === '') allMissingData.push('Apellido del Responsable')
-        if(dniNumber === 0 && partnerNumber === 0) allMissingData.push('Número de documento o socio del responsable')
+        if(dniNumber === 0 && partnerNumber === '') allMissingData.push('Número de documento o socio del responsable')
         if(carPlateNumber === '') allMissingData.push('Número de patente')
-        if(residents.some(resident => resident.dniNumber === 0 && resident.partnerNumber === 0)) allMissingData.push('Número de documento o socio de una persona del grupo')
-        if(vehicules.some(vehicule => vehicule.carPlate === '')) allMissingData.push('Número de patente de un vehiculo')
         if(dateFrom === 0) allMissingData.push('Fecha desde')
         if(dateTo === 0) allMissingData.push('Fecha hasta')
         return allMissingData
     }
 
-    const registerData = () => {
+    async function registerData() {
         const missingData = validateMissingData()
+        console.log(dateFrom * 1000)
+        console.log(dateTo * 1000)
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
         if (missingData.length === 0) {
-            console.log("Nombre del Encargado: ", managerName);
-            console.log("Apellido del Encargado: ", managerLastName);
-            console.log("Numero de DNI: ", dniNumber);
-            console.log("Numero de Socio: ", partnerNumber);
-            console.log("Patente del vehiculo: ", carPlateNumber);
-            console.log("-----------------------------------------");
-            console.log("Datos del grupo: ", residents);
-            console.log("-----------------------------------------");
-            console.log("Datos de los vehiculos: ", vehicules);
-            console.log("-----------------------------------------");
-            console.log("Fecha desde en UNIX: ", dateFrom);
-            console.log("Fecha hasta en UNIX: ", dateTo);
-            console.log("-----------------------------------------");
-            console.log("Precio Total: ", totalPrice);
+            const newReserve = {
+                initDate: (dateFrom * 1000).toString(), 
+                finishDate: (dateTo * 1000).toString(), 
+                workshiftId: userData.workshiftId, 
+                price: totalPrice.toString(),
+                managerCarPlate: carPlateNumber.toString(),
+                managerDni: dniNumber.toString(),
+                managerFirstName: managerName,
+                managerLastName: managerLastName, 
+                managerMemberNumber: partnerNumber.toString(),
+                residents: residents.map((resident) => ({dni: resident.dniNumber.toString(), memberNumber: resident.partnerNumber.toString()})),
+                vehicles: vehicules.map((vehicule) => ({carPlate: vehicule.carPlate.toString(), vehicleType: '0b05ba6a-b817-4f88-825d-4e787ef82e5a'}))}
+        
+        await reserveServices.postReserve(newReserve)
+            
         } else {
             Swal.fire({
                 title: 'Faltan rellenar datos',

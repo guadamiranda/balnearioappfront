@@ -16,6 +16,16 @@ const reserveServices = {
         } 
     },
 
+    getActiveReserves: async() => {
+        try {
+            const response = await axios.get('http://localhost:3001/balneario/api/reserve/actives', { headers: getDefaultsHeaders()});
+            return response.data
+            
+          } catch (error) {
+            console.error(error);
+        } 
+    },
+
     postReserve: async(body) => {
         try {
             const response = await axios.post('http://localhost:3001/balneario/api/reserve', body, { headers: getDefaultsHeaders()});

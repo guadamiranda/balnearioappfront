@@ -1,3 +1,6 @@
+@import '../Variables/Colors/colors.module.scss';
+@import '../Variables/Fonts/fonts.module.scss';
+
 
 .reservesContainer{
     display: flex;
@@ -5,9 +8,18 @@
     height: 95%;
     justify-content: space-between;
 
+    &__title {
+        display: flex;
+        font-size: 20px;
+        font-family: "Montserrat", sans-serif;
+        justify-content: center;
+    }
+
     &__actualReserve{
         display: flex;
-        height: 85%;
+        flex-direction: column;
+        height: 78%;
+        overflow-y: auto;
     }
 
     &__buttonContainer{

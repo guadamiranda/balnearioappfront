@@ -6,6 +6,7 @@ import Button from '@/Components/Atoms/button/button';
 import { useRouter } from 'next/navigation';
 import style from './reserves.module.scss'
 import { useState } from "react";
+import ActiveReserveCard from '@/Components/Molecules/ActiveReservesCard/ActiveReserveCard';
 
 
 const Reserves = () => {
@@ -29,8 +30,16 @@ const Reserves = () => {
             
             <>
                 <LittleABMTemplate title="Reservas" subTitle="Administración de reservas"> 
+                    <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
                     <div className={style.reservesContainer__actualReserve}>
-                        <ActualReserve></ActualReserve>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        <ActiveReserveCard></ActiveReserveCard>
+                        
                     </div>
                     <div className={style.reservesContainer__buttonContainer}>
                         <Button text='Buscar reserva' type='secondary' onClickFunction={() => handleClick('/queryReserve')}></Button>

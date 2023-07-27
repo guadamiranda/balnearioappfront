@@ -16,10 +16,11 @@
     }
 
     &__actualReserve{
-        display: flex;
-        flex-direction: column;
-        height: 78%;
+        font-size: 14px;
+        font-family: "Montserrat", sans-serif;
+        max-height: 80%;
         overflow-y: auto;
+        width: 100%;
     }
 
     &__buttonContainer{

@@ -1,21 +1,41 @@
 'use client'
 
 import LittleABMTemplate from '@/Components/templates/littleAbmTemplate/LittleABMTemplate';
-import ActualReserve from '@/Components/Molecules/ActualReserves/ActualReserves';
 import Button from '@/Components/Atoms/button/button';
 import { useRouter } from 'next/navigation';
 import style from './reserves.module.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActiveReserveCard from '@/Components/Molecules/ActiveReservesCard/ActiveReserveCard';
+import reserveServices from '../../Services/reserveServices'
 
+interface IAllReservesData {
+    managerFirstName: string,
+    managerLastName: string,
+    managerDni: string,
+    managerMemberNumber: string,
+    finishDate: number,
+    initDate: number
+}
 
 const Reserves = () => {
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const router = useRouter();
 
     const handleClick = (route:string) => {
         router.push(route);
     }
+
+    async function getActiveReserves() {
+        const allActiveReservesData = await reserveServices.getActiveReserves();
+        setAllReservesData(allActiveReservesData) 
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        getActiveReserves()
+        
+    }, [])
 
 
     return (
@@ -32,13 +52,15 @@ const Reserves = () => {
                 <LittleABMTemplate title="Reservas" subTitle="Administración de reservas"> 
                     <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
                     <div className={style.reservesContainer__actualReserve}>
-                        <ActiveReserveCard></ActiveReserveCard>
-                        <ActiveReserveCard></ActiveReserveCard>
-                        <ActiveReserveCard></ActiveReserveCard>
-                        <ActiveReserveCard></ActiveReserveCard>
-                        <ActiveReserveCard></ActiveReserveCard>
-                        <ActiveReserveCard></ActiveReserveCard>
-                        <ActiveReserveCard></ActiveReserveCard>
+                        {allReservesData.map((reserve) => 
+                        <ActiveReserveCard 
+                        managerName={reserve.managerFirstName}
+                        managerLastName={reserve.managerLastName}
+                        managerDNI={reserve.managerDni}
+                        managerMemberNumber={reserve.managerMemberNumber}
+                        finishDate={reserve.finishDate}
+                        initDate={reserve.initDate}/>
+                        )}
                         
                     </div>
                     <div className={style.reservesContainer__buttonContainer}>

@@ -7,6 +7,8 @@ interface IPeriodReserve {
 
 const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix}) => {
     const todayDate = new Date()
+    const dayOfTheMonth = todayDate.getDate()
+    const month = todayDate.getMonth() + 1
     const initDate = new Date(initDateUnix)
     const finishDate = new Date(finishDateUnix)
 
@@ -36,7 +38,7 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
             <div className={style.periodReserve__todayDate}>
                 <div className={style.periodReserve__lineToday}></div>
                 <div className={styleDotDate}></div>
-                <div className={style.periodReserve__today}>25/05</div>
+                <div className={style.periodReserve__today}>{dayOfTheMonth}/{month}</div>
             </div>
             <div className={style.periodReserve__dateInfo}>
                 <p>Salida</p>

@@ -1,8 +1,28 @@
 
 .addEditPriceContainer{
-    background-color: rgb(230, 174, 106);
+    align-items: center;
+    background-color: #f6f6f6;
+    border: 1px solid rgba(59, 59, 59, 0.2196078431);
     border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
     margin-top: 5px;
-    height: 60px;
+    padding: 5px;
+    min-height: 97px;
     width: 100%;
+
+    &___leftSide {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &___rightSide{
+        width: 50%;
+    }
+}
+
+@media (max-width: 700px) {
+    .addEditPriceContainer{
+        height: 115px;
+    }
 }

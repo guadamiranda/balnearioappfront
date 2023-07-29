@@ -15,7 +15,7 @@ interface ICardInfoEntity {
 const CardInfoEntity: React.FC<ICardInfoEntity> = ({typeInfoName, infoNames}) => {
 
     const renderInfo = (infoNames: string[]) => {
-        return(infoNames.map(name => <span className={style.cardEntity__entity}>{name}</span>))
+        return(infoNames.map((name, index) => <span key={index} className={style.cardEntity__entity}>{name}</span>))
     }
 
     return (

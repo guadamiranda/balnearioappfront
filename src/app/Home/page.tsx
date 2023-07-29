@@ -27,7 +27,7 @@ const HomeComponent = () => {
                     <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMPrice')}/>
                     <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMDiscounts')}/>
                     <Button text='Roles' type='primary' isFullWidth={true} onClickFunction={() => handleClick('/ABMRol')}/>
-                    <Button text='Empelados' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Empleados')}/>
+                    <Button text='Empleados' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Empleados')}/>
                     <Button text='Reportes' type='primary' isFullWidth={true} onClickFunction={() => console.log('Soy Reportes')}/>
                 </div>
             </div>

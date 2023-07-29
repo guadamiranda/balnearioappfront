@@ -27,8 +27,8 @@ const Reserves = () => {
                         <ActualReserve></ActualReserve>
                     </div>
                     <div className={style.reservesContainer__buttonContainer}>
-                        <Button text='Buscar reserva' type='secondary'></Button>
-                        <Button text='Registrar reserva' type='primary'></Button>
+                        <Button text='Buscar reserva' type='secondary' onClickFunction={()=> console.log('hola')}></Button>
+                        <Button text='Registrar reserva' type='primary' onClickFunction={()=> console.log('hola')}></Button>
                     </div>
                     
                 </LittleABMTemplate>

@@ -1,6 +1,15 @@
 @import '../../../app/Variables/Colors/colors.module.scss';
 @import '../../../app/Variables/Fonts/fonts.module.scss';
 
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .button {
     align-items: center;
     border: 1px solid $borderGrey;
@@ -43,6 +52,9 @@
         }
     }
 
+        &-loading {
+            animation: spin 1s linear infinite;
+        }
 
     &__text {
         font-family: $montserrat;

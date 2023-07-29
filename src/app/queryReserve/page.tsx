@@ -1,5 +1,6 @@
 'use client'
 
+import reserveServices from '../../Services/reserveServices';
 import ABMTemplate from "@/Components/templates/abmTemplate/ABMTemplate";
 import Encabezado from "@/Components/Atoms/Encabezado/Encabezado";
 import Separator from "@/Components/Atoms/Separator/separator";
@@ -12,9 +13,12 @@ import { AiOutlineCar } from "react-icons/ai";
 import { useState } from "react";
 import GuardLogin from "@/utils/guardLogin";
 
+
 const QueryReserve = () => {
     const [dni, setDni] = useState(0);
     const [cardPlate, setCardPlate] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+    const [reserveData, setReserveData] = useState<ReserveDto | null>(null)
 
     const saveDni = (valueInput: string) => {
        const value = parseInt(valueInput)
@@ -28,10 +32,22 @@ const QueryReserve = () => {
        }
     }
 
-    const searchReserve = () => {
-        if(!dni && !cardPlate){
-            alert('Debe ingresar al menos un valor')
+    const searchReserve = async () => {
+        if(!dni && !cardPlate) {
+            alert('Debe ingresar al menos un valor') 
+            return
         }
+
+        setIsLoading(true);
+        const reserveQuery = await reserveServices.getSpecificReserve(dni.toString(), cardPlate)
+        setIsLoading(false)
+
+        if(reserveQuery.status == 404) {
+            alert('No hay datos')
+        }
+
+        setReserveData(reserveQuery.data as ReserveDto)
+        console.log(reserveQuery)
     }
 
     return (
@@ -48,11 +64,11 @@ const QueryReserve = () => {
                     </div>
                 </div>
             </div>
-            <Button text="Buscar" type="primary" isFullWidth={true} onClickFunction={searchReserve} />
+            <Button text="Buscar" type="primary" isFullWidth={true} isLoading={isLoading} onClickFunction={()=>searchReserve()} />
             <Separator/>
             <div className={style.formContainer__reserveZone}>
                 <Encabezado title='Datos de la estadia' alignment="center"/>
-                <InfoReserve></InfoReserve>
+                {reserveData && <InfoReserve infoReserve={reserveData}/>}
             </div>
         </ABMTemplate>
     </GuardLogin>

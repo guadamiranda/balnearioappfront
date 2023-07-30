@@ -8,9 +8,10 @@ import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
 import { useEffect, useState } from "react";
 import style from './ABMPrice.module.scss'
-import Swal from 'sweetalert2'
 import GuardLogin from "@/utils/guardLogin";
 import Loader from "@/Components/Organism/loaderScreen/loader";
+import sessionServices from "@/Services/sessionServices";
+import AlertServices from "@/utils/AlertServices";
 
 type IAllPrices = {
     id: number,
@@ -41,32 +42,44 @@ const ABMPrice = () => {
             name: price.name,
             amount: price.amount
         }))
-        return dataPricesInTable
+        return dataPricesInTable;
     }
 
     const openModalEditFunction = () => {
-        setOpenModalEdit(true)
+        if(sessionServices.isAdmin()) {
+            setOpenModalEdit(true)
+            return
+        }
+        AlertServices.renderAlertPermission();
     }
 
     const openModalCreateFunction = () => {
-        setFullPriceToEdit({ id: '', name: '', amount: ''})
-        setOpenModalCreate(true)
+        if(sessionServices.isAdmin()) {
+            setFullPriceToEdit({ id: '', name: '', amount: ''})
+            setOpenModalCreate(true)
+            return
+        }
+        AlertServices.renderAlertPermission();
     }
 
     async function deleteElementFunction(index:number) {
-        const elementToDelete = pricesAllData[index]
-        const newPricesAllData = pricesAllData.filter((obj) => obj.id !== elementToDelete.id);
-        const dataPricesInTable = formatPricesToTable(newPricesAllData)
-        setPricesAllData(newPricesAllData)
-        setPricesData(dataPricesInTable)
-
-        await priceServices.deletePrice(elementToDelete.id)
-        Swal.fire({
-            title: 'El Precio ha sido eliminado',
-            icon: 'success',
-            confirmButtonText: 'Cerrar',
-          })
-    } 
+        if(sessionServices.isAdmin()) {
+            const elementToDelete = pricesAllData[index]
+            const newPricesAllData = pricesAllData.filter((obj) => obj.id !== elementToDelete.id);
+            const dataPricesInTable = formatPricesToTable(newPricesAllData)
+            setPricesAllData(newPricesAllData)
+            setPricesData(dataPricesInTable)
+    
+            await priceServices.deletePrice(elementToDelete.id)
+            AlertServices.renderAlert(
+                'El precio ha sido eliminado',
+                '',
+                'success'
+            )
+            return;
+        }
+        AlertServices.renderAlertPermission();
+    }
     
     useEffect(() => {
         getPrices()
@@ -89,7 +102,7 @@ const ABMPrice = () => {
                             deleteElementFunction={deleteElementFunction}/>
                     </div>
                     <div className={style.abmPriceContainer__buttonContainer}>
-                        <Button text="Crear nuevo Precio" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
+                        <Button text="Crear nuevo Precio" type='primary' onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
                     </div>
                 </div>
             </LittleABMTemplate>

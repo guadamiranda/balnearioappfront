@@ -11,5 +11,14 @@ export default {
             text: message,
             confirmButtonText: 'Ok',
           })
+    },
+
+    renderAlertPermission: () => {
+        Swal.fire({
+            title: 'Faltan Permisos',
+            icon: 'info',
+            text: 'Para acceder a esta opción es necesario tener permisos',
+            confirmButtonText: 'Ok',
+        })
     }
 }

@@ -6,7 +6,7 @@ import HomeTemplate from '@/Components/templates/homeTemplate/homeTemplate';
 import Button from '@/Components/Atoms/button/button';
 import HomeProfile from '@/Components/Molecules/HomeProfile/HomeProfile';
 import GuardLogin from '@/utils/guardLogin';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AlertServices from '@/utils/AlertServices';
 import { isRouteAdmin } from './routes';
 import sessionServices from '@/Services/sessionServices';
@@ -14,7 +14,7 @@ import sessionServices from '@/Services/sessionServices';
 const HomeComponent = () => {
     const router = useRouter();
     const [isLoadingButtons, setIsLoadingButtons] = useState([false,false,false,false,false,false,false])
-    const isAdmin = sessionServices.isAdmin()
+    const [isAdmin, setIsAdmin] = useState(false)
     let lastId = 0;
 
     const handleClick = async (route:string, buttonId:number) => {
@@ -38,6 +38,8 @@ const HomeComponent = () => {
         loadingButtons[buttonId] = false;
         setIsLoadingButtons([...loadingButtons])
     }
+
+    useEffect(() => {setIsAdmin(sessionServices.isAdmin())}, [])
 
     return (
     <GuardLogin>

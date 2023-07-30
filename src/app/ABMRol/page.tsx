@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import style from './ABMRol.module.scss'
 import Swal from 'sweetalert2'
 import GuardLogin from "@/utils/guardLogin";
+import Loader from "@/Components/Organism/loaderScreen/loader";
 
 type IAllRol = {
     id: number,
@@ -31,6 +32,7 @@ const ABMPrice = () => {
         const dataRolInTable = formatRolToTable(allRols)
         setRolAllData(allRols)
         setRolData(dataRolInTable)
+        setIsLoading(false)
     }
 
     const formatRolToTable = (rols:any) => {
@@ -66,22 +68,13 @@ const ABMPrice = () => {
     
     useEffect(() => {
         getRols()
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
     }, [])
 
     return (
         <GuardLogin>
-        {
-            isLoading? 
-            <div className={style.abmPriceContainer}>
-                <div className={style.abmPriceContainer__loaderContainer}>
-                    <div className={style.abmPriceContainer__loader}></div>
-                </div>
-            </div> :
-            
-            <>
+            {
+                isLoading? <Loader/> :
+                <>
                 <LittleABMTemplate title="Administración de Roles" subTitle="">
                     <div className={style.abmPriceContainer}>
                         <div className={style.abmPriceContainer__tableContainer}>
@@ -101,7 +94,7 @@ const ABMPrice = () => {
                 {openModalCreate && <ModalABMTemplate title='Crear Rol' children={<AddEditRol updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
                 {openModalEdit && <ModalABMTemplate title='Editar Rol' children={<AddEditRol updateTable={getRols} fullElementToEdit={fullRolToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
             </>
-        }  
+            }
     </GuardLogin>
     );
 };

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import discountServices from '../../Services/discountServices'
 import Swal from 'sweetalert2'
 import GuardLogin from "@/utils/guardLogin";
+import Loader from "@/Components/Organism/loaderScreen/loader";
 
 type IAllDiscounts = {
     id: number,
@@ -31,6 +32,7 @@ const ABMDiscount = () => {
         const dataDiscountInTable = formatDiscountToTable(allDiscounts)
 
         setDiscountsAllData(allDiscounts)
+        setIsLoading(false)
         setDiscountsData(dataDiscountInTable)
     }
 
@@ -70,21 +72,12 @@ const ABMDiscount = () => {
     
     useEffect(() => {
         getDiscounts()
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
     }, [])
 
     return (
         <GuardLogin>
         {
-            isLoading? 
-            <div className={style.abmPriceContainer}>
-                <div className={style.abmPriceContainer__loaderContainer}>
-                    <div className={style.abmPriceContainer__loader}></div>
-                </div>
-            </div> :
-            
+            isLoading? <Loader/> :
             <>
                 <LittleABMTemplate title="Administración de Descuentos" subTitle="">
                     <div className={style.abmPriceContainer}>

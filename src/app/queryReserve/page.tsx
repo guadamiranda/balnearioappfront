@@ -12,6 +12,7 @@ import Button from "@/Components/Atoms/button/button";
 import { AiOutlineCar } from "react-icons/ai";
 import { useState } from "react";
 import GuardLogin from "@/utils/guardLogin";
+import AlertServices from '@/utils/AlertServices';
 
 
 const QueryReserve = () => {
@@ -34,7 +35,11 @@ const QueryReserve = () => {
 
     const searchReserve = async () => {
         if(!dni && !cardPlate) {
-            alert('Debe ingresar al menos un valor') 
+            AlertServices.renderAlert(
+                'Faltan Datos',
+                'Debe ingresar al menos el dni o la patente',
+                'error'
+            )
             return
         }
 
@@ -43,7 +48,21 @@ const QueryReserve = () => {
         setIsLoading(false)
 
         if(reserveQuery.status == 404) {
-            alert('No hay datos')
+            AlertServices.renderAlert(
+                'Usuario no encontrado',
+                'Los datos ingresados no corresponden con ninguna estadia',
+                'info'
+            )
+            return
+        }
+
+        if(reserveQuery.status == 500) {
+            AlertServices.renderAlert(
+                'Error en el sistema',
+                'Algo salio mal en el sistema, porfavor contactese con administracion',
+                'error'
+            )
+            return
         }
 
         setReserveData(reserveQuery.data as ReserveDto)

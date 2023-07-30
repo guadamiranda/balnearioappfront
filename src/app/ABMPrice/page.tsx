@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import style from './ABMPrice.module.scss'
 import Swal from 'sweetalert2'
 import GuardLogin from "@/utils/guardLogin";
+import Loader from "@/Components/Organism/loaderScreen/loader";
 
 type IAllPrices = {
     id: number,
@@ -32,6 +33,7 @@ const ABMPrice = () => {
         const dataPricesInTable = formatPricesToTable(allPrices)
         setPricesAllData(allPrices)
         setPricesData(dataPricesInTable)
+        setIsLoading(false)
     }
 
     const formatPricesToTable = (prices:any) => {
@@ -68,42 +70,33 @@ const ABMPrice = () => {
     
     useEffect(() => {
         getPrices()
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
     }, [])
 
     return (
         <GuardLogin>
-        {
-            isLoading? 
-            <div className={style.abmPriceContainer}>
-                <div className={style.abmPriceContainer__loaderContainer}>
-                    <div className={style.abmPriceContainer__loader}></div>
-                </div>
-            </div> :
-            
-            <>
-                <LittleABMTemplate title="Administración de Precios" subTitle="">
-                    <div className={style.abmPriceContainer}>
-                        <div className={style.abmPriceContainer__tableContainer}>
-                            <Table 
-                                columns={columns} 
-                                tableData={pricesData} 
-                                completeTableData={pricesAllData} 
-                                openModalEditFunction={openModalEditFunction} 
-                                setFullElement={setFullPriceToEdit}
-                                deleteElementFunction={deleteElementFunction}/>
-                        </div>
-                        <div className={style.abmPriceContainer__buttonContainer}>
-                            <Button text="Crear nuevo Precio" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
-                        </div>
+            {
+                isLoading? <Loader/>:
+                <>
+                    <LittleABMTemplate title="Administración de Precios" subTitle="">
+                <div className={style.abmPriceContainer}>
+                    <div className={style.abmPriceContainer__tableContainer}>
+                        <Table 
+                            columns={columns} 
+                            tableData={pricesData} 
+                            completeTableData={pricesAllData} 
+                            openModalEditFunction={openModalEditFunction} 
+                            setFullElement={setFullPriceToEdit}
+                            deleteElementFunction={deleteElementFunction}/>
                     </div>
-                </LittleABMTemplate>
-                {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
-                {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
-            </>
-        }  
+                    <div className={style.abmPriceContainer__buttonContainer}>
+                        <Button text="Crear nuevo Precio" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
+                    </div>
+                </div>
+            </LittleABMTemplate>
+            {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
+            {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
+                </>
+            }
         </GuardLogin>
     );
 };

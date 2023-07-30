@@ -52,6 +52,11 @@
         }
     }
 
+    &-disable {
+        color: white;
+        background-color: $disable;
+    }
+
         &-loading {
             animation: spin 1s linear infinite;
         }

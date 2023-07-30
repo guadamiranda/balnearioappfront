@@ -7,7 +7,7 @@ interface IButton {
   text: string;
   isFullWidth?: boolean;
   isLoading?: boolean;
-  type: 'primary' | 'secondary' | 'danger';
+  type: 'primary' | 'secondary' | 'danger' | 'disable';
   onClickFunction: () => void;
 }
 

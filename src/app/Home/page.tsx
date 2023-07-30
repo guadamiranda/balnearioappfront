@@ -43,7 +43,7 @@ const HomeComponent = () => {
 
     return (
     <GuardLogin>
-        <HomeTemplate title="BalnearioApp" subTitle="Administración">
+        <HomeTemplate title="Camping Los Nogales" subTitle="Administración">
             <div className={style.homeContainer}>
                 <div className={style.homeContainer__leftSide}>
                     <HomeProfile/>

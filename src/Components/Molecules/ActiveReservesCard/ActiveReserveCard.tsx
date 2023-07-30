@@ -6,8 +6,8 @@ interface IActiveReserveCard {
     managerLastName: string,
     managerDNI: string,
     managerMemberNumber: string,
-    finishDate: number,
-    initDate: number
+    finishDate: string,
+    initDate: string
 }
 
 const ActiveReserveCard: React.FC<IActiveReserveCard> = ({

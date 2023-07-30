@@ -28,13 +28,13 @@ const ABMEmployee= () => {
     const columns = ['Nombre', 'Apellido', 'DNI', 'Rol']
 
     const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: ''})
-    const [employeeAllData, setEmployeesAllData] = useState<IAllEmployeesData[]>([])
     const [employeeData, setEmployeeData] = useState([{ firstName: '', lastName: '', dni: '', rolName: ''}])
+    const [employeeAllData, setEmployeesAllData] = useState<IAllEmployeesData[]>([])
     const [openModalCreate, setOpenModalCreate] = useState(false)
     const [openModalEdit, setOpenModalEdit] = useState(false)
-    const [allRoles, setAllRoles] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-
+    const [allRoles, setAllRoles] = useState([])
+    
     async function getEmployeeRolData() {
         const allEmployeesData = await employeeServices.getEmployee()
         const allRolesData = await rolServices.getRols()

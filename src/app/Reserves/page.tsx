@@ -14,12 +14,13 @@ interface IAllReservesData {
     managerLastName: string,
     managerDni: string,
     managerMemberNumber: string,
-    finishDate: number,
-    initDate: number
+    finishDate: string,
+    initDate: string
 }
 
 const Reserves = () => {
     const router = useRouter();
+    const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
     const [isLoading, setIsLoading] = useState(true)
     const redirectPage = (route: string, buttonId: number) => {
@@ -30,18 +31,15 @@ const Reserves = () => {
         router.push(route);
     }
 
-    const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
-
-
     async function getActiveReserves() {
         const allActiveReservesData = await reserveServices.getActiveReserves();
         setAllReservesData(allActiveReservesData) 
+        console.log(allActiveReservesData)
         setIsLoading(false)
     }
 
     useEffect(() => {
         getActiveReserves()
-        
     }, [])
 
     return (

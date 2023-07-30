@@ -30,11 +30,11 @@ const getUserData = (): userData | undefined=> {
     console.log('ERROR EN LA OBTENCION DEL USERDATA')
 }
 
-
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 export default {
     authUser: async (email: string, password: string) => {
         try {
-            const response = await axios.post('http://localhost:3001/balneario/api/user/authenticate', {email, password});
+            const response = await axios.post(backendUrl + 'balneario/api/user/authenticate', {email, password});
             return response
         } catch (error:any) {
             return error.response
@@ -44,7 +44,7 @@ export default {
     logOutUser: async (observations: string) => {
         try {
             const userData = getUserData();
-            const response = await axios.put(`http://localhost:3001/balneario/api/user/workshifts/${userData?.workshiftId}/finish`, {observations}, { headers: getDefaultsHeaders()});
+            const response = await axios.put(`${backendUrl}balneario/api/user/workshifts/${userData?.workshiftId}/finish`, {observations}, { headers: getDefaultsHeaders()});
             return response
         } catch (error:any) {
             return error.response

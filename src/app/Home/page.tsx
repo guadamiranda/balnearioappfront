@@ -13,13 +13,13 @@ const HomeComponent = () => {
     const [isLoadingButtons, setIsLoadingButtons] = useState([false,false,false,false,false,false,false])
     let lastId = 0;
 
-    const handleClick = async (route:string, buttonId:number) => {
+    const handleClick = (route:string, buttonId:number) => {
         const loadingButtons = isLoadingButtons
         loadingButtons[lastId] = false;
         loadingButtons[buttonId] = true;
         lastId = buttonId;
         setIsLoadingButtons([...loadingButtons])
-        await router.push(route);
+        router.push(route);
     }
 
     return (

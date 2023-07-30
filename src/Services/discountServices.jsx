@@ -4,10 +4,11 @@ const getDefaultsHeaders = () => {
     return {'x-role-id': userData.roleId}
 }
 
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 const discountServices = {
     getDiscounts: async() => {
         try {
-            const response = await axios.get('http://localhost:3001/balneario/api/reserve/discount', { headers: getDefaultsHeaders()});
+            const response = await axios.get(`${backendUrl}balneario/api/reserve/discount`, { headers: getDefaultsHeaders()});
             return response.data
             
           } catch (error) {
@@ -17,7 +18,7 @@ const discountServices = {
 
     postDiscount: async(body) => {
         try {
-            await axios.post('http://localhost:3001/balneario/api/reserve/discount', body, { headers: getDefaultsHeaders()});
+            await axios.post(`${backendUrl}balneario/api/reserve/discount`, body, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
@@ -26,7 +27,7 @@ const discountServices = {
 
     deleteDiscount: async(idDiscount) => {
         try {
-            await axios.delete(`http://localhost:3001/balneario/api/reserve/discount/${idDiscount}`, { headers: getDefaultsHeaders()});
+            await axios.delete(`${backendUrl}balneario/api/reserve/discount/${idDiscount}`, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
@@ -35,7 +36,7 @@ const discountServices = {
 
     editDiscount: async(idDiscount, body) => {
         try {
-            await axios.put(`http://localhost:3001/balneario/api/reserve/discount/${idDiscount}`, body, { headers: getDefaultsHeaders()});
+            await axios.put(`${backendUrl}balneario/api/reserve/discount/${idDiscount}`, body, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);

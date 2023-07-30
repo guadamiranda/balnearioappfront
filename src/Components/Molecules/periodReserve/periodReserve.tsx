@@ -1,8 +1,8 @@
 import style from "./periodReserve.module.scss";
 
 interface IPeriodReserve {
-    initDateUnix: number,
-    finishDateUnix: number
+    initDateUnix: string,
+    finishDateUnix: string
 }
 
 const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix}) => {
@@ -12,7 +12,8 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
     const initDate = new Date(initDateUnix)
     const finishDate = new Date(finishDateUnix)
 
-    const getStateNamePeriodByDates = (todayUnix:number, initDateUnix:number, finishDateUnix:number): String => {
+    const getStateNamePeriodByDates = (todayUnix: number, initDateUnix: number, finishDateUnix: number): String => {
+        
         return (
             initDateUnix < todayUnix && 
             todayUnix < finishDateUnix ? 
@@ -25,7 +26,7 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
         return `${date.getDate()}/${date.getMonth() + 1}`
     }
 
-    const statePeriodName = getStateNamePeriodByDates(todayDate.getTime(), initDateUnix, finishDateUnix) 
+    const statePeriodName = getStateNamePeriodByDates(todayDate.getTime(), initDate.getTime(), finishDate.getTime()) 
 
     const styleContainer = `${style.periodReserve} ${style[`periodReserve-${statePeriodName}`]}`
     const styleDotDate = `${style.periodReserve__dotToday} ${style[`periodReserve__dotToday-${statePeriodName}`]}`
@@ -38,7 +39,7 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
             <div className={style.periodReserve__todayDate}>
                 <div className={style.periodReserve__lineToday}></div>
                 <div className={styleDotDate}></div>
-                <div className={style.periodReserve__today}>{dayOfTheMonth}/{month}</div>
+                <div className={style.periodReserve__today}>{getDayMonthFormatByDate(todayDate)}</div>
             </div>
             <div className={style.periodReserve__dateInfo}>
                 <p>Salida</p>

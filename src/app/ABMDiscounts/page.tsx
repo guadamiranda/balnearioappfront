@@ -8,8 +8,11 @@ import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
 import style from './ABMDiscounts.module.scss'
 import { useEffect, useState } from "react";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import GuardLogin from "@/utils/guardLogin";
+import Loader from "@/Components/Organism/loaderScreen/loader";
+import AlertServices from "@/utils/AlertServices";
+import sessionServices from "@/Services/sessionServices";
 
 type IAllDiscounts = {
     id: string,
@@ -32,6 +35,7 @@ const ABMDiscount = () => {
         const dataDiscountInTable = formatDiscountToTable(allDiscounts)
 
         setDiscountsAllData(allDiscounts)
+        setIsLoading(false)
         setDiscountsData(dataDiscountInTable)
     }
 
@@ -46,48 +50,49 @@ const ABMDiscount = () => {
     }
 
     async function deleteElementFunction(index:number) {
-        const elementToDelete = discountsAllData[index]
-        const newDiscountsAllData = discountsAllData.filter((obj) => obj.id !== elementToDelete.id);
-        const dataPricesInTable = formatDiscountToTable(newDiscountsAllData)
-
-        setDiscountsAllData(newDiscountsAllData)
-        setDiscountsData(dataPricesInTable)
-
-        await discountServices.deleteDiscount(elementToDelete.id)
-
-        Swal.fire({
-            title: 'El Descuento ha sido eliminado',
-            icon: 'success',
-            confirmButtonText: 'Cerrar',
-          })
+        if(sessionServices.isAdmin()) {
+            const elementToDelete = discountsAllData[index]
+            const newDiscountsAllData = discountsAllData.filter((obj) => obj.id !== elementToDelete.id);
+            const dataPricesInTable = formatDiscountToTable(newDiscountsAllData)
+            setDiscountsAllData(newDiscountsAllData)
+            setDiscountsData(dataPricesInTable)
+    
+            await discountServices.deleteDiscount(elementToDelete.id)
+            AlertServices.renderAlert(
+                'El Descuento ha sido eliminado',
+                '',
+                'success'
+            )
+            return
+        }
+        AlertServices.renderAlertPermission()
     } 
 
     const openModalEditFunction = () => {
-        setOpenModalEdit(true)
+        if(sessionServices.isAdmin()) {
+            setOpenModalEdit(true)
+            return
+        }
+        AlertServices.renderAlertPermission();
     }
 
     const openModalCreateFunction = () => {
-        setFullDiscountToEdit({ id: '', name: '', percentage: ''})
-        setOpenModalCreate(true)
+        if(sessionServices.isAdmin()) {
+            setFullDiscountToEdit({ id: '', name: '', percentage: ''})
+            setOpenModalCreate(true)
+            return
+        }
+        AlertServices.renderAlertPermission();
     }
    
     useEffect(() => {
         getDiscounts()
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
     }, [])
 
     return (
         <GuardLogin>
         {
-            isLoading? 
-            <div className={style.abmPriceContainer}>
-                <div className={style.abmPriceContainer__loaderContainer}>
-                    <div className={style.abmPriceContainer__loader}></div>
-                </div>
-            </div> :
-            
+            isLoading? <Loader/> :
             <>
                 <LittleABMTemplate title="Administración de Descuentos" subTitle="">
                     <div className={style.abmPriceContainer}>

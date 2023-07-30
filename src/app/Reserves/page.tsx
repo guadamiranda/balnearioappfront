@@ -2,11 +2,11 @@
 
 import LittleABMTemplate from '@/Components/templates/littleAbmTemplate/LittleABMTemplate';
 import Button from '@/Components/Atoms/button/button';
-import { useRouter } from 'next/navigation';
 import style from './reserves.module.scss'
 import { useEffect, useState } from "react";
 import ActiveReserveCard from '@/Components/Molecules/ActiveReservesCard/ActiveReserveCard';
 import reserveServices from '../../Services/reserveServices'
+import { useRouter } from 'next/navigation';
 
 interface IAllReservesData {
     managerFirstName: string,
@@ -18,13 +18,17 @@ interface IAllReservesData {
 }
 
 const Reserves = () => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
-    const router = useRouter();
+    const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
+    const redirectPage = (route: string, buttonId: number) => {
+        const loadingButtons = isLoadingButtons
+        loadingButtons[buttonId] = true;
 
-    const handleClick = (route:string) => {
+        setIsLoadingButton([...loadingButtons])
         router.push(route);
     }
+
+    const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
+
 
     async function getActiveReserves() {
         const allActiveReservesData = await reserveServices.getActiveReserves();
@@ -36,7 +40,6 @@ const Reserves = () => {
         getActiveReserves()
         
     }, [])
-
 
     return (
         <>
@@ -69,8 +72,8 @@ const Reserves = () => {
                     </div>
                     
                     <div className={style.reservesContainer__buttonContainer}>
-                        <Button text='Buscar reserva' type='secondary' onClickFunction={() => handleClick('/queryReserve')}></Button>
-                        <Button text='Registrar reserva' type='primary' onClickFunction={() => handleClick('/RegistrarEstadia')}></Button>
+                        <Button text='Buscar reserva' type='secondary' isLoading={isLoadingButtons[0]} onClickFunction={()=> redirectPage('/queryReserve', 0)}></Button>
+                        <Button text='Registrar reserva' type='primary' isLoading={isLoadingButtons[1]} onClickFunction={()=> redirectPage('/RegistrarEstadia', 1)}></Button>
                     </div>
                     
                 </LittleABMTemplate>

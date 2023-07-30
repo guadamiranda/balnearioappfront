@@ -1,12 +1,13 @@
 'use client'
-
-import React from 'react'
+import { BiLoaderCircle } from 'react-icons/bi';
 import style from './button.module.scss'
+import React from 'react'
 
 interface IButton {
   text: string;
   isFullWidth?: boolean;
-  type: 'primary' | 'secondary' | 'danger';
+  isLoading?: boolean;
+  type: 'primary' | 'secondary' | 'danger' | 'disable';
   onClickFunction: () => void;
 }
 
@@ -14,6 +15,7 @@ const Button: React.FC<IButton> = ({
   text,
   isFullWidth,
   onClickFunction,
+  isLoading = false,
   type
 }) => {
   const className = `
@@ -23,7 +25,7 @@ const Button: React.FC<IButton> = ({
 `
   return (
     <div className={className} onClick={() => onClickFunction()}>
-        <div className={style.button__text}>{text}</div>
+         {isLoading ? <BiLoaderCircle className={style['button-loading']} /> : <div className={style.button__text}>{text}</div>}
     </div>
   );
 };

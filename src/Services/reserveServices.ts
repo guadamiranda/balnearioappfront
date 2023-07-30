@@ -26,9 +26,9 @@ const reserveServices = {
         }
     },
 
-    /*getReserves: async() => {
+    getActiveReserves: async() => {
         try {
-            const response = await axios.get('http://localhost:3001/balneario/api/reserve', { headers: getDefaultsHeaders()});
+            const response = await axios.get('http://localhost:3001/balneario/api/reserve/actives', { headers: getDefaultsHeaders()});
             return response.data
             
           } catch (error) {
@@ -36,9 +36,9 @@ const reserveServices = {
         } 
     },
 
-    getActiveReserves: async() => {
+    /*getReserves: async() => {
         try {
-            const response = await axios.get('http://localhost:3001/balneario/api/reserve/actives', { headers: getDefaultsHeaders()});
+            const response = await axios.get('http://localhost:3001/balneario/api/reserve', { headers: getDefaultsHeaders()});
             return response.data
             
           } catch (error) {

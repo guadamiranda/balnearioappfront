@@ -6,6 +6,7 @@ import style from './reserves.module.scss'
 import { useEffect, useState } from "react";
 import ActiveReserveCard from '@/Components/Molecules/ActiveReservesCard/ActiveReserveCard';
 import reserveServices from '../../Services/reserveServices'
+import Loader from "@/Components/Organism/loaderScreen/loader";
 import { useRouter } from 'next/navigation';
 
 interface IAllReservesData {
@@ -18,7 +19,9 @@ interface IAllReservesData {
 }
 
 const Reserves = () => {
+    const router = useRouter();
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
+    const [isLoading, setIsLoading] = useState(true)
     const redirectPage = (route: string, buttonId: number) => {
         const loadingButtons = isLoadingButtons
         loadingButtons[buttonId] = true;
@@ -44,13 +47,7 @@ const Reserves = () => {
     return (
         <>
         {
-            isLoading? 
-            <div className={style.reservesContainer}>
-                <div className={style.reservesContainer__loaderContainer}>
-                    <div className={style.reservesContainer__loader}></div>
-                </div>
-            </div> :
-            
+            isLoading? <Loader/> :
             <>
                 <LittleABMTemplate title="Reservas" subTitle="Administración de reservas"> 
                     <div className={style.reservesContainer__titleTableContainer}>

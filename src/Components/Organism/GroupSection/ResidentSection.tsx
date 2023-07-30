@@ -30,7 +30,6 @@ const ResidentSection: React.FC<IResidentSection> = ({
     setTotalPrice}) => {
 
     const [residentIndex, setResidentIndex] = useState(0)
-    console.log(residents)
 
     const addResidentComponent = () => {
         const newResident = {key: residentIndex, 

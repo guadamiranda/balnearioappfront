@@ -44,9 +44,9 @@ const ManagerSection: React.FC<IManagerSection> = ({
     const [isChecked, setIsChecked] = useState(false)
 
     const setPriceAndChecked = () => { 
-        const isCheckedPartner = !isChecked
-        setIsChecked(isCheckedPartner)
-        isCheckedPartner === true ? setDocumentNumber(0) : setPartnerNumber('')
+        const isCheckedPartner = isChecked
+        setIsChecked(!isCheckedPartner)
+        isCheckedPartner === false ? setDocumentNumber(0) : setPartnerNumber('')
         setTotalPrice(isCheckedPartner? (totalPrice + pricePerPerson) : totalPrice === 0 ? 0 : (totalPrice - pricePerPerson))
     }
 

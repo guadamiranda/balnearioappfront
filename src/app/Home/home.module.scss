@@ -25,3 +25,13 @@
       width: 65%;
     }
   }
+
+@media (max-width: 700px) {
+
+  .homeContainer {
+
+    &__leftSide{
+      width: 48%;
+    }
+  }
+}

@@ -8,6 +8,10 @@
     height: 95%;
     justify-content: space-between;
 
+    &__titleTableContainer{
+        height: 93%;
+    }
+
     &__title {
         display: flex;
         font-size: 20px;
@@ -18,7 +22,7 @@
     &__actualReserve{
         font-size: 14px;
         font-family: "Montserrat", sans-serif;
-        max-height: 80%;
+        max-height: 95%;
         overflow-y: auto;
         width: 100%;
     }
@@ -53,11 +57,39 @@
 }
 
 @media (max-width: 700px) {
-    .abmPriceContainer{
-
-        &__buttonContainer{
-            align-items: center;
-            flex-direction: column;
+    .reservesContainer{
+        display: flex;
+        flex-direction: column;
+        height: 95%;
+        justify-content: space-between;
+    
+        &__title {
+            display: flex;
+            font-size: 20px;
+            font-family: "Montserrat", sans-serif;
+            justify-content: center;
         }
+    
+        &__actualReserve{
+            font-size: 14px;
+            font-family: "Montserrat", sans-serif;
+            max-height: 80%;
+            overflow-y: auto;
+            width: 100%;
+        }
+    
+        &__buttonContainer{
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        &__tableContainer{
+            height: 90%;
+        }
+    
+        &__spaceButton{
+            margin: 0px 10px;
+        }  
+
     }
 }

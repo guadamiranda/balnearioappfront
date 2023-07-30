@@ -10,7 +10,7 @@ interface ITable{
     tableData: Array<any>,
     openModalEditFunction: any,
     setFullElement: any,
-    deleteElementFunction: any
+    deleteElementFunction?: any
 }
 
 const Table: React.FC<ITable> = ({
@@ -40,7 +40,7 @@ const Table: React.FC<ITable> = ({
                     ))}
                     <div className={style.tableContainer__tableColumns}>
                         <ButtonIcon icon={<RiEdit2Fill/>} type='info' onClickFunction={() => openEditModal(index)}/>
-                        <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteElementFunction(index)}/>
+                        {deleteElementFunction? <ButtonIcon icon={<FaTrashAlt/>} type='danger' onClickFunction={() => deleteElementFunction(index)}/> : <></>}
                     </div>
                 </div>
                 )}

@@ -7,6 +7,15 @@
     min-height: 80vh;
     justify-content: space-between;
 
+        &__discountsContainer{
+            align-items: center;
+            display: flex;
+
+            span {
+                margin-right: 5px;
+            }
+        }
+    
         &__buttonsContainer{
             display: flex;
             justify-content: space-between;
@@ -25,6 +34,7 @@
         }
 
         &__sectionTotal{
+            align-items: center;
             background-color: $lightGrey;
             border: 1px solid $borderGrey;
             border-radius: 8px;

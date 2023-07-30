@@ -9,7 +9,7 @@ type Option = {
 interface IDropdown {
     title: string,
     options: Array<Option>,
-    titleDropdown: string,
+    titleDropdown?: string,
     selectedValueFunction: (name:string) => void
 }
 

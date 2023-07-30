@@ -21,7 +21,7 @@ interface IAddEditPrice {
 }
 
 const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable, closeFunction }) => {
-    //const [ newName, setNewName ] = useState(fullElementToEdit.name)
+    const [ newName, setNewName ] = useState(fullElementToEdit.name)
     const [ newAmount, setNewAmount ] = useState(fullElementToEdit.amount)
 
     const validateMissingData = () => {
@@ -33,7 +33,7 @@ const AddEditPrice: React.FC<IAddEditPrice> = ({ fullElementToEdit, updateTable,
     async function postPrice() {
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
-        const newPrice= {amount: parseInt(newAmount)}
+        const newPrice= {name: newName, amount: parseInt(newAmount)}
 
         if (missingData.length === 0) {
             fullElementToEdit.id === '' ? (await priceServices.postPrice(newPrice)) : (await priceServices.editPrice(fullElementToEdit.id, newPrice)) 

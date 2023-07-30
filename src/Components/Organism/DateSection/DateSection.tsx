@@ -25,6 +25,8 @@ const DateSection: React.FC<IDateSection> = ({
     const [isCheckedOneDay, setIsCheckedOneDay] = useState(false)
     const [dateFrom, setDateFrom] = useState<number>(0)
     const [dateTo, setDateTo] = useState<number>(0)
+    const [oldNumberOfDays, setOldNumberOfDays] = useState(0)
+    const [numberOfDays, setNumberOfDays] = useState(0)
 
     const calculateUnixDate = (completeDateFrom: Date, completeDateTo: Date, isOneDay: boolean) => {
         completeDateFrom.setHours(isOneDay? 0 : completeDateFrom.getHours())
@@ -52,7 +54,17 @@ const DateSection: React.FC<IDateSection> = ({
         setDateFromUnix(calculatedUnixDays.unixTimeFrom)
         setDateToUnix(calculatedUnixDays.unixTimeTo)
         setIsCheckedOneDay(newChecked)
-        setTotalPrice(newChecked? (totalPrice + priceOneDay) : (totalPrice === 0 ? 0 : (totalPrice - priceOneDay)))
+        setTotalPrice(newChecked? (totalPrice - (numberOfDays * priceOneDay) + priceOneDay ) : (totalPrice === 0 ? 0 : (totalPrice - priceOneDay)))
+
+        if (newChecked === false) {
+            setDateFrom(0)
+            setDateTo(0)
+            setDateFromUnix(0)
+            setDateToUnix(0)
+        }
+
+        setNumberOfDays(0)
+        setOldNumberOfDays(0)
     }
 
     const calculateDays = () => {
@@ -63,16 +75,18 @@ const DateSection: React.FC<IDateSection> = ({
 
         const differenceInSeconds = calculatedUnixDays.unixTimeTo - calculatedUnixDays.unixTimeFrom;
         const secondsInOneDay = 24 * 60 * 60;
-        const numberOfDays = Math.floor(differenceInSeconds / secondsInOneDay);
+        setNumberOfDays(Math.floor(differenceInSeconds / secondsInOneDay));
 
         setDateFromUnix(calculatedUnixDays.unixTimeFrom)
-        setDateToUnix(calculatedUnixDays.unixTimeTo)
-        setTotalPrice(totalPrice + (numberOfDays * priceOneDay))
+        setDateToUnix(calculatedUnixDays.unixTimeTo)    
+        setOldNumberOfDays(numberOfDays)
     }
 
     const cleanDataDateSection = () => {
         setDateFrom(0)
         setDateTo(0)
+        setOldNumberOfDays(0)
+        setNumberOfDays(0)
     }
 
     useEffect(() => {
@@ -80,9 +94,12 @@ const DateSection: React.FC<IDateSection> = ({
     }, [dateFrom, dateTo]) 
 
     useEffect(() => {
-        setIsCheckedOneDay(false)
         cleanDataDateSection()
     }, [cleanDataFlag])
+
+    useEffect(() => {
+        setTotalPrice(totalPrice  + (numberOfDays * priceOneDay) - (oldNumberOfDays * priceOneDay))
+    }, [numberOfDays])
 
     return(
         <div className={style.registrarEstadiaContainer__section}>
@@ -95,9 +112,9 @@ const DateSection: React.FC<IDateSection> = ({
             <div className={style.registrarEstadiaContainer__estadia}>
                 <ReservationDays 
                     setFechaDesdeFunction={setDateFrom} 
-                    setFechaHastaFunction={setDateTo} 
+                    setFechaHastaFunction={setDateTo}
                     valueDateFrom={dateFrom}
-                    valueDateTo={dateTo}/>
+                    valueDateTo={dateTo} />
             </div>
             }
             

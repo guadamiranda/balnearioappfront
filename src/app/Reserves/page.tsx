@@ -50,19 +50,24 @@ const Reserves = () => {
             
             <>
                 <LittleABMTemplate title="Reservas" subTitle="Administración de reservas"> 
-                    <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
-                    <div className={style.reservesContainer__actualReserve}>
-                        {allReservesData.map((reserve) => 
-                        <ActiveReserveCard 
-                        managerName={reserve.managerFirstName}
-                        managerLastName={reserve.managerLastName}
-                        managerDNI={reserve.managerDni}
-                        managerMemberNumber={reserve.managerMemberNumber}
-                        finishDate={reserve.finishDate}
-                        initDate={reserve.initDate}/>
-                        )}
-                        
+                    <div className={style.reservesContainer__titleTableContainer}>
+                        <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
+                        <div className={style.reservesContainer__actualReserve}>
+                            {allReservesData.map((reserve) => 
+                            <ActiveReserveCard 
+                            key={reserve.managerDni}
+                            managerName={reserve.managerFirstName}
+                            managerLastName={reserve.managerLastName}
+                            managerDNI={reserve.managerDni}
+                            managerMemberNumber={reserve.managerMemberNumber}
+                            finishDate={reserve.finishDate}
+                            initDate={reserve.initDate}/>
+                            )}
+                            
+                        </div>
+
                     </div>
+                    
                     <div className={style.reservesContainer__buttonContainer}>
                         <Button text='Buscar reserva' type='secondary' onClickFunction={() => handleClick('/queryReserve')}></Button>
                         <Button text='Registrar reserva' type='primary' onClickFunction={() => handleClick('/RegistrarEstadia')}></Button>

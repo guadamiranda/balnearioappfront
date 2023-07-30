@@ -16,20 +16,24 @@ const HomeComponent = () => {
     let lastId = 0;
 
     const handleClick = (route:string, buttonId:number) => {
-        if(!isAdmin) {
-            AlertServices.renderAlert(
-                'Faltan Permisos',
-                'Para acceder a esta opción es necesario tener permisos',
-                'info'
-            )
-            return
-        }
         const loadingButtons = isLoadingButtons
         loadingButtons[lastId] = false;
         loadingButtons[buttonId] = true;
         lastId = buttonId;
         setIsLoadingButtons([...loadingButtons])
         router.push(route);
+    }
+
+    const permissonAlert = () => {
+        AlertServices.renderAlert(
+            'Faltan Permisos',
+            'Para acceder a esta opción es necesario tener permisos',
+            'info'
+        )
+    }
+
+    const redirectPage = (route:string, buttonId:number) => {
+
     }
 
     const getRole = () => {

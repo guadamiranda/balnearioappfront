@@ -40,9 +40,8 @@ type IResident = {
 }
 
 const RegistrarEstadia = () => {
-    const storedUserData = localStorage.getItem('userData');
-    const userData = storedUserData ? JSON.parse(storedUserData) : null;
 
+    let userData:any = ''
     const [managerLastName, setManagerLastName] = useState<string>('')
     const [carPlateNumber, setCarPlateNumber] = useState<string>('')
     const [partnerNumber, setPartnerNumber] = useState<string>('')
@@ -163,6 +162,11 @@ const RegistrarEstadia = () => {
         getPricesAndDiscounts()
     }, [pricePerPerson])
 
+    useEffect(() => {
+        const storedUserData = localStorage.getItem('userData');
+        userData = storedUserData ? JSON.parse(storedUserData) : null;
+    }, [])
+
     return(
     <GuardLogin>
         <ABMTemplate title="Registrar Estadía" subTitle="Ingresa los datos para registrar la estadía.">
@@ -255,7 +259,3 @@ const RegistrarEstadia = () => {
 
 export default RegistrarEstadia
 
-
-/*
-
-        */

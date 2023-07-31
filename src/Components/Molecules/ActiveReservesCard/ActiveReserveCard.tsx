@@ -13,6 +13,7 @@ interface IActiveReserveCard {
     managerMemberNumber: string,
     finishDate: string,
     initDate: string,
+    managerCarPlate: string
 }
 
 const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
@@ -22,7 +23,9 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
     managerDNI,
     managerMemberNumber,
     finishDate,
-    initDate
+    initDate,
+    managerCarPlate
+
     }) => {
     const [isEliminteReserve, setIsEliminateReserve] = useState<boolean>(false)
     const eliminateReserve = () => {
@@ -45,7 +48,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
                 <span><b>Nombre:</b> {managerName}, {managerLastName}</span>
                 <span><b>DNI:</b> {managerDNI}</span>
                 <span><b>N° Socio:</b> {managerMemberNumber === '' ? '-' : managerMemberNumber}</span>
-                <span><b>Patente:</b> </span>
+                <span><b>Patente:</b> {managerCarPlate} </span>
 
             </div>
             <div className={style.addEditPriceContainer___rightSide}>

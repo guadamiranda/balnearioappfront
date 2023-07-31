@@ -16,7 +16,8 @@ interface IAllReservesData {
     managerDni: string,
     managerMemberNumber: string,
     finishDate: string,
-    initDate: string
+    initDate: string,
+    managerCarPlate: string
 }
 
 const Reserves = () => {
@@ -35,7 +36,6 @@ const Reserves = () => {
     async function getActiveReserves() {
         const allActiveReservesData = await reserveServices.getActiveReserves();
         setAllReservesData(allActiveReservesData) 
-        console.log(allActiveReservesData)
         setIsLoading(false)
     }
 
@@ -60,6 +60,7 @@ const Reserves = () => {
                             managerLastName={reserve.managerLastName}
                             managerDNI={reserve.managerDni}
                             managerMemberNumber={reserve.managerMemberNumber}
+                            managerCarPlate = {reserve.managerCarPlate}
                             finishDate={reserve.finishDate}
                             initDate={reserve.initDate}/>
                             )}

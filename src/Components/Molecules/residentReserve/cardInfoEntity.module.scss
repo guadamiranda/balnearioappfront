@@ -31,11 +31,18 @@
     &__entityContainer {
         align-items: center;
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         height: 60px;
         justify-content: space-around;
         overflow-y: auto;
         width: 90%;
+    }
+
+    &__allInfo {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
     }
 
     &__entity {

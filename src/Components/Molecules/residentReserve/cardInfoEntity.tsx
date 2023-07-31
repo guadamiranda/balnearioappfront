@@ -24,7 +24,8 @@ const CardInfoEntity: React.FC<ICardInfoEntity> = ({typeInfoName, infoNames}) =>
                 {iconEntitys[typeInfoName]}
             </div>
             <div className={style.cardEntity__entityContainer}>
-                {renderInfo(infoNames)}
+                <div><b>{typeInfoName === 'carPlate' ? 'Patentes de Vehiculos' : 'Grupo'}</b></div>
+                <div className={style.cardEntity__allInfo}>{renderInfo(infoNames)}</div>
             </div>
         </div>
     );

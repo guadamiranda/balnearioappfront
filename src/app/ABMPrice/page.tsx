@@ -98,8 +98,7 @@ const ABMPrice = () => {
                             tableData={pricesData} 
                             completeTableData={pricesAllData} 
                             openModalEditFunction={openModalEditFunction} 
-                            setFullElement={setFullPriceToEdit}
-                            deleteElementFunction={deleteElementFunction}/>
+                            setFullElement={setFullPriceToEdit}/>
                     </div>
                     <div className={style.abmPriceContainer__buttonContainer}>
                         <Button text="Crear nuevo Precio" type='primary' onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>

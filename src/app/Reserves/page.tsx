@@ -8,6 +8,7 @@ import ActiveReserveCard from '@/Components/Molecules/ActiveReservesCard/ActiveR
 import reserveServices from '../../Services/reserveServices'
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import { useRouter } from 'next/navigation';
+import AlertServices from '@/utils/AlertServices';
 
 interface IAllReservesData {
     id: string,
@@ -35,6 +36,15 @@ const Reserves = () => {
 
     async function getActiveReserves() {
         const allActiveReservesData = await reserveServices.getActiveReserves();
+        if(!allActiveReservesData) {
+            AlertServices.rederAlertWithConfirm(
+                'Falla en el servidor',
+                'No se puede conectar con el servidor, contactese con el administrador',
+                'error',
+                () => {router.push('/')}
+            )
+            return
+        }
         setAllReservesData(allActiveReservesData) 
         setIsLoading(false)
     }

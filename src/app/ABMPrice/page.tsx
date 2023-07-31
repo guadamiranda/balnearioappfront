@@ -101,7 +101,7 @@ const ABMPrice = () => {
                             setFullElement={setFullPriceToEdit}/>
                     </div>
                     <div className={style.abmPriceContainer__buttonContainer}>
-                        <Button text="Crear nuevo Precio" type='primary' onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>
+                        { /*<Button text="Crear nuevo Precio" type='primary' onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button> */}
                     </div>
                 </div>
             </LittleABMTemplate>

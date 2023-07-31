@@ -1,21 +1,21 @@
 import style from "./cardInfoEntity.module.scss";
-import { AiOutlineUser } from "react-icons/ai";
-import { FaCarSide } from "react-icons/fa"
+import { FaCarSide, FaUsers } from "react-icons/fa"
 
 const iconEntitys: { [entityName: string]: JSX.Element} = {
     carPlate: <FaCarSide/>,
-    dni: <AiOutlineUser/>
+    dni: <FaUsers/>,
 }
 
 interface ICardInfoEntity {
     infoNames: string[],
-    typeInfoName: 'carPlate' | 'dni'
+    typeInfoName: 'carPlate' | 'dni' 
 }
 
 const CardInfoEntity: React.FC<ICardInfoEntity> = ({typeInfoName, infoNames}) => {
-
     const renderInfo = (infoNames: string[]) => {
-        return(infoNames.map((name, index) => <span key={index} className={style.cardEntity__entity}>{name}</span>))
+        return(infoNames.length === 0 ? 
+            <span className={style.cardEntity__entity}>No hay datos para mostrar</span>
+            : infoNames.map((name, index) => <span key={index} className={style.cardEntity__entity}>{name}</span>))
     }
 
     return (

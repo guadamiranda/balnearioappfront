@@ -48,7 +48,7 @@ const reserveServices = {
 
     deleteReserve: async(idReserve: string) => {
         try {
-            await axios.delete(`${backendUrl}/balneario/api/reserve/${idReserve}`, { headers: getDefaultsHeaders()});
+            await axios.delete(`${backendUrl}balneario/api/reserve/${idReserve}`, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);

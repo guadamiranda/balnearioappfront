@@ -20,5 +20,18 @@ export default {
             text: 'Para acceder a esta opción es necesario tener permisos',
             confirmButtonText: 'Ok',
         })
+    },
+
+    rederAlertWithConfirm: async (title: string, message: string, typeAlert: typeAlert, onConfirmFunction: () => void) => {
+        const {isConfirmed} = await Swal.fire({
+            title: title,
+            text: message,
+            icon: typeAlert,
+            confirmButtonText: 'Finalizar',
+            showCancelButton: true,
+            denyButtonText: `Cancelar`,
+          })
+          
+          if(isConfirmed) onConfirmFunction()
     }
 }

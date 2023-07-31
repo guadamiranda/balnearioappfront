@@ -10,6 +10,7 @@ import Loader from "@/Components/Organism/loaderScreen/loader";
 import { useRouter } from 'next/navigation';
 
 interface IAllReservesData {
+    id: string,
     managerFirstName: string,
     managerLastName: string,
     managerDni: string,
@@ -54,6 +55,7 @@ const Reserves = () => {
                             {allReservesData.map((reserve) => 
                             <ActiveReserveCard 
                             key={reserve.managerDni}
+                            id={reserve.id}
                             managerName={reserve.managerFirstName}
                             managerLastName={reserve.managerLastName}
                             managerDNI={reserve.managerDni}

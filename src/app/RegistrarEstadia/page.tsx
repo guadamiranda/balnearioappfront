@@ -40,8 +40,8 @@ type IResident = {
 }
 
 const RegistrarEstadia = () => {
-
-    let userData:any = ''
+    const [userData, setUserData] = useState<any>()
+    console.log(userData)
     const [managerLastName, setManagerLastName] = useState<string>('')
     const [carPlateNumber, setCarPlateNumber] = useState<string>('')
     const [partnerNumber, setPartnerNumber] = useState<string>('')
@@ -93,7 +93,6 @@ const RegistrarEstadia = () => {
 
     const validateMissingData = () => {
         let allMissingData = []
-        console.log(residents)
         if(managerName === '') allMissingData.push('Nombre del Responsable')
         if(managerLastName === '') allMissingData.push('Apellido del Responsable')
         if(dniNumber === 0 && partnerNumber === '') allMissingData.push('Número de documento o socio del responsable')
@@ -164,7 +163,7 @@ const RegistrarEstadia = () => {
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
-        userData = storedUserData ? JSON.parse(storedUserData) : null;
+        setUserData(storedUserData ? JSON.parse(storedUserData) : null);
     }, [])
 
     return(

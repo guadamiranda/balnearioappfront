@@ -57,7 +57,7 @@ const HomeProfile: React.FC<IHomeProfile> = () => {
             <span className={style.homeProfileContainer__rol}>{roleName}</span>
         </div>
         <div className={style.homeProfileContainer__signOffContainer}>
-            <div className={style.homeProfileContainer__signOff} onClick={()=> logout()}>Cerrar Sesión</div>
+            <div className={style.homeProfileContainer__signOff} onClick={()=> logout()}>Finalizar Turno</div>
         </div>
         
     </div>

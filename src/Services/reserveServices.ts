@@ -28,7 +28,7 @@ const reserveServices = {
 
     getActiveReserves: async() => {
         try {
-            const response = await axios.get('http://localhost:3001/balneario/api/reserve/actives', { headers: getDefaultsHeaders()});
+            const response = await axios.get(`${backendUrl}balneario/api/reserve/actives`, { headers: getDefaultsHeaders()});
             return response.data
             
           } catch (error) {
@@ -36,19 +36,9 @@ const reserveServices = {
         } 
     },
 
-    /*getReserves: async() => {
+    postReserve: async(body: any) => {
         try {
-            const response = await axios.get('http://localhost:3001/balneario/api/reserve', { headers: getDefaultsHeaders()});
-            return response.data
-            
-          } catch (error) {
-            console.error(error);
-        } 
-    },
-
-    postReserve: async(body) => {
-        try {
-            const response = await axios.post('http://localhost:3001/balneario/api/reserve', body, { headers: getDefaultsHeaders()});
+            const response = await axios.post(`${backendUrl}balneario/api/reserve`, body, { headers: getDefaultsHeaders()});
             return response
 
           } catch (error) {
@@ -56,23 +46,14 @@ const reserveServices = {
         } 
     },
 
-    deleteReserve: async(idReserve) => {
+    deleteReserve: async(idReserve: string) => {
         try {
-            await axios.delete(`http://localhost:3001/balneario/api/reserve/${idReserve}`, { headers: getDefaultsHeaders()});
+            await axios.delete(`${backendUrl}balneario/api/reserve/${idReserve}`, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
         } 
-    },
-
-    editReserve: async(idReserve, body) => {
-        try {
-            await axios.put(`http://localhost:3001/balneario/api/reserve/${idReserve}`, body, { headers: getDefaultsHeaders()});
-
-          } catch (error) {
-            console.error(error);
-        } 
-    }*/
+    }
 }
 
 export default reserveServices;

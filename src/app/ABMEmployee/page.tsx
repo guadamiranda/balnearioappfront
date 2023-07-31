@@ -5,13 +5,14 @@ import ModalABMTemplate from "@/Components/templates/modalABMTemplate/modalABMTe
 import AddEditEmployee from "@/Components/Molecules/AddEditEmployee/AddEditEmployee";
 import employeeServices from '../../Services/employeeServices';
 import Loader from "@/Components/Organism/loaderScreen/loader";
+import sessionServices from "@/Services/sessionServices";
 import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
+import AlertServices from "@/utils/AlertServices";
 import rolServices from "@/Services/rolServices";
 import style from './ABMEmployee.module.scss';
 import { useEffect, useState } from "react";
 
-import Swal from 'sweetalert2'
 
 type IAllEmployeesData = {
     id: number,
@@ -39,8 +40,6 @@ const ABMEmployee= () => {
         const allRolesData = await rolServices.getRols()
         const tableEmployeeData = formatEmployeeToTable(allEmployeesData, allRolesData)
         setData(allEmployeesData, allRolesData, tableEmployeeData)
-
-        console.log(allEmployeesData)
     }
 
     const formatEmployeeToTable = (allEmployeesData: any, allRolesData:any) => {
@@ -61,29 +60,40 @@ const ABMEmployee= () => {
     }
 
     const openModalEditFunction = () => {
-        setOpenModalEdit(true)
+        if(sessionServices.isAdmin()) {
+            setOpenModalEdit(true)
+            return;
+        }
+        AlertServices.renderAlertPermission();
     }
 
     const openModalCreateFunction = () => {
-        setFullEmployeeToEdit({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: '' })
-        setOpenModalCreate(true)
+        if(sessionServices.isAdmin()) {
+            setFullEmployeeToEdit({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: '' })
+            setOpenModalCreate(true)
+            return
+        }
+        AlertServices.renderAlertPermission();
     }
 
     async function deleteElementFunction(index:number) {
-        const elementToDelete = employeeAllData[index]
-        const newEmployeeAllData = employeeAllData.filter((obj) => obj.id !== elementToDelete.id);
-        const dataEmployeeInTable = formatEmployeeToTable(newEmployeeAllData, allRoles)
-
-        setEmployeesAllData(newEmployeeAllData)
-        setEmployeeData(dataEmployeeInTable)
-
-        await employeeServices.deleteEmployee(elementToDelete.id)
-
-        Swal.fire({
-            title: 'El empleado ha sido eliminado',
-            icon: 'success',
-            confirmButtonText: 'Cerrar',
-          })
+        if(sessionServices.isAdmin()) {
+            const elementToDelete = employeeAllData[index]
+            const newEmployeeAllData = employeeAllData.filter((obj) => obj.id !== elementToDelete.id);
+            const dataEmployeeInTable = formatEmployeeToTable(newEmployeeAllData, allRoles)
+    
+            setEmployeesAllData(newEmployeeAllData)
+            setEmployeeData(dataEmployeeInTable)
+    
+            await employeeServices.deleteEmployee(elementToDelete.id)
+            AlertServices.renderAlert(
+                'El empleado ha sido eliminado',
+                '',
+                'success'
+            )
+            return
+        }
+        AlertServices.renderAlertPermission();
     } 
 
     useEffect(() => {
@@ -97,7 +107,6 @@ const ABMEmployee= () => {
         <>
         {
             isLoading? <Loader/> :
-            
             <>
             <LittleABMTemplate title="Administración de Empleados" subTitle="">
                 <div className={style.abmPriceContainer}>

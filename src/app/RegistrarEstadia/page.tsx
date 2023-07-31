@@ -17,7 +17,7 @@ import ReactDOMServer from 'react-dom/server'
 import GuardLogin from '@/utils/guardLogin'
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
-
+import AlertServices from '@/utils/AlertServices'
 
 type IAllDiscount = {
     id: string,
@@ -41,7 +41,7 @@ type IResident = {
 
 const RegistrarEstadia = () => {
     const [userData, setUserData] = useState<any>()
-    console.log(userData)
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
     const [managerLastName, setManagerLastName] = useState<string>('')
     const [carPlateNumber, setCarPlateNumber] = useState<string>('')
     const [partnerNumber, setPartnerNumber] = useState<string>('')
@@ -116,6 +116,7 @@ const RegistrarEstadia = () => {
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
         if (missingData.length === 0) {
+            setIsLoadingButton(true)
             const newReserve = {
                 initDate: (dateFrom * 1000).toString(), 
                 finishDate: (dateTo * 1000).toString(), 
@@ -129,7 +130,26 @@ const RegistrarEstadia = () => {
                 residents: residents.map((resident) => ({dni: resident.dniNumber.toString(), memberNumber: resident.partnerNumber.toString()})),
                 vehicles: vehicules.map((vehicule) => ({carPlate: vehicule.carPlate.toString(), vehicleType: '0b05ba6a-b817-4f88-825d-4e787ef82e5a'}))}
         
-        await reserveServices.postReserve(newReserve)
+        const response = await reserveServices.postReserve(newReserve)
+        setOpenModalDiscount(false)
+        setIsLoadingButton(false)
+        if(response?.status == 201) {
+            AlertServices.renderAlert(
+                'Completado',
+                'Se creo una reserva correctamente',
+                'success',
+            )
+            return
+        }
+
+        if(response?.status == 500) {
+            AlertServices.renderAlert(
+                'Error',
+                'Algo salio mal, contactese con el administrador',
+                'error',
+            )
+            return
+        }
             
         } else {
             Swal.fire({
@@ -247,7 +267,7 @@ const RegistrarEstadia = () => {
                             <span><b>$ {selectedDiscount === 0 ? totalPrice : totalPrice - ((totalPrice * selectedDiscount) / 100)}</b></span>
                         </div>
 
-                        <Button text='Registrar Reserva' type='primary' onClickFunction={() => registerData()} isFullWidth={true}></Button>
+                        <Button text='Registrar Reserva' isLoading={isLoadingButton} type='primary' onClickFunction={() => registerData()} isFullWidth={true}></Button>
                     </div>
                 </>
             } closeFunction={() => closeOpenModal(false)} ></ModalABMTemplate>}

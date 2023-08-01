@@ -3,7 +3,7 @@
 import HomeTemplate from '@/Components/templates/homeTemplate/homeTemplate';
 import HomeProfile from '@/Components/Molecules/HomeProfile/HomeProfile';
 import Button from '@/Components/Atoms/button/button';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import GuardLogin from '@/utils/guardLogin';
 import { useEffect, useState } from 'react';
 import AlertServices from '@/utils/AlertServices';
@@ -13,6 +13,7 @@ import style from './home.module.scss'
 
 const HomeComponent = () => {
     const router = useRouter();
+    const pathName = usePathname()
     const [isLoadingButtons, setIsLoadingButtons] = useState<boolean[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     let lastId = 0;
@@ -45,6 +46,12 @@ const HomeComponent = () => {
         setIsLoadingButtons([false,false,false,false,false,false,false])
         console.log('hola')
     }, [])
+
+    useEffect(() => {
+        console.log('chau')
+        setIsLoadingButtons([false,false,false,false,false,false,false])
+    },
+    [pathName])
 
     return (
     <GuardLogin>

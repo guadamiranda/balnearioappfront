@@ -26,14 +26,16 @@ const HomeComponent = () => {
         setIsLoadingButtons([...loadingButtons])
 
         if(isAdmin) {
-            router.push('/' + route);
             //setIsLoadingButtons([false,false,false,false,false,false,false])
+            router.push('/' + route);
+
             return
         }
 
         if(!isRouteAdmin(route)) {
-            router.push('/' + route);
             //setIsLoadingButtons([false,false,false,false,false,false,false])
+            router.push('/' + route);
+
             return
         }
         AlertServices.renderAlertPermission();
@@ -51,7 +53,7 @@ const HomeComponent = () => {
         console.log('chau')
         setIsLoadingButtons([false,false,false,false,false,false,false])
     },
-    [pathName])
+    [window.location.pathname])
 
     return (
     <GuardLogin>

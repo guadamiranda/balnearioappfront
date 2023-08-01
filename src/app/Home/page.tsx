@@ -41,8 +41,9 @@ const HomeComponent = () => {
     }
 
     useEffect(() => {
-        setIsLoadingButtons([false,false,false,false,false,false,false])
         setIsAdmin(sessionServices.isAdmin())
+        setIsLoadingButtons([false,false,false,false,false,false,false])
+        console.log('hola')
     }, [])
 
     return (

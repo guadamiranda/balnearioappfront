@@ -13,7 +13,7 @@ import style from './home.module.scss'
 
 const HomeComponent = () => {
     const router = useRouter();
-    const [isLoadingButtons, setIsLoadingButtons] = useState([false,false,false,false,false,false,false])
+    const [isLoadingButtons, setIsLoadingButtons] = useState<boolean[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     let lastId = 0;
 
@@ -26,23 +26,24 @@ const HomeComponent = () => {
 
         if(isAdmin) {
             router.push('/' + route);
-            setIsLoadingButtons([false,false,false,false,false,false,false])
+            //setIsLoadingButtons([false,false,false,false,false,false,false])
             return
         }
 
         if(!isRouteAdmin(route)) {
             router.push('/' + route);
-            setIsLoadingButtons([false,false,false,false,false,false,false])
+            //setIsLoadingButtons([false,false,false,false,false,false,false])
             return
         }
         AlertServices.renderAlertPermission();
 
-        loadingButtons[buttonId] = false;
-        setIsLoadingButtons([...loadingButtons])
         setIsLoadingButtons([false,false,false,false,false,false,false])
     }
 
-    useEffect(() => {setIsAdmin(sessionServices.isAdmin())}, [])
+    useEffect(() => {
+        setIsLoadingButtons([false,false,false,false,false,false,false])
+        setIsAdmin(sessionServices.isAdmin())
+    }, [])
 
     return (
     <GuardLogin>

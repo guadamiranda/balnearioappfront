@@ -37,6 +37,7 @@ const HomeComponent = () => {
 
         loadingButtons[buttonId] = false;
         setIsLoadingButtons([...loadingButtons])
+        setIsLoadingButtons([false,false,false,false,false,false,false])
     }
 
     useEffect(() => {setIsAdmin(sessionServices.isAdmin())}, [])

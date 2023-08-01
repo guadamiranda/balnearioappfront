@@ -13,7 +13,6 @@ import style from './home.module.scss'
 
 const HomeComponent = () => {
     const router = useRouter();
-    const pathName = usePathname()
     const [isLoadingButtons, setIsLoadingButtons] = useState<boolean[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     let lastId = 0;
@@ -25,35 +24,29 @@ const HomeComponent = () => {
         lastId = buttonId;
         setIsLoadingButtons([...loadingButtons])
 
-        if(isAdmin) {
-            //setIsLoadingButtons([false,false,false,false,false,false,false])
-            router.push('/' + route);
+        setTimeout(() => {
+            if(isAdmin) {
+                router.push('/' + route);
+                setIsLoadingButtons([false,false,false,false,false,false,false])
+                return
+            }
+    
+            if(!isRouteAdmin(route)) {
+                router.push('/' + route);
+                setIsLoadingButtons([false,false,false,false,false,false,false])
+                return
+            }
+            AlertServices.renderAlertPermission();
+    
+            setIsLoadingButtons([false,false,false,false,false,false,false])
+        }, 1500)
 
-            return
-        }
-
-        if(!isRouteAdmin(route)) {
-            //setIsLoadingButtons([false,false,false,false,false,false,false])
-            router.push('/' + route);
-
-            return
-        }
-        AlertServices.renderAlertPermission();
-
-        setIsLoadingButtons([false,false,false,false,false,false,false])
     }
 
     useEffect(() => {
         setIsAdmin(sessionServices.isAdmin())
         setIsLoadingButtons([false,false,false,false,false,false,false])
-        console.log('hola')
     }, [])
-
-    useEffect(() => {
-        console.log('chau')
-        setIsLoadingButtons([false,false,false,false,false,false,false])
-    },
-    [window.location.pathname])
 
     return (
     <GuardLogin>

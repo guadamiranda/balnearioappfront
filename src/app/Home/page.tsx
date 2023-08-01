@@ -23,8 +23,6 @@ const HomeComponent = () => {
         loadingButtons[buttonId] = true;
         lastId = buttonId;
         setIsLoadingButtons([...loadingButtons])
-
-        setTimeout(() => {
             if(isAdmin) {
                 router.push('/' + route);
                 setIsLoadingButtons([false,false,false,false,false,false,false])
@@ -39,7 +37,6 @@ const HomeComponent = () => {
             AlertServices.renderAlertPermission();
     
             setIsLoadingButtons([false,false,false,false,false,false,false])
-        }, 1500)
 
     }
 

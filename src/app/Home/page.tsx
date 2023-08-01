@@ -26,11 +26,13 @@ const HomeComponent = () => {
 
         if(isAdmin) {
             router.push('/' + route);
+            setIsLoadingButtons([false,false,false,false,false,false,false])
             return
         }
 
         if(!isRouteAdmin(route)) {
             router.push('/' + route);
+            setIsLoadingButtons([false,false,false,false,false,false,false])
             return
         }
         AlertServices.renderAlertPermission();

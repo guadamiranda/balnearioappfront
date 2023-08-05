@@ -14,7 +14,6 @@ import { useState } from "react";
 import GuardLogin from "@/utils/guardLogin";
 import AlertServices from '@/utils/AlertServices';
 
-
 const QueryReserve = () => {
     const [dni, setDni] = useState(0);
     const [cardPlate, setCardPlate] = useState('')
@@ -23,21 +22,25 @@ const QueryReserve = () => {
 
     const saveDni = (valueInput: string) => {
        const value = parseInt(valueInput)
-       if(value < 1 || !value) {
-        setDni(0)
-        alert('no se permiten valores menores a 0')
-        return
-       }
-       if(value > 0){
+
         setDni(value)
-       }
+       
     }
 
     const searchReserve = async () => {
+        console.log(dni)
+        if(dni < 0) {
+            AlertServices.renderAlert(
+                'Error en el DNI',
+                'Los números deben ser positivos',
+                'error'
+            )
+            return
+        }
         if(!dni && !cardPlate) {
             AlertServices.renderAlert(
                 'Faltan Datos',
-                'Debe ingresar al menos el dni o la patente',
+                'Debe ingresar al menos el DNI o la patente',
                 'error'
             )
             return

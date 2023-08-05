@@ -49,6 +49,11 @@ const Reserves = () => {
         setIsLoading(false)
     }
 
+    function onDelete(id:string) {
+        const reserves = allReservesData
+        setAllReservesData([... reserves.filter(reserve => reserve.id != id)])
+    }
+
     useEffect(() => {
         getActiveReserves()
     }, [])
@@ -72,7 +77,10 @@ const Reserves = () => {
                             managerMemberNumber={reserve.managerMemberNumber}
                             managerCarPlate = {reserve.managerCarPlate}
                             finishDate={reserve.finishDate}
-                            initDate={reserve.initDate}/>
+                            initDate={reserve.initDate}
+                            onDelete={() => onDelete(reserve.id)}
+                            />
+                            
                             )}
                             
                         </div>

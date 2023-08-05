@@ -66,8 +66,8 @@ const DateSection: React.FC<IDateSection> = ({
     }
 
     const calculateDays = () => {
-        const completeDateFrom = new Date(dateFrom)
-        const completeDateTo = new Date(dateTo)
+        const completeDateFrom = new Date(dateFrom + 'T00:00:00')
+        const completeDateTo = new Date(dateTo + 'T23:59:00')
 
         const calculatedUnixDays = calculateUnixDate(completeDateFrom, completeDateTo, false)
 
@@ -83,10 +83,10 @@ const DateSection: React.FC<IDateSection> = ({
     const cleanDataDateSection = () => {
         setDateFrom(0)
         setDateTo(0)
-        setNumberOfDays(0)
+        setNumberOfDays(-1)
     }
 
-    useEffect(() => {
+    useEffect(() => { 
         {dateFrom != 0 && dateTo != 0 ? calculateDays() : null}       
     }, [dateFrom, dateTo]) 
 

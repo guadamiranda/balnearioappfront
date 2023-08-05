@@ -13,7 +13,8 @@ interface IActiveReserveCard {
     managerMemberNumber: string,
     finishDate: string,
     initDate: string,
-    managerCarPlate: string
+    managerCarPlate: string,
+    onDelete: any,
 }
 
 const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
@@ -24,8 +25,8 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
     managerMemberNumber,
     finishDate,
     initDate,
-    managerCarPlate
-
+    managerCarPlate,
+    onDelete,
     }) => {
     const [isEliminteReserve, setIsEliminateReserve] = useState<boolean>(false)
     const eliminateReserve = () => {
@@ -36,7 +37,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
             async () => {
                 setIsEliminateReserve(true) 
                 await reserveServices.deleteReserve(id)
-                window.location.reload()
+                onDelete()
             }
         )
     }

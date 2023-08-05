@@ -35,7 +35,14 @@
     }
 
     &__signOff{
-        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 1px solid $green;
+        height: 35px;
+        width: 130px;
+        font-size: 15px;
 
         &:hover {
             color: $green;

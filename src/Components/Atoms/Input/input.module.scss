@@ -43,7 +43,10 @@
 
             &:focus{
                 outline: none;
-                
+            }
+
+            &::placeholder{
+                color: lightGrey
             }
         }
     }

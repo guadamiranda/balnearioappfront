@@ -14,9 +14,8 @@ interface IManagerSection{
     partnerNumber: string,
     managerLastName: string,
     managerName: string,
-    pricePerPerson: number
-    totalPrice: number,
-    setTotalPrice: (arg: number) => void,
+    amountPeople: number,
+    setAmountPeople: (arg: number) => void,
     setCarPlateNumber: (value: string) => void,
     setDocumentNumber: (value: number) => void,
     setPartnerNumber: (value: string) => void,
@@ -31,14 +30,13 @@ const ManagerSection: React.FC<IManagerSection> = ({
     partnerNumber,
     managerLastName,
     managerName,
-    pricePerPerson,
-    totalPrice,
+    amountPeople,
     setCarPlateNumber, 
     setDocumentNumber,
     setManagerLastName,
     setManagerName, 
     setPartnerNumber,
-    setTotalPrice,  
+    setAmountPeople,  
     }) => {
     
     const [isChecked, setIsChecked] = useState(false)
@@ -47,7 +45,7 @@ const ManagerSection: React.FC<IManagerSection> = ({
         const isCheckedPartner = isChecked
         setIsChecked(!isCheckedPartner)
         isCheckedPartner === false ? setDocumentNumber(0) : setPartnerNumber('')
-        setTotalPrice(isCheckedPartner? (totalPrice + pricePerPerson) : totalPrice === 0 ? 0 : (totalPrice - pricePerPerson))
+        setAmountPeople(isCheckedPartner === false ? amountPeople - 1 : amountPeople + 1)
     }
 
     useEffect(() => {

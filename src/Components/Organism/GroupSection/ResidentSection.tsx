@@ -7,11 +7,10 @@ import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import { VscAdd } from 'react-icons/vsc'
 
 interface IResidentSection {
-    pricePerPerson: number,
-    totalPrice: number,
+    amountPeople: number,
     residents: Array<IResident>
     setResidents: (resident: any) => void,
-    setTotalPrice: (price: number) => void
+    setAmountPeople: (price: number) => void
 }
 
 type IResident = {
@@ -23,11 +22,10 @@ type IResident = {
 }
 
 const ResidentSection: React.FC<IResidentSection> = ({
-    pricePerPerson, 
-    totalPrice,
+    amountPeople,
     residents,
     setResidents,
-    setTotalPrice}) => {
+    setAmountPeople}) => {
 
     const [residentIndex, setResidentIndex] = useState(0)
 
@@ -39,14 +37,14 @@ const ResidentSection: React.FC<IResidentSection> = ({
                             isPartner: false}
         setResidents([...residents, newResident])
         setResidentIndex(residentIndex + 1)
-        setTotalPrice(totalPrice + pricePerPerson)
+        setAmountPeople(amountPeople + 1)
     }
 
     const deleteResidentComponent = (index:number, isCheckedResident:boolean) => {
         const residentIndexWithoutDeletedComponent = residents.filter((resident) => resident.index !== index);
         
         setResidents(residentIndexWithoutDeletedComponent)
-        setTotalPrice(isCheckedResident? totalPrice : (totalPrice === 0 ? 0 : (totalPrice - pricePerPerson)))
+        setAmountPeople(isCheckedResident? amountPeople : amountPeople - 1)
     }
 
     const handleDNIorPartnerNumber = (index: number, dniNumber: number, partnerNumber: number, isPartner: boolean) => {
@@ -71,10 +69,9 @@ const ResidentSection: React.FC<IResidentSection> = ({
                 {residents.map((resident) => <AddResident index={resident.index}
                                                           handleDNIorPartnerNumber={handleDNIorPartnerNumber}
                                                           key={resident.key} 
-                                                          pricePerPerson={pricePerPerson}
-                                                          totalPrice={totalPrice}
+                                                          amountPeople={amountPeople}
                                                           deleteComponent={deleteResidentComponent}
-                                                          setTotalPrice={setTotalPrice}
+                                                          setAmountPeople={setAmountPeople}
                                                           />)}
             </div>
         </div>

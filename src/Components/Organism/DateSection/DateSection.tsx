@@ -6,34 +6,32 @@ import ReservationDays from '@/Components/Molecules/ReservationDays/ReservationD
 
 interface IDateSection {
     cleanDataFlag: boolean,
-    priceOneDay: number,
-    totalPrice: number,
     setDateFromUnix: (dateFrom: number) => void,
     setDateToUnix: (dateFrom: number) => void,
-    setTotalPrice: (price: number) => void
+    setNumberOfDays: (numberOfDays: number) => void,
+    setTotalPrice: (price: number) => void,
+    setCheckOneDay: (check: boolean) => void
 }
 
 const DateSection: React.FC<IDateSection> = ({
     cleanDataFlag,
-    priceOneDay,
-    totalPrice,
     setDateFromUnix,
     setDateToUnix,
+    setNumberOfDays,
     setTotalPrice,
+    setCheckOneDay
     }) => {
 
     const [isCheckedOneDay, setIsCheckedOneDay] = useState(false)
     const [dateFrom, setDateFrom] = useState<number>(0)
     const [dateTo, setDateTo] = useState<number>(0)
-    const [oldNumberOfDays, setOldNumberOfDays] = useState(0)
-    const [numberOfDays, setNumberOfDays] = useState(0)
 
     const calculateUnixDate = (completeDateFrom: Date, completeDateTo: Date, isOneDay: boolean) => {
-        completeDateFrom.setHours(isOneDay? 0 : completeDateFrom.getHours())
+        completeDateFrom.setHours(0)
         completeDateFrom.setMinutes(0)
         completeDateFrom.setSeconds(0)
 
-        completeDateTo.setHours(isOneDay? 20 : completeDateTo.getHours())
+        completeDateTo.setHours(20)
         completeDateTo.setMinutes(59)
         completeDateTo.setSeconds(0)
         
@@ -46,7 +44,9 @@ const DateSection: React.FC<IDateSection> = ({
     }
 
     const setPriceAndChecked = () => { 
+        setTotalPrice(0)
         const newChecked = !isCheckedOneDay
+        setCheckOneDay(newChecked)
         const completeDateFrom = new Date()
         const completeDateTo = new Date()
         const calculatedUnixDays = calculateUnixDate(completeDateFrom, completeDateTo, true)
@@ -54,7 +54,7 @@ const DateSection: React.FC<IDateSection> = ({
         setDateFromUnix(calculatedUnixDays.unixTimeFrom)
         setDateToUnix(calculatedUnixDays.unixTimeTo)
         setIsCheckedOneDay(newChecked)
-        setTotalPrice(newChecked? (totalPrice - (numberOfDays * priceOneDay) + priceOneDay ) : (totalPrice === 0 ? 0 : (totalPrice - priceOneDay)))
+        setNumberOfDays(newChecked? 0 : -1)
 
         if (newChecked === false) {
             setDateFrom(0)
@@ -63,8 +63,6 @@ const DateSection: React.FC<IDateSection> = ({
             setDateToUnix(0)
         }
 
-        setNumberOfDays(0)
-        setOldNumberOfDays(0)
     }
 
     const calculateDays = () => {
@@ -75,17 +73,16 @@ const DateSection: React.FC<IDateSection> = ({
 
         const differenceInSeconds = calculatedUnixDays.unixTimeTo - calculatedUnixDays.unixTimeFrom;
         const secondsInOneDay = 24 * 60 * 60;
-        setNumberOfDays(Math.floor(differenceInSeconds / secondsInOneDay));
+        const calculatedNumberOfDays = Math.floor(differenceInSeconds / secondsInOneDay)
+        setNumberOfDays(calculatedNumberOfDays === 0 ? 0 : calculatedNumberOfDays);
 
         setDateFromUnix(calculatedUnixDays.unixTimeFrom)
         setDateToUnix(calculatedUnixDays.unixTimeTo)    
-        setOldNumberOfDays(numberOfDays)
     }
 
     const cleanDataDateSection = () => {
         setDateFrom(0)
         setDateTo(0)
-        setOldNumberOfDays(0)
         setNumberOfDays(0)
     }
 
@@ -97,15 +94,11 @@ const DateSection: React.FC<IDateSection> = ({
         cleanDataDateSection()
     }, [cleanDataFlag])
 
-    useEffect(() => {
-        setTotalPrice(totalPrice  + (numberOfDays * priceOneDay) - (oldNumberOfDays * priceOneDay))
-    }, [numberOfDays])
-
     return(
         <div className={style.registrarEstadiaContainer__section}>
             <Encabezado title='Datos de la Estadía'/>
             <Checkbox cleanDataFlag={cleanDataFlag}
-                      title='¿Se queda menos de un día?' 
+                      title='¿Se queda a pasar el día?' 
                       onClickFunction={setPriceAndChecked}/>
                               
             {isCheckedOneDay? <></> : 

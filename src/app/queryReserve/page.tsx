@@ -66,7 +66,6 @@ const QueryReserve = () => {
         }
 
         setReserveData(reserveQuery.data as ReserveDto)
-        console.log(reserveQuery)
     }
 
     return (

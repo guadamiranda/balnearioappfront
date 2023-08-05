@@ -48,7 +48,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
                 <span><b>Nombre:</b> {managerName}, {managerLastName}</span>
                 <span><b>DNI:</b> {managerDNI}</span>
                 <span><b>N° Socio:</b> {managerMemberNumber === '' ? '-' : managerMemberNumber}</span>
-                <span><b>Patente:</b> {managerCarPlate} </span>
+                <span><b>Patente:</b> {managerCarPlate === '' ? '-' : managerCarPlate} </span>
 
             </div>
             <div className={style.addEditPriceContainer___rightSide}>

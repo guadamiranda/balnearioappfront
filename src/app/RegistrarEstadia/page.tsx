@@ -40,6 +40,7 @@ type IResident = {
 }
 
 const RegistrarEstadia = () => {
+    const [amountPeople, setAmountPeople] = useState(1)
     const [userData, setUserData] = useState<any>()
     const [isLoadingButton, setIsLoadingButton] = useState(false)
     const [managerLastName, setManagerLastName] = useState<string>('')
@@ -58,8 +59,10 @@ const RegistrarEstadia = () => {
     const [dateTo, setDateTo] = useState(0)
     const [discountFlag, setDiscountFlag] = useState(false)
     const [openModalDiscount, setOpenModalDiscount] = useState(false)
+    const [numberOfDays, setNumberOfDays] = useState(-1)
+    const [checkOneDay, setCheckOneDay] = useState(false)
     
-    const [totalPrice, setTotalPrice] = useState(pricePerPerson)
+    const [totalPrice, setTotalPrice] = useState(0)
 
     async function getPricesAndDiscounts() {
         const allPrices = await priceServices.getPrices()
@@ -70,7 +73,7 @@ const RegistrarEstadia = () => {
             if(price.name === 'Dia') setPriceOneDay(price.amount)
         })
 
-        setTotalPrice(pricePerPerson)
+        setTotalPrice(0)
         setAllDiscounts(allDiscounts)
     }
 
@@ -88,7 +91,14 @@ const RegistrarEstadia = () => {
         setDateFrom(0)
         setDateTo(0)
         
-        setTotalPrice(pricePerPerson)
+        setTotalPrice(0)
+    }
+
+    const setNewTotalPrice = () => {
+        if (numberOfDays >= 0) {
+        const newTotalPrice = numberOfDays === 0 ? (amountPeople * priceOneDay) : (amountPeople * numberOfDays * pricePerPerson)
+        setTotalPrice(newTotalPrice)
+        }
     }
 
     const validateMissingData = () => {
@@ -96,7 +106,6 @@ const RegistrarEstadia = () => {
         if(managerName === '') allMissingData.push('Nombre del Responsable')
         if(managerLastName === '') allMissingData.push('Apellido del Responsable')
         if(dniNumber === 0 && partnerNumber === '') allMissingData.push('Número de documento o socio del responsable')
-        if(carPlateNumber === '') allMissingData.push('Número de patente del responsable')
 
         if(residents.length != 0) {
             const missData = residents.find((resident) => resident.dniNumber === 0 && resident.partnerNumber === 0)
@@ -182,6 +191,10 @@ const RegistrarEstadia = () => {
     }, [pricePerPerson])
 
     useEffect(() => {
+        setNewTotalPrice()
+    }, [amountPeople, numberOfDays, checkOneDay]) 
+
+    useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
         setUserData(storedUserData ? JSON.parse(storedUserData) : null);
     }, [])
@@ -197,9 +210,8 @@ const RegistrarEstadia = () => {
                                     partnerNumber={partnerNumber}
                                     managerLastName={managerLastName}
                                     managerName={managerName}
-                                    pricePerPerson={pricePerPerson}
-                                    totalPrice={totalPrice}
-                                    setTotalPrice={setTotalPrice}
+                                    amountPeople={amountPeople}
+                                    setAmountPeople={setAmountPeople}
                                     setCarPlateNumber={setCarPlateNumber}
                                     setDocumentNumber={setdniNumber}
                                     setPartnerNumber={setPartnerNumber}
@@ -210,11 +222,10 @@ const RegistrarEstadia = () => {
                     <br/>
 
                     <ResidentSection 
-                        pricePerPerson={pricePerPerson}
-                        totalPrice={totalPrice}
+                        amountPeople={amountPeople}
                         residents={residents}
                         setResidents={setResidents}
-                        setTotalPrice={setTotalPrice}
+                        setAmountPeople={setAmountPeople}
                     ></ResidentSection>
 
                     <br/>
@@ -228,11 +239,11 @@ const RegistrarEstadia = () => {
 
                     <DateSection 
                         cleanDataFlag={cleanDataFlag}
-                        priceOneDay={priceOneDay}
-                        totalPrice={totalPrice}
                         setDateFromUnix={setDateFrom}
                         setDateToUnix={setDateTo}
+                        setNumberOfDays={setNumberOfDays}
                         setTotalPrice={setTotalPrice}
+                        setCheckOneDay={setCheckOneDay}
                     ></DateSection>
 
                 </div>

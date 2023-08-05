@@ -11,20 +11,18 @@ import { IoMdClose } from 'react-icons/io'
 interface IAddResident{
     index: number,
     handleDNIorPartnerNumber?: any ,
-    pricePerPerson: number,
-    totalPrice: number,
+    amountPeople: number,
     deleteComponent: (index: number, isCheckedResident:boolean) => void,
     setResidentsDni?: () => void,
-    setTotalPrice: (price: number) => void
+    setAmountPeople: (price: number) => void
 }
 
 const AddResident: React.FC<IAddResident> = ({
     index, 
     handleDNIorPartnerNumber, 
-    pricePerPerson,
-    totalPrice,
+    amountPeople,
     deleteComponent,
-    setTotalPrice}) => {
+    setAmountPeople}) => {
 
     const [isCheckedPartner, setIsCheckedPartner] = useState(false)
     const [dniNumber, setDniNumber] = useState<number>(0)
@@ -36,7 +34,7 @@ const AddResident: React.FC<IAddResident> = ({
 
     const setPriceAndChecked = () => { 
         setIsCheckedPartner(!isCheckedPartner)
-        setTotalPrice(isCheckedPartner? (totalPrice + pricePerPerson) : (totalPrice === 0 ? 0 : (totalPrice - pricePerPerson)))
+        setAmountPeople(isCheckedPartner? amountPeople + 1 : amountPeople - 1)
     }
 
     useEffect(() => {

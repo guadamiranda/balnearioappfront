@@ -27,7 +27,7 @@ const InfoReserve:React.FC<IInfoReserve>  = ({infoReserve}) => {
                     <div className={style.reserveContainer__managerDataBody}>
                         <span><b>Nombre completo:</b> {infoReserve.managerLastName}, {infoReserve.managerFirstName}</span>
                         <span><b>DNI/NroSocio: </b>{infoReserve.managerMemberNumber === '' ? infoReserve.managerDni : infoReserve.managerMemberNumber}</span>
-                        <span><b>Número de Patente:</b> {infoReserve.managerCarPlate}</span>
+                        <span><b>Número de Patente:</b> {infoReserve.managerCarPlate === '' ? '-' : infoReserve.managerCarPlate}</span>
                     </div>
                 </div>
             </div>

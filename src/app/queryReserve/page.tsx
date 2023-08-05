@@ -28,7 +28,6 @@ const QueryReserve = () => {
     }
 
     const searchReserve = async () => {
-        console.log(dni)
         if(dni < 0) {
             AlertServices.renderAlert(
                 'Error en el DNI',

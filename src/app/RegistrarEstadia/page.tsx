@@ -40,6 +40,7 @@ type IResident = {
 }
 
 const RegistrarEstadia = () => {
+    const [restartCounter, setRestartCounter] = useState(0)
     const [amountPeople, setAmountPeople] = useState(1)
     const [amountVehicules, setAmountVehicules] = useState(0)
     const [userData, setUserData] = useState<any>()
@@ -84,6 +85,7 @@ const RegistrarEstadia = () => {
     }
 
     const cleanData = () => {
+        setRestartCounter(restartCounter + 1)
         setCleanDataFlag(!cleanDataFlag)
         setManagerLastName('')
         setSelectedDiscount(0)
@@ -98,7 +100,6 @@ const RegistrarEstadia = () => {
         setdniNumber(0)
         setDateFrom(0)
         setDateTo(0)
-        
         
         setTotalPrice(0)
     }
@@ -257,7 +258,8 @@ const RegistrarEstadia = () => {
 
                     <br/>
 
-                    <DateSection 
+                    <DateSection
+                        key={restartCounter}
                         cleanDataFlag={cleanDataFlag}
                         setDateFromUnix={setDateFrom}
                         setDateToUnix={setDateTo}

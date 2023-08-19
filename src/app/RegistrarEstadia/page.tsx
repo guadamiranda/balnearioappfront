@@ -90,6 +90,7 @@ const RegistrarEstadia = () => {
         setDiscountFlag(false)
         setCarPlateNumber('')
         setPartnerNumber('')
+        setAmountHorses(0)
         setManagerName('')
         setResidents([])
         setVehicules([])
@@ -101,11 +102,15 @@ const RegistrarEstadia = () => {
     }
 
     const setNewTotalPrice = () => {
-        if (numberOfDays >= 0) {
-        const newTotalPrice = numberOfDays === 0 ? (amountPeople * priceOneDay) + (amountVehicules * pricePerVehicule) + (amountHorses * pricePerHorse) : 
-                                                   (amountPeople * numberOfDays * pricePerPerson) + (amountVehicules * pricePerVehicule) + (amountHorses * pricePerHorse)
-        setTotalPrice(newTotalPrice)
-        }
+        const totalAmountVehicule = amountVehicules + (carPlateNumber.length ? 1 : 0)
+        const vehicleSectionPrice = (totalAmountVehicule * pricePerVehicule)
+        const horsesPirce = (amountHorses * pricePerHorse)
+        const personsSectionPrice = 
+            numberOfDays == 0 
+            ? (amountPeople * priceOneDay) 
+            : (amountPeople * numberOfDays * pricePerPerson)
+
+        setTotalPrice(horsesPirce + vehicleSectionPrice + personsSectionPrice)
     }
 
     const validateMissingData = () => {
@@ -113,7 +118,7 @@ const RegistrarEstadia = () => {
         if(managerName === '') allMissingData.push('Nombre del Responsable')
         if(managerLastName === '') allMissingData.push('Apellido del Responsable')
         if(dniNumber === 0 && partnerNumber === '') allMissingData.push('Número de documento o socio del responsable')
-
+        if(amountHorses < 0 || amountHorses.toString() == '') allMissingData.push('Cantidad de caballos de ser un numero positivo')
         if(residents.length != 0) {
             const missData = residents.find((resident) => resident.dniNumber === 0 && resident.partnerNumber === 0)
             missData === undefined ? null : allMissingData.push('Número de documento o socio de una persona del grupo')
@@ -200,8 +205,8 @@ const RegistrarEstadia = () => {
     }, [pricePerPerson])
 
     useEffect(() => {
-        setNewTotalPrice()
-    }, [amountPeople, amountVehicules, numberOfDays, checkOneDay, amountHorses]) 
+        if(numberOfDays >= 0) setNewTotalPrice()
+    }, [amountPeople, amountVehicules, numberOfDays, checkOneDay, amountHorses, carPlateNumber]) 
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');

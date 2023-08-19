@@ -41,6 +41,7 @@ type IResident = {
 
 const RegistrarEstadia = () => {
     const [amountPeople, setAmountPeople] = useState(1)
+    const [amountVehicules, setAmountVehicules] = useState(0)
     const [userData, setUserData] = useState<any>()
     const [isLoadingButton, setIsLoadingButton] = useState(false)
     const [managerLastName, setManagerLastName] = useState<string>('')
@@ -61,6 +62,7 @@ const RegistrarEstadia = () => {
     const [openModalDiscount, setOpenModalDiscount] = useState(false)
     const [numberOfDays, setNumberOfDays] = useState(-1)
     const [checkOneDay, setCheckOneDay] = useState(false)
+    console.log(amountVehicules)
     
     const [totalPrice, setTotalPrice] = useState(0)
 
@@ -96,7 +98,8 @@ const RegistrarEstadia = () => {
 
     const setNewTotalPrice = () => {
         if (numberOfDays >= 0) {
-        const newTotalPrice = numberOfDays === 0 ? (amountPeople * priceOneDay) : (amountPeople * numberOfDays * pricePerPerson)
+        const newTotalPrice = numberOfDays === 0 ? (amountPeople * priceOneDay) + (amountVehicules * 1500) : 
+                                                   (amountPeople * numberOfDays * pricePerPerson) + (amountVehicules * 1500)
         setTotalPrice(newTotalPrice)
         }
     }
@@ -192,7 +195,7 @@ const RegistrarEstadia = () => {
 
     useEffect(() => {
         setNewTotalPrice()
-    }, [amountPeople, numberOfDays, checkOneDay]) 
+    }, [amountPeople, amountVehicules, numberOfDays, checkOneDay]) 
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
@@ -231,8 +234,10 @@ const RegistrarEstadia = () => {
                     <br/>
 
                     <VehiculeSection 
+                        amountVehicules={amountVehicules}
                         vehicules={vehicules}
                         setVehicules={setVehicules}
+                        setAmountVehicules={setAmountVehicules}
                     ></VehiculeSection>
 
                     <br/>

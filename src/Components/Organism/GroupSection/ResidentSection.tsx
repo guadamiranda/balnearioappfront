@@ -40,11 +40,11 @@ const ResidentSection: React.FC<IResidentSection> = ({
         setAmountPeople(amountPeople + 1)
     }
 
-    const deleteResidentComponent = (index:number, isCheckedResident:boolean) => {
+    const deleteResidentComponent = (index:number, isCheckedResident:boolean, isCheckedYounger:boolean) => {
         const residentIndexWithoutDeletedComponent = residents.filter((resident) => resident.index !== index);
         
         setResidents(residentIndexWithoutDeletedComponent)
-        setAmountPeople(isCheckedResident? amountPeople : amountPeople - 1)
+        setAmountPeople(isCheckedResident || isCheckedYounger ? amountPeople : amountPeople - 1)
     }
 
     const handleDNIorPartnerNumber = (index: number, dniNumber: number, partnerNumber: number, isPartner: boolean) => {

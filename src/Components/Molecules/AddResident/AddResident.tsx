@@ -12,7 +12,7 @@ interface IAddResident{
     index: number,
     handleDNIorPartnerNumber?: any ,
     amountPeople: number,
-    deleteComponent: (index: number, isCheckedResident:boolean) => void,
+    deleteComponent: (index: number, isCheckedResident:boolean, isCheckedYounger:boolean) => void,
     setResidentsDni?: () => void,
     setAmountPeople: (price: number) => void
 }
@@ -25,16 +25,22 @@ const AddResident: React.FC<IAddResident> = ({
     setAmountPeople}) => {
 
     const [isCheckedPartner, setIsCheckedPartner] = useState(false)
+    const [isCheckedYounger, setIsCheckedYounger] = useState(false)
     const [dniNumber, setDniNumber] = useState<number>(0)
     const [partnerNumber, setPartnerNumber] = useState<number>(0)
 
     const deleteComponentAndComprobateChecked = () => {
-        deleteComponent(index, isCheckedPartner)
+        deleteComponent(index, isCheckedPartner, isCheckedYounger)
     }
 
     const setPriceAndChecked = () => { 
         setIsCheckedPartner(!isCheckedPartner)
-        setAmountPeople(isCheckedPartner? amountPeople + 1 : amountPeople - 1)
+        isCheckedYounger? null : setAmountPeople(isCheckedPartner? amountPeople + 1 : amountPeople - 1)  
+    }
+
+    const setYoungerAndCheck = () => {
+        setIsCheckedYounger(!isCheckedYounger)
+        isCheckedPartner? null : setAmountPeople(isCheckedYounger? amountPeople + 1 : amountPeople - 1)
     }
 
     useEffect(() => {
@@ -65,6 +71,11 @@ const AddResident: React.FC<IAddResident> = ({
 
                 <Checkbox title='¿Es socio?' 
                           onClickFunction={setPriceAndChecked}/>
+
+                <div className={style.addResidentContainer__space} />
+
+                <Checkbox title='¿Es menor de 6 años?' 
+                          onClickFunction={setYoungerAndCheck}/>
             </div>
 
             <div className={style.addResidentContainer__eliminarContainer}>

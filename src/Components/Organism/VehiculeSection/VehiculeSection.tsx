@@ -7,8 +7,10 @@ import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import { VscAdd } from 'react-icons/vsc'
 
 interface IVehiculeSection {
+    amountVehicules: number,
     vehicules: Array<IVehicule>,
     setVehicules: (vehicule: any) => void,
+    setAmountVehicules: (amount: any) => void
 }
 
 type IVehicule = {
@@ -19,7 +21,9 @@ type IVehicule = {
 
 const VehiculeSection: React.FC<IVehiculeSection> = ({
     vehicules,
-    setVehicules
+    setVehicules,
+    amountVehicules,
+    setAmountVehicules
     }) => {
 
     const [vehiculeIndex, setVehiculeIndex] = useState(0)
@@ -28,11 +32,13 @@ const VehiculeSection: React.FC<IVehiculeSection> = ({
         const newVehicule = {key:vehiculeIndex, index:vehiculeIndex, carPlate: ''}
         setVehicules([...vehicules, newVehicule])
         setVehiculeIndex(vehiculeIndex + 1)
+        setAmountVehicules(amountVehicules + 1)
     }
 
     const deleteVehiculeComponent = (index:number) => {
         const vehiculesWithoutDeletedComponent = vehicules.filter((vehicule) => vehicule.index !== index);
         setVehicules(vehiculesWithoutDeletedComponent)
+        setAmountVehicules(amountVehicules - 1)
     } 
 
     const handleCarPlateNumber = (index: number, carPlateNumber: string) => {

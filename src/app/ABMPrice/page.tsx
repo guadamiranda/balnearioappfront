@@ -20,7 +20,7 @@ type IAllPrices = {
 }
 
 const ABMPrice = () => {
-    const columns = ["Nombre", "Precio"]
+    const columns = ["Nombre", "Precio $"]
     const [fullPriceToEdit, setFullPriceToEdit] = useState({ id: '', name: '', amount: ''})
     const [pricesData, setPricesData] = useState([{ name: '', amount: 0 }]);
     const [pricesAllData, setPricesAllData] = useState<IAllPrices[]>([])

@@ -21,7 +21,7 @@ type IAllDiscounts = {
 }
 
 const ABMDiscount = () => {
-    const columns = ["Nombre", "Descuento"]
+    const columns = ["Nombre", "Descuento %"]
 
     const [fullDiscountToEdit, setFullDiscountToEdit] = useState({ id: '', name: '', percentage: ''});
     const [discountsData, setDiscountsData] = useState([{ name: '', percentage: 0 }]);

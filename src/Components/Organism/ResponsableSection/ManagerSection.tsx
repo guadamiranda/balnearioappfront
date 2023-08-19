@@ -77,7 +77,7 @@ const ManagerSection: React.FC<IManagerSection> = ({
                 <Input useStateFunction={setManagerLastName} icon={<AiOutlineUser/>} placeholder='Gonzalez' title='Apellido' value={managerLastName}/>   
             </div>   
 
-            <Input useStateFunction={setAmountOfHorses} type='number' icon={<FaHorse/>} placeholder='5' title='Cantidad de Caballos'/>         
+            <Input useStateFunction={setAmountOfHorses} value={amountHorses} type='number' icon={<FaHorse/>} placeholder='5' title='Cantidad de Caballos'/>         
     
         </div>
     )

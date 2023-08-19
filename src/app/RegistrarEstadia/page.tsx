@@ -106,7 +106,7 @@ const RegistrarEstadia = () => {
     const setNewTotalPrice = () => {
         const totalAmountVehicule = amountVehicules + (carPlateNumber.length ? 1 : 0)
         const vehicleSectionPrice = (totalAmountVehicule * pricePerVehicule)
-        const horsesPirce = (amountHorses * pricePerHorse)
+        const horsesPirce = ((amountHorses < 0 ? 0 : amountHorses) * pricePerHorse)
         const personsSectionPrice = 
             numberOfDays == 0 
             ? (amountPeople * priceOneDay) 

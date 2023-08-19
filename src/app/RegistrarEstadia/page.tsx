@@ -91,11 +91,13 @@ const RegistrarEstadia = () => {
         setCarPlateNumber('')
         setPartnerNumber('')
         setManagerName('')
+        setAmountHorses(0)
         setResidents([])
         setVehicules([])
         setdniNumber(0)
         setDateFrom(0)
         setDateTo(0)
+        
         
         setTotalPrice(0)
     }

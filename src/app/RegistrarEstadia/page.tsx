@@ -62,7 +62,9 @@ const RegistrarEstadia = () => {
     const [openModalDiscount, setOpenModalDiscount] = useState(false)
     const [numberOfDays, setNumberOfDays] = useState(-1)
     const [checkOneDay, setCheckOneDay] = useState(false)
-    console.log(amountVehicules)
+    const [amountHorses, setAmountHorses] = useState(0)
+    const [pricePerVehicule, setPricePerVehicule] = useState(0)
+    const [pricePerHorse, setPricePerHorse] = useState(0)
     
     const [totalPrice, setTotalPrice] = useState(0)
 
@@ -73,6 +75,8 @@ const RegistrarEstadia = () => {
         allPrices.map((price:any) => {
             if(price.name === 'Persona') setPricePerPerson(price.amount)
             if(price.name === 'Dia') setPriceOneDay(price.amount)
+            if(price.name === 'Caballo') setPricePerHorse(price.amount)
+            if(price.name === 'Vehiculo') setPricePerVehicule(price.amount)
         })
 
         setTotalPrice(0)
@@ -98,8 +102,8 @@ const RegistrarEstadia = () => {
 
     const setNewTotalPrice = () => {
         if (numberOfDays >= 0) {
-        const newTotalPrice = numberOfDays === 0 ? (amountPeople * priceOneDay) + (amountVehicules * 1500) : 
-                                                   (amountPeople * numberOfDays * pricePerPerson) + (amountVehicules * 1500)
+        const newTotalPrice = numberOfDays === 0 ? (amountPeople * priceOneDay) + (amountVehicules * pricePerVehicule) + (amountHorses * pricePerHorse) : 
+                                                   (amountPeople * numberOfDays * pricePerPerson) + (amountVehicules * pricePerVehicule) + (amountHorses * pricePerHorse)
         setTotalPrice(newTotalPrice)
         }
     }
@@ -140,7 +144,9 @@ const RegistrarEstadia = () => {
                 managerLastName: managerLastName, 
                 managerMemberNumber: partnerNumber.toString(),
                 residents: residents.map((resident) => ({dni: resident.dniNumber.toString(), memberNumber: resident.partnerNumber.toString()})),
-                vehicles: vehicules.map((vehicule) => ({carPlate: vehicule.carPlate.toString(), vehicleType: '0b05ba6a-b817-4f88-825d-4e787ef82e5a'}))}
+                vehicles: vehicules.map((vehicule) => ({carPlate: vehicule.carPlate.toString(), vehicleType: '0b05ba6a-b817-4f88-825d-4e787ef82e5a'})),
+                amountHorses: amountHorses
+            }
         
         const response = await reserveServices.postReserve(newReserve)
         setOpenModalDiscount(false)
@@ -195,7 +201,7 @@ const RegistrarEstadia = () => {
 
     useEffect(() => {
         setNewTotalPrice()
-    }, [amountPeople, amountVehicules, numberOfDays, checkOneDay]) 
+    }, [amountPeople, amountVehicules, numberOfDays, checkOneDay, amountHorses]) 
 
     useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
@@ -214,12 +220,14 @@ const RegistrarEstadia = () => {
                                     managerLastName={managerLastName}
                                     managerName={managerName}
                                     amountPeople={amountPeople}
+                                    amountHorses={amountHorses}
                                     setAmountPeople={setAmountPeople}
                                     setCarPlateNumber={setCarPlateNumber}
                                     setDocumentNumber={setdniNumber}
                                     setPartnerNumber={setPartnerNumber}
                                     setManagerLastName={setManagerLastName}
                                     setManagerName={setManagerName}
+                                    setAmountOfHorses= {setAmountHorses}
                     ></ManagerSection>
 
                     <br/>

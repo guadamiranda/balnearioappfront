@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import style from './residentSection.module.scss'
 import AddResident from '@/Components/Molecules/AddResident/AddResident'
 import ButtonAction from '@/Components/Atoms/ButtonAction/ButtonAction'

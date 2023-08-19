@@ -21,4 +21,5 @@ interface ResidentDto {
     residents: ResidentDto[];
     vehicles: VehicleDto[];
     workshiftId: string;
+    amountHorses: string;
   }

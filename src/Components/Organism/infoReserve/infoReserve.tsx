@@ -28,6 +28,7 @@ const InfoReserve:React.FC<IInfoReserve>  = ({infoReserve}) => {
                         <span><b>Nombre completo:</b> {infoReserve.managerLastName}, {infoReserve.managerFirstName}</span>
                         <span><b>DNI/NroSocio: </b>{infoReserve.managerMemberNumber === '' ? infoReserve.managerDni : infoReserve.managerMemberNumber}</span>
                         <span><b>Número de Patente:</b> {infoReserve.managerCarPlate === '' ? '-' : infoReserve.managerCarPlate}</span>
+                        <span><b>Cantidad de caballos:</b> {infoReserve.amountHorses || 0}</span>
                     </div>
                 </div>
             </div>

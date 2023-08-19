@@ -6,6 +6,7 @@ import Input from '@/Components/Atoms/Input/input'
 
 import { AiOutlineCar, AiOutlineUser } from 'react-icons/ai'
 import { HiOutlineIdentification } from 'react-icons/hi'
+import { FaHorse } from 'react-icons/fa'
 
 interface IManagerSection{
     cleanDataFlag: boolean,
@@ -15,12 +16,14 @@ interface IManagerSection{
     managerLastName: string,
     managerName: string,
     amountPeople: number,
+    amountHorses: number,
     setAmountPeople: (arg: number) => void,
     setCarPlateNumber: (value: string) => void,
     setDocumentNumber: (value: number) => void,
     setPartnerNumber: (value: string) => void,
     setManagerLastName: (value: string) => void,
     setManagerName: (value: string) => void,
+    setAmountOfHorses: (value: number) => void
 }
 
 const ManagerSection: React.FC<IManagerSection> = ({
@@ -31,12 +34,14 @@ const ManagerSection: React.FC<IManagerSection> = ({
     managerLastName,
     managerName,
     amountPeople,
+    amountHorses,
     setCarPlateNumber, 
     setDocumentNumber,
     setManagerLastName,
     setManagerName, 
     setPartnerNumber,
-    setAmountPeople,  
+    setAmountPeople,
+    setAmountOfHorses  
     }) => {
     
     const [isChecked, setIsChecked] = useState(false)
@@ -69,8 +74,10 @@ const ManagerSection: React.FC<IManagerSection> = ({
                     
             <div className={style.managerSection__inputs}>
                 <Input useStateFunction={setManagerName} icon={<AiOutlineUser/>} placeholder='José' title='Nombre' value={managerName}/>
-                <Input useStateFunction={setManagerLastName} icon={<AiOutlineUser/>} placeholder='Gonzalez' title='Apellido' value={managerLastName}/>
-            </div>            
+                <Input useStateFunction={setManagerLastName} icon={<AiOutlineUser/>} placeholder='Gonzalez' title='Apellido' value={managerLastName}/>   
+            </div>   
+
+            <Input useStateFunction={setAmountOfHorses} type='number' icon={<FaHorse/>} placeholder='5' title='Cantidad de Caballos'/>         
     
         </div>
     )

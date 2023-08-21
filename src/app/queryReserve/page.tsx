@@ -72,7 +72,7 @@ const QueryReserve = () => {
 
     return (
     <GuardLogin>
-        <ABMTemplate title="Consultar Estadia" subTitle="Ingresa los datos para consultar la estadia">
+        <ABMTemplate title="Consultar Estadia" subTitle="Ingresa el dni o la patente del encargado de grupo para consultar la estadia">
             <div className={style.formContainer}>
                 <Encabezado title='Encargado del Grupo'/>
                 <div className={style.formContainer__searchZone}>

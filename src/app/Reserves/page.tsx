@@ -69,7 +69,7 @@ const Reserves = () => {
                         <div className={style.reservesContainer__actualReserve}>
                             {allReservesData.map((reserve, index) => 
                             <ActiveReserveCard 
-                            key={index}
+                            key={reserve.id}
                             id={reserve.id}
                             managerName={reserve.managerFirstName}
                             managerLastName={reserve.managerLastName}

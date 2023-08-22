@@ -23,8 +23,14 @@ const Button: React.FC<IButton> = ({
   ${style[`button-${type}`]}
   ${isFullWidth ? style['-fullWidth'] : null}
 `
+  const customOnClick = () => {
+    if(type != 'disable') {
+      onClickFunction()
+    }
+  }
+  
   return (
-    <div className={className} onClick={() => onClickFunction()}>
+    <div className={className} onClick={() => customOnClick()}>
          {isLoading ? <BiLoaderCircle className={style['button-loading']} /> : <div className={style.button__text}>{text}</div>}
     </div>
   );

@@ -14,9 +14,9 @@ const getDefaultsHeaders = () => {
 }
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 const reserveServices = {
-    getSpecificReserve: async(dni: string, carPlate:string) => {
+    getSpecificReserve: async(dni: string, carPlate:string, memberNumber: string) => {
         try {
-            const response = await axios.get(`${backendUrl}balneario/api/reserve?dni=${dni}&carplate=${carPlate}`, { headers: getDefaultsHeaders()});
+            const response = await axios.get(`${backendUrl}balneario/api/reserve?dni=${dni}&carplate=${carPlate}&membernumber=${memberNumber}`, { headers: getDefaultsHeaders()});
             return response
             
           } catch (error: any) {

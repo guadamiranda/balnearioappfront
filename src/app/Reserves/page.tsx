@@ -67,9 +67,9 @@ const Reserves = () => {
                     <div className={style.reservesContainer__titleTableContainer}>
                         <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
                         <div className={style.reservesContainer__actualReserve}>
-                            {allReservesData.map((reserve) => 
+                            {allReservesData.map((reserve, index) => 
                             <ActiveReserveCard 
-                            key={reserve.managerDni}
+                            key={index}
                             id={reserve.id}
                             managerName={reserve.managerFirstName}
                             managerLastName={reserve.managerLastName}

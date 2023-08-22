@@ -66,8 +66,6 @@ const RegistrarEstadia = () => {
     const [amountHorses, setAmountHorses] = useState(0)
     const [pricePerVehicule, setPricePerVehicule] = useState(0)
     const [pricePerHorse, setPricePerHorse] = useState(0)
-    
-    const [totalPrice, setTotalPrice] = useState(0)
 
     async function getPricesAndDiscounts() {
         const allPrices = await priceServices.getPrices()
@@ -80,7 +78,6 @@ const RegistrarEstadia = () => {
             if(price.name === 'Vehiculo') setPricePerVehicule(price.amount)
         })
 
-        setTotalPrice(0)
         setAllDiscounts(allDiscounts)
     }
 
@@ -100,11 +97,11 @@ const RegistrarEstadia = () => {
         setdniNumber(0)
         setDateFrom(0)
         setDateTo(0)
-        
-        setTotalPrice(0)
     }
 
     const setNewTotalPrice = () => {
+        if(numberOfDays == -1) return 0
+
         const totalAmountVehicule = amountVehicules + (carPlateNumber.length ? 1 : 0)
         const vehicleSectionPrice = (totalAmountVehicule * pricePerVehicule)
         const horsesPirce = ((amountHorses < 0 ? 0 : amountHorses) * pricePerHorse)
@@ -113,8 +110,10 @@ const RegistrarEstadia = () => {
             ? (amountPeople * priceOneDay) 
             : (amountPeople * numberOfDays * pricePerPerson)
 
-        setTotalPrice(horsesPirce + vehicleSectionPrice + personsSectionPrice)
+        return (horsesPirce + vehicleSectionPrice + personsSectionPrice)
     }
+
+    const calculatedTotalPrice = setNewTotalPrice()
 
     const validateMissingData = () => {
         let allMissingData = []
@@ -137,6 +136,7 @@ const RegistrarEstadia = () => {
     }
 
     async function registerData() {
+        const totalPrice = setNewTotalPrice()
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
         if (missingData.length === 0) {
@@ -208,10 +208,6 @@ const RegistrarEstadia = () => {
     }, [pricePerPerson])
 
     useEffect(() => {
-        if(numberOfDays >= 0) setNewTotalPrice()
-    }, [amountPeople, amountVehicules, numberOfDays, checkOneDay, amountHorses, carPlateNumber]) 
-
-    useEffect(() => {
         const storedUserData = localStorage.getItem('userData');
         setUserData(storedUserData ? JSON.parse(storedUserData) : null);
     }, [])
@@ -264,7 +260,6 @@ const RegistrarEstadia = () => {
                         setDateFromUnix={setDateFrom}
                         setDateToUnix={setDateTo}
                         setNumberOfDays={setNumberOfDays}
-                        setTotalPrice={setTotalPrice}
                         setCheckOneDay={setCheckOneDay}
                     ></DateSection>
 
@@ -275,7 +270,7 @@ const RegistrarEstadia = () => {
                 <div className={style.registrarEstadiaContainer__footer}>
                     <div className={style.registrarEstadiaContainer__sectionTotal}>
                         <span>Total de Estadía</span>
-                        <span><b>$ {totalPrice}</b></span>
+                        <span><b>$ {calculatedTotalPrice}</b></span>
                     </div>
                     <div className={style.registrarEstadiaContainer__buttonsContainer}>
                         <Button text='Limpiar datos' type='secondary' onClickFunction={() => cleanData()} isFullWidth={true}></Button>
@@ -297,7 +292,7 @@ const RegistrarEstadia = () => {
                         <br/>
                         <div className={style.registrarEstadiaContainer__sectionTotal}>
                             <span>Total de Estadía</span>
-                            <span><b>$ {selectedDiscount === 0 ? totalPrice : totalPrice - ((totalPrice * selectedDiscount) / 100)}</b></span>
+                            <span><b>$ {selectedDiscount === 0 ? calculatedTotalPrice : calculatedTotalPrice - ((calculatedTotalPrice * selectedDiscount) / 100)}</b></span>
                         </div>
 
                         <Button text='Registrar Reserva' isLoading={isLoadingButton} type='primary' onClickFunction={() => registerData()} isFullWidth={true}></Button>

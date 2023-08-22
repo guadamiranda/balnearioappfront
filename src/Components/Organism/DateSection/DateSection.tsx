@@ -9,7 +9,6 @@ interface IDateSection {
     setDateFromUnix: (dateFrom: number) => void,
     setDateToUnix: (dateFrom: number) => void,
     setNumberOfDays: (numberOfDays: number) => void,
-    setTotalPrice: (price: number) => void,
     setCheckOneDay: (check: boolean) => void
 }
 
@@ -18,7 +17,6 @@ const DateSection: React.FC<IDateSection> = ({
     setDateFromUnix,
     setDateToUnix,
     setNumberOfDays,
-    setTotalPrice,
     setCheckOneDay
     }) => {
 
@@ -44,7 +42,6 @@ const DateSection: React.FC<IDateSection> = ({
     }
 
     const setPriceAndChecked = () => { 
-        setTotalPrice(0)
         const newChecked = !isCheckedOneDay
         setCheckOneDay(newChecked)
         const completeDateFrom = new Date()

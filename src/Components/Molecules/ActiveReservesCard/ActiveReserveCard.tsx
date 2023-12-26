@@ -2,7 +2,7 @@ import style from "./activeReserveCard.module.scss";
 import PeriodReserve from "../periodReserve/periodReserve";
 import Button from "@/Components/Atoms/button/button";
 import AlertServices from "@/utils/AlertServices";
-import reserveServices from "@/Services/reserveServices";
+import reserveServices from "@/Services/stayServices";
 import { useState } from "react";
 
 interface IActiveReserveCard {

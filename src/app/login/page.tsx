@@ -18,7 +18,14 @@ const LoginPage = () => {
 
     const logIn = async () => {
         setIsLoading(true)
-        const {status, data: userData} = await loginServices.authUser(email,password)
+        const userMock = {
+            firstName: 'test',
+            lastName: 'apellido',
+            roleId: '12489asf89h123',
+            roleName: 'administrador',
+            workshiftId: 'aiwaogjiaos',
+        }
+        /*const {status, data: userData} = await loginServices.authUser(email,password)
         setIsLoading(false)
         if(status == 401) {
             AlertServices.renderAlert(
@@ -38,7 +45,8 @@ const LoginPage = () => {
             return
         }
         
-        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.setItem('userData', JSON.stringify(userData));*/
+        localStorage.setItem('userData', JSON.stringify(userMock))
         router.push('/')
     }
 

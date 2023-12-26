@@ -5,7 +5,7 @@ import Button from '@/Components/Atoms/button/button';
 import style from './reserves.module.scss'
 import { useEffect, useState } from "react";
 import ActiveReserveCard from '@/Components/Molecules/ActiveReservesCard/ActiveReserveCard';
-import reserveServices from '../../Services/reserveServices'
+import reserveServices from '../../Services/stayServices'
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import { useRouter } from 'next/navigation';
 import AlertServices from '@/utils/AlertServices';

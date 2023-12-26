@@ -6,7 +6,7 @@ import VehiculeSection from '@/Components/Organism/VehiculeSection/VehiculeSecti
 import ResidentSection from '@/Components/Organism/GroupSection/ResidentSection'
 import ABMTemplate from '@/Components/templates/abmTemplate/ABMTemplate'
 import DateSection from '@/Components/Organism/DateSection/DateSection'
-import reserveServices from '../../Services/reserveServices' 
+import reserveServices from '../../Services/stayServices' 
 import Dropdown from '@/Components/Atoms/DropDown/Dropdown'
 import Checkbox from '@/Components/Atoms/Checkbox/Checkbox'
 import discountServices from '@/Services/discountServices'

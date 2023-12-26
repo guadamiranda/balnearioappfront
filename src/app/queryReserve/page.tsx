@@ -1,6 +1,6 @@
 'use client'
 
-import reserveServices from '../../Services/reserveServices';
+import reserveServices from '../../Services/stayServices';
 import ABMTemplate from "@/Components/templates/abmTemplate/ABMTemplate";
 import Encabezado from "@/Components/Atoms/Encabezado/Encabezado";
 import Separator from "@/Components/Atoms/Separator/separator";

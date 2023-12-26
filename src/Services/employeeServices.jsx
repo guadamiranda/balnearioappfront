@@ -90,10 +90,11 @@ const mockedEmployees = [
 
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const BASE_PATH_EMPLOYEE = `${backendUrl}balneario/api/employee`
 const employeeServices = {
     getEmployee: async() => {
         try {
-            /*const response = await axios.get(`${backendUrl}balneario/api/user`, { headers: getDefaultsHeaders()});
+            /*const response = await axios.get(`BASE_PATH_EMPLOYEE/`, { headers: getDefaultsHeaders()});
             return response.data
             */
            return mockedEmployees
@@ -105,7 +106,7 @@ const employeeServices = {
 
     /*postEmployee: async(body) => {
         try {
-            await axios.post(`${backendUrl}balneario/api/user`, body, { headers: getDefaultsHeaders()});
+            await axios.post(`BASE_PATH_EMPLOYEE/`, body, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
@@ -114,7 +115,7 @@ const employeeServices = {
 
     deleteEmployee: async(idEmployee) => {
         try {
-            await axios.delete(`${backendUrl}balneario/api/user/${idEmployee}`, { headers: getDefaultsHeaders()});
+            await axios.delete(`BASE_PATH_EMPLOYEE/${idEmployee}`, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);
@@ -123,7 +124,7 @@ const employeeServices = {
 
     editEmployee: async(idEmployee, body) => {
         try {
-            await axios.put(`${backendUrl}balneario/api/user/${idEmployee}`, body, { headers: getDefaultsHeaders()});
+            await axios.put(`BASE_PATH_EMPLOYEE/${idEmployee}`, body, { headers: getDefaultsHeaders()});
 
           } catch (error) {
             console.error(error);

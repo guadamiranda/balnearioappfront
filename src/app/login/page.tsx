@@ -12,21 +12,15 @@ import { useState } from "react";
 
 const LoginPage = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [email, setEmail] = useState('');
+    const [dni, setDni] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter()
 
     const logIn = async () => {
         setIsLoading(true)
-        const userMock = {
-            firstName: 'test',
-            lastName: 'apellido',
-            roleId: '12489asf89h123',
-            roleName: 'administrador',
-            workshiftId: 'aiwaogjiaos',
-        }
-        /*const {status, data: userData} = await loginServices.authUser(email,password)
+        const {status, data: userData} = await loginServices.authUser(dni,password)
         setIsLoading(false)
+
         if(status == 401) {
             AlertServices.renderAlert(
                 'No se puede iniciar el turno',
@@ -45,8 +39,7 @@ const LoginPage = () => {
             return
         }
         
-        localStorage.setItem('userData', JSON.stringify(userData));*/
-        localStorage.setItem('userData', JSON.stringify(userMock))
+        localStorage.setItem('userData', JSON.stringify(userData));
         router.push('/')
     }
 
@@ -58,7 +51,7 @@ const LoginPage = () => {
                     <Encabezado title="Ingrese sus datos para comenzar su turno"></Encabezado>
                 </div>
                 <div className={style['loginContainer-inputSection']}>
-                    <Input isFullWidth={true} title="Email" useStateFunction={setEmail} placeholder="usuario@hotmail.com" icon={undefined}></Input>
+                    <Input isFullWidth={true} title="Dni" useStateFunction={setDni} placeholder="32856123" icon={undefined}></Input>
                     <Input isFullWidth={true} title="Contraseña" useStateFunction={setPassword} placeholder="Mi Contraseña" icon={undefined}></Input>
                 </div>
                 <div className={style['loginContainer-buttonSection']}>

@@ -37,7 +37,7 @@ const ABMEmployee= () => {
     
     async function getEmployeeRolData() {
         const allEmployeesData = await employeeServices.getEmployee()
-        const allRolesData = await rolServices.getRols()
+        const allRolesData = await rolServices.getRole()
         const tableEmployeeData = formatEmployeeToTable(allEmployeesData, allRolesData)
         setData(allEmployeesData, allRolesData, tableEmployeeData)
     }

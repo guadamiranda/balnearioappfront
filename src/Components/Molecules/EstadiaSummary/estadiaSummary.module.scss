@@ -1,0 +1,45 @@
+
+.estadiaSummary{
+    font-family: "Montserrat", sans-serif;
+
+    &__title {
+        border-bottom: 1px solid rgba(145, 145, 145, 0.281);
+        font-size: 15px;
+        padding-bottom: 3px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    &__visitantesContainer {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;  
+    }
+
+    &__visitantesContainer:hover{
+        background-color: rgba(192, 192, 192, 0.637);
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    &__visitantes{
+        align-items: center;
+        display: flex;
+        gap: 8px;
+    }
+
+    &__descuentos{
+        color: #00000094;
+        font-size: 13px;
+    }
+
+    &__priceContainer{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__price{
+        font-size: 20px;
+    }
+
+}

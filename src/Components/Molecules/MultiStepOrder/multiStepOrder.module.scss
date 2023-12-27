@@ -1,0 +1,60 @@
+
+.multiStepOrder{
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+    width: 100%;
+
+    &__line{
+        height: 3px;
+        width: 100px;
+        background-color: #dedede;
+        position: absolute;
+        margin-top: 25px;
+        width: 100%;
+    }
+
+    &__optionsContainer{
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__circules{
+        align-items: center;
+        background-color: #dedede;
+        border-radius: 90px;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        width: 50px;
+        z-index: 3;
+
+        div {
+            display: flex;
+            font-size: 29px;
+        }
+    }
+
+    &__option{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-size: 12px;
+    }
+
+    &__title{
+        cursor: default;
+        margin-top: 5px;
+        text-align: center;
+        width: 120px;
+    }
+
+    &__color{
+        color: #53b95391;
+    }
+
+    &__colorWhite{
+        color: white;
+    }
+}

@@ -15,6 +15,7 @@
 
     &__inputConteiner{
         display: flex;
+        gap: 26px;
     }
 
     &__eliminarContainer{
@@ -24,6 +25,12 @@
 
     &__space {
         margin-left: 10px;
+    }
+
+    &__inputs{
+        display: flex;
+        flex-direction: column;
+        width: 89%;
     }
 
 }

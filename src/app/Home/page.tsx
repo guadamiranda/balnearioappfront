@@ -53,7 +53,7 @@ const HomeComponent = () => {
                     <HomeProfile/>
                 </div>
                 <div className={style.homeContainer__rightSide}>
-                    <Button text='Reservas' type='primary' isLoading={isLoadingButtons[0]} isFullWidth={true} onClickFunction={() => handleClick('Reserves',0) }/>
+                    <Button text='Reservas' type='primary' isLoading={isLoadingButtons[0]} isFullWidth={true} onClickFunction={() => handleClick('RegistrarEstadia',0) }/>
                     <Button text='Precios' type='primary' isLoading={isLoadingButtons[1]} isFullWidth={true} onClickFunction={() => handleClick('ABMPrice',1)}/>
                     <Button text='Descuentos' type='primary' isLoading={isLoadingButtons[2]} isFullWidth={true} onClickFunction={() => handleClick('ABMDiscounts',2)}/>
                     {/*<Button text='Roles' type={isAdmin? 'primary': 'disable'} isLoading={isLoadingButtons[3]} isFullWidth={true} onClickFunction={() => handleClick('ABMRol',3)}/>*/ }

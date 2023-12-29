@@ -3,17 +3,30 @@
 import Checkbox from '@/Components/Atoms/Checkbox/Checkbox';
 import Input from '@/Components/Atoms/Input/input';
 import style from './addDatosEstadia.module.scss'
-import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineCar } from "react-icons/ai";
 import { FaHorse } from "react-icons/fa";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import DateSection from '@/Components/Organism/DateSection/DateSection';
 
-const AddDatosEstadia = () => {
+interface IAddDatosEstadia {
+    setVehiculePlateFunction: any,
+    setAnimalAmountFunction: any,
+}
+
+const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction, setAnimalAmountFunction }) => {
     const [hasVehicule, setHasVehicule] = useState(false)
+    const [vehiculePlate, setVehiculePlate] = useState('')
+    const [animalAmount, setAnimalAmount] = useState(0)
 
     const checkVehicule = () => {
         setHasVehicule(!hasVehicule)
+        setVehiculePlate('')
     }
+
+    useEffect(() => {
+        setVehiculePlateFunction(vehiculePlate)
+        setAnimalAmountFunction(animalAmount)
+    }, [vehiculePlate, animalAmount])
 
     return(
         <div className={style.addDatosEstadia}>
@@ -23,24 +36,29 @@ const AddDatosEstadia = () => {
                 <Checkbox title='¿Tiene Vehiculo?' onClickFunction={() => checkVehicule()}></Checkbox>
 
                 {hasVehicule && 
-                    <Input useStateFunction={() =>console.log('')} 
-                    icon={<AiOutlineCar/>} 
-                    placeholder='AS 234 RT' 
-                    title='Patente del Vehiculo' 
-                    value={''}/> 
+                    <Input
+                        useStateFunction={setVehiculePlate}
+                        icon={<AiOutlineCar />}
+                        placeholder='AS 234 RT'
+                        title='Patente del Vehiculo' 
+                        value={vehiculePlate}
+                    /> 
                 }
             </div>
 
-            <Input useStateFunction={() =>console.log('')} 
-                   icon={<FaHorse/>} 
-                   type='number'
-                   placeholder='0' 
-                   title='Cantidad de Caballos' 
-                   value={''}/> 
+            <Input
+                useStateFunction={setAnimalAmount}
+                icon={<FaHorse />}
+                type='number'
+                placeholder='0'
+                title='Cantidad de Caballos' 
+                value={animalAmount}
+            /> 
             
                 <br/>
 
             <div className={style.addDatosEstadia__title}>Fecha de la estadía</div>
+            <DateSection></DateSection>
            
         </div>
     )

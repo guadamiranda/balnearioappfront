@@ -16,6 +16,8 @@ const RegistrarEstadia = () => {
     const [step, setStep] = useState(0)
     const [visitors, setVisitors] = useState([])
     const [leader, setLeader] = useState({})
+    const [vehiculePlate, setVehiculePlate] = useState(0)
+    const [animalAmount, setAnimalAmount] = useState(0)
     const buttonContainerStyle = step === 0 ? style.registrarEstadiaContainer__buttonNext : ''
 
     return(
@@ -41,13 +43,20 @@ const RegistrarEstadia = () => {
 
             <div style={{ display: step === 2 ? 'block' : 'none' }}>
                 <div className={style.registrarEstadiaContainer}>
-                    <AddDatosEstadia/>
+                        <AddDatosEstadia
+                            setVehiculePlateFunction={setVehiculePlate}
+                            setAnimalAmountFunction={setAnimalAmount}
+                        />
                 </div>
             </div>
 
             <div style={{ display: step === 3 ? 'block' : 'none' }}>
                 <div className={style.registrarEstadiaContainer}>
-                    <EstadiaSummary/>
+                        <EstadiaSummary
+                            animalAmount={animalAmount}
+                            leader={leader}
+                            vehiculePlate={vehiculePlate}
+                            visitors={visitors} />
                 </div>
             </div>
 

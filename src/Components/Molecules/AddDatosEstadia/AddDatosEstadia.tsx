@@ -17,6 +17,16 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
     const [hasVehicule, setHasVehicule] = useState(false)
     const [vehiculePlate, setVehiculePlate] = useState('')
     const [animalAmount, setAnimalAmount] = useState(0)
+    const [dateFromUnix, setDateFromUnix] = useState(0)
+    const [dateToUnix, setDateToUnix] = useState(0)
+    const [numberOfDays, setNumberOfDays] = useState(0)
+    const [checkOneDay, setCheckOneDay] = useState(false)
+
+    console.log('Fecha desde', dateFromUnix)
+    console.log('fecha hasta', dateToUnix)
+    console.log('numero de dias', numberOfDays)
+    console.log('un dia', checkOneDay)
+
 
     const checkVehicule = () => {
         setHasVehicule(!hasVehicule)
@@ -58,7 +68,12 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
                 <br/>
 
             <div className={style.addDatosEstadia__title}>Fecha de la estadía</div>
-            <DateSection></DateSection>
+            <DateSection
+                setDateFromUnix={setDateFromUnix}
+                setDateToUnix={setDateToUnix}
+                setNumberOfDays={setNumberOfDays}
+                setCheckOneDay={setCheckOneDay}>
+            </DateSection>
            
         </div>
     )

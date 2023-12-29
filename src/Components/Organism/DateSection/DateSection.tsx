@@ -5,7 +5,6 @@ import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import ReservationDays from '@/Components/Molecules/ReservationDays/ReservationDays'
 
 interface IDateSection {
-    cleanDataFlag: boolean,
     setDateFromUnix: (dateFrom: number) => void,
     setDateToUnix: (dateFrom: number) => void,
     setNumberOfDays: (numberOfDays: number) => void,
@@ -13,7 +12,6 @@ interface IDateSection {
 }
 
 const DateSection: React.FC<IDateSection> = ({
-    cleanDataFlag,
     setDateFromUnix,
     setDateToUnix,
     setNumberOfDays,
@@ -59,7 +57,6 @@ const DateSection: React.FC<IDateSection> = ({
             setDateFromUnix(0)
             setDateToUnix(0)
         }
-
     }
 
     const calculateDays = () => {
@@ -77,25 +74,14 @@ const DateSection: React.FC<IDateSection> = ({
         setDateToUnix(calculatedUnixDays.unixTimeTo)    
     }
 
-    const cleanDataDateSection = () => {
-        setDateFrom(0)
-        setDateTo(0)
-        setNumberOfDays(-1)
-    }
-
     useEffect(() => { 
         {dateFrom != 0 && dateTo != 0 ? calculateDays() : null}       
     }, [dateFrom, dateTo]) 
 
-    useEffect(() => {
-        cleanDataDateSection()
-    }, [cleanDataFlag])
-
     return(
         <div className={style.registrarEstadiaContainer__section}>
-            <Encabezado title='Datos de la Estadía'/>
-            <Checkbox cleanDataFlag={cleanDataFlag}
-                      title='¿Se queda a pasar el día?' 
+            <Checkbox
+                title='¿Se queda solo un día?' 
                       onClickFunction={setPriceAndChecked}/>
                               
             {isCheckedOneDay? <></> : 

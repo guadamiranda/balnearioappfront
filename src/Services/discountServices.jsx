@@ -1,14 +1,12 @@
+import localStorageUtils from '@/utils/localStorageUtils';
 import axios from 'axios';
-const getDefaultsHeaders = () => {
-    const userData = JSON.parse(localStorage.getItem('userData'))
-    return {'x-role-id': userData.roleId}
-}
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const BASE_PATH_PRICE = `${backendUrl}balneario/api/price`;
 const discountServices = {
     getDiscounts: async() => {
         try {
-            const response = await axios.get(`${backendUrl}balneario/api/reserve/discount`, { headers: getDefaultsHeaders()});
+            const response = await axios.get(`${BASE_PATH_PRICE}/`, { headers: localStorageUtils.getDefaultsHeaders()});
             return response.data
             
           } catch (error) {
@@ -16,6 +14,7 @@ const discountServices = {
         } 
     },
 
+    //Estos endpoints no existen en el back aun
     postDiscount: async(body) => {
         try {
             await axios.post(`${backendUrl}balneario/api/reserve/discount`, body, { headers: getDefaultsHeaders()});

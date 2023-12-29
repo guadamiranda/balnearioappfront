@@ -9,7 +9,7 @@ const BASE_PATH_EMPLOYEE = `${backendUrl}balneario/api/employee`
 const employeeServices = {
     getEmployee: async() => {
         try {
-            const response = await axios.get(BASE_PATH_EMPLOYEE, { headers: getDefaultsHeaders() });
+            const response = await axios.get(`${BASE_PATH_EMPLOYEE}/`, { headers: getDefaultsHeaders() });
             return response.data
             
           } catch (error) {

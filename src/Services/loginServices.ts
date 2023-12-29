@@ -32,9 +32,9 @@ const getUserData = (): userData | undefined=> {
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 export default {
-    authUser: async (email: string, password: string) => {
+    authUser: async (dni: string, password: string) => {
         try {
-            const response = await axios.post(backendUrl + 'balneario/api/user/authenticate', {email, password});
+            const response = await axios.post(backendUrl + 'balneario/api/auth/login', {dni, password});
             return response
         } catch (error:any) {
             return error.response

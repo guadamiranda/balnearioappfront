@@ -17,7 +17,7 @@ const employeeServices = {
         } 
     },
 
-    postEmployee: async (body) => {
+    postEmployee: async(body) => {
         try {
             await axios.post(BASE_PATH_EMPLOYEE, body, { headers: getDefaultsHeaders() });
 

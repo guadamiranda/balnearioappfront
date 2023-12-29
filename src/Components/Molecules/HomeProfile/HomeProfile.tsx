@@ -1,5 +1,5 @@
 import ProfilePhoto from '@/Components/Atoms/ProfilePhoto/ProfilePhoto';
-import loginServices from '@/Services/loginServices';
+import workshiftServices from '@/Services/workshiftServices';
 import style from './homeProfile.module.scss';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
@@ -39,7 +39,7 @@ const HomeProfile: React.FC<IHomeProfile> = () => {
     })
     
     if(isConfirmed) {
-      await loginServices.logOutUser(observacion);
+      await workshiftServices.finish(observacion);
       localStorage.removeItem('userData')
       router.push('/login')
     }

@@ -83,8 +83,8 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
         } 
     }
 
-    async function getRoles() {
-        const getAllRoles = await rolServices.getRols()
+    async function getAllRoles() {
+        const getAllRoles = await rolServices.getRole()
         setAllRoles(getAllRoles)
     }
 
@@ -94,7 +94,7 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
     }
 
     useEffect(() => {
-        getRoles()
+        getAllRoles()
     }, [])
 
     return(

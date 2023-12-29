@@ -1,35 +1,17 @@
 import axios from 'axios';
-
-const getDefaultsHeaders = () => {
-    const userData = JSON.parse(localStorage.getItem('userData'))
-    return {'x-role-id': userData.roleId}
-}
-
-const mockedRole = [
-    {
-        name: "Administrador",
-        privileges: null,
-        id: "eb2c431f-ce15-4770-af81-09c2a1c41fa2"
-    },
-    {
-        name: "Empleado",
-        privileges: null,
-        id: "a40f006f-6a8f-4808-aa80-08f9555e71cd"
-    }
-]
+import localStorageUtils from '../utils/localStorageUtils';
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 const BASE_PATH_ROL = `${backendUrl}balneario/api/role`
 const rolServices = {
-    getRols: async() => {
+    getRole: async() => {
         try {
-            /*const response = await axios.get(`${BASE_PATH_ROL}/`, { headers: getDefaultsHeaders()});
-            return response.data*/
-            return mockedRole
+            const response = await axios.get(`${BASE_PATH_ROL}/`, { headers: localStorageUtils.getDefaultHeaders()});
+            return response.data
             
           } catch (error) {
             console.error(error);
-        } 
+        }
     },
 
     /*postRol: async(body) => {

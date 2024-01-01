@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import style from './dateSection.module.scss'
 import Checkbox from '@/Components/Atoms/Checkbox/Checkbox'
-import Encabezado from '@/Components/Atoms/Encabezado/Encabezado'
 import ReservationDays from '@/Components/Molecules/ReservationDays/ReservationDays'
 
 interface IDateSection {
@@ -23,12 +22,12 @@ const DateSection: React.FC<IDateSection> = ({
     const [dateTo, setDateTo] = useState<number>(0)
 
     const calculateUnixDate = (completeDateFrom: Date, completeDateTo: Date, isOneDay: boolean) => {
-        completeDateFrom.setHours(0)
+        completeDateFrom.setHours(9)
         completeDateFrom.setMinutes(0)
         completeDateFrom.setSeconds(0)
 
-        completeDateTo.setHours(20)
-        completeDateTo.setMinutes(59)
+        completeDateTo.setHours(!isOneDay ? 12 : 21)
+        completeDateTo.setMinutes(0)
         completeDateTo.setSeconds(0)
         
         const unixTimeFrom = Math.floor(completeDateFrom.getTime() / 1000);

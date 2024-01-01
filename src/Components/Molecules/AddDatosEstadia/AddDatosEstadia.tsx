@@ -11,22 +11,17 @@ import DateSection from '@/Components/Organism/DateSection/DateSection';
 interface IAddDatosEstadia {
     setVehiculePlateFunction: any,
     setAnimalAmountFunction: any,
+    setDatosFecha: any
 }
 
-const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction, setAnimalAmountFunction }) => {
+const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction, setAnimalAmountFunction, setDatosFecha }) => {
     const [hasVehicule, setHasVehicule] = useState(false)
-    const [vehiculePlate, setVehiculePlate] = useState('')
+    const [vehiculePlate, setVehiculePlate] = useState(0)
     const [animalAmount, setAnimalAmount] = useState(0)
     const [dateFromUnix, setDateFromUnix] = useState(0)
     const [dateToUnix, setDateToUnix] = useState(0)
     const [numberOfDays, setNumberOfDays] = useState(0)
     const [checkOneDay, setCheckOneDay] = useState(false)
-
-    console.log('Fecha desde', dateFromUnix)
-    console.log('fecha hasta', dateToUnix)
-    console.log('numero de dias', numberOfDays)
-    console.log('un dia', checkOneDay)
-
 
     const checkVehicule = () => {
         setHasVehicule(!hasVehicule)
@@ -36,7 +31,14 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
     useEffect(() => {
         setVehiculePlateFunction(vehiculePlate)
         setAnimalAmountFunction(animalAmount)
-    }, [vehiculePlate, animalAmount])
+        setDatosFecha({
+            dateFromUnix: dateFromUnix,
+            dateToUnix: dateToUnix,
+            numberOfDays: numberOfDays,
+            checkOneDay: checkOneDay
+        }
+        )
+    }, [vehiculePlate, animalAmount, dateFromUnix, dateToUnix, numberOfDays, checkOneDay])
 
     return(
         <div className={style.addDatosEstadia}>

@@ -10,7 +10,7 @@ interface IDropdown {
     title: string,
     options: Array<Option>,
     titleDropdown?: string,
-    selectedValueFunction: (name:string) => void
+    selectedValueFunction: (name: string) => void,
 }
 
 const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selectedValueFunction }) => {
@@ -33,11 +33,16 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
     }, [isOpenDropDown])
 
     const closeAndSelectValue = (option: string) => {
+        console.log('hola', option)
         setSelectedValue(option)
         selectedValueFunction(option)
         setOptionItemClassName(classNameOptionItem)
         setIsOpenDropDown(false)
     }
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div className={className}>

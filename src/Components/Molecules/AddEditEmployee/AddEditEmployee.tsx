@@ -26,7 +26,8 @@ interface IAddEditEmployee {
 
 type IAllRoles = {
     id: string,
-    name: string
+    name: string,
+    privileges: string
 }
 
 const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable, closeFunction }) => {
@@ -36,17 +37,15 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
     const [ newRoleEmployee, setNewRoleEmployee ] = useState('')
     const [ newMailEmployee, setNewMailEmployee ] = useState(fullElementToEdit.email)
     const [ newPasswordEmployee, setNewPasswordEmployee ] = useState(fullElementToEdit.password)
-    const [ allRoles, setAllRoles ] = useState<IAllRoles[]>([{id: '', name: ''}])
-    
+    const [allRoles, setAllRoles] = useState<IAllRoles[]>([{ id: '', name: '', privileges: '' }])
 
     const validateMissingData = () => {
         let allMissingData = []
-        if(newNameEmployee === '') allMissingData.push('Nombre')
-        if(newLastNameEmployee === '') allMissingData.push('Apellido')
-        if(newDocumentNumberEmployee === '') allMissingData.push('DNI')
-        if(newRoleEmployee === '') allMissingData.push('Rol')
-        if(newMailEmployee === '') allMissingData.push('E-mail')
-        if(newPasswordEmployee === '') allMissingData.push('Contraseña')
+        if (newNameEmployee === '') allMissingData.push('Nombre')
+        if (newLastNameEmployee === '') allMissingData.push('Apellido')
+        if (newDocumentNumberEmployee === '') allMissingData.push('DNI')
+        if (newRoleEmployee === '') allMissingData.push('Rol')
+        if (newPasswordEmployee === '') allMissingData.push('Contraseña')
         return allMissingData
     }
 
@@ -55,14 +54,15 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
 
         if (missingData.length === 0) {
-            const newEmployee= {firstName: newNameEmployee, 
+            const newEmployee = {
+                firstName: newNameEmployee, 
                 lastName: newLastNameEmployee, 
                 dni: newDocumentNumberEmployee, 
-                email: newMailEmployee,
+                email: newMailEmployee ? newMailEmployee : null,
                 password: newPasswordEmployee,
                 roleId: newRoleEmployee}
 
-            fullElementToEdit.id === '' ? (await employeeServices.postEmployee(newEmployee)) : (await employeeServices.editEmployee(fullElementToEdit.id, newEmployee))
+            fullElementToEdit.id === '' ? (await employeeServices.postEmployee(newEmployee)) : (await employeeServices.editEmployee(newEmployee))
             updateTable()
             Swal.fire({
                 title: fullElementToEdit.id === '' ? "¡El nuevo empleado fue creado!" : '¡El empleado fue editado!',
@@ -83,8 +83,8 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
         } 
     }
 
-    async function getRoles() {
-        const getAllRoles = await rolServices.getRols()
+    async function getAllRoles() {
+        const getAllRoles = await rolServices.getRole()
         setAllRoles(getAllRoles)
     }
 
@@ -94,7 +94,7 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
     }
 
     useEffect(() => {
-        getRoles()
+        getAllRoles()
     }, [])
 
     return(
@@ -106,7 +106,7 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
                 <br/>
                 <Input icon={<ImPriceTag/>} value={newDocumentNumberEmployee} placeholder="Documento" title='Documento de Identidad' useStateFunction={setNewDocumentNumberEmployee} isFullWidth={true}></Input>
                 <br/>
-                <Dropdown title='Seleccione un Rol' options={allRoles} titleDropdown="Rol que ocupa el empleado" selectedValueFunction={selectedValue}/>
+                <Dropdown title='Seleccione un Rol' options={allRoles} titleDropdown="Rol que ocupa el empleado" selectedValueFunction={selectedValue} />
                 <br/>
                 <Input icon={<ImPriceTag/>} value={newMailEmployee} placeholder="E-mail" title='E-mail' useStateFunction={setNewMailEmployee} isFullWidth={true}></Input>
                 <br/>

@@ -31,7 +31,7 @@ const Button: React.FC<IButton> = ({
   
   return (
     <div className={className} onClick={() => customOnClick()}>
-         {isLoading ? <BiLoaderCircle className={style['button-loading']} /> : <div className={style.button__text}>{text}</div>}
+      <div className={style.button__text}>{text}</div>
     </div>
   );
 };

@@ -21,13 +21,14 @@ type IAllEmployeesData = {
     dni: string,
     email: string,
     password: string,
-    roleId: string
+    roleId: string,
+    isDismissal: boolean
 }
 
 const ABMEmployee= () => {
     const columns = ['Nombre', 'Apellido', 'DNI', 'Rol']
 
-    const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: ''})
+    const [fullEmployeeToEdit, setFullEmployeeToEdit] = useState({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: '', isDismissal: false })
     const [employeeData, setEmployeeData] = useState([{ firstName: '', lastName: '', dni: '', rolName: ''}])
     const [employeeAllData, setEmployeesAllData] = useState<IAllEmployeesData[]>([])
     const [openModalCreate, setOpenModalCreate] = useState(false)
@@ -37,7 +38,7 @@ const ABMEmployee= () => {
     
     async function getEmployeeRolData() {
         const allEmployeesData = await employeeServices.getEmployee()
-        const allRolesData = await rolServices.getRols()
+        const allRolesData = await rolServices.getRole()
         const tableEmployeeData = formatEmployeeToTable(allEmployeesData, allRolesData)
         setData(allEmployeesData, allRolesData, tableEmployeeData)
     }
@@ -60,23 +61,52 @@ const ABMEmployee= () => {
     }
 
     const openModalEditFunction = () => {
+        setOpenModalEdit(true)
+        /*
         if(sessionServices.isAdmin()) {
             setOpenModalEdit(true)
             return;
         }
         AlertServices.renderAlertPermission();
+        */
     }
 
     const openModalCreateFunction = () => {
+        setFullEmployeeToEdit({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: '', isDismissal: false })
+        setOpenModalCreate(true)
+
+
+        /*
         if(sessionServices.isAdmin()) {
             setFullEmployeeToEdit({ id: '', firstName: '', lastName: '', dni: '', email: '', password: '', roleId: '' })
             setOpenModalCreate(true)
             return
         }
         AlertServices.renderAlertPermission();
+        */
     }
 
     async function deleteElementFunction(index:number) {
+        const elementToDelete = employeeAllData[index]
+
+        const newEmployeeAllData = employeeAllData.filter((obj) => obj.dni !== elementToDelete.dni);
+        console.log(employeeAllData)
+        const dataEmployeeInTable = formatEmployeeToTable(newEmployeeAllData, allRoles)
+
+        setEmployeesAllData(newEmployeeAllData)
+        setEmployeeData(dataEmployeeInTable)
+
+        const dnis = { dnis: [elementToDelete.dni] }
+
+        await employeeServices.deleteEmployee(dnis)
+        AlertServices.renderAlert(
+            'El empleado ha sido eliminado',
+            '',
+            'success'
+        )
+        return
+
+        /*
         if(sessionServices.isAdmin()) {
             const elementToDelete = employeeAllData[index]
             const newEmployeeAllData = employeeAllData.filter((obj) => obj.id !== elementToDelete.id);
@@ -94,6 +124,7 @@ const ABMEmployee= () => {
             return
         }
         AlertServices.renderAlertPermission();
+        */
     } 
 
     useEffect(() => {
@@ -154,4 +185,5 @@ const ABMEmployee= () => {
 };
 
 export default ABMEmployee;
+
 

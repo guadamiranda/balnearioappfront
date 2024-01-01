@@ -1,22 +1,20 @@
 import axios from 'axios';
+import localStorageUtils from '../utils/localStorageUtils';
 
-const getDefaultsHeaders = () => {
-    const userData = JSON.parse(localStorage.getItem('userData'))
-    return {'x-role-id': userData.roleId}
-}
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const BASE_PATH_ROL = `${backendUrl}balneario/api/role`
 const rolServices = {
-    getRols: async() => {
+    getRole: async() => {
         try {
-            const response = await axios.get(`${backendUrl}balneario/api/user/role`, { headers: getDefaultsHeaders()});
+            const response = await axios.get(`${BASE_PATH_ROL}/`, { headers: localStorageUtils.getDefaultHeaders()});
             return response.data
             
           } catch (error) {
             console.error(error);
-        } 
+        }
     },
 
-    postRol: async(body) => {
+    /*postRol: async(body) => {
         try {
             await axios.post(`${backendUrl}balneario/api/user/role`, body, { headers: getDefaultsHeaders()});
 
@@ -41,7 +39,7 @@ const rolServices = {
           } catch (error) {
             console.error(error);
         } 
-    }
+    }*/
 }
 
 export default rolServices;

@@ -17,7 +17,7 @@ const HomeComponent = () => {
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const handleClick = async (route: string, buttonId: number) => {
+    const handleClick = async (route: string) => {
             if(isAdmin) {
                 router.push('/' + route);
                 setLoading(true)

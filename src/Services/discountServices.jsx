@@ -2,11 +2,11 @@ import localStorageUtils from '@/utils/localStorageUtils';
 import axios from 'axios';
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-const BASE_PATH_PRICE = `${backendUrl}balneario/api/price`;
+const BASE_PATH_DISCOUNT = `${backendUrl}balneario/api/discount`;
 const discountServices = {
     getDiscounts: async() => {
         try {
-            const response = await axios.get(`${BASE_PATH_PRICE}/`, { headers: localStorageUtils.getDefaultsHeaders()});
+            const response = await axios.get(`${BASE_PATH_DISCOUNT}/`, { headers: localStorageUtils.getDefaultsHeaders() });
             return response.data
             
           } catch (error) {

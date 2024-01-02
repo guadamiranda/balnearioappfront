@@ -1,15 +1,13 @@
 'use client'
 
-import ButtonAction from "@/Components/Atoms/ButtonAction/ButtonAction";
 import { HiOutlineIdentification } from "react-icons/hi2";
-import AddResident from "../AddResident/AddResident";
 import Input from '@/Components/Atoms/Input/input';
 import style from './addGroupLeader.module.scss';
 import { AiOutlineUser } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
-import { VscAdd } from "react-icons/vsc";
 import React, { useState, useEffect } from 'react'
 import Dropdown from "@/Components/Atoms/DropDown/Dropdown";
+import discountServices from "@/Services/discountServices";
 
 interface IAddLeaderGroup {
     setLeaderGroup: any
@@ -37,9 +35,18 @@ const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
         setLeaderGroup(leader)   
     }
 
+    const getDiscountsFromEndPoint = async () => {
+        const allDiscounts = await discountServices.getDiscounts()
+        console.log(allDiscounts)
+    }
+
     useEffect(() => {
         handleLeader()
     }, [name, lastName, dniNumber, phone, bracelet, partnerNumber, discount])
+
+    useEffect(() => {
+        getDiscountsFromEndPoint()
+    }, [])
 
     return(
         <div className={style.addGroupLeader}>

@@ -6,22 +6,34 @@ import Input from '@/Components/Atoms/Input/input'
 import { AiOutlineUser } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
 import Dropdown from '@/Components/Atoms/DropDown/Dropdown'
+import discountServices from '@/Services/discountServices'
 
 type IAddResident = {
     visitorIndex: number,
     deleteVisitor: any,
-    handleDNI: any
+    handleDNI: any,
+    amountNights: number
 }
 
-const AddResident: React.FC<IAddResident> = ({visitorIndex, deleteVisitor, handleDNI}) => {
+const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, handleDNI, amountNights }) => {
     const [dni, setDni] = useState('')
     const [braceletNumber, setBraceletNumber] = useState('')
     const [discount, setDiscount] = useState('')
+    const [allDiscounts, setAllDiscounts] = useState([])
+
+    const getDiscountsFromEndPoint = async () => {
+        const allDiscount = await discountServices.getDiscounts()
+        setAllDiscounts(allDiscount)
+    }
 
     useEffect(() => {
         handleDNI(visitorIndex, dni, braceletNumber, discount)
-    }, [dni, braceletNumber, discount])
-    
+    }, [dni, braceletNumber, discount, amountNights])
+
+    useEffect(() => {
+        getDiscountsFromEndPoint()
+    }, [])
+
     return(
         <div className={style.addResidentContainer}>
             <div className={style.addResidentContainer__inputs}>
@@ -43,7 +55,7 @@ const AddResident: React.FC<IAddResident> = ({visitorIndex, deleteVisitor, handl
 
                 <Dropdown
                     title='Ninguno' 
-                    options={[{name: 'Desc 1'}, {name: 'Desc 2'}]} 
+                    options={allDiscounts} 
                     titleDropdown="Seleccione un Descuento" 
                     selectedValueFunction={setDiscount}
                 />  

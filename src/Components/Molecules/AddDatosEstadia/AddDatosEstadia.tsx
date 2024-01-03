@@ -11,10 +11,11 @@ import DateSection from '@/Components/Organism/DateSection/DateSection';
 interface IAddDatosEstadia {
     setVehiculePlateFunction: any,
     setAnimalAmountFunction: any,
-    setDatosFecha: any
+    setDatosFecha: any,
+    setHasVehiculeFinal: any
 }
 
-const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction, setAnimalAmountFunction, setDatosFecha }) => {
+const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction, setAnimalAmountFunction, setDatosFecha, setHasVehiculeFinal }) => {
     const [hasVehicule, setHasVehicule] = useState(false)
     const [vehiculePlate, setVehiculePlate] = useState(0)
     const [animalAmount, setAnimalAmount] = useState(0)
@@ -26,6 +27,7 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
     const checkVehicule = () => {
         setHasVehicule(!hasVehicule)
         setVehiculePlate('')
+        setHasVehiculeFinal(!hasVehicule)
     }
 
     useEffect(() => {

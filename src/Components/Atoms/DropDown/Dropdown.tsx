@@ -10,7 +10,7 @@ interface IDropdown {
     title: string,
     options: Array<Option>,
     titleDropdown?: string,
-    selectedValueFunction: (name: string) => void,
+    selectedValueFunction: (name: any) => void,
 }
 
 const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selectedValueFunction }) => {
@@ -32,17 +32,12 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
         setOptionItemClassName(isOpenDropDown === true ? classNameOptionItemClicked : classNameOptionItem)
     }, [isOpenDropDown])
 
-    const closeAndSelectValue = (option: string) => {
-        console.log('hola', option)
-        setSelectedValue(option)
+    const closeAndSelectValue = (option: any) => {
+        setSelectedValue(option.name)
         selectedValueFunction(option)
         setOptionItemClassName(classNameOptionItem)
         setIsOpenDropDown(false)
     }
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div className={className}>
@@ -52,7 +47,7 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
                 <div className={dropdownStyle.dropdown__iconArrow}>{arrow}</div>
             </div>
             <div className={optionItemsClassName}>
-                {options.map(option => <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue(option.name)} key={option.name}>{option.name}</div>)}
+                {options.map(option => <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue(option)} key={option.name}>{option.name}</div>)}
             </div>
         </div>
     )

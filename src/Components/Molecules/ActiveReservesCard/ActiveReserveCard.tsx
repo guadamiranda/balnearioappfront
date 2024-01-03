@@ -46,10 +46,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
         <div className={style.addEditPriceContainer}>
             <div className={style.addEditPriceContainer___leftSide}>
                 <span>Responsable: </span>
-                <span><b>Nombre:</b> {managerName}, {managerLastName}</span>
-                <span><b>DNI:</b> {managerDNI.toString() == '0'? '-' : managerDNI}</span>
-                <span><b>N° Socio:</b> {managerMemberNumber === '' ? '-' : managerMemberNumber}</span>
-                <span><b>Patente:</b> {managerCarPlate === '' ? '-' : managerCarPlate} </span>
+
 
             </div>
             <div className={style.addEditPriceContainer___rightSide}>
@@ -64,3 +61,12 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
 }
 
 export default ActiveReserveCard
+
+
+/*
+<span>Responsable: </span>
+                <span><b>Nombre:</b> {managerName}, {managerLastName}</span>
+                <span><b>DNI:</b> '{managerDNI.toString() == '0'? '-' : managerDNI}'</span>
+                <span><b>N° Socio:</b> {managerMemberNumber === '' ? '-' : managerMemberNumber}</span>
+                <span><b>Patente:</b> {managerCarPlate === '' ? '-' : managerCarPlate} </span>
+                */

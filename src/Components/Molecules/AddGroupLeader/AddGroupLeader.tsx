@@ -10,10 +10,15 @@ import Dropdown from "@/Components/Atoms/DropDown/Dropdown";
 import discountServices from "@/Services/discountServices";
 
 interface IAddLeaderGroup {
-    setLeaderGroup: any
+    setLeaderGroup: any,
+    checkOneDay: boolean,
+    campingPrice: number,
+    dayPrice: number,
+    numberOfDays: number
+
 }
 
-const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
+const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay, campingPrice, dayPrice, numberOfDays }) => {
     const [name, setName] = useState('')
     const [lastName, setLastName] = useState('')
     const [dniNumber, setDniNumber] = useState('')
@@ -21,8 +26,12 @@ const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
     const [bracelet, setBracelet] = useState('')
     const [partnerNumber, setPartnerNumber] = useState('')
     const [discount, setDiscount] = useState('')
+    const [allDiscounts, setAllDiscounts] = useState([])
 
     const handleLeader = () => {
+        const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
+        const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
+
         const leader = {
             name: name,
             lastName: lastName,
@@ -30,14 +39,16 @@ const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
             phone: phone,
             bracelet: bracelet,
             partnerNumber: partnerNumber,
-            discount: discount
+            discount: discount,
+            price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount === '' ? 1 : (discount.percent / 100))))
+
         }
         setLeaderGroup(leader)   
     }
 
     const getDiscountsFromEndPoint = async () => {
         const allDiscounts = await discountServices.getDiscounts()
-        console.log(allDiscounts)
+        setAllDiscounts(allDiscounts)
     }
 
     useEffect(() => {
@@ -102,7 +113,7 @@ const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
 
             <Dropdown 
                 title='Ninguno' 
-                options={[{name: 'Desc 1'}, {name: 'Desc 2'}]} 
+                options={allDiscounts}
                 titleDropdown="Seleccione un Descuento" 
                 selectedValueFunction={setDiscount}
             />

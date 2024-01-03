@@ -13,9 +13,13 @@ type IVisitors = {
 
 interface IAddVisitors {
     setAllVisitors: any,
+    checkOneDay: boolean,
+    campingPrice: number,
+    dayPrice: number,
+    numberOfDays: number
 }
 
-const AddVisitors : React.FC<IAddVisitors> = ({setAllVisitors}) => {
+const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, campingPrice, dayPrice, numberOfDays }) => {
     const [visitors, setVisitors] = useState<IVisitors[]>([]);
     const [indexVisitor, setIndexVisitor] = useState(0)
 
@@ -30,14 +34,19 @@ const AddVisitors : React.FC<IAddVisitors> = ({setAllVisitors}) => {
         setVisitors(visitorNotDeleted)
     }
 
-    const handleDNI = ( index: any, dniNumber: any, braceletNumber: any, discount: any ) => {
+    const changeVisitorData = (index: any, dniNumber: any, braceletNumber: any, discount: any) => {
+        const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
+        const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
+
         setVisitors(
             visitors.map((visitor) => {
             if(visitor.index === index){
                 return { ...visitor, 
                          dni: dniNumber,
                          braceletNumber: braceletNumber,
-                         discount: discount}
+                    discount: discount,
+                    price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount === '' ? 1 : (discount.percent / 100))))
+                }
             }
             return visitor;
             })
@@ -61,8 +70,9 @@ const AddVisitors : React.FC<IAddVisitors> = ({setAllVisitors}) => {
                     <AddResident 
                         key={visitor.index}
                         deleteVisitor={deleteComponent} 
-                        handleDNI={handleDNI}
-                        visitorIndex= {visitor.index}/>
+                        handleDNI={changeVisitorData}
+                        visitorIndex={visitor.index}
+                        amountNights={numberOfDays} />
                 )}
             </div>          
         </div>

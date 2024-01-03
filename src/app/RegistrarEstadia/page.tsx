@@ -7,89 +7,137 @@ import EstadiaSummary from '@/Components/Molecules/EstadiaSummary/EstadiaSummary
 import ABMTemplate from '@/Components/templates/abmTemplate/ABMTemplate';
 import AddVisitors from '@/Components/Molecules/AddVisitors/AddVisitors';
 import Button from '@/Components/Atoms/button/button';
+import priceServices from '@/Services/priceServices';
 import style from './registrarEstadia.module.scss';
 import ReactDOMServer from 'react-dom/server';
 import GuardLogin from '@/utils/guardLogin';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import reserveServices from '@/Services/stayServices';
+import AlertServices from '@/utils/AlertServices';
+import Swal from 'sweetalert2';
 
 const RegistrarEstadia = () => {
     const [step, setStep] = useState(0)
     const [visitors, setVisitors] = useState([])
-    const [leader, setLeader] = useState({})
-    const [vehiculePlate, setVehiculePlate] = useState(0)
+    const [leader, setLeader] = useState({ dniNumber: '', bracelet: '', discount: { percent: 0 } })
+    const [vehiculePlate, setVehiculePlate] = useState('')
+    const [hasVehicule, setHasVehicule] = useState(false)
     const [animalAmount, setAnimalAmount] = useState(0)
-    const [datosFechas, setDatosFecha] = useState()
+    const [datosFechas, setDatosFecha] = useState({ numberOfDays: 0, dateFromUnix: 0, dateToUnix: 0 })
     const buttonContainerStyle = step === 0 ? style.registrarEstadiaContainer__buttonNext : ''
+    const [amountPrice, setAmountPrice] = useState(0)
+    const [prices, setPrices] = useState({})
+
+    const [dayPrice, setDayPrice] = useState(0)
+    const [campingPrice, setCampingPrice] = useState(0)
+    const [animalPrice, setAnimalPrice] = useState(0)
+    const [vehiculePrice, setVehiculePrice] = useState(0)
 
     console.log(leader)
     console.log(visitors)
-    console.log(vehiculePlate)
     console.log(animalAmount)
     console.log(datosFechas)
+    console.log('Tiene auto el conchudo?', hasVehicule, vehiculePlate)
 
     const validateMissingData = () => {
         let allMissingData = []
         if(leader.dniNumber === '') allMissingData.push('Número de documento del Responsable')
-        if(leader.bracelet === '') allMissingData.push('Número de documento del Responsable')
+        if (leader.bracelet === '') allMissingData.push('Número de pulsera del Responsable')
         if(animalAmount < 0 || animalAmount.toString() == '') allMissingData.push('Cantidad de caballos de ser un numero positivo')
         if(visitors.length != 0) {
-            const missData = visitors.find((visitor) => visitor.dniNumber === '' && visitor.braceletNumber === '')
+            const missData = visitors.find((visitor) => visitor.dni === '' || visitor.braceletNumber === '')
+            console.log('MISSDATA', missData)
             missData === undefined ? null : allMissingData.push('Número de documento o pulsera de un visitante')
         }
+        if (hasVehicule === true && vehiculePlate === '') allMissingData.push('Número de patente')
         if (datosFechas.dateFromUnix === 0) allMissingData.push('Fecha desde')
         if (datosFechas.dateToUnix === 0) allMissingData.push('Fecha hasta')
         return allMissingData
     }
 
-    const calculeTotalPrice = () => {
+    const allPricesFromEndpoint = async () => {
+        const allPrices = await priceServices.getPrices()
+        setPrices(allPrices)
 
+        for (var i = 0; i < allPrices.length; i++) {
+            if (allPrices[i].name === 'Dia') setDayPrice(allPrices[i].amount)
+            if (allPrices[i].name === 'Noche') setCampingPrice(allPrices[i].amount)
+            if (allPrices[i].name === 'Caballo') setAnimalPrice(allPrices[i].amount)
+            if (allPrices[i].name === 'Vehiculo') setVehiculePrice(allPrices[i].amount)
+        }
     }
 
+    const calculeTotalPrice = () => {
+        let visitorPrice = 0
+        const leaderPrice = leader.price
+        const animalFinalPrice = animalAmount * animalPrice
+        const vehiculeFinalPrice = hasVehicule ? vehiculePrice : 0
+
+        visitors.map(visitor => visitorPrice += visitor.price)
+
+        setAmountPrice(leaderPrice + visitorPrice + animalFinalPrice + vehiculeFinalPrice)
+    }
 
     async function registerData() {
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
-        /*
+
         if (missingData.length === 0) {
             const newReserve = {
-                initDate: (dateFrom * 1000).toString(), 
-                finishDate: (dateTo * 1000).toString(), 
-                amount: //COMPLETAR,
-                    stayType: "a5fa073e-8fb7-47ff-95b9-9a5de0590a6a" //PREGUNTAR,
-                workshiftId: userData.workshiftId, 
+                initDate: (datosFechas.dateFromUnix * 1000).toString(),
+                finishDate: (datosFechas.dateToUnix * 1000).toString(),
+                amount: amountPrice,
+                stayType: 'a5fa073e-8fb7-47ff-95b9-9a5de0590a6a',
+                group: {
+                    idCampsite: '86abe192-f273-45ea-b2ac-103312791439',
+                    carPlate: vehiculePlate,
+                    quantityAnimals: animalAmount
+                },
+                visitors: [
+                    {
+                        dni: leader.dniNumber.toString(),
+                        firstName: leader.name.toString(),
+                        lastName: leader.lastName.toString(),
+                        phone: leader.phone.toString(),
+                        location: "Córdoba",
+                        memberNumber: leader.partnerNumber.toString(),
+                        wristbandNumber: leader.bracelet.toString(),
+                        idDiscount: leader.discount.id.toString(),
+                        isManager: true
+                    },
 
-                managerCarPlate: carPlatesNumber.toString(),
-                managerDni: dniNumber.toString(),
-                managerFirstName: managerName,
-                managerLastName: managerLastName, 
-                managerMemberNumber: partnerNumber.toString(),
-                residents: residents.map((resident) => ({dni: resident.dniNumber.toString(), memberNumber: resident.partnerNumber.toString()})),
-                vehicles: vehicules.map((vehicule) => ({carPlate: vehicule.carPlate.toString(), vehicleType: '0b05ba6a-b817-4f88-825d-4e787ef82e5a'})),
-                animalAmount: animalAmount
+                    ...visitors.map((visitor) => ({
+                        dni: visitor.dni.toString(),
+                        firstName: '',
+                        lastName: '',
+                        phone: '',
+                        location: "Córdoba",
+                        memberNumber: '',
+                        wristbandNumber: visitor.braceletNumber.toString(),
+                        idDiscount: visitor.discount === '' ? '' : visitor.discount.id.toString(),
+                        isManager: false
+                    })),
+                ]
             }
-        /*
-        
-        const response = await reserveServices.postReserve(newReserve)
-        setOpenModalDiscount(false)
-        setIsLoadingButton(false)
-        if(response?.status == 201) {
-            AlertServices.renderAlert(
-                'Completado',
-                'Se creo una reserva correctamente',
-                'success',
-            )
-            return
-        }
 
-        if(response?.status == 500) {
-            AlertServices.renderAlert(
-                'Error',
-                'Algo salio mal, contactese con el administrador',
-                'error',
-            )
-            return
-        }
+            const response = await reserveServices.postReserve(newReserve)
+            if (response?.status == 201) {
+                AlertServices.renderAlert(
+                    'Completado',
+                    'Se creo una reserva correctamente',
+                    'success',
+                )
+                return
+            }
+
+            if (response?.status == 500) {
+                AlertServices.renderAlert(
+                    'Error',
+                    'Algo salio mal, contactese con el administrador',
+                    'error',
+                )
+                return
+            }
             
         } else {
             Swal.fire({
@@ -100,8 +148,15 @@ const RegistrarEstadia = () => {
               });
         }
 
-        */
     }
+
+    useEffect(() => {
+        calculeTotalPrice()
+    }, [leader.discount, visitors, hasVehicule, animalAmount, datosFechas])
+
+    useEffect(() => {
+        allPricesFromEndpoint()
+    }, [])
 
     return(
     <GuardLogin>
@@ -112,6 +167,10 @@ const RegistrarEstadia = () => {
                 <div className={style.registrarEstadiaContainer}>
                     <AddLeaderGroup 
                         setLeaderGroup={setLeader}
+                            checkOneDay={datosFechas.checkOneDay}
+                            campingPrice={campingPrice}
+                            dayPrice={dayPrice}
+                            numberOfDays={datosFechas.numberOfDays}
                     />
                 </div>
             </div>
@@ -120,6 +179,11 @@ const RegistrarEstadia = () => {
                 <div className={style.registrarEstadiaContainer}>
                     <AddVisitors 
                         setAllVisitors={ setVisitors }
+                            checkOneDay={datosFechas.checkOneDay}
+                            campingPrice={campingPrice}
+                            dayPrice={dayPrice}
+                            numberOfDays={datosFechas.numberOfDays}
+
                     />
                 </div>
             </div>
@@ -130,6 +194,7 @@ const RegistrarEstadia = () => {
                             setVehiculePlateFunction={setVehiculePlate}
                             setAnimalAmountFunction={setAnimalAmount}
                             setDatosFecha={setDatosFecha}
+                            setHasVehiculeFinal={setHasVehicule}
                         />
                 </div>
             </div>
@@ -138,8 +203,13 @@ const RegistrarEstadia = () => {
                 <div className={style.registrarEstadiaContainer}>
                         <EstadiaSummary
                             animalAmount={animalAmount}
+                            amountPrice={amountPrice}
                             leader={leader}
+                            animalPrice={animalPrice}
+                            vehiculePrice={vehiculePrice}
+                            datosFechas={datosFechas}
                             vehiculePlate={vehiculePlate}
+                            hasVehicule={hasVehicule}
                             visitors={visitors} />
                 </div>
             </div>

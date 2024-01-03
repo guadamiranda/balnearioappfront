@@ -98,7 +98,6 @@ const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
                    title='Número de Socio' 
                    value={partnerNumber}
                    useStateFunction={setPartnerNumber}/>
-
             </div>
 
             <Dropdown 
@@ -106,7 +105,7 @@ const AddLeaderGroup : React.FC<IAddLeaderGroup> = ({setLeaderGroup}) => {
                 options={[{name: 'Desc 1'}, {name: 'Desc 2'}]} 
                 titleDropdown="Seleccione un Descuento" 
                 selectedValueFunction={setDiscount}
-            />        
+            />
         </div>
     )
 }

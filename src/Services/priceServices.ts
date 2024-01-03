@@ -7,17 +7,17 @@ const priceServices = {
 
     getPrices: async() => {
         try {
-            const response = await axios.get(`${BASE_PATH_PRICE}/`, { headers: localStorageUtils.getDefaultsHeaders() });
+            const response = await axios.get(`${BASE_PATH_PRICE}/`, { headers: localStorageUtils.getDefaultHeaders() });
             return response.data
           } catch (error) {
             console.error(error);
-        } 
+        }
     },
 
     //Estos endpoints no existen en el back aun
-    postPrice: async(body) => {
+    postPrice: async(body: any) => {
         try {
-            const result = await axios.post(`${backendUrl}balneario/api/reserve/price`, body, { headers: getDefaultsHeaders()});
+            const result = await axios.post(`${backendUrl}balneario/api/reserve/price`, body, { headers: localStorageUtils.getDefaultHeaders() });
             console.log(result)
 
           } catch (error) {
@@ -25,18 +25,18 @@ const priceServices = {
         } 
     },
 
-    deletePrice: async(idPrice) => {
+    deletePrice: async(idPrice: string) => {
         try {
-            await axios.delete(`${backendUrl}balneario/api/reserve/price/${idPrice}`, { headers: getDefaultsHeaders()});
+            await axios.delete(`${backendUrl}balneario/api/reserve/price/${idPrice}`, { headers: localStorageUtils.getDefaultHeaders() });
 
           } catch (error) {
             console.error(error);
-        } 
+        }
     },
 
-    editPrice: async(idPrice, body) => {
+    editPrice: async(idPrice: string, body:any) => {
         try {
-            await axios.put(`${backendUrl}balneario/api/reserve/price/${idPrice}`, body, { headers: getDefaultsHeaders()});
+            await axios.put(`${backendUrl}balneario/api/reserve/price/${idPrice}`, body, { headers: localStorageUtils.getDefaultHeaders() });
 
           } catch (error) {
             console.error(error);

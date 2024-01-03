@@ -8,24 +8,19 @@ import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
 import style from './ABMDiscounts.module.scss'
 import { useEffect, useState } from "react";
-import Swal from 'sweetalert2';
 import GuardLogin from "@/utils/guardLogin";
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import AlertServices from "@/utils/AlertServices";
 import sessionServices from "@/Services/sessionServices";
 
-type IAllDiscounts = {
-    id: string,
-    name: string,
-    percentage: any
-}
+
 
 const ABMDiscount = () => {
     const columns = ["Nombre", "Descuento %"]
 
     const [fullDiscountToEdit, setFullDiscountToEdit] = useState({ id: '', name: '', percentage: ''});
     const [discountsData, setDiscountsData] = useState([{ name: '', percentage: 0 }]);
-    const [discountsAllData, setDiscountsAllData] = useState<IAllDiscounts[]>([]);
+    const [discountsAllData, setDiscountsAllData] = useState<IDiscount[]>([]);
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
@@ -39,10 +34,10 @@ const ABMDiscount = () => {
         setDiscountsData(dataDiscountInTable)
     }
 
-    const formatDiscountToTable = (discount:Array<IAllDiscounts>) => {
+    const formatDiscountToTable = (discount:Array<IDiscount>) => {
         const dataDiscountInTable = discount.map((discount) => ({
             name: discount.name,
-            percentage: discount.percentage
+            percentage: discount.percent
 
         }))
 

@@ -16,13 +16,14 @@ const reserveServices = {
         }
     },
 
-    getActiveReserves: async() => {
+    getActiveReserves: async(): Promise<IGeneralInfoStay[]> => {
         try {
             const response = await axios.get(`${BASE_PATH_STAY}/active`, { headers: localStorageUtils.getDefaultHeaders()});
             return response.data
             
           } catch (error) {
-            console.error(error);
+            console.error(error)
+            return []
         } 
     },
 

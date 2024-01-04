@@ -45,9 +45,10 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
                          dni: dniNumber,
                          braceletNumber: braceletNumber,
                     discount: discount,
-                    price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount === '' ? 1 : (discount.percent / 100))))
+                    price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (Object.keys(discount).length === 0 ? 1 : (discount.percent / 100))))
                 }
             }
+
             return visitor;
             })
         )   

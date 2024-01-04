@@ -49,7 +49,7 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
     visitors = [] }) => {
 
     const [allVisitors, setAllVisitors] = useState<IVisitors[]>([])
-    const [leaderFull, setLeaderFull] = useState<ILeader>({} as ILeader)
+    const [leaderFull, setLeaderFull] = useState<ILeader>({ discount: {} } as ILeader)
 
     useEffect(() => {
         setAllVisitors(visitors)
@@ -90,7 +90,8 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                     <div className={style.estadiaSummary__visitantes}>
                         <b>{leader.dniNumber}</b>
                         <span className={style.estadiaSummary__descuentos}>
-                            {leaderFull.discount ? `Descuento: ${leaderFull.discount.name} - ${leaderFull.discount.percent}%` : null}
+                            Descuento: {leaderFull.discount === undefined ? '-' : leaderFull.discount.name} -
+                            {leaderFull.discount === undefined ? '-' : leaderFull.discount.percent}
                         </span>
                     </div>
                     <div className={style.estadiaSummary__prices}>
@@ -107,7 +108,8 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                         <div className={style.estadiaSummary__visitantes}>
                             <b>{visitor.dni}</b>
                             <span className={style.estadiaSummary__descuentos}>
-                                {visitor.discount ? `Descuento: ${visitor.discount.name} - ${visitor.discount.percent}%` : null}
+                                Descuento: {visitor.discount === undefined ? '-' : visitor.discount.name} -
+                                {visitor.discount === undefined ? '-' : visitor.discount.percent}
                             </span>
                         </div>
                         <div className={style.estadiaSummary__prices}>
@@ -116,9 +118,11 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                     </div>
                 )}
             <div className={style.estadiaSummary__title}>Total de la Estadía</div>
-                    <div className={style.estadiaSummary__priceContainer}>
-                <b className={style.estadiaSummary__price}>${amountPrice}</b>
-                    </div>
+            <div className={style.estadiaSummary__priceContainer}>
+                <b className={style.estadiaSummary__price}>
+                    {datosFechas.dateFromUnix === 0 ? '$' : `$  ${amountPrice}`}
+                </b>
+            </div>
 
         </div>
     )

@@ -31,6 +31,10 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
     const handleLeader = () => {
         const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
         const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
+        const priceWithDiscount = amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (dayPriceOrCampingPrice * (discount.percent / 100))))
+        const priceWithoutDiscount = amountNights * dayPriceOrCampingPrice
+
+        console.log('longitud', Object.keys(discount).length)
 
         const leader = {
             name: name,
@@ -40,9 +44,10 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
             bracelet: bracelet,
             partnerNumber: partnerNumber,
             discount: discount,
-            price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (Object.keys(discount).length === 0 ? 1 : (discount.percent / 100))))
+            price: Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount
 
         }
+        console.log(leader.price)
         setLeaderGroup(leader)   
     }
 
@@ -53,7 +58,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
 
     useEffect(() => {
         handleLeader()
-    }, [name, lastName, dniNumber, phone, bracelet, partnerNumber, discount])
+    }, [name, lastName, dniNumber, phone, bracelet, partnerNumber, discount, numberOfDays])
 
     useEffect(() => {
         getDiscountsFromEndPoint()

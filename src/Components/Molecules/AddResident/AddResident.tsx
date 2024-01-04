@@ -18,8 +18,8 @@ type IAddResident = {
 const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, handleDNI, amountNights }) => {
     const [dni, setDni] = useState('')
     const [braceletNumber, setBraceletNumber] = useState('')
-    const [discount, setDiscount] = useState('')
-    const [allDiscounts, setAllDiscounts] = useState([])
+    const [discount, setDiscount] = useState({})
+    const [allDiscounts, setAllDiscounts] = useState<IDiscount[]>([])
 
     const getDiscountsFromEndPoint = async () => {
         const allDiscount = await discountServices.getDiscounts()

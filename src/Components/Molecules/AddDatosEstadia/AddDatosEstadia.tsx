@@ -26,7 +26,7 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
 
     const checkVehicule = () => {
         setHasVehicule(!hasVehicule)
-        setVehiculePlate('')
+        setVehiculePlate(0)
         setHasVehiculeFinal(!hasVehicule)
     }
 

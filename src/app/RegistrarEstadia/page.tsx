@@ -6,24 +6,53 @@ import AddLeaderGroup from '@/Components/Molecules/AddGroupLeader/AddGroupLeader
 import EstadiaSummary from '@/Components/Molecules/EstadiaSummary/EstadiaSummary';
 import ABMTemplate from '@/Components/templates/abmTemplate/ABMTemplate';
 import AddVisitors from '@/Components/Molecules/AddVisitors/AddVisitors';
+import reserveServices from '@/Services/stayServices';
 import Button from '@/Components/Atoms/button/button';
 import priceServices from '@/Services/priceServices';
 import style from './registrarEstadia.module.scss';
+import AlertServices from '@/utils/AlertServices';
 import ReactDOMServer from 'react-dom/server';
 import GuardLogin from '@/utils/guardLogin';
 import { useEffect, useState } from 'react';
-import reserveServices from '@/Services/stayServices';
-import AlertServices from '@/utils/AlertServices';
 import Swal from 'sweetalert2';
+
+interface IDiscount {
+    id: number,
+}
+
+interface IVisitors {
+    dni: any,
+    braceletNumber: any,
+    price: number,
+    discount: IDiscount,
+}
+
+interface ILeader {
+    dniNumber: any,
+    name: string,
+    lastName: string,
+    phone: number,
+    partnerNumber: number,
+    bracelet: string,
+    price: number,
+    discount: IDiscount,
+}
+
+interface IDate {
+    numberOfDays: any,
+    dateFromUnix: any,
+    dateToUnix: any,
+    checkOneDay: boolean
+}
 
 const RegistrarEstadia = () => {
     const [step, setStep] = useState(0)
-    const [visitors, setVisitors] = useState([])
-    const [leader, setLeader] = useState({ dniNumber: '', bracelet: '', discount: { percent: 0 } })
+    const [visitors, setVisitors] = useState<IVisitors[]>([])
+    const [leader, setLeader] = useState<ILeader>({} as ILeader)
     const [vehiculePlate, setVehiculePlate] = useState('')
     const [hasVehicule, setHasVehicule] = useState(false)
     const [animalAmount, setAnimalAmount] = useState(0)
-    const [datosFechas, setDatosFecha] = useState({ numberOfDays: 0, dateFromUnix: 0, dateToUnix: 0 })
+    const [datosFechas, setDatosFecha] = useState<IDate>({} as IDate) 
     const buttonContainerStyle = step === 0 ? style.registrarEstadiaContainer__buttonNext : ''
     const [amountPrice, setAmountPrice] = useState(0)
     const [prices, setPrices] = useState({})
@@ -33,12 +62,6 @@ const RegistrarEstadia = () => {
     const [animalPrice, setAnimalPrice] = useState(0)
     const [vehiculePrice, setVehiculePrice] = useState(0)
 
-    console.log(leader)
-    console.log(visitors)
-    console.log(animalAmount)
-    console.log(datosFechas)
-    console.log('Tiene auto el conchudo?', hasVehicule, vehiculePlate)
-
     const validateMissingData = () => {
         let allMissingData = []
         if(leader.dniNumber === '') allMissingData.push('Número de documento del Responsable')
@@ -46,7 +69,6 @@ const RegistrarEstadia = () => {
         if(animalAmount < 0 || animalAmount.toString() == '') allMissingData.push('Cantidad de caballos de ser un numero positivo')
         if(visitors.length != 0) {
             const missData = visitors.find((visitor) => visitor.dni === '' || visitor.braceletNumber === '')
-            console.log('MISSDATA', missData)
             missData === undefined ? null : allMissingData.push('Número de documento o pulsera de un visitante')
         }
         if (hasVehicule === true && vehiculePlate === '') allMissingData.push('Número de patente')
@@ -114,7 +136,7 @@ const RegistrarEstadia = () => {
                         location: "Córdoba",
                         memberNumber: '',
                         wristbandNumber: visitor.braceletNumber.toString(),
-                        idDiscount: visitor.discount === '' ? '' : visitor.discount.id.toString(),
+                        idDiscount: Object.keys(visitor.discount).length === 0 ? '' : visitor.discount.id.toString(),
                         isManager: false
                     })),
                 ]

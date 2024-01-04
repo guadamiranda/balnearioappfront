@@ -1,8 +1,25 @@
 'use client'
 
-import style from './estadiaSummary.module.scss'
 import React, { useEffect, useState } from 'react'
+import style from './estadiaSummary.module.scss'
 
+interface IVisitors {
+    dni: any,
+    braceletNumber: any,
+    price: number,
+    discount: IDiscount,
+}
+
+interface ILeader {
+    dniNumber: any,
+    name: string,
+    lastName: string,
+    phone: number,
+    partnerNumber: number,
+    bracelet: string,
+    price: number,
+    discount: IDiscount,
+}
 interface IStaySummary {
     animalAmount: number,
     leader: any,
@@ -26,8 +43,8 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
     hasVehicule,
     visitors = [] }) => {
 
-    const [allVisitors, setAllVisitors] = useState([])
-    const [leaderFull, setLeaderFull] = useState({ dniNumber: '', price: '' })
+    const [allVisitors, setAllVisitors] = useState<IVisitors[]>([])
+    const [leaderFull, setLeaderFull] = useState<ILeader>({} as ILeader)
 
     useEffect(() => {
         setAllVisitors(visitors)

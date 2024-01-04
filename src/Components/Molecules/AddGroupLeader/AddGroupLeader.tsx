@@ -25,8 +25,8 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
     const [phone, setPhone] = useState('')
     const [bracelet, setBracelet] = useState('')
     const [partnerNumber, setPartnerNumber] = useState('')
-    const [discount, setDiscount] = useState('')
-    const [allDiscounts, setAllDiscounts] = useState([])
+    const [discount, setDiscount] = useState<IDiscount>({} as IDiscount)
+    const [allDiscounts, setAllDiscounts] = useState<IDiscount[]>([])
 
     const handleLeader = () => {
         const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
@@ -40,7 +40,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
             bracelet: bracelet,
             partnerNumber: partnerNumber,
             discount: discount,
-            price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount === '' ? 1 : (discount.percent / 100))))
+            price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (Object.keys(discount).length === 0 ? 1 : (discount.percent / 100))))
 
         }
         setLeaderGroup(leader)   

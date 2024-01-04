@@ -16,7 +16,7 @@ const reserveServices = {
         }
     },
 
-    getActiveReserves: async(): Promise<IGeneralInfoStay[]> => {
+    getActiveReserves: async () => {
         try {
             const response = await axios.get(`${BASE_PATH_STAY}/active`, { headers: localStorageUtils.getDefaultHeaders()});
             return response.data

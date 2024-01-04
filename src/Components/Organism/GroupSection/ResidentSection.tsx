@@ -1,3 +1,4 @@
+/*
 import { useState } from 'react'
 import style from './residentSection.module.scss'
 import AddResident from '@/Components/Molecules/AddResident/AddResident'
@@ -79,3 +80,5 @@ const ResidentSection: React.FC<IResidentSection> = ({
 }
 
 export default ResidentSection
+
+*/

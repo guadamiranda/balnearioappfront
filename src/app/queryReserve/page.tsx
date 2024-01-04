@@ -35,7 +35,7 @@ const QueryReserve = () => {
     const [cardPlate, setCardPlate] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [opToFind, setOpToFind] = useState('')
-    const [reserveData, setReserveData] = useState<ReserveDto | null>(null)
+    const [reserveData, setReserveData] = useState<any | null>(null)
 
     const saveDni = (valueInput: string) => {
         const value = parseInt(valueInput)
@@ -146,7 +146,7 @@ const QueryReserve = () => {
             return
         }
 
-        setReserveData(reserveQuery.data as ReserveDto)
+        setReserveData(reserveQuery.data as any)
     }
 
     return (

@@ -76,8 +76,7 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
                 setDateFromUnix={setDateFromUnix}
                 setDateToUnix={setDateToUnix}
                 setNumberOfDays={setNumberOfDays}
-                setCheckOneDay={setCheckOneDay}>
-            </DateSection>
+                setCheckOneDay={setCheckOneDay} />
            
         </div>
     )

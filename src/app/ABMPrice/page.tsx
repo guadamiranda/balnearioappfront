@@ -62,25 +62,6 @@ const ABMPrice = () => {
         AlertServices.renderAlertPermission();
     }
 
-    async function deleteElementFunction(index:number) {
-        if(sessionServices.isAdmin()) {
-            const elementToDelete = pricesAllData[index]
-            const newPricesAllData = pricesAllData.filter((obj) => obj.id !== elementToDelete.id);
-            const dataPricesInTable = formatPricesToTable(newPricesAllData)
-            setPricesAllData(newPricesAllData)
-            setPricesData(dataPricesInTable)
-    
-            await priceServices.deletePrice(elementToDelete.id)
-            AlertServices.renderAlert(
-                'El precio ha sido eliminado',
-                '',
-                'success'
-            )
-            return;
-        }
-        AlertServices.renderAlertPermission();
-    }
-    
     useEffect(() => {
         getPrices()
     }, [])

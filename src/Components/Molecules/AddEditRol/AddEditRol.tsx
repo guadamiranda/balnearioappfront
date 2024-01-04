@@ -26,6 +26,8 @@ const AddEditRol: React.FC<IAddEditRol> = ({ fullElementToEdit, updateTable, clo
         return allMissingData
     }
 
+    /*
+
     async function postRol() {
         const missingData = validateMissingData()
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
@@ -53,6 +55,8 @@ const AddEditRol: React.FC<IAddEditRol> = ({ fullElementToEdit, updateTable, clo
         } 
     }
 
+    */
+
     return(
         <div className={style.addEditPriceContainer}>
             <div className={style.addEditPriceContainer__inputContainer}>
@@ -61,7 +65,7 @@ const AddEditRol: React.FC<IAddEditRol> = ({ fullElementToEdit, updateTable, clo
             </div>
             <div className={style.addEditPriceContainer__buttonContainer}>
                 <br/>
-                <Button text={fullElementToEdit.id === '' ? "Crear Rol" : 'Editar Rol'} type='primary' onClickFunction={() => postRol()} isFullWidth={true}></Button>
+                <Button text={fullElementToEdit.id === '' ? "Crear Rol" : 'Editar Rol'} type='primary' onClickFunction={() => console.log('postRol()')} isFullWidth={true}></Button>
             </div>
         </div>
     )

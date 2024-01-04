@@ -29,7 +29,7 @@ const ABMPrice = () => {
     
 
     async function getRols() {
-        const allRols = await rolServices.getRols()
+        const allRols = await rolServices.getRole()
         const dataRolInTable = formatRolToTable(allRols)
 
         setRolAllData(allRols)
@@ -54,6 +54,7 @@ const ABMPrice = () => {
         setOpenModalCreate(true)
     }
 
+    /*
     async function deleteElementFunction(index:number) {
         const elementToDelete = rolAllData[index]
         const newRolsAllData = rolAllData.filter((obj) => obj.id !== elementToDelete.id);
@@ -70,6 +71,7 @@ const ABMPrice = () => {
             confirmButtonText: 'Cerrar',
           })
     } 
+    */
     
     useEffect(() => {
         getRols()
@@ -89,7 +91,7 @@ const ABMPrice = () => {
                                 completeTableData={rolAllData} 
                                 openModalEditFunction={openModalEditFunction} 
                                 setFullElement={setFullRolToEdit}
-                                deleteElementFunction={deleteElementFunction}/>
+                                    />
                         </div>
                         <div className={style.abmPriceContainer__buttonContainer}>
                             <Button text="Crear nuevo Rol" type='primary'  onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button>

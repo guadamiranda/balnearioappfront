@@ -4,7 +4,16 @@ import style from "./infoReserve.module.scss";
 import { FaUserAlt } from "react-icons/fa";
 
 interface IInfoReserve {
-    infoReserve: ReserveDto
+    infoReserve: any
+}
+
+interface ResidentDto {
+    dni: any,
+    memberNumber: any
+}
+
+interface VehicleDto {
+    carPlate: any
 }
 
 const InfoReserve:React.FC<IInfoReserve>  = ({infoReserve}) => {

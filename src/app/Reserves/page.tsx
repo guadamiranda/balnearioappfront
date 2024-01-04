@@ -88,8 +88,8 @@ const Reserves = () => {
                     </div>
                     
                     <div className={style.reservesContainer__buttonContainer}>
-                        <Button text='Buscar reserva' type='secondary' onClickFunction={()=> redirectPage('/queryReserve', 0)}></Button>
-                        <Button text='Registrar reserva' type='primary' onClickFunction={()=> redirectPage('/RegistrarEstadia', 1)}></Button>
+                                <Button isLoading={isLoadingButtons[0]} text='Buscar reserva' type='secondary' onClickFunction={() => redirectPage('/queryReserve', 0)}></Button>
+                                <Button isLoading={isLoadingButtons[1]} text='Registrar reserva' type='primary' onClickFunction={() => redirectPage('/RegistrarEstadia', 1)}></Button>
                     </div>
                     
                 </LittleABMTemplate>

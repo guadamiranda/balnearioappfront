@@ -3,6 +3,11 @@
 import React, { useEffect, useState } from 'react'
 import style from './estadiaSummary.module.scss'
 
+interface IDiscount {
+    name: string,
+    percent: number
+}
+
 interface IVisitors {
     dni: any,
     braceletNumber: any,
@@ -85,7 +90,7 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                     <div className={style.estadiaSummary__visitantes}>
                         <b>{leader.dniNumber}</b>
                         <span className={style.estadiaSummary__descuentos}>
-                            Descuento: {leaderFull.discount.name} - {leaderFull.discount.percent}%
+                            {leaderFull.discount ? `Descuento: ${leaderFull.discount.name} - ${leaderFull.discount.percent}%` : null}
                         </span>
                     </div>
                     <div className={style.estadiaSummary__prices}>

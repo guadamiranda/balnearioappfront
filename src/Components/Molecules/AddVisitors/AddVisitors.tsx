@@ -23,6 +23,7 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
     const [visitors, setVisitors] = useState<IVisitors[]>([]);
     const [indexVisitor, setIndexVisitor] = useState(0)
 
+
     const setNewVisitor = () => {
         const index = indexVisitor + 1
         setVisitors([ ...visitors, {dni: '', index}])
@@ -37,6 +38,8 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
     const changeVisitorData = (index: any, dniNumber: any, braceletNumber: any, discount: any) => {
         const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
         const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
+        const priceWithDiscount = amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount.percent / 100)))
+        const priceWithoutDiscount = amountNights * dayPriceOrCampingPrice
 
         setVisitors(
             visitors.map((visitor) => {
@@ -45,7 +48,7 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
                          dni: dniNumber,
                          braceletNumber: braceletNumber,
                     discount: discount,
-                    price: amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (Object.keys(discount).length === 0 ? 1 : (discount.percent / 100))))
+                    price: Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount
                 }
             }
 

@@ -17,24 +17,24 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 interface IDiscount {
-    id: number,
+    id: any,
 }
 
 interface IVisitors {
     dni: any,
     braceletNumber: any,
-    price: number,
+    price: any,
     discount: IDiscount,
 }
 
 interface ILeader {
     dniNumber: any,
-    name: string,
-    lastName: string,
-    phone: number,
-    partnerNumber: number,
-    bracelet: string,
-    price: number,
+    name: any,
+    lastName: any,
+    phone: any,
+    partnerNumber: any,
+    bracelet: any,
+    price: any,
     discount: IDiscount,
 }
 
@@ -124,7 +124,7 @@ const RegistrarEstadia = () => {
                         location: "Córdoba",
                         memberNumber: leader.partnerNumber.toString(),
                         wristbandNumber: leader.bracelet.toString(),
-                        idDiscount: leader.discount? leader.discount.id.toString(): '',
+                        idDiscount: Object.keys(leader.discount).length === 0 ? '' : leader.discount.id.toString(),
                         isManager: true
                     },
 
@@ -174,7 +174,7 @@ const RegistrarEstadia = () => {
 
     useEffect(() => {
         calculeTotalPrice()
-    }, [leader.discount, visitors, hasVehicule, animalAmount, datosFechas])
+    }, [leader.discount, visitors, hasVehicule, animalAmount, datosFechas, leader])
 
     useEffect(() => {
         allPricesFromEndpoint()

@@ -32,8 +32,9 @@ const reserveServices = {
             const response = await axios.post(`${BASE_PATH_STAY}/`, body, { headers: localStorageUtils.getDefaultHeaders()});
             return response
 
-          } catch (error) {
+          } catch (error: any) {
             console.error(error);
+            return error.response
         } 
     },
 

@@ -1,10 +1,8 @@
+import localStorageUtils from "../utils/localStorageUtils"
+
 export default {
     isAdmin: () => {
-        const userDataString = localStorage.getItem('userData')
-        if(userDataString) { 
-            const userData = JSON.parse(userDataString)
-            return userData.roleName == 'Administrador'
-        }
-        return false;
+        const userData = localStorageUtils.getUserData()
+        return userData.isAdmin
     }
 }

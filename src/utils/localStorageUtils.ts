@@ -3,6 +3,7 @@ interface IuserData {
     firstName: string
     lastName: string
     workshiftId: string
+    isAdmin: boolean
 }
 
 const getToken = () => {
@@ -19,11 +20,16 @@ const getToken = () => {
         lastName: '',
         roleId: '',
         roleName: '',
+        isAdmin: false
     }
 }
 
 export default {
     getUserData: getToken,
+    isUserAdmin: () => {
+        const userData = getToken()
+        return userData.isAdmin
+    },
     getDefaultHeaders: () => {
         const userData = getToken()
         return {

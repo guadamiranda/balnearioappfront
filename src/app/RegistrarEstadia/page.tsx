@@ -102,7 +102,7 @@ const RegistrarEstadia = () => {
                         location: "Córdoba",
                         memberNumber: leader.partnerNumber.toString(),
                         wristbandNumber: leader.bracelet.toString(),
-                        idDiscount: leader.discount.id.toString(),
+                        idDiscount: leader.discount? leader.discount.id.toString(): '',
                         isManager: true
                     },
 

@@ -4,10 +4,10 @@ import Checkbox from '@/Components/Atoms/Checkbox/Checkbox'
 import ReservationDays from '@/Components/Molecules/ReservationDays/ReservationDays'
 
 interface IDateSection {
-    setDateFromUnix: (dateFrom: number) => void,
-    setDateToUnix: (dateFrom: number) => void,
-    setNumberOfDays: (numberOfDays: number) => void,
-    setCheckOneDay: (check: boolean) => void
+    setDateFromUnix: (dateFrom: any) => void,
+    setDateToUnix: (dateFrom: any) => void,
+    setNumberOfDays: (numberOfDays: any) => void,
+    setCheckOneDay: (check: any) => void
 }
 
 const DateSection: React.FC<IDateSection> = ({

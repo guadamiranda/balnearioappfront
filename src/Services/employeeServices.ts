@@ -7,7 +7,8 @@ const employeeServices = {
     getEmployee: async(): Promise<IEmployee[]> => {
         try {
             const response = await axios.get(`${BASE_PATH_EMPLOYEE}/`, { headers: localStorageUtils.getDefaultHeaders() });
-            return response.data
+          const onlyActiveEmployee = (response.data as any[]).filter((emplyee: any) => emplyee.isDismissal === false)
+          return onlyActiveEmployee
             
           } catch (error) {
             console.error(error);

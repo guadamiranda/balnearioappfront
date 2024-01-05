@@ -90,7 +90,6 @@ const ABMEmployee= () => {
         const elementToDelete = employeeAllData[index]
 
         const newEmployeeAllData = employeeAllData.filter((obj) => obj.dni !== elementToDelete.dni);
-        console.log(employeeAllData)
         const dataEmployeeInTable = formatEmployeeToTable(newEmployeeAllData, allRoles)
 
         setEmployeesAllData(newEmployeeAllData)

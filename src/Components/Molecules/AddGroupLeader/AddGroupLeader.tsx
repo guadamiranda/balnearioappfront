@@ -38,11 +38,6 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
         const priceWithDiscount = amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount.percent / 100)))
         const priceWithoutDiscount = amountNights * dayPriceOrCampingPrice
 
-        console.log('descuento', Object.keys(discount).length)
-
-        console.log('Cantidad de dias', amountNights)
-        console.log('precio', dayPriceOrCampingPrice)
-
         const leader = {
             name: name,
             lastName: lastName,
@@ -55,7 +50,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
             price: Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount
 
         }
-        console.log(leader.price)
+
         setLeaderGroup(leader)   
     }
 

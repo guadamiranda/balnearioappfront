@@ -12,9 +12,8 @@ import AlertServices from '@/utils/AlertServices';
 
 interface IAllReservesData {
     id: string,
-    managerFirstName: string,
-    managerLastName: string,
-    managerDni: string,
+    name: string,
+    dni: string,
     managerMemberNumber: string,
     finishDate: string,
     initDate: string,
@@ -36,6 +35,7 @@ const Reserves = () => {
 
     async function getActiveReserves() {
         const allActiveReservesData = await reserveServices.getActiveReserves();
+
         if(!allActiveReservesData) {
             AlertServices.rederAlertWithConfirm(
                 'Falla en el servidor',
@@ -71,9 +71,8 @@ const Reserves = () => {
                             <ActiveReserveCard 
                             key={reserve.id}
                             id={reserve.id}
-                            managerName={reserve.managerFirstName}
-                            managerLastName={reserve.managerLastName}
-                            managerDNI={reserve.managerDni}
+                                    name={reserve.name}
+                                    managerDNI={reserve.dni}
                             managerMemberNumber={reserve.managerMemberNumber}
                             managerCarPlate = {reserve.managerCarPlate}
                             finishDate={reserve.finishDate}

@@ -7,8 +7,7 @@ import { useState } from "react";
 
 interface IActiveReserveCard {
     id: string,
-    managerName: string,
-    managerLastName: string,
+    name: string,
     managerDNI: string,
     managerMemberNumber: string,
     finishDate: string,
@@ -19,8 +18,7 @@ interface IActiveReserveCard {
 
 const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
     id,
-    managerName, 
-    managerLastName,
+    name,
     managerDNI,
     managerMemberNumber,
     finishDate,
@@ -45,10 +43,9 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
         <>
         <div className={style.addEditPriceContainer}>
             <div className={style.addEditPriceContainer___leftSide}>
-                <span>Responsable: </span>
-
-
+                    <span>Responsable: <b>{managerDNI}</b> - <b>{name}</b> </span>
             </div>
+
             <div className={style.addEditPriceContainer___rightSide}>
                 <PeriodReserve initDateUnix={initDate} finishDateUnix={finishDate}></PeriodReserve>
             </div>
@@ -61,12 +58,3 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
 }
 
 export default ActiveReserveCard
-
-
-/*
-<span>Responsable: </span>
-                <span><b>Nombre:</b> {managerName}, {managerLastName}</span>
-                <span><b>DNI:</b> '{managerDNI.toString() == '0'? '-' : managerDNI}'</span>
-                <span><b>N° Socio:</b> {managerMemberNumber === '' ? '-' : managerMemberNumber}</span>
-                <span><b>Patente:</b> {managerCarPlate === '' ? '-' : managerCarPlate} </span>
-                */

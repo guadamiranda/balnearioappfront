@@ -63,9 +63,13 @@ const RegistrarEstadia = () => {
     const [animalPrice, setAnimalPrice] = useState(0)
     const [vehiculePrice, setVehiculePrice] = useState(0)
 
+    console.log(leader)
     const validateMissingData = () => {
         let allMissingData = []
         if(leader.dniNumber === '') allMissingData.push('Número de documento del Responsable')
+        if (leader.name === '' || leader.lastName === '') allMissingData.push('Nombre completo del Responsable')
+        if (leader.phone === '') allMissingData.push('Telefono del responsable')
+        if (leader.location === '') allMissingData.push('Ciudad del responsable')
         if (leader.bracelet === '') allMissingData.push('Número de pulsera del Responsable')
         if(animalAmount < 0 || animalAmount.toString() == '') allMissingData.push('Cantidad de caballos de ser un numero positivo')
         if(visitors.length != 0) {

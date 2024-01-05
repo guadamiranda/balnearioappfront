@@ -37,6 +37,7 @@ interface IVisitor {
     id: string;
     name: string;
     percent: number;
+    isDeleted: boolean;
   }
 
   interface IEmployee {

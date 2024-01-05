@@ -64,6 +64,8 @@ const QueryReserve = () => {
             )
             return
         }
+
+        
         setStayData(reserveQuery.data as ISpecificStay)
     }
 

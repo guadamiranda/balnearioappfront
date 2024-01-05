@@ -56,3 +56,11 @@ interface IVisitor {
     finishDate: string;
     id: string;
   }
+
+  interface ILoginData {
+    access_token: string;
+    firstName: string;
+    lastName: string;
+    email: string | null;
+    isAdmin: boolean;
+}

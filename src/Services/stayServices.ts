@@ -40,7 +40,13 @@ const reserveServices = {
 
     deleteReserve: async(idReserve: string) => {
         try {
-            await axios.delete(`${BASE_PATH_STAY}/`, { headers: localStorageUtils.getDefaultHeaders()});
+            await axios.delete(
+                `${BASE_PATH_STAY}/`,
+                {
+                    headers: localStorageUtils.getDefaultHeaders(),
+                    data: { ids: [idReserve] }
+                }
+            );
 
           } catch (error) {
             console.error(error);

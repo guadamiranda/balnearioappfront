@@ -63,7 +63,6 @@ const RegistrarEstadia = () => {
     const [animalPrice, setAnimalPrice] = useState(0)
     const [vehiculePrice, setVehiculePrice] = useState(0)
 
-    console.log(leader)
     const validateMissingData = () => {
         let allMissingData = []
         if(leader.dniNumber === '') allMissingData.push('Número de documento del Responsable')

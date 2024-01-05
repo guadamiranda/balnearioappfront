@@ -4,10 +4,9 @@ import axios from 'axios';
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 const BASE_PATH_STAY = `${backendUrl}balneario/api/stay`
 const reserveServices = {
-    //Esta no esta aun en el back
-    getSpecificReserve: async(dni: string, carPlate:string, memberNumber: string) => {
+    getSpecificStayByDni: async(dni: string) => {
         try {
-            const response = await axios.get(`${BASE_PATH_STAY}?dni=${dni}&carplate=${carPlate}&membernumber=${memberNumber}`, { headers: localStorageUtils.getDefaultHeaders()});
+            const response = await axios.get(`${BASE_PATH_STAY}/visitor/${dni}`, { headers: localStorageUtils.getDefaultHeaders()});
             return response
             
           } catch (error: any) {

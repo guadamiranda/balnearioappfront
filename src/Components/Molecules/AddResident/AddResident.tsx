@@ -23,7 +23,7 @@ const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, hand
 
     const getDiscountsFromEndPoint = async () => {
         const allDiscount = await discountServices.getDiscounts()
-        setAllDiscounts(allDiscounts.filter(discount => !discount.isDeleted))
+        setAllDiscounts(allDiscount.filter(discount => !discount.isDeleted))
     }
 
     useEffect(() => {

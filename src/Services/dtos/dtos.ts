@@ -49,3 +49,10 @@ interface IVisitor {
     roleId: string;
     isDismissal: boolean;
   }
+
+  interface IStay {
+    amount: number;
+    initDate: string;
+    finishDate: string;
+    id: string;
+  }

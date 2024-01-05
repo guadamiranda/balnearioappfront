@@ -2,47 +2,33 @@ import CardInfoEntity from '../../Molecules/residentReserve/cardInfoEntity';
 import PeriodReserve from '../../Molecules/periodReserve/periodReserve';
 import style from "./infoReserve.module.scss";
 import { FaUserAlt } from "react-icons/fa";
+import { useState } from 'react';
 
-interface IInfoReserve {
-    infoReserve: any
-}
-
-interface ResidentDto {
-    dni: any,
-    memberNumber: any
-}
-
-interface VehicleDto {
-    carPlate: any
-}
-
-const InfoReserve:React.FC<IInfoReserve>  = ({infoReserve}) => {
-    const getInfoResidents = (residents: ResidentDto[]): string[] => {
-        return residents.map(resident => (resident.dni != '0' ? resident.dni : resident.memberNumber))
-    }
-
-    const getInfoVehicles = (vehicles: VehicleDto[]): string[] => {
-        return vehicles.map(vehicle => vehicle.carPlate)
+const InfoReserve:React.FC<any>  = ({infoReserve}) => {
+    const {stay, group, visitors} = infoReserve as ISpecificStay
+    const [manager,setManager] = useState<ISpecificVisitor>(visitors.find(visitor => visitor.isManager) || {} as ISpecificVisitor)
+    const getNroDocVisitors = (visitors: ISpecificVisitor[]): string[] => {
+        const visitorThatAreNotManager = visitors.filter(visitor => !visitor.isManager)
+        return visitorThatAreNotManager.map(visitor => (visitor.nroDoc ? visitor.nroDoc.toString() : ''))
     }
 
     return (
         <div className={style.reserveContainer}>
-            <PeriodReserve initDateUnix={infoReserve.initDate} finishDateUnix={infoReserve.finishDate}></PeriodReserve>
+            <PeriodReserve initDateUnix={stay.initDate} finishDateUnix={stay.finishDate}/>
             <div className={style.reserveContainer__managerSection}>
                 <div className={style.reserveContainer__icon}>
                     <FaUserAlt/>
                 </div>
                 <div className={style.reserveContainer__managerData}>
                     <div className={style.reserveContainer__managerDataBody}>
-                        <span><b>Nombre completo:</b> {infoReserve.managerLastName}, {infoReserve.managerFirstName}</span>
-                        <span><b>DNI/NroSocio: </b>{infoReserve.managerMemberNumber === '' ? infoReserve.managerDni : infoReserve.managerMemberNumber}</span>
-                        <span><b>Número de Patente:</b> {infoReserve.managerCarPlate === '' ? '-' : infoReserve.managerCarPlate}</span>
-                        <span><b>Cantidad de caballos:</b> {infoReserve.amountHorses || 0}</span>
+                        <span><b>Nombre completo:</b> {manager.person.firstName}, {manager.person.lastName}</span>
+                        <span><b>DNI: </b>{manager.person.nroDoc}</span>
+                        <span><b>Número de Patente:</b> {group.carPlate? group.carPlate : '-'}</span>
+                        <span><b>Cantidad de caballos:</b> {group.animals.quantity || 0}</span>
                     </div>
                 </div>
             </div>
-            <CardInfoEntity typeInfoName={'dni'} infoNames={getInfoResidents(infoReserve.residents)}/>
-            <CardInfoEntity typeInfoName={'carPlate'} infoNames={getInfoVehicles(infoReserve.vehicles)}/>
+            <CardInfoEntity typeInfoName={'dni'} infoNames={getNroDocVisitors(visitors)}/>
         </div>
     );
 };

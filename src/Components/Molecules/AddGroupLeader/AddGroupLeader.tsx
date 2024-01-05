@@ -54,7 +54,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
 
     const getDiscountsFromEndPoint = async () => {
         const allDiscounts = await discountServices.getDiscounts()
-        setAllDiscounts(allDiscounts)
+        setAllDiscounts(allDiscounts.filter(discount => !discount.isDeleted))
     }
 
     useEffect(() => {

@@ -15,10 +15,10 @@ const discountServices = {
         } 
     },
 
-    //Estos endpoints no existen en el back aun
+
     postDiscount: async(body: any) => {
         try {
-            await axios.post(`${backendUrl}balneario/api/reserve/discount`, body, { headers: localStorageUtils.getDefaultHeaders()});
+            await axios.post(`${BASE_PATH_DISCOUNT}/`, body, { headers: localStorageUtils.getDefaultHeaders()});
 
           } catch (error) {
             console.error(error);
@@ -27,7 +27,7 @@ const discountServices = {
 
     deleteDiscount: async(idDiscount: string) => {
         try {
-            await axios.delete(`${backendUrl}balneario/api/reserve/discount/${idDiscount}`, { headers: localStorageUtils.getDefaultHeaders()});
+            await axios.delete(`${BASE_PATH_DISCOUNT}/${idDiscount}`, { headers: localStorageUtils.getDefaultHeaders()});
 
           } catch (error) {
             console.error(error);
@@ -36,7 +36,7 @@ const discountServices = {
 
     editDiscount: async(idDiscount:string, body:any) => {
         try {
-            await axios.put(`${backendUrl}balneario/api/reserve/discount/${idDiscount}`, body, { headers: localStorageUtils.getDefaultHeaders()});
+            await axios.put(`${BASE_PATH_DISCOUNT}/${idDiscount}`, body, { headers: localStorageUtils.getDefaultHeaders()});
 
           } catch (error) {
             console.error(error);

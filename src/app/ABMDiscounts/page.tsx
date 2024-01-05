@@ -27,9 +27,12 @@ const ABMDiscount = () => {
     
     async function getDiscounts() {
         const allDiscounts = await discountServices.getDiscounts()
-        const dataDiscountInTable = formatDiscountToTable(allDiscounts)
+        if(!allDiscounts) return
+        
+        const dataDiscountInTable = formatDiscountToTable(allDiscounts.filter(discount => !discount.isDeleted))
 
-        setDiscountsAllData(allDiscounts)
+
+        setDiscountsAllData(allDiscounts.filter(discount => !discount.isDeleted))
         setIsLoading(false)
         setDiscountsData(dataDiscountInTable)
     }
@@ -38,7 +41,6 @@ const ABMDiscount = () => {
         const dataDiscountInTable = discount.map((discount) => ({
             name: discount.name,
             percentage: discount.percent
-
         }))
 
         return dataDiscountInTable

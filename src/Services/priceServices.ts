@@ -36,7 +36,7 @@ const priceServices = {
 
     editPrice: async(idPrice: string, body:any) => {
         try {
-            await axios.put(`${backendUrl}balneario/api/reserve/price/${idPrice}`, body, { headers: localStorageUtils.getDefaultHeaders() });
+            await axios.put(`${BASE_PATH_PRICE}/${idPrice}`, body, { headers: localStorageUtils.getDefaultHeaders() });
 
           } catch (error) {
             console.error(error);

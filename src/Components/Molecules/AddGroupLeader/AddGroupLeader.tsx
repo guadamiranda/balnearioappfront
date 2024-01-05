@@ -8,6 +8,9 @@ import { FiPhone } from "react-icons/fi";
 import React, { useState, useEffect } from 'react'
 import Dropdown from "@/Components/Atoms/DropDown/Dropdown";
 import discountServices from "@/Services/discountServices";
+import { FaCity } from "react-icons/fa";
+import { TbNumbers } from "react-icons/tb";
+
 
 interface IAddLeaderGroup {
     setLeaderGroup: any,
@@ -27,12 +30,15 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
     const [partnerNumber, setPartnerNumber] = useState('')
     const [discount, setDiscount] = useState<IDiscount>({} as IDiscount)
     const [allDiscounts, setAllDiscounts] = useState<IDiscount[]>([])
+    const [city, setCity] = useState('')
 
     const handleLeader = () => {
         const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
         const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
         const priceWithDiscount = amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount.percent / 100)))
         const priceWithoutDiscount = amountNights * dayPriceOrCampingPrice
+
+        console.log('descuento', Object.keys(discount).length)
 
         console.log('Cantidad de dias', amountNights)
         console.log('precio', dayPriceOrCampingPrice)
@@ -45,6 +51,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
             bracelet: bracelet,
             partnerNumber: partnerNumber,
             discount: discount,
+            location: city,
             price: Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount
 
         }
@@ -59,7 +66,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
 
     useEffect(() => {
         handleLeader()
-    }, [name, lastName, dniNumber, phone, bracelet, partnerNumber, discount, numberOfDays])
+    }, [name, lastName, dniNumber, phone, bracelet, partnerNumber, discount, numberOfDays, city])
 
     useEffect(() => {
         getDiscountsFromEndPoint()
@@ -103,18 +110,28 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
 
             <div className={style.addGroupLeader__firstGroupInput}> 
                 <Input 
-                   icon={<HiOutlineIdentification/>} 
+                    icon={<TbNumbers />} 
                    placeholder='3456' 
                    title='Número de Pulsera' 
                    value={bracelet}
                    useStateFunction={setBracelet}/>
                 
                 <Input
-                   icon={<FiPhone/>} 
+                    icon={<TbNumbers />} 
                    placeholder='2313' 
                    title='Número de Socio' 
                    value={partnerNumber}
                    useStateFunction={setPartnerNumber}/>
+            </div>
+
+            <div className={style.addGroupLeader__LocationGroupInput}>
+                <Input
+                    icon={<FaCity />}
+                    placeholder='Córdoba'
+                    title='Localidad'
+                    value={city}
+                    isFullWidth={true}
+                    useStateFunction={setCity} />
             </div>
 
             <Dropdown 

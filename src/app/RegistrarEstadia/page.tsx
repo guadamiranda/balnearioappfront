@@ -35,6 +35,7 @@ interface ILeader {
     partnerNumber: any,
     bracelet: any,
     price: any,
+    location: any,
     discount: IDiscount,
 }
 
@@ -61,6 +62,8 @@ const RegistrarEstadia = () => {
     const [campingPrice, setCampingPrice] = useState(0)
     const [animalPrice, setAnimalPrice] = useState(0)
     const [vehiculePrice, setVehiculePrice] = useState(0)
+
+    console.log(leader.discount)
 
     const validateMissingData = () => {
         let allMissingData = []
@@ -121,7 +124,7 @@ const RegistrarEstadia = () => {
                         firstName: leader.name.toString(),
                         lastName: leader.lastName.toString(),
                         phone: leader.phone.toString(),
-                        location: "Córdoba",
+                        location: leader.location.toString(),
                         memberNumber: leader.partnerNumber.toString(),
                         wristbandNumber: leader.bracelet.toString(),
                         idDiscount: Object.keys(leader.discount).length === 0 ? '' : leader.discount.id.toString(),
@@ -133,7 +136,7 @@ const RegistrarEstadia = () => {
                         firstName: '',
                         lastName: '',
                         phone: '',
-                        location: "Córdoba",
+                        location: '',
                         memberNumber: '',
                         wristbandNumber: visitor.braceletNumber.toString(),
                         idDiscount: Object.keys(visitor.discount).length === 0 ? '' : visitor.discount.id.toString(),

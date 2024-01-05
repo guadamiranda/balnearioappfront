@@ -33,10 +33,19 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
     }, [isOpenDropDown])
 
     const closeAndSelectValue = (option: any) => {
-        setSelectedValue(option.name)
-        selectedValueFunction(option)
-        setOptionItemClassName(classNameOptionItem)
-        setIsOpenDropDown(false)
+        if (option === 'Ninguno') {
+            setSelectedValue(option)
+            selectedValueFunction({})
+            setOptionItemClassName(classNameOptionItem)
+            setIsOpenDropDown(false)
+        }
+        else {
+            setSelectedValue(option.name)
+            selectedValueFunction(option)
+            setOptionItemClassName(classNameOptionItem)
+            setIsOpenDropDown(false)
+        }
+
     }
 
     return (
@@ -47,6 +56,7 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
                 <div className={dropdownStyle.dropdown__iconArrow}>{arrow}</div>
             </div>
             <div className={optionItemsClassName}>
+                <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue('Ninguno')} key='noOption'>Ninguno</div>
                 {options.map(option => <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue(option)} key={option.name}>{option.name}</div>)}
             </div>
         </div>

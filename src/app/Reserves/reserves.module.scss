@@ -22,7 +22,7 @@
     &__actualReserve{
         font-size: 14px;
         font-family: "Montserrat", sans-serif;
-        max-height: 95%;
+        max-height: 91%;
         overflow-y: auto;
         width: 100%;
     }
@@ -76,5 +76,8 @@
             margin: 0px 10px;
         }  
 
+                                &__buttonContainer {
+                                    gap: 5px;
+                                }
     }
 }

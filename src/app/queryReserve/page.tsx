@@ -47,8 +47,7 @@ const QueryReserve = () => {
         setIsLoading(false)
 
         if(reserveQuery.status == 500) {
-
-            if(reserveQuery.data.message.includes( "No se pudo encontrar el visitante con dni:")){
+            if(reserveQuery.data.message.includes( "dni")){
                 AlertServices.renderAlert(
                     'Usuario no encontrado',
                     'Los datos ingresados no corresponden con ninguna estadia',

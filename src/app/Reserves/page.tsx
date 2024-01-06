@@ -9,6 +9,7 @@ import reserveServices from '../../Services/stayServices'
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import { useRouter } from 'next/navigation';
 import AlertServices from '@/utils/AlertServices';
+import GuardLogin from '@/utils/guardLogin';
 
 interface IAllReservesData {
     id: string,
@@ -59,7 +60,7 @@ const Reserves = () => {
     }, [])
 
     return (
-        <>
+        <GuardLogin>
         {
             isLoading? <Loader/> :
             <>
@@ -95,7 +96,7 @@ const Reserves = () => {
             </>
         }  
 
-        </>
+        </GuardLogin>
     );
 };
 

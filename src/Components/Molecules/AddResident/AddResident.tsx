@@ -41,15 +41,14 @@ const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, hand
                     <Input  value={dni}
                             icon={<AiOutlineUser/>} 
                             placeholder='23008123' 
-                            title='DNI' 
+                            title='DNI (*)' 
                             type='number'
                             useStateFunction={setDni}/> 
                     
                     <Input  value={braceletNumber}
                             icon={<AiOutlineUser/>} 
                             placeholder='23008123' 
-                            title='Pulsera' 
-                            type='number'
+                            title='Pulsera (*)'
                             useStateFunction={setBraceletNumber}/> 
                 </div>
 

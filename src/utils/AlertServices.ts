@@ -54,6 +54,7 @@ export default {
             icon: typeAlert,
             confirmButtonText: 'Finalizar',
             showCancelButton: false,
+            allowOutsideClick: false
         })
 
         if (isConfirmed) onConfirmFunction()

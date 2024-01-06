@@ -75,14 +75,14 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
                 <Input 
                    icon={<AiOutlineUser/>} 
                    placeholder='Juan' 
-                   title='Nombre' 
+                   title='Nombre (*)' 
                    value={name}
                    useStateFunction={setName}/>
                 
                 <Input 
                    icon={<AiOutlineUser/>} 
                    placeholder='Caballo' 
-                   title='Apellido' 
+                   title='Apellido (*)' 
                    value={lastName}
                    useStateFunction={setLastName}/>
             </div>
@@ -91,14 +91,14 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
                 <Input 
                    icon={<HiOutlineIdentification/>} 
                    placeholder='23567998' 
-                   title='Número de DNI' 
+                   title='Número de DNI (*)' 
                    value={dniNumber}
                    useStateFunction={setDniNumber}/>
                 
                 <Input
                    icon={<FiPhone/>} 
                    placeholder='2975233478' 
-                   title='Teléfono de Contacto' 
+                   title='Teléfono de Contacto (*)' 
                    value={phone}
                    useStateFunction={setPhone}/>
             </div>
@@ -107,7 +107,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
                 <Input 
                     icon={<TbNumbers />} 
                    placeholder='3456' 
-                   title='Número de Pulsera' 
+                   title='Número de Pulsera (*)' 
                    value={bracelet}
                    useStateFunction={setBracelet}/>
                 
@@ -122,8 +122,8 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
             <div className={style.addGroupLeader__LocationGroupInput}>
                 <Input
                     icon={<FaCity />}
-                    placeholder='Córdoba'
-                    title='Localidad'
+                    placeholder='Córdoba Jesus Maria'
+                    title='Localidad (*)'
                     value={city}
                     isFullWidth={true}
                     useStateFunction={setCity} />

@@ -35,9 +35,12 @@ const HomeComponent = () => {
 
     useEffect(() => {
         setIsAdmin(sessionServices.isAdmin())
+        console.log('hola')
+        setLoading(false);
     }, [])
 
     useEffect(() => {
+        console.log('estoyAca')
         setLoading(false);
     }, [pathName]); 
 

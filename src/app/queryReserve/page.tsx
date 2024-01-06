@@ -45,22 +45,23 @@ const QueryReserve = () => {
         setIsLoading(true);
         const reserveQuery = await stayServices.getSpecificStayByDni(dni.toString())
         setIsLoading(false)
-
-        if(reserveQuery.status == 500) {
-            if(reserveQuery.data.message.includes( "dni")){
-                AlertServices.renderAlert(
-                    'Usuario no encontrado',
-                    'Los datos ingresados no corresponden con ninguna estadia',
-                    'info'
-                )
-                return
-            }
-
+        
+        if(reserveQuery.data?.status == 404) {
+            AlertServices.renderAlert(
+                'Usuario no encontrado',
+                'Los datos ingresados no corresponden con ninguna estadia',
+                'info'
+            )
+            setStayData(null)
+            return
+        }
+        if(reserveQuery.response?.status == 500) {
             AlertServices.renderAlert(
                 'Error en el sistema',
                 'Algo salio mal en el sistema, porfavor contactese con administracion',
                 'error'
             )
+            setStayData(null)
             return
         }
 

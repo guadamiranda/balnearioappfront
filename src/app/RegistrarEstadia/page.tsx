@@ -15,6 +15,7 @@ import ReactDOMServer from 'react-dom/server';
 import GuardLogin from '@/utils/guardLogin';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 interface IDiscount {
     id: any,
@@ -47,6 +48,7 @@ interface IDate {
 }
 
 const RegistrarEstadia = () => {
+    const router = useRouter();
     const [step, setStep] = useState(0)
     const [visitors, setVisitors] = useState<IVisitors[]>([])
     const [leader, setLeader] = useState<ILeader>({} as ILeader)
@@ -57,6 +59,8 @@ const RegistrarEstadia = () => {
     const buttonContainerStyle = step === 0 ? style.registrarEstadiaContainer__buttonNext : ''
     const [amountPrice, setAmountPrice] = useState(0)
     const [prices, setPrices] = useState({})
+    const [isLoadingButtons, setIsLoadingButton] = useState(false)
+    const [disableButton, setDisableButton] = useState(false)
 
     const [dayPrice, setDayPrice] = useState(0)
     const [campingPrice, setCampingPrice] = useState(0)
@@ -109,6 +113,8 @@ const RegistrarEstadia = () => {
         const missingDataFormatedInHTML = ReactDOMServer.renderToString(<ul>{missingData.map((data, index) => (<li key={index}>{data}</li>))}</ul>)
 
         if (missingData.length === 0) {
+            setDisableButton(true)
+            setIsLoadingButton(true)
             const newReserve = {
                 initDate: (datosFechas.dateFromUnix * 1000).toString(),
                 finishDate: (datosFechas.dateToUnix * 1000).toString(),
@@ -148,15 +154,17 @@ const RegistrarEstadia = () => {
 
             const response = await reserveServices.postReserve(newReserve)
             if (response?.status == 201) {
-                AlertServices.renderAlert(
+                AlertServices.renderAlertWithOnlyButtonConfirmAndFunction(
                     'Completado',
                     'Se creo una reserva correctamente',
                     'success',
+                    () => router.push('/Home')
                 )
                 return
             }
 
             if (response?.status == 500) {
+                setDisableButton(false)
                 AlertServices.renderAlert(
                     'Error',
                     'Algo salio mal, contactese con el administrador',
@@ -166,6 +174,7 @@ const RegistrarEstadia = () => {
             }
             
         } else {
+            setDisableButton(false)
             Swal.fire({
                 title: 'Faltan rellenar datos',
                 html: "Faltan los siguientes datos: " + missingDataFormatedInHTML,
@@ -246,7 +255,7 @@ const RegistrarEstadia = () => {
                     <Button text='Siguiente' onClickFunction={() => setStep(step + 1)} type='primary'></Button >
                 </div>}
                 {step === 3 && <div className={buttonContainerStyle}>
-                        <Button text='Realizar Reserva' onClickFunction={() => registerData()} type='primary'></Button >
+                        <Button isLoading={isLoadingButtons} text='Realizar Reserva' onClickFunction={() => disableButton === false ? registerData() : console.log('hi')} type='primary'></Button >
                 </div>}
             </div>
             

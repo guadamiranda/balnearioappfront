@@ -45,5 +45,17 @@ export default {
           })
           
          return isConfirmed
+    },
+
+    renderAlertWithOnlyButtonConfirmAndFunction: async (title: string, message: string, typeAlert: typeAlert, onConfirmFunction: () => void) => {
+        const { isConfirmed } = await Swal.fire({
+            title: title,
+            text: message,
+            icon: typeAlert,
+            confirmButtonText: 'Finalizar',
+            showCancelButton: false,
+        })
+
+        if (isConfirmed) onConfirmFunction()
     }
 }

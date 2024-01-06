@@ -69,7 +69,7 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
 
     return(
         <div className={style.addGroupLeader}>
-            <div className={style.addGroupLeader__title}>Datos del Responsable del Grupo</div>
+            <div className={style.addGroupLeader__title}>Datos del Responsable del Grupo (* Obligatorio)</div>
 
             <div className={style.addGroupLeader__firstGroupInput}> 
                 <Input 

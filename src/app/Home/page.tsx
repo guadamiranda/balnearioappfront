@@ -14,6 +14,7 @@ import style from './home.module.scss'
 
 const HomeComponent = () => {
     const router = useRouter();
+    const pathName = usePathname()
     const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -36,6 +37,9 @@ const HomeComponent = () => {
         setIsAdmin(sessionServices.isAdmin())
     }, [])
 
+    useEffect(() => {
+        setLoading(false);
+    }, [pathName]); 
 
     return (
     <GuardLogin>

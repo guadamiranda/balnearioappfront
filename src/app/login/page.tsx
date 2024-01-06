@@ -21,7 +21,7 @@ const LoginPage = () => {
         const {status, data: userData} = await loginServices.authUser(dni,password)
         setIsLoading(false)
 
-        if(status == 401) {
+        if(userData.status == 401) {
             AlertServices.renderAlert(
                 'No se puede iniciar el turno',
                 'No se encontro ningun usuario con los datos ingresados. Verifique que el email o la contraseña sean correctas e intente de nuevo',

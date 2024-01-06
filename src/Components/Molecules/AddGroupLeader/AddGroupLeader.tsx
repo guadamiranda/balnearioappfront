@@ -32,8 +32,23 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
     const [allDiscounts, setAllDiscounts] = useState<IDiscount[]>([])
     const [city, setCity] = useState('')
 
+    //TODO: MOVER A BASE DE DATOS
+    const calculatePrice = (isMember: boolean) => {
+        const oneDay = isMember? 0 : dayPrice
+        const priceZeroToTree = isMember? 4000 : campingPrice
+        const priceFourDaysToTen = isMember? 3500 : 7000
+        const priceTenDaysOrMore = isMember? 3000 : 6000
+
+        if(checkOneDay) return oneDay
+        if(numberOfDays < 4) return priceZeroToTree
+        if(numberOfDays >= 4 && numberOfDays < 10) return priceFourDaysToTen
+        return priceTenDaysOrMore
+    }
+
     const handleLeader = () => {
-        const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
+        //const dayPriceOrCampingPrice = checkOneDay === false ? campingPrice : dayPrice
+        const isMember = partnerNumber? true : false
+        const dayPriceOrCampingPrice = calculatePrice(isMember)
         const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
         const priceWithDiscount = amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount.percent / 100)))
         const priceWithoutDiscount = amountNights * dayPriceOrCampingPrice

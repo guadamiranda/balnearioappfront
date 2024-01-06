@@ -66,6 +66,7 @@ const RegistrarEstadia = () => {
     const [campingPrice, setCampingPrice] = useState(0)
     const [animalPrice, setAnimalPrice] = useState(0)
     const [vehiculePrice, setVehiculePrice] = useState(0)
+    const [vehicleTotalPrice, setVehicleTotalPrice] = useState(0)
 
     const validateMissingData = () => {
         let allMissingData = []
@@ -97,11 +98,26 @@ const RegistrarEstadia = () => {
         }
     }
 
+    const calculateVehiclePrice = (isMember: boolean) => {
+        const numberOfDays = datosFechas.numberOfDays
+        const oneDay = isMember? 0 : dayPrice
+        const priceZeroToTree = isMember? 4000 : campingPrice
+        const priceFourDaysToTen = isMember? 3500 : 7000
+        const priceTenDaysOrMore = isMember? 3000 : 6000
+
+        if(numberOfDays <= 1) return oneDay
+        if(numberOfDays < 4) return priceZeroToTree
+        if(numberOfDays >= 4 && numberOfDays < 10) return priceFourDaysToTen
+        return priceTenDaysOrMore
+    }
+
     const calculeTotalPrice = () => {
+        const isMember = leader.partnerNumber ? true : false
         let visitorPrice = 0
         const leaderPrice = leader.price
         const animalFinalPrice = animalAmount * animalPrice
-        const vehiculeFinalPrice = hasVehicule ? vehiculePrice : 0
+        const vehiculeFinalPrice = hasVehicule ? calculateVehiclePrice(isMember) : 0
+        setVehicleTotalPrice(vehiculeFinalPrice)
 
         visitors.map(visitor => visitorPrice += visitor.price)
 
@@ -241,7 +257,7 @@ const RegistrarEstadia = () => {
                             amountPrice={amountPrice}
                             leader={leader}
                             animalPrice={animalPrice}
-                            vehiculePrice={vehiculePrice}
+                            vehiculePrice={vehicleTotalPrice}
                             datosFechas={datosFechas}
                             vehiculePlate={vehiculePlate}
                             hasVehicule={hasVehicule}

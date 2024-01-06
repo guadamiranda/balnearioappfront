@@ -11,13 +11,14 @@ import discountServices from '@/Services/discountServices'
 type IAddResident = {
     visitorIndex: number,
     deleteVisitor: any,
-    handleDNI: any,
+    handleResidentData: any,
     amountNights: number
 }
 
-const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, handleDNI, amountNights }) => {
+const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, handleResidentData, amountNights }) => {
     const [dni, setDni] = useState('')
     const [braceletNumber, setBraceletNumber] = useState('')
+    const [memberNumber, setMemberNumber] = useState(0)
     const [discount, setDiscount] = useState({})
     const [allDiscounts, setAllDiscounts] = useState<IDiscount[]>([])
 
@@ -27,7 +28,7 @@ const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, hand
     }
 
     useEffect(() => {
-        handleDNI(visitorIndex, dni, braceletNumber, discount)
+        handleResidentData(visitorIndex, dni, braceletNumber, discount, memberNumber)
     }, [dni, braceletNumber, discount, amountNights])
 
     useEffect(() => {
@@ -43,13 +44,22 @@ const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, hand
                             placeholder='23008123' 
                             title='DNI (*)' 
                             type='number'
-                            useStateFunction={setDni}/> 
+                            useStateFunction={setDni}
+                    /> 
                     
                     <Input  value={braceletNumber}
                             icon={<AiOutlineUser/>} 
                             placeholder='23008123' 
                             title='Pulsera (*)'
-                            useStateFunction={setBraceletNumber}/> 
+                            useStateFunction={setBraceletNumber}
+                    />
+
+                    <Input  value={memberNumber}
+                            icon={<AiOutlineUser/>} 
+                            placeholder='48613589' 
+                            title='Numero de socio'
+                            useStateFunction={setMemberNumber}
+                    /> 
                 </div>
 
                 <Dropdown

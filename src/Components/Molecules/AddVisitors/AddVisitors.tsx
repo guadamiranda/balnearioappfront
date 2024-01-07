@@ -8,7 +8,11 @@ import { VscAdd } from "react-icons/vsc";
 
 type IVisitors = {
     dni: any,
-    index: any
+    braceletNumber: any,
+    memberNumber: any,
+    discount: any,
+    price: any,
+    index: any,
 }
 
 interface IAddVisitors {
@@ -25,7 +29,7 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
 
     const setNewVisitor = () => {
         const index = indexVisitor + 1
-        setVisitors([ ...visitors, {dni: '', index}])
+        setVisitors([ ...visitors, {dni: '', index, braceletNumber: '', price: 0, discount: 0, memberNumber: ''} ])
         setIndexVisitor(index)
     }
 
@@ -42,9 +46,10 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
         const priceTenDaysOrMore = isMember? 3000 : 6000
 
         if(checkOneDay) return oneDay
-        if(numberOfDays < 4) return priceZeroToTree
+        if(numberOfDays >= 1 && numberOfDays < 4) return priceZeroToTree
         if(numberOfDays >= 4 && numberOfDays < 10) return priceFourDaysToTen
-        return priceTenDaysOrMore
+        if(numberOfDays >= 10) return priceTenDaysOrMore
+        return 0
     }
     // --------------------------------------------------------
 
@@ -53,26 +58,23 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
         const isMember = memberNumber? true : false
         const dayPriceOrCampingPrice = calculatePrice(isMember)
         const amountNights = numberOfDays <= 1 ? 1 : numberOfDays
-        
+
         const priceWithDiscount = amountNights * (dayPriceOrCampingPrice - (dayPriceOrCampingPrice * (discount.percent / 100)))
         const priceWithoutDiscount = amountNights * dayPriceOrCampingPrice
 
-        setVisitors(
-            visitors.map((visitor) => {
+        const newVisitorsList = visitors.map((visitor) => {
             if(visitor.index === index) {
-                return {
-                    ...visitor,
-                    dni: dniNumber,
-                    braceletNumber: braceletNumber,
-                    memberNumber: memberNumber,
-                    discount: discount,
-                    price: Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount
-                }
+                visitor.dni = dniNumber
+                visitor.braceletNumber = braceletNumber
+                visitor.memberNumber = memberNumber
+                visitor.discount = discount
+                visitor.price = Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount
             }
 
-            return visitor;
-            })
-        )   
+            return visitor
+        })
+
+        setVisitors(newVisitorsList)
     }
 
     useEffect(() => {
@@ -93,7 +95,8 @@ const AddVisitors: React.FC<IAddVisitors> = ({ setAllVisitors, checkOneDay, camp
                         deleteVisitor={deleteComponent} 
                         handleResidentData={changeVisitorData}
                         visitorIndex={visitor.index}
-                        amountNights={numberOfDays} />
+                        amountNights={numberOfDays}
+                        checkOneDay={checkOneDay} />
                 )}
             </div>          
         </div>

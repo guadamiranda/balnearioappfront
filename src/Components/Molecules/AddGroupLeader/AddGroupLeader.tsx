@@ -40,9 +40,10 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
         const priceTenDaysOrMore = isMember? 3000 : 6000
 
         if(checkOneDay) return oneDay
-        if(numberOfDays < 4) return priceZeroToTree
+        if(numberOfDays >= 1 && numberOfDays < 4) return priceZeroToTree
         if(numberOfDays >= 4 && numberOfDays < 10) return priceFourDaysToTen
-        return priceTenDaysOrMore
+        if(numberOfDays >= 10) return priceTenDaysOrMore
+        return 0
     }
 
     const handleLeader = () => {

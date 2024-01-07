@@ -12,10 +12,11 @@ type IAddResident = {
     visitorIndex: number,
     deleteVisitor: any,
     handleResidentData: any,
-    amountNights: number
+    amountNights: number,
+    checkOneDay: boolean
 }
 
-const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, handleResidentData, amountNights }) => {
+const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, handleResidentData, amountNights, checkOneDay }) => {
     const [dni, setDni] = useState('')
     const [braceletNumber, setBraceletNumber] = useState('')
     const [memberNumber, setMemberNumber] = useState(0)
@@ -29,7 +30,7 @@ const AddResident: React.FC<IAddResident> = ({ visitorIndex, deleteVisitor, hand
 
     useEffect(() => {
         handleResidentData(visitorIndex, dni, braceletNumber, discount, memberNumber)
-    }, [dni, braceletNumber, discount, amountNights])
+    }, [dni, braceletNumber, discount, amountNights, memberNumber, checkOneDay])
 
     useEffect(() => {
         getDiscountsFromEndPoint()

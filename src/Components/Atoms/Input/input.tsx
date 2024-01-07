@@ -32,7 +32,7 @@ const Input: React.FC<IInput> = ({
           onChange={e => useStateFunction(e.target.value)}
           type={type}
           className={style.inputContainer__input__input}
-          value= {value}
+          value= {value? value : null}
         ></input>
       </div>
     </div>

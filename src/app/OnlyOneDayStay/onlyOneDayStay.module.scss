@@ -1,0 +1,47 @@
+.onlyOneDatStay {
+    font-family: "Montserrat", sans-serif;
+
+    &__title {
+        border-bottom: 1px solid rgba(145, 145, 145, 0.281);
+        font-size: 15px;
+        padding-bottom: 3px;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__firstGroupInput {
+        border-bottom: none;
+        display: flex;
+        gap: 29px;
+        margin-top: 5px;
+    }
+
+    &__buttonContainer {
+        margin-top: 20px;
+        display: flex;
+    }
+
+    &__priceContainer {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__price {
+        font-size: 20px;
+    }
+
+    &__title {
+        border-bottom: 1px solid rgba(145, 145, 145, 0.281);
+        font-size: 15px;
+        padding-bottom: 3px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    &__containerPrice {
+        margin-top: 20px;
+    }
+}

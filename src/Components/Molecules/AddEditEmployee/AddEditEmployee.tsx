@@ -88,8 +88,8 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
         setAllRoles(getAllRoles)
     }
 
-    const selectedValue = (rolName:string) => {
-        const newRole = allRoles.find(rol => rol.name === rolName) || {id: 'a40f006f-6a8f-4808-aa80-08f9555e71cd', name: 'Empleado'}
+    const selectedValue = (rolName: any) => {
+        const newRole = allRoles.find(rol => rol.name === rolName.name) || { id: 'a40f006f-6a8f-4808-aa80-08f9555e71cd', name: 'Empleado' }
         setNewRoleEmployee(newRole.id)
     }
 

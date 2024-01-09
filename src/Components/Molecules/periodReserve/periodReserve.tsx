@@ -23,7 +23,7 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
 
     const getDayMonthFormatByDate = (date: Date): string => {
         console.log()
-        return `${date.getDate()}/${date.getMonth() + 1}`
+        return `${date.getUTCDate()}/${date.getUTCMonth() + 1}`
     }
 
     const statePeriodName = getStateNamePeriodByDates(todayDate.getTime(), initDate.getTime(), finishDate.getTime()) 

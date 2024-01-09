@@ -100,15 +100,24 @@ const RegistrarEstadia = () => {
 
     const calculateVehiclePrice = (isMember: boolean) => {
         const numberOfDays = datosFechas.numberOfDays
+        const dateFrom = new Date(datosFechas.dateFromUnix)
+        const dateTo = new Date(datosFechas.dateToUnix)
         const oneDay = isMember? 0 : dayPrice
         const priceZeroToTree = isMember? 4000 : campingPrice
         const priceFourDaysToTen = isMember? 3500 : 7000
         const priceTenDaysOrMore = isMember? 3000 : 6000
-
-        if(numberOfDays <= 1) return oneDay
-        if(numberOfDays < 4) return priceZeroToTree
+        
+        if(numberOfDays === 1 && isCamping(dateTo,dateFrom)) return oneDay
+        if(numberOfDays >= 1 && numberOfDays < 4) return priceZeroToTree
         if(numberOfDays >= 4 && numberOfDays < 10) return priceFourDaysToTen
-        return priceTenDaysOrMore
+        if(numberOfDays >= 10) return priceTenDaysOrMore
+        return 0
+    }
+
+    const isCamping = (dateFrom: Date, dateTo: Date): boolean => {
+        if(dateFrom.getMonth() != dateTo.getMonth()) return true
+        if(dateFrom.getDate() != dateTo.getDate()) return true
+        return false
     }
 
     const calculeTotalPrice = () => {

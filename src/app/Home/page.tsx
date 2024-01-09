@@ -52,7 +52,8 @@ const HomeComponent = () => {
                 </div>
                 <div className={style.homeContainer__rightSide}>
                             <Button text='Registrar Dia' type='primary' isFullWidth={true} onClickFunction={() => handleClick('OnlyOneDayStay')} />
-                            <Button text='Reservas' type='primary' isFullWidth={true} onClickFunction={() => handleClick('Reserves')} />
+                            <Button text='Registrar Camping' type='primary' isFullWidth={true} onClickFunction={() => handleClick('RegistrarEstadia')} />
+                            <Button text='Ver Reservas' type='primary' isFullWidth={true} onClickFunction={() => handleClick('Reserves')} />
                             <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('ABMPrice')} />
                             <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('ABMDiscounts')} />
                             {/*<Button text='Roles' type={isAdmin? 'primary': 'disable'}  isFullWidth={true} onClickFunction={() => handleClick('ABMRol')}/>*/}

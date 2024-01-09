@@ -37,6 +37,17 @@ const reserveServices = {
         } 
     },
 
+    postStayOneDay: async(body: any) => {
+        try {
+            const response = await axios.post(`${BASE_PATH_STAY}/day`, body, { headers: localStorageUtils.getDefaultHeaders()});
+            return response
+
+          } catch (error: any) {
+            console.error(error);
+            return error.response
+        } 
+    },
+
     deleteReserve: async(idReserve: string) => {
         try {
             await axios.delete(

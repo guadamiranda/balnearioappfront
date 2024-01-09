@@ -36,62 +36,42 @@ const OnlyOneDayStay = () => {
     const [dayPrice, setDayPrice] = useState(0);
     const prueba = true
 
+    const buildVisitor = () => {
+        return [
+            {
+                dni: dniNumber.toString(),
+                firstName: '',
+                lastName: '',
+                phone: '',
+                location: '',
+                memberNumber: partnerNumber.toString(),
+                wristbandNumber: '',
+                idDiscount: Object.keys(discount).length === 0 ? '' : discount.id.toString(),
+                isManager: true
+            },
+        ]
+    }
+
+    const buildStay = () => {
+        return {
+            initDate: (dateFromUnix * 1000).toString(),
+            finishDate: (dateToUnix * 1000).toString(),
+            amount: amountPrice,
+            stayType: '2c9e4708-3f2b-4ae9-99ac-d68172d0bf0e',
+            group: {
+                idCampsite: '86abe192-f273-45ea-b2ac-103312791439',
+                carPlate: null,
+                quantityAnimals: ''
+            },
+            visitors: buildVisitor()
+        }
+    }
+
     async function registerReserveOneDay() {
         setIsLoadingButtons(true)
         setDisableButton(true)
 
-        if (dniNumber !== '') {
-            const newReserve = {
-                initDate: (dateFromUnix * 1000).toString(),
-                finishDate: (dateToUnix * 1000).toString(),
-                amount: amountPrice,
-                stayType: '2c9e4708-3f2b-4ae9-99ac-d68172d0bf0e',
-                group: {
-                    idCampsite: '86abe192-f273-45ea-b2ac-103312791439',
-                    carPlate: '',
-                    quantityAnimals: ''
-                },
-                visitors: [
-                    {
-                        dni: dniNumber.toString(),
-                        firstName: '',
-                        lastName: '',
-                        phone: '',
-                        location: '',
-                        memberNumber: partnerNumber.toString(),
-                        wristbandNumber: '',
-                        idDiscount: Object.keys(discount).length === 0 ? '' : discount.id.toString(),
-                        isManager: true
-                    },
-                ]
-            }
-
-            const response = await console.log('hi')/*reserveServices.postReserve(newReserve) */
-            if (prueba === true /*response?.status == 201 */) {
-                console.log(newReserve)
-                AlertServices.renderAlertWithOnlyButtonConfirmAndFunction(
-                    'Completado',
-                    'Se creo una reserva correctamente',
-                    'success',
-                    () => window.location.reload()
-                )
-                return
-            }
-
-            /*
-
-            if (response?.status == 500) {
-                setDisableButton(false)
-                AlertServices.renderAlert(
-                    'Error',
-                    'Algo salio mal, contactese con el administrador',
-                    'error',
-                )
-                return
-            */
-
-
-        } else {
+        if(!dniNumber) {
             setDisableButton(false)
             setIsLoadingButtons(false)
 
@@ -100,16 +80,39 @@ const OnlyOneDayStay = () => {
                 'Falta ingresar el DNI',
                 'error',
             )
+            return
         }
 
+        const newReserve = buildStay()
+        const response = await reserveServices.postStayOneDay(newReserve)
+        if (response?.status === 201) {
+            console.log(newReserve)
+            AlertServices.renderAlertWithOnlyButtonConfirmAndFunction(
+                'Completado',
+                'Se creo una reserva correctamente',
+                'success',
+                () => window.location.reload()
+            )
+            return
+        }
+
+        
+        if (response?.status == 500) {
+            setDisableButton(false)
+            AlertServices.renderAlert(
+                'Error',
+                'Algo salio mal, contactese con el administrador',
+                'error',
+            )
+            return
+        }
     }
+
 
     const calculatePrice = () => {
         const price = partnerNumber ? 0 : dayPrice
-
         const priceWithDiscount = price - (price * (discount.percent / 100))
         const priceWithoutDiscount = price
-
         setAmountPrice(Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount)
     }
 
@@ -168,8 +171,8 @@ const OnlyOneDayStay = () => {
     return (
         <GuardLogin>
             <ABMTemplate
-                title="Registro de estadía de un solo día"
-                subTitle="Estadía donde los visitantes solo estarán durante el día, sin posibilidad de acampe">
+                title="Registrar día"
+                subTitle="Formulario para registrar una persona que va a pasar un día">
 
                 <div className={style.onlyOneDatStay__container}>
                     <div>

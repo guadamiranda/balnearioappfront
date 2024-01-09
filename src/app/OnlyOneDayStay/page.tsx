@@ -220,8 +220,8 @@ const OnlyOneDayStay = () => {
                             isLoading={isLoadingButtons}
                             text='Realizar Reserva'
                             onClickFunction={() => disableButton === false ? registerReserveOneDay() : null}
-                            type='primary'>
-                        </Button >
+                            type='primary'
+                        />
                     </div>
 
                 </div>

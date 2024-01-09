@@ -50,7 +50,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
             </div>
 
             <div className={style.addEditPriceContainer___rightSide}>
-                <PeriodReserve initDateUnix={initDate} finishDateUnix={finishDate}></PeriodReserve>
+                <PeriodReserve initDateUnix={initDate} finishDateUnix={finishDate} isStayDay={typeStay == 'Dia'}></PeriodReserve>
             </div>
             
         </div>

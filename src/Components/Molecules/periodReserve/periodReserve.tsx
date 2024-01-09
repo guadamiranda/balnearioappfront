@@ -2,10 +2,11 @@ import style from "./periodReserve.module.scss";
 
 interface IPeriodReserve {
     initDateUnix: string,
-    finishDateUnix: string
+    finishDateUnix: string,
+    isStayDay: boolean
 }
 
-const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix}) => {
+const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix, isStayDay}) => {
     const todayDate = new Date()
     const dayOfTheMonth = todayDate.getDate()
     const month = todayDate.getMonth() + 1
@@ -22,7 +23,6 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
     }
 
     const getDayMonthFormatByDate = (date: Date): string => {
-        console.log()
         return `${date.getUTCDate()}/${date.getUTCMonth() + 1}`
     }
 
@@ -43,7 +43,7 @@ const PeriodReserve: React.FC<IPeriodReserve> = ({initDateUnix, finishDateUnix})
             </div>
             <div className={style.periodReserve__dateInfo}>
                 <p>Salida</p>
-                <p>{getDayMonthFormatByDate(finishDate)}</p>
+                <p>{getDayMonthFormatByDate(isStayDay? initDate:finishDate)}</p>
             </div>
         </div>
     );

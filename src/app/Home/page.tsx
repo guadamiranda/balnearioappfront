@@ -35,12 +35,10 @@ const HomeComponent = () => {
 
     useEffect(() => {
         setIsAdmin(sessionServices.isAdmin())
-        console.log('hola')
         setLoading(false);
     }, [])
 
     useEffect(() => {
-        console.log('estoyAca')
         setLoading(false);
     }, [pathName]); 
 
@@ -53,7 +51,9 @@ const HomeComponent = () => {
                     <HomeProfile/>
                 </div>
                 <div className={style.homeContainer__rightSide}>
-                            <Button text='Reservas' type='primary' isFullWidth={true} onClickFunction={() => handleClick('Reserves')} />
+                            <Button text='Registrar Dia' type='primary' isFullWidth={true} onClickFunction={() => handleClick('OnlyOneDayStay')} />
+                            <Button text='Registrar Camping' type='primary' isFullWidth={true} onClickFunction={() => handleClick('RegistrarEstadia')} />
+                            <Button text='Ver Reservas' type='primary' isFullWidth={true} onClickFunction={() => handleClick('Reserves')} />
                             <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('ABMPrice')} />
                             <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('ABMDiscounts')} />
                             {/*<Button text='Roles' type={isAdmin? 'primary': 'disable'}  isFullWidth={true} onClickFunction={() => handleClick('ABMRol')}/>*/}

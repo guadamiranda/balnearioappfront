@@ -18,7 +18,8 @@ interface IAllReservesData {
     managerMemberNumber: string,
     finishDate: string,
     initDate: string,
-    managerCarPlate: string
+    managerCarPlate: string,
+    stayType: string
 }
 
 const Reserves = () => {
@@ -72,8 +73,9 @@ const Reserves = () => {
                             <ActiveReserveCard 
                             key={reserve.id}
                             id={reserve.id}
-                                    name={reserve.name}
-                                    managerDNI={reserve.dni}
+                            name={reserve.name}
+                            typeStay={reserve.stayType}
+                            managerDNI={reserve.dni}
                             managerMemberNumber={reserve.managerMemberNumber}
                             managerCarPlate = {reserve.managerCarPlate}
                             finishDate={reserve.finishDate}
@@ -88,8 +90,7 @@ const Reserves = () => {
                     </div>
                     
                     <div className={style.reservesContainer__buttonContainer}>
-                                <Button isLoading={isLoadingButtons[0]} text='Buscar reserva' type='secondary' onClickFunction={() => redirectPage('/queryReserve', 0)}></Button>
-                                <Button isLoading={isLoadingButtons[1]} text='Crear reserva' type='primary' onClickFunction={() => redirectPage('/RegistrarEstadia', 1)}></Button>
+                                <Button isLoading={isLoadingButtons[0]} text='Buscar reserva por DNI' type='primary' isFullWidth={true} onClickFunction={() => redirectPage('/queryReserve', 0)}></Button>
                     </div>
                     
                 </LittleABMTemplate>

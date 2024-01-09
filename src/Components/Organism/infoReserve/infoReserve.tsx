@@ -14,7 +14,7 @@ const InfoReserve:React.FC<any>  = ({infoReserve}) => {
     //TODO: Agregar el idStay a la interfaz
     return (
         <div className={style.reserveContainer}>
-            <PeriodReserve initDateUnix={stay.initDate} finishDateUnix={stay.finishDate} isStayDay={false}/>
+            <PeriodReserve initDateUnix={stay.initDate} finishDateUnix={stay.finishDate} isStayDay={stay.stayType == 'Dia'}/>
             <div className={style.reserveContainer__managerSection}>
                 <div className={style.reserveContainer__icon}>
                     <FaUserAlt/>
@@ -24,7 +24,7 @@ const InfoReserve:React.FC<any>  = ({infoReserve}) => {
                         <span><b>Nombre completo:</b> {manager.person.firstName}, {manager.person.lastName}</span>
                         <span><b>DNI: </b>{manager.person.nroDoc}</span>
                         <span><b>Número de Patente:</b> {group.carPlate? group.carPlate : '-'}</span>
-                        <span><b>Cantidad de caballos:</b> {group.animals.quantity || 0}</span>
+                        <span><b>Cantidad de caballos:</b> {group.animals?.quantity || 0}</span>
                     </div>
                 </div>
             </div>

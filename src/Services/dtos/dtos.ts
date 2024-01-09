@@ -55,6 +55,7 @@ interface IVisitor {
     initDate: string;
     finishDate: string;
     id: string;
+    stayType: string;
   }
 
   interface ILoginData {

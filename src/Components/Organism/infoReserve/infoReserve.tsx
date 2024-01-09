@@ -11,10 +11,10 @@ const InfoReserve:React.FC<any>  = ({infoReserve}) => {
         const visitorThatAreNotManager = visitors.filter(visitor => !visitor.isManager)
         return visitorThatAreNotManager.map(visitor => (visitor.nroDoc ? visitor.nroDoc.toString() : ''))
     }
-
+    //TODO: Agregar el idStay a la interfaz
     return (
         <div className={style.reserveContainer}>
-            <PeriodReserve initDateUnix={stay.initDate} finishDateUnix={stay.finishDate}/>
+            <PeriodReserve initDateUnix={stay.initDate} finishDateUnix={stay.finishDate} isStayDay={false}/>
             <div className={style.reserveContainer__managerSection}>
                 <div className={style.reserveContainer__icon}>
                     <FaUserAlt/>

@@ -15,6 +15,7 @@ interface IActiveReserveCard {
     typeStay: string,
     managerCarPlate: string,
     onDelete: any,
+    phone: string
 }
 
 const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
@@ -26,6 +27,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
     initDate,
     typeStay,
     managerCarPlate,
+    phone,
     onDelete,
     }) => {
     const [isEliminteReserve, setIsEliminateReserve] = useState<boolean>(false)
@@ -45,8 +47,9 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
         <>
         <div className={style.addEditPriceContainer}>
             <div className={style.addEditPriceContainer___leftSide}>
-                    <span>Tipo: <b>{typeStay}</b></span>
-                    <span>Responsable: <b>{managerDNI}</b> - <b>{name}</b> </span>
+                    <span><b>Tipo:</b> {typeStay}</span>
+                    <span><b>Responsable:</b> {managerDNI} - {name.trim()? name: 'Nombre no informado'} </span>
+                    <span><b>Telefono:</b> {phone? phone: 'No informado'}</span>
             </div>
 
             <div className={style.addEditPriceContainer___rightSide}>

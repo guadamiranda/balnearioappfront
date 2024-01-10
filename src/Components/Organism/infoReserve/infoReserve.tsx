@@ -11,7 +11,17 @@ const InfoReserve:React.FC<any>  = ({infoReserve}) => {
         const visitorThatAreNotManager = visitors.filter(visitor => !visitor.isManager)
         return visitorThatAreNotManager.map(visitor => (visitor.nroDoc ? visitor.nroDoc.toString() : ''))
     }
-    //TODO: Agregar el idStay a la interfaz
+
+    const getFullNameManager = () => {
+        if(!manager) return 'No informado'
+        
+        if(manager.person.firstName && manager.person.lastName) {
+            return `${manager.person.firstName} ${manager.person.lastName}`
+        }
+
+        return 'No informado'
+    }
+
     return (
         <div className={style.reserveContainer}>
             <PeriodReserve initDateUnix={stay.initDate} finishDateUnix={stay.finishDate} isStayDay={stay.stayType == 'Dia'}/>
@@ -21,9 +31,10 @@ const InfoReserve:React.FC<any>  = ({infoReserve}) => {
                 </div>
                 <div className={style.reserveContainer__managerData}>
                     <div className={style.reserveContainer__managerDataBody}>
-                        <span><b>Nombre completo:</b> {manager.person.firstName}, {manager.person.lastName}</span>
+                        <span><b>Nombre completo:</b> {getFullNameManager()}</span>
                         <span><b>DNI: </b>{manager.person.nroDoc}</span>
-                        <span><b>Número de Patente:</b> {group.carPlate? group.carPlate : '-'}</span>
+                        <span><b>Telefono: </b>{manager.person.phone? manager.person.phone : 'No informado'}</span>
+                        <span><b>Número de Patente:</b> {group.carPlate? group.carPlate : 'No informado'}</span>
                         <span><b>Cantidad de caballos:</b> {group.animals?.quantity || 0}</span>
                     </div>
                 </div>

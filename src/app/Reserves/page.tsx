@@ -15,6 +15,7 @@ interface IAllReservesData {
     id: string,
     name: string,
     dni: string,
+    amount: string,
     phone: string,
     managerMemberNumber: string,
     finishDate: string,
@@ -82,6 +83,7 @@ const Reserves = () => {
                             finishDate={reserve.finishDate}
                             initDate={reserve.initDate}
                             phone={reserve.phone}
+                            amount={reserve.amount}
                             onDelete={() => onDelete(reserve.id)}
                             />
                             

@@ -22,6 +22,14 @@ const Input: React.FC<IInput> = ({
 }) => {
   const fullWidthProp = isFullWidth ? "-fullWidth" : "";
   const styleInputContainer = style[`inputContainer${fullWidthProp}`];
+
+  const handleUseStateFunction = (value: any) => {
+    if(type === 'number'){
+      value = value? parseInt(value): 0
+    }
+    useStateFunction(value);
+  };
+
   return (
     <div className={styleInputContainer}>
       <span className={style.inputContainer__title}>{title}</span>
@@ -29,10 +37,10 @@ const Input: React.FC<IInput> = ({
         <div className={style.inputContainer__input__icon}>{icon}</div>
         <input
           placeholder={placeholder}
-          onChange={e => useStateFunction(e.target.value)}
+          onChange={e => handleUseStateFunction(e.target.value)}
           type={type}
           className={style.inputContainer__input__input}
-          value= {value? value : null}
+          value= {value? value: null}
         ></input>
       </div>
     </div>

@@ -26,6 +26,7 @@ interface IVisitors {
     braceletNumber: any,
     price: any,
     discount: IDiscount,
+    memberNumber: any
 }
 
 interface ILeader {
@@ -169,14 +170,14 @@ const RegistrarEstadia = () => {
                         lastName: '',
                         phone: '',
                         location: '',
-                        memberNumber: '',
+                        memberNumber: visitor.memberNumber,
                         wristbandNumber: visitor.braceletNumber.toString(),
                         idDiscount: Object.keys(visitor.discount).length === 0 ? '' : visitor.discount.id.toString(),
                         isManager: false
                     })),
                 ]
             }
-
+            
             const response = await reserveServices.postReserve(newReserve)
             if (response?.status == 201) {
                 AlertServices.renderAlertWithOnlyButtonConfirmAndFunction(
@@ -263,14 +264,14 @@ const RegistrarEstadia = () => {
                 <div className={style.registrarEstadiaContainer}>
                         <EstadiaSummary
                             animalAmount={animalAmount}
-                            amountPrice={amountPrice}
+                            setAmountStayState={(value) =>setAmountPrice(value)}
                             leader={leader}
                             animalPrice={animalPrice}
                             vehiculePrice={vehicleTotalPrice}
                             datosFechas={datosFechas}
                             vehiculePlate={vehiculePlate}
                             hasVehicule={hasVehicule}
-                            visitors={visitors} />
+                            visitors={visitors as IVisitors[]} />
                 </div>
             </div>
 

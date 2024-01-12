@@ -40,6 +40,7 @@ const InfoReserve:React.FC<any>  = ({infoReserve}) => {
                 </div>
             </div>
             <CardInfoEntity typeInfoName={'dni'} infoNames={getNroDocVisitors(visitors)}/>
+            <div className={style.reserveContainer__price}>Precio: $ {stay.amount}</div>
         </div>
     );
 };

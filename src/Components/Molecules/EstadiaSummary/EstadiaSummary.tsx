@@ -2,17 +2,11 @@
 
 import React, { useEffect, useState } from 'react'
 import style from './estadiaSummary.module.scss'
+import Input from '@/Components/Atoms/Input/input'
 
 interface IDiscount {
     name: string,
     percent: number
-}
-
-interface IVisitors {
-    dni: any,
-    braceletNumber: any,
-    price: number,
-    discount: IDiscount,
 }
 
 interface ILeader {
@@ -26,12 +20,12 @@ interface ILeader {
     discount: IDiscount,
 }
 interface IStaySummary {
-    animalAmount: number,
+    animalAmount: any,
     leader: any,
     vehiculePlate: any,
-    visitors: any,
+    visitors: any[],
     hasVehicule: boolean,
-    amountPrice: number,
+    setAmountStayState: (value:any) => void,
     datosFechas: any,
     animalPrice: number,
     vehiculePrice: number
@@ -39,7 +33,7 @@ interface IStaySummary {
 
 const EstadiaSummary: React.FC<IStaySummary> = ({
     animalAmount,
-    amountPrice,
+    setAmountStayState,
     leader,
     animalPrice,
     vehiculePrice,
@@ -48,25 +42,81 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
     hasVehicule,
     visitors = [] }) => {
 
-    const [allVisitors, setAllVisitors] = useState<IVisitors[]>([])
+    const [amountStay, setAmountStay] = useState(0)
+    const [leaderAmount, setLeaderAmount] = useState(0)
+    const [vehiculeAmount, setVehiculeAmount] = useState(0)
+    const [animalValue, setAnimalValue] = useState<any>(0)
+    const [visitorPrices, setVisitorPrices] = useState([0]); 
     const [leaderFull, setLeaderFull] = useState<ILeader>({ discount: {} } as ILeader)
 
     useEffect(() => {
-        setAllVisitors(visitors)
         setLeaderFull(leader)
-    }, [visitors, leader]) 
+    }, [leader]) 
+
+    const handlerChangePriceVisitor =(index: number, value: number) => {
+        visitorPrices[index] = value
+        setVisitorPrices([...visitorPrices])
+    }
+
+    const handlerChangeLeaderAmount = (value: number) => {
+        setLeaderAmount(value)
+    }
+
+    const handlerChangeVehiculePrice = (value: number) => {
+        setVehiculeAmount(value)
+    }
+
+    const handlerChangeAnimalPrice = (value: number) => {
+        setAnimalValue(value)
+    }
+
+    useEffect(() => {
+        const totalStayAmount = parseInt(animalValue) + vehiculeAmount + visitorPrices.reduce((a, b) => a + b, 0) + leaderAmount
+        setAmountStayState(totalStayAmount)
+        setAmountStay(totalStayAmount)
+    },[animalValue, vehiculeAmount,visitorPrices, leaderAmount])
+
+    useEffect(() => {
+        const animalSum = animalPrice * parseInt(animalAmount);
+
+        setAnimalValue(animalSum? animalSum: 0);
+    }, [animalAmount]);
+      
+    useEffect(() => {
+        setVehiculeAmount(vehiculePrice);
+    }, [vehiculePrice]);
+    
+    useEffect(() => {
+        setVisitorPrices(visitors.map(visitor => visitor.price));
+    }, [visitors]);
+
+    useEffect(() => {
+        setLeaderAmount(leader.price)
+    },[leader.price])
 
     return(
         <div className={style.estadiaSummary}>
-            <div className={style.estadiaSummary__title}>Detalles de Estadía</div>
+            <div className={style.estadiaSummary__title}>
+                <span>Detalles de Estadía</span> 
+                <span>Precios Sugeridos</span>
+            </div>
             {hasVehicule &&
                 <div className={style.estadiaSummary__visitantesContainer}>
                     <div className={style.estadiaSummary__visitantes}>
                         <b>Vehiculo</b>
                         <div className={style.estadiaSummary__descuentos}> Patente: {vehiculePlate}</div>
                     </div>
-                    <div className={style.estadiaSummary__prices}>
-                        {datosFechas.dateFromUnix === 0 ? null : `$ ${vehiculePrice}`}
+                    <div className={style.estadiaSummary__price}>
+                        {datosFechas.dateFromUnix === 0 ? null : 
+                            <Input
+                            title={''}
+                            placeholder={''}
+                            type='number'
+                            isFullWidth={true}
+                            useStateFunction={(value) => handlerChangeVehiculePrice(value)}
+                            value={vehiculeAmount}
+                            />
+                        }
                     </div>
                 </div>
             }
@@ -76,8 +126,17 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                         <b>Animales</b>
                     <div className={style.estadiaSummary__descuentos}> Cantidad: {animalAmount}</div>
                     </div>
-                    <div className={style.estadiaSummary__prices}>
-                    {datosFechas.dateFromUnix === 0 ? null : `$ ${animalAmount * animalPrice}`}
+                    <div className={style.estadiaSummary__price}>
+                    {datosFechas.dateFromUnix === 0 ? null :
+                        <Input
+                        title={''}
+                        placeholder={''}
+                        isFullWidth={true}
+                        type='number'
+                        useStateFunction={(value) => handlerChangeAnimalPrice( value)}
+                        value={animalValue}
+                        />
+                    }
                     </div>
                 </div>
 
@@ -94,16 +153,25 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                             {leaderFull.discount === undefined ? '-' : leaderFull.discount.percent}
                         </span>
                     </div>
-                    <div className={style.estadiaSummary__prices}>
-                        {datosFechas.dateFromUnix === 0 ? null : `$ ${leaderFull.price}`}
+                    <div className={style.estadiaSummary__price}>
+                        {datosFechas.dateFromUnix === 0 ? null : 
+                            <Input
+                            title={''}
+                            placeholder={''}
+                            type='number'
+                            isFullWidth={true}
+                            useStateFunction={(value) => handlerChangeLeaderAmount( value)}
+                            value={leaderAmount}
+                            />
+                        }
                     </div>
                 </div>
             }
 
-            {allVisitors.length === 0 ?
+            {visitors.length === 0 ?
                 <div> *No se agrego visitantes </div>
                 :
-                allVisitors.map(visitor =>
+                visitors.map((visitor,index) =>
                     <div className={style.estadiaSummary__visitantesContainer}>
                         <div className={style.estadiaSummary__visitantes}>
                             <b>{visitor.dni}</b>
@@ -112,15 +180,24 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                                 {visitor.discount === undefined ? '-' : visitor.discount.percent}
                             </span>
                         </div>
-                        <div className={style.estadiaSummary__prices}>
-                            {datosFechas.dateFromUnix === 0 ? null : `$ ${visitor.price}`}
+                        <div className={style.estadiaSummary__price}>
+                            {datosFechas.dateFromUnix === 0 ? null : 
+                                <Input
+                                title={''}
+                                placeholder={''}
+                                isFullWidth={true}
+                                type='number'
+                                useStateFunction={(value) => handlerChangePriceVisitor(index, value)}
+                                value={visitorPrices[index]}
+                                />
+                            }
                         </div>
                     </div>
                 )}
             <div className={style.estadiaSummary__title}>Total de la Estadía</div>
             <div className={style.estadiaSummary__priceContainer}>
                 <b className={style.estadiaSummary__price}>
-                    {datosFechas.dateFromUnix === 0 ? '$' : `$  ${amountPrice}`}
+                    {datosFechas.dateFromUnix === 0 ? '$' : `$ ${amountStay}`}
                 </b>
             </div>
 

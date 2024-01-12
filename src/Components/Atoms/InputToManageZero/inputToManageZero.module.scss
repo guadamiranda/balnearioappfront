@@ -1,0 +1,70 @@
+@import '../../../app/Variables/Colors/colors.module.scss';
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+
+.inputContainer {
+    width: 300px;
+
+    &__input{
+        align-items: center;
+        background-color: $lightGrey;
+        border: 1px solid $borderGrey;
+        border-radius: 8px;
+        display: flex;
+        height: 30px;
+        justify-content: flex-start;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        padding: 0px 5px;
+        width: 100%;
+
+        &:hover{
+            border: 1px solid $green;
+        }
+
+        &:hover &__icon {
+            color: $green;
+        }
+
+        &__icon{
+            align-items: center;
+            border-right: 1px solid $borderGrey;
+            color: $borderGrey;
+            display: flex;
+            padding-right: 5px;
+        }
+
+        &__input{
+            width: 100%;
+            margin-left: 5px;
+            background-color: $lightGrey;
+            border: none;
+            font-family: $montserrat;
+            height: 100%;
+
+            &:focus{
+                outline: none;
+            }
+
+            &::placeholder{
+                color: lightGrey
+            }
+        }
+    }
+
+    &__title{
+        font-family: $montserrat;
+        font-size: 13px;
+        font-weight: $regular-montserrat-weight;
+        
+    }
+
+    &-fullWidth{
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .inputContainer {
+        width: 100%;
+    }
+}

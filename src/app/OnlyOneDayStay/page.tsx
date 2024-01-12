@@ -7,6 +7,7 @@ import { HiOutlineIdentification } from "react-icons/hi2";
 import Button from "@/Components/Atoms/button/button";
 import priceServices from "@/Services/priceServices";
 import Input from "@/Components/Atoms/Input/input";
+import InputManageZero from "@/Components/Atoms/InputToManageZero/inputToManageZero";
 import AlertServices from "@/utils/AlertServices";
 import style from './onlyOneDayStay.module.scss';
 import GuardLogin from "@/utils/guardLogin";
@@ -113,7 +114,12 @@ const OnlyOneDayStay = () => {
         const price = partnerNumber ? 0 : dayPrice
         const priceWithDiscount = price - (price * (discount.percent / 100))
         const priceWithoutDiscount = price
+        //setAmountPrice(0)
         setAmountPrice(Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount)
+    }
+    
+    const handlerChangePriceByUser = (value: any) => {
+        setAmountPrice(value)
     }
 
     const calculateUnixDate = (completeDateFrom: Date, completeDateTo: Date) => {
@@ -207,9 +213,14 @@ const OnlyOneDayStay = () => {
                     <div className={style.onlyOneDatStay__containerPrice}>
                         <div className={style.onlyOneDatStay__title}>Total de la Estadía</div>
                         <div className={style.onlyOneDatStay__priceContainer}>
-                            <b className={style.onlyOneDatStay__price}>
-                                $ {amountPrice}
-                            </b>
+                            <InputManageZero 
+                            placeholder={""} 
+                            title={""}
+                            isFullWidth={true}
+                            type="number"
+                            useStateFunction={(value) => handlerChangePriceByUser(value)}
+                            value={amountPrice}
+                            />
                         </div>
                     </div>
 

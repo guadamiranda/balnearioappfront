@@ -1,0 +1,32 @@
+
+.homeContainer{ 
+    background-image: url('../../../public/Assets/fondoHojas.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    
+    &__menuContainer{
+        align-items: center;
+        background-color: #e1d8b1;
+        box-shadow: 6px 1px 5px 0px rgba(0, 0, 0, 0.514);
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        width: 250px;
+    }
+
+    &__menuButtons{
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        span{
+            border-radius: 6px;
+            border: 1px solid black;
+            cursor: pointer;
+            padding: 15px 10px;
+            width: 190px;
+        }
+    }
+}

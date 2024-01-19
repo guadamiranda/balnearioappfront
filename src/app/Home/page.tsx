@@ -56,7 +56,7 @@ const HomeComponent = () => {
                             <Button text='Ver Reservas' type='primary' isFullWidth={true} onClickFunction={() => handleClick('Reserves')} />
                             <Button text='Precios' type='primary' isFullWidth={true} onClickFunction={() => handleClick('ABMPrice')} />
                             <Button text='Descuentos' type='primary' isFullWidth={true} onClickFunction={() => handleClick('ABMDiscounts')} />
-                            {/*<Button text='Roles' type={isAdmin? 'primary': 'disable'}  isFullWidth={true} onClickFunction={() => handleClick('ABMRol')}/>*/}
+                            <Button text='Home prueba' type= 'primary' isFullWidth={true} onClickFunction={() => handleClick('HomePrueba')}/>
                             <Button text='Empleados' type={'primary'} isFullWidth={true} onClickFunction={() => handleClick('ABMEmployee')} />
                             <Button text='Reportes' type={'primary'} isFullWidth={true} onClickFunction={() => console.log('Soy Reportes')} />
                 </div>

@@ -1,20 +1,21 @@
 'use client'
 
+import InputManageZero from "@/Components/Atoms/InputToManageZero/inputToManageZero";
 import ABMTemplate from "@/Components/templates/abmTemplate/ABMTemplate";
 import Dropdown from "@/Components/Atoms/DropDown/Dropdown";
 import discountServices from "@/Services/discountServices";
 import { HiOutlineIdentification } from "react-icons/hi2";
+import reserveServices from "@/Services/stayServices";
 import Button from "@/Components/Atoms/button/button";
 import priceServices from "@/Services/priceServices";
 import Input from "@/Components/Atoms/Input/input";
-import InputManageZero from "@/Components/Atoms/InputToManageZero/inputToManageZero";
 import AlertServices from "@/utils/AlertServices";
 import style from './onlyOneDayStay.module.scss';
 import GuardLogin from "@/utils/guardLogin";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { TbNumbers } from "react-icons/tb";
-import reserveServices from "@/Services/stayServices";
+import { BsSunFill } from "react-icons/bs";
 
 interface IDiscount {
     name: any,
@@ -178,7 +179,8 @@ const OnlyOneDayStay = () => {
         <GuardLogin>
             <ABMTemplate
                 title="Registrar día"
-                subTitle="Formulario para registrar una persona que va a pasar un día">
+                subTitle="Formulario para registrar una persona que va a pasar un día"
+                icon={<BsSunFill />} >
 
                 <div className={style.onlyOneDatStay__container}>
                     <div>
@@ -200,7 +202,7 @@ const OnlyOneDayStay = () => {
                                 useStateFunction={setPartnerNumber} />
                         </div>
 
-                        <div>
+                        <div className={style.onlyOneDatStay__inputDiscounts}>
                             <Dropdown
                                 title='Ninguno'
                                 options={allDiscounts}

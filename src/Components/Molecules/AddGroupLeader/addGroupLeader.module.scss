@@ -5,14 +5,55 @@
     &__title {
         border-bottom: 1px solid rgba(145, 145, 145, 0.281);
         font-size: 15px;
-        padding-bottom: 3px;
+        background-color: #568871;
+        padding: 10px;
+        border-radius: 9px 10px 1px 0px;
+        color: white;
     }
 
     &__firstGroupInput{
         border-bottom: none;
         display: flex;
-        gap: 15px;
+        gap: 31px;
+        justify-content: center;
         margin-top: 5px;
+        padding: 3px 3px;
+    }
+
+    &__addVisitor{
+        margin: 10px 0px;
+        padding-left: 2px;
+    }
+
+    &__visitorList{
+        height: 194px;
+        overflow: hidden;
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+    }
+
+    &__LocationGroupInput{
+        padding: 7px 19px;
+    }
+}
+
+@media (max-width: 1060px) {
+    .addGroupLeader{
+        font-family: "Montserrat", sans-serif;
+
+    &__title {
+        border-bottom: 1px solid rgba(145, 145, 145, 0.281);
+        font-size: 15px;
+        background-color: #568871;
+        padding: 8px;
+        border-radius: 9px 10px 1px 0px;
+        color: white;
+    }
+
+    &__firstGroupInput{
+        gap: 0px;
+        flex-direction: column;
+        padding: 0px 10px;
     }
 
     &__addVisitor{
@@ -25,4 +66,11 @@
         overflow: hidden;
         overflow-y: auto;
     }
+
+    &__LocationGroupInput{
+        padding: 4px 10px;
+    }
 }
+}
+
+

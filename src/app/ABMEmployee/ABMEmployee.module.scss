@@ -2,8 +2,9 @@
 .abmPriceContainer{
     display: flex;
     flex-direction: column;
-    height: 95%;
+    height: 92%;
     justify-content: space-between;
+    padding: 15px 15px;
 
     &__buttonContainer{
         display: flex;
@@ -24,7 +25,7 @@
     }
 
     &__loader{
-        background-image: url('../../Assets/loader100px.gif');
+        //background-image: url('../../Assets/loader100px.gif');
         height: 100%;
         object-fit: cover;
         background-repeat: no-repeat; 

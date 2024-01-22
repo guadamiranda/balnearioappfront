@@ -1,3 +1,5 @@
+@import '../../../app/Variables/Fonts/fonts.module.scss';
+@import '../../../app/Variables/Colors/colors.module.scss';
 
 .multiStepOrder{
     font-family: "Montserrat", sans-serif;
@@ -7,7 +9,7 @@
     &__line{
         height: 3px;
         width: 100px;
-        background-color: #dedede;
+        background-color: $orange-bold;
         position: absolute;
         margin-top: 25px;
         width: 100%;
@@ -22,7 +24,7 @@
 
     &__circules{
         align-items: center;
-        background-color: #dedede;
+        background-color: $orange-bold;
         border-radius: 90px;
         display: flex;
         height: 50px;
@@ -47,14 +49,50 @@
         cursor: default;
         margin-top: 5px;
         text-align: center;
-        width: 120px;
+        width: 80px;
     }
 
     &__color{
-        color: #53b95391;
+        color: #044c2c;;
     }
 
     &__colorWhite{
-        color: white;
+        color: white
     }
 }
+
+@media (max-width: 1060px) {
+    .multiStepOrder{
+        font-family: "Montserrat", sans-serif;
+        position: relative;
+        width: 100%;
+    
+        &__line{
+            margin-top: 20px;
+        }
+    
+        &__optionsContainer{
+            align-items: flex-start;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    
+        &__circules{
+            align-items: center;
+            background-color: #e49506;
+            border-radius: 90px;
+            display: flex;
+            height: 41px;
+            justify-content: center;
+            width: 41px;
+            z-index: 3;
+    
+            div {
+                display: flex;
+                font-size: 23px;
+            }
+        }
+    }
+}
+

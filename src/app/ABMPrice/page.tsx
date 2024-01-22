@@ -12,6 +12,7 @@ import GuardLogin from "@/utils/guardLogin";
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import sessionServices from "@/Services/sessionServices";
 import AlertServices from "@/utils/AlertServices";
+import { AiFillDollarCircle } from "react-icons/ai";
 
 type IAllPrices = {
     id: number,
@@ -71,23 +72,24 @@ const ABMPrice = () => {
             {
                 isLoading? <Loader/>:
                 <>
-                    <LittleABMTemplate title="Administración de Precios" subTitle="">
-                <div className={style.abmPriceContainer}>
-                    <div className={style.abmPriceContainer__tableContainer}>
-                        <Table 
-                            columns={columns} 
-                            tableData={pricesData} 
-                            completeTableData={pricesAllData} 
-                            openModalEditFunction={openModalEditFunction} 
-                            setFullElement={setFullPriceToEdit}/>
-                    </div>
-                    <div className={style.abmPriceContainer__buttonContainer}>
-                        { /*<Button text="Crear nuevo Precio" type='primary' onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button> */}
-                    </div>
-                </div>
-            </LittleABMTemplate>
-            {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
-            {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
+                    <LittleABMTemplate title="Administración de Precios" subTitle="Ve y edita los precios del negocio" icon={<AiFillDollarCircle />}>
+                        <div className={style.abmPriceContainer}>
+                            <div className={style.abmPriceContainer__tableContainer}>
+                                <Table 
+                                    columns={columns} 
+                                    tableData={pricesData} 
+                                    completeTableData={pricesAllData} 
+                                    openModalEditFunction={openModalEditFunction} 
+                                    setFullElement={setFullPriceToEdit}/>
+                            </div>
+                            <div className={style.abmPriceContainer__buttonContainer}>
+                                { /*<Button text="Crear nuevo Precio" type='primary' onClickFunction={() => openModalCreateFunction()} isFullWidth={true}></Button> */}
+                            </div>
+                        </div>
+
+                    </LittleABMTemplate>
+                    {openModalCreate && <ModalABMTemplate title='Crear Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalCreate}/>} closeFunction={setOpenModalCreate} ></ModalABMTemplate>}
+                    {openModalEdit && <ModalABMTemplate title='Editar Precio' children={<AddEditPrice updateTable={getPrices} fullElementToEdit={fullPriceToEdit} closeFunction={setOpenModalEdit}/>} closeFunction={setOpenModalEdit} ></ModalABMTemplate>}
                 </>
             }
         </GuardLogin>

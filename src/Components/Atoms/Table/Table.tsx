@@ -26,6 +26,12 @@ const Table: React.FC<ITable> = ({
         openModalEditFunction()
     }
 
+    const rowStyle = (index:any) => {
+        const styleRow = index % 2== 0 ? style.tableContainer__tableItem__pair : style.tableContainer__tableItem
+
+        return styleRow
+    }
+
     return(
         <div className={style.tableContainer}>
             <div className={style.tableContainer__tableHeader}>
@@ -34,7 +40,7 @@ const Table: React.FC<ITable> = ({
             </div>
             <div className={style.tableContainer__tableBody}>
                 {tableData.map((data, index) => 
-                <div key={index} className={style.tableContainer__tableItem}>
+                <div key={index} className={rowStyle(index)}>
                     {Object.keys(data).map((key) => (
                     <div className={style.tableContainer__tableColumns} key={key}>{data[key]}</div>
                     ))}

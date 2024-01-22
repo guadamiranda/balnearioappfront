@@ -43,42 +43,49 @@ const AddDatosEstadia: React.FC<IAddDatosEstadia> = ({ setVehiculePlateFunction,
     }, [vehiculePlate, animalAmount, dateFromUnix, dateToUnix, numberOfDays, checkOneDay])
 
     return(
-        <div className={style.addDatosEstadia}>
-            <div className={style.addDatosEstadia__title}>Datos de Vehiculo y Animales</div>
+        <>
+            <div className={style.addDatosEstadia}>
+                <div className={style.addDatosEstadia__title}>Datos de Vehiculo y Animales</div>
 
-            <div className={style.addDatosEstadia__checkBoxContainer}>
-                <Checkbox title='¿Tiene Vehiculo?' onClickFunction={() => checkVehicule()}></Checkbox>
+                <div className={style.addDatosEstadia__checkBoxContainer}>
+                    <Checkbox title='¿Tiene Vehiculo?' onClickFunction={() => checkVehicule()}></Checkbox>
 
-                {hasVehicule && 
+                    {hasVehicule && 
+                        <Input
+                            useStateFunction={setVehiculePlate}
+                            icon={<AiOutlineCar />}
+                            placeholder='AS 234 RT'
+                            title='Patente del Vehiculo' 
+                            value={vehiculePlate}
+                        /> 
+                    }
+                </div>
+
+                <div className={style.addDatosEstadia__checkBoxContainer}>
                     <Input
-                        useStateFunction={setVehiculePlate}
-                        icon={<AiOutlineCar />}
-                        placeholder='AS 234 RT'
-                        title='Patente del Vehiculo' 
-                        value={vehiculePlate}
+                        useStateFunction={setAnimalAmount}
+                        icon={<FaHorse />}
+                        type='number'
+                        placeholder='0'
+                        title='Cantidad de Caballos' 
+                        value={animalAmount}
                     /> 
-                }
+                </div> 
             </div>
 
-            <Input
-                useStateFunction={setAnimalAmount}
-                icon={<FaHorse />}
-                type='number'
-                placeholder='0'
-                title='Cantidad de Caballos' 
-                value={animalAmount}
-            /> 
-            
-                <br/>
+            <br></br>
 
-            <div className={style.addDatosEstadia__title}>Fecha de la estadía</div>
-            <DateSection
-                setDateFromUnix={setDateFromUnix}
-                setDateToUnix={setDateToUnix}
-                setNumberOfDays={setNumberOfDays}
-                setCheckOneDay={setCheckOneDay} />
-           
-        </div>
+            <div className={style.addDatosEstadia}>
+                <div className={style.addDatosEstadia__titleStayDate}>Fecha de la estadía</div>
+                <div className={style.addDatosEstadia__checkBoxContainer}>
+                    <DateSection
+                        setDateFromUnix={setDateFromUnix}
+                        setDateToUnix={setDateToUnix}
+                        setNumberOfDays={setNumberOfDays}
+                        setCheckOneDay={setCheckOneDay} />
+                </div>
+            </div>
+        </>
     )
 }
 

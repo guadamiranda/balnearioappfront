@@ -11,11 +11,13 @@ import Button from '@/Components/Atoms/button/button';
 import priceServices from '@/Services/priceServices';
 import style from './registrarEstadia.module.scss';
 import AlertServices from '@/utils/AlertServices';
+import { GiCampingTent } from 'react-icons/gi';
 import ReactDOMServer from 'react-dom/server';
 import GuardLogin from '@/utils/guardLogin';
 import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
+
 
 interface IDiscount {
     id: any,
@@ -205,7 +207,8 @@ const RegistrarEstadia = () => {
                 title: 'Faltan rellenar datos',
                 html: "Faltan los siguientes datos: " + missingDataFormatedInHTML,
                 icon: 'error',
-                confirmButtonText: 'Entendido'
+                confirmButtonText: 'Entendido',
+                confirmButtonColor: '#568871'
               });
         }
 
@@ -221,7 +224,7 @@ const RegistrarEstadia = () => {
 
     return(
     <GuardLogin>
-        <ABMTemplate title="Registrar Estadía" subTitle="Ingresa los datos para registrar la estadía.">
+        <ABMTemplate title="Registrar Camping" subTitle="Ingresa los datos para registrar la estadía." icon={<GiCampingTent />}>
             <MultiStepOrder numberStep={step}/>
 
             <div style={{ display: step === 0 ? 'block' : 'none' }}>

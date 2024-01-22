@@ -2,17 +2,19 @@
 @import '../../../app/Variables/Fonts/fonts.module.scss';
 
 .tableContainer{
-    height: 100%;
+    border: 1px solid $orange-bold;
+    border-radius: 8px;
+    min-height: 50px;
+    max-height: 568px;
+    overflow: hidden;
 
     &__tableHeader {
-        background-color: $lightGrey;
-        border: 1px solid $borderGrey;
-        border-radius: 5px;
-        color: $iconGrey;
+        background-color: $orange-bold;
+        border-radius: 6px 6px 0px 0px;
+        color: white;
         display: flex;
         font-family: $montserrat;
         justify-content: space-between;
-        margin-top: 3px;
         padding: 5px 15px;
         width: 100%;
     }
@@ -20,22 +22,29 @@
     &__tableBody{
         display: flex;
         flex-direction: column;
-        font-family: $montserrat;
-        height: 90%;
+        font-family: "Montserrat", sans-serif;
+        height: 46%;
         justify-content: flex-start;
         overflow: hidden;
+        max-height: 536px;
         overflow-y: auto;
-        padding: 5px 15px;
     }
 
     &__tableItem{
         align-items: center;
-        border-bottom: 1px solid #58a12638;
         display: flex;
         font-size: 15px;
         justify-content: space-between;
-        padding: 11px 0px;
+        padding: 11px 10px;
         width: 100%;
+       
+        &__pair{
+            align-items: center;
+            background-color: $orange-light;
+            display: flex;
+            justify-content: space-between;
+            padding: 11px 10px;
+        }
     }
 
     &__tableColumns{

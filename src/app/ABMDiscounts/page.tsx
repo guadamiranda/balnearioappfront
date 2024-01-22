@@ -3,17 +3,16 @@
 import LittleABMTemplate from "@/Components/templates/littleAbmTemplate/LittleABMTemplate";
 import ModalABMTemplate from "@/Components/templates/modalABMTemplate/modalABMTemplate";
 import AddEditDiscount from "@/Components/Molecules/AddEditDiscount/AddEditDiscount";
-import discountServices from '../../Services/discountServices'
+import Loader from "@/Components/Organism/loaderScreen/loader";
+import discountServices from '../../Services/discountServices';
+import sessionServices from "@/Services/sessionServices";
 import Button from "@/Components/Atoms/button/button";
 import Table from "@/Components/Atoms/Table/Table";
-import style from './ABMDiscounts.module.scss'
+import AlertServices from "@/utils/AlertServices";
+import style from './ABMDiscounts.module.scss';
+import { FaPercentage } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import GuardLogin from "@/utils/guardLogin";
-import Loader from "@/Components/Organism/loaderScreen/loader";
-import AlertServices from "@/utils/AlertServices";
-import sessionServices from "@/Services/sessionServices";
-
-
 
 const ABMDiscount = () => {
     const columns = ["Nombre", "Descuento %"]
@@ -91,7 +90,7 @@ const ABMDiscount = () => {
         {
             isLoading? <Loader/> :
             <>
-                <LittleABMTemplate title="Administración de Descuentos" subTitle="">
+                <LittleABMTemplate title="Administración de Descuentos" subTitle="Crea y edita los descuentos" icon={<FaPercentage />}>
                     <div className={style.abmPriceContainer}>
                         <div className={style.abmPriceContainer__tableContainer}>
                             <Table 

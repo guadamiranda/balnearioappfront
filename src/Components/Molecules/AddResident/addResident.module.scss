@@ -9,7 +9,7 @@
     font-family: $montserrat;
     font-size: 12px;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 15px;
     padding: 5px;
     width: 100%;
 
@@ -34,3 +34,18 @@
     }
 
 }
+
+@media (max-width: 1060px) {
+    .addResidentContainer{
+
+        &__inputConteiner{
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+        
+    }
+}
+
+
+

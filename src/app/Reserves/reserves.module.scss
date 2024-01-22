@@ -5,8 +5,13 @@
 .reservesContainer{
     display: flex;
     flex-direction: column;
-    height: 95%;
+    height: 80%;
     justify-content: space-between;
+
+    &__titleTableButtonContainer{
+        padding: 14px 15px;
+        height: 650px;
+    }
 
     &__titleTableContainer{
         height: 93%;
@@ -41,43 +46,17 @@
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1060px) {
     .reservesContainer{
-        display: flex;
-        flex-direction: column;
-        height: 95%;
-        justify-content: space-between;
-    
-        &__title {
-            display: flex;
-            font-size: 20px;
-            font-family: "Montserrat", sans-serif;
-            justify-content: center;
-        }
-    
-        &__actualReserve{
-            font-size: 14px;
-            font-family: "Montserrat", sans-serif;
-            max-height: 80%;
-            overflow-y: auto;
-            width: 100%;
-        }
-    
-        &__buttonContainer{
-            display: flex;
-            justify-content: space-between;
-        }
-    
-        &__tableContainer{
-            height: 90%;
-        }
-    
-        &__spaceButton{
-            margin: 0px 10px;
-        }  
 
-                                &__buttonContainer {
-                                    gap: 5px;
-                                }
+        &__titleTableButtonContainer{
+            height: 800px;
+            padding: 7px 6px;
+        }
+    
+        &__titleTableContainer{
+            height: 96%;
+        }
     }
+    
 }

@@ -18,17 +18,17 @@
         width: 100%;
 
         &:hover{
-            border: 1px solid $green;
+            border: 1px solid $green-light;
         }
 
         &:hover &__icon {
-            color: $green;
+            color: $green-light;
         }
 
         &__icon{
             align-items: center;
-            border-right: 1px solid $borderGrey;
-            color: $borderGrey;
+            border-right: 1px solid $green-light;
+            color: $green-light;
             display: flex;
             padding-right: 5px;
         }

@@ -14,23 +14,22 @@
     z-index: 2;
 
     &__closeButton{
-        color: $borderGrey;
+        color: white;
         cursor: pointer;
     }
 
     &__header{
-        border-bottom: 1px solid #58a12638;
+        background-color: $green-medium;
+        border-radius: 16px 16px 0px 0px;
+        color: white;
         display: flex;
         justify-content: space-between;
-        font-family: $montserrat;
-        font-size: 20px;
-        padding-bottom: 12px;
+        padding: 20px 20px;
     }
 
     &__modal{
         background-color: #ffffff;
         border-radius: 18px;
-        padding: 25px 20px;
         width: 650px;
     }
 

@@ -10,6 +10,7 @@ import Loader from "@/Components/Organism/loaderScreen/loader";
 import { useRouter } from 'next/navigation';
 import AlertServices from '@/utils/AlertServices';
 import GuardLogin from '@/utils/guardLogin';
+import { FaListAlt } from "react-icons/fa";
 
 interface IAllReservesData {
     id: string,
@@ -67,35 +68,38 @@ const Reserves = () => {
         {
             isLoading? <Loader/> :
             <>
-                <LittleABMTemplate title="Reservas" subTitle="Administración de reservas"> 
+                <LittleABMTemplate title="Reservas" subTitle="Administración de reservas" icon={<FaListAlt/>}> 
+                <div className={style.reservesContainer__titleTableButtonContainer}>
                     <div className={style.reservesContainer__titleTableContainer}>
-                        <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
-                        <div className={style.reservesContainer__actualReserve}>
-                            {allReservesData.map((reserve, index) => 
-                            <ActiveReserveCard 
-                            key={reserve.id}
-                            id={reserve.id}
-                            name={reserve.name}
-                            typeStay={reserve.stayType}
-                            managerDNI={reserve.dni}
-                            managerMemberNumber={reserve.managerMemberNumber}
-                            managerCarPlate = {reserve.managerCarPlate}
-                            finishDate={reserve.finishDate}
-                            initDate={reserve.initDate}
-                            phone={reserve.phone}
-                            amount={reserve.amount}
-                            onDelete={() => onDelete(reserve.id)}
-                            />
-                            
-                            )}
-                            
-                        </div>
+                            <span className={style.reservesContainer__title}><b>Reservas activas</b></span>
+                            <div className={style.reservesContainer__actualReserve}>
+                                {allReservesData.map((reserve, index) => 
+                                <ActiveReserveCard 
+                                key={reserve.id}
+                                id={reserve.id}
+                                name={reserve.name}
+                                typeStay={reserve.stayType}
+                                managerDNI={reserve.dni}
+                                managerMemberNumber={reserve.managerMemberNumber}
+                                managerCarPlate = {reserve.managerCarPlate}
+                                finishDate={reserve.finishDate}
+                                initDate={reserve.initDate}
+                                phone={reserve.phone}
+                                amount={reserve.amount}
+                                onDelete={() => onDelete(reserve.id)}
+                                />
+                                
+                                )}
+                                
+                            </div>
 
                     </div>
-                    
+                        
                     <div className={style.reservesContainer__buttonContainer}>
-                                <Button isLoading={isLoadingButtons[0]} text='Buscar reserva por DNI' type='primary' isFullWidth={true} onClickFunction={() => redirectPage('/queryReserve', 0)}></Button>
+                        <Button isLoading={isLoadingButtons[0]} text='Buscar reserva por DNI' type='primary' isFullWidth={true} onClickFunction={() => redirectPage('/queryReserve', 0)}></Button>
                     </div>
+                </div>
+                    
                     
                 </LittleABMTemplate>
             </>

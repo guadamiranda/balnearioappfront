@@ -17,6 +17,7 @@
         display: flex;
         gap: 29px;
         margin-top: 5px;
+        justify-content: center;
     }
 
     &__buttonContainer {
@@ -36,12 +37,17 @@
     &__title {
         border-bottom: 1px solid rgba(145, 145, 145, 0.281);
         font-size: 15px;
-        padding-bottom: 3px;
-        margin-bottom: 5px;
-        margin-top: 5px;
+        background-color: #568871;
+        padding: 10px;
+        border-radius: 9px 10px 10px 10px;
+        color: white;
     }
 
     &__containerPrice {
         margin-top: 20px;
+    }  
+    
+    &__inputDiscounts{
+        padding: 16px 21px;
     }
 }

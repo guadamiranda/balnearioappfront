@@ -21,8 +21,28 @@
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1060px) {
     .addEditPriceContainer{
-        height: 115px;
+        align-items: center;
+        background-color: #f6f6f6;
+        border: 1px solid rgba(59, 59, 59, 0.2196078431);
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+        padding: 5px;
+        min-height: 97px;
+        width: 100%;
+        flex-direction: column;
+    
+        &___leftSide {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        &___rightSide{
+            margin-top: 4px;
+            width: 80%;
+        }
     }
 }

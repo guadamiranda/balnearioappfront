@@ -145,12 +145,14 @@ const AddLeaderGroup: React.FC<IAddLeaderGroup> = ({ setLeaderGroup, checkOneDay
                     useStateFunction={setCity} />
             </div>
 
-            <Dropdown 
-                title='Ninguno' 
-                options={allDiscounts}
-                titleDropdown="Seleccione un Descuento" 
-                selectedValueFunction={setDiscount}
-            />
+            <div className={style.addGroupLeader__LocationGroupInput}>
+                <Dropdown 
+                    title='Ninguno' 
+                    options={allDiscounts}
+                    titleDropdown="Seleccione un Descuento" 
+                    selectedValueFunction={setDiscount}
+                />
+            </div>
         </div>
     )
 }

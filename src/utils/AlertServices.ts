@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 
+
 type typeAlert = 'success' | 'error' | 'warning' | 'info' | 'question'
 
 
@@ -10,6 +11,7 @@ export default {
             icon: typeAlert,
             text: message,
             confirmButtonText: 'Ok',
+            confirmButtonColor: "#568871",
           })
     },
 
@@ -19,6 +21,7 @@ export default {
             icon: 'info',
             text: 'Para acceder a esta opción es necesario tener permisos',
             confirmButtonText: 'Ok',
+            confirmButtonColor: "#568871",
         })
     },
 
@@ -28,6 +31,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Finalizar',
+            confirmButtonColor: "#568871",
             showCancelButton: true,
             denyButtonText: `Cancelar`,
           })
@@ -41,6 +45,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Ok',
+            confirmButtonColor: "#568871",
             showCancelButton: true,
           })
           
@@ -53,6 +58,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Finalizar',
+            confirmButtonColor: "#568871",
             showCancelButton: false,
             allowOutsideClick: false
         })

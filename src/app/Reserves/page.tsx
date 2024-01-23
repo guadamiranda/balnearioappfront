@@ -26,17 +26,16 @@ interface IAllReservesData {
     stayType: string
 }
 
-interface Reserves {
+interface IReserves {
     changeComponent: any
 }
 
-const Reserves: React.FC<Reserves> = ({ changeComponent }) =>{
+const Reserves: React.FC<IReserves> = ({ changeComponent }) =>{
     const router = useRouter();
     const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
     const [isLoading, setIsLoading] = useState(true)
 
-    console.log(allReservesData)
     const redirectPage = (route: string, buttonId: number) => {
         const loadingButtons = isLoadingButtons
         loadingButtons[buttonId] = true;

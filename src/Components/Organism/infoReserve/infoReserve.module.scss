@@ -82,12 +82,12 @@
     }
 }
 
-/*
-align-items: center;
-        
-        flex-wrap: wrap;
-        height: 60px;
-        justify-content: space-around;
-        overflow-y: auto;
-        width: 90%;
-        */
+@media (max-width: 1060px) {
+    .reserveContainer {
+
+        &__managerSection{
+            height: 147px;
+        }
+
+    }
+}

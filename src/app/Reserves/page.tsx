@@ -25,11 +25,11 @@ interface IAllReservesData {
     stayType: string
 }
 
-type IReserves = {
+type IReservesComponent = {
     changeComponent: any
 }
 
-const Reserves: React.FC<IReserves> = ({ changeComponent }) =>{
+const Reserves: React.FC<IReservesComponent> = ({ changeComponent }) =>{
     const router = useRouter();
     const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])

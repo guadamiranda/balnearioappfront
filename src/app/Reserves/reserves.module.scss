@@ -14,7 +14,7 @@
     }
 
     &__titleTableContainer{
-        height: 93%;
+        height: 86%;
     }
 
     &__title {
@@ -48,6 +48,7 @@
 
 @media (max-width: 1060px) {
     .reservesContainer{
+        
 
         &__titleTableButtonContainer{
             height: 800px;
@@ -55,7 +56,7 @@
         }
     
         &__titleTableContainer{
-            height: 96%;
+            height: 85%;
         }
     }
     

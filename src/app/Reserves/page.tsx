@@ -11,7 +11,6 @@ import { useRouter } from 'next/navigation';
 import AlertServices from '@/utils/AlertServices';
 import GuardLogin from '@/utils/guardLogin';
 import { FaListAlt } from "react-icons/fa";
-import QueryReserve from '../queryReserve/page';
 
 interface IAllReservesData {
     id: string,
@@ -26,7 +25,7 @@ interface IAllReservesData {
     stayType: string
 }
 
-interface IReserves {
+type IReserves = {
     changeComponent: any
 }
 

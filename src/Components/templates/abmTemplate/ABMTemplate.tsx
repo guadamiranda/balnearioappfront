@@ -10,7 +10,7 @@ interface IABMTemplate {
     title: string,
     subTitle: string,
     children: React.ReactNode,
-    icon: any
+    icon?: any
 }
 
 const ABMTemplate: React.FC<IABMTemplate> = ({ title, subTitle, children, icon }) => {

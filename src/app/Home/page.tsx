@@ -68,14 +68,14 @@ const HomePrueba = () => {
         case 'Empleados':
             if(isAdmin) {
                 componentToRender = <ABMEmployee />;
-                return
+                break
             }
             AlertServices.renderAlertPermission();
             break;
         case 'Reportes':
             if(isAdmin) {
                 componentToRender = <ABMEmployee />;
-                return
+                break
             }
             AlertServices.renderAlertPermission();
             break;

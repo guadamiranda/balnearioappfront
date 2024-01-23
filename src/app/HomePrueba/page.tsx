@@ -18,6 +18,7 @@ import style from './home2.module.scss';
 import Reserves from "../Reserves/page";
 import GuardLogin from "@/utils/guardLogin";
 import Loader from "@/Components/Organism/loaderScreen/loader";
+import QueryReserve from "../queryReserve/page";
 
 
 const HomePrueba = () => {
@@ -51,7 +52,7 @@ const HomePrueba = () => {
             componentToRender = <RegistrarEstadia />;
             break;
         case 'verReservas':
-            componentToRender = <Reserves />;
+            componentToRender = <Reserves changeComponent={handleButtonClick}/>;
             break;
         case 'ABMPrecios':
             componentToRender = <ABMPrice />;
@@ -65,8 +66,11 @@ const HomePrueba = () => {
         case 'Reportes':
             componentToRender = <ABMEmployee />;
             break;
+        case 'buscarReserva':
+            componentToRender = <QueryReserve />;
+            break;
         default:
-            componentToRender = <Reserves />
+            componentToRender = <Reserves changeComponent={handleButtonClick}/>
             break;
     }
 

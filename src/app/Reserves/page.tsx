@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import AlertServices from '@/utils/AlertServices';
 import GuardLogin from '@/utils/guardLogin';
 import { FaListAlt } from "react-icons/fa";
+import QueryReserve from '../queryReserve/page';
 
 interface IAllReservesData {
     id: string,
@@ -25,7 +26,11 @@ interface IAllReservesData {
     stayType: string
 }
 
-const Reserves = () => {
+interface Reserves {
+    changeComponent: any
+}
+
+const Reserves: React.FC<Reserves> = ({ changeComponent }) =>{
     const router = useRouter();
     const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
@@ -96,7 +101,7 @@ const Reserves = () => {
                     </div>
                         
                     <div className={style.reservesContainer__buttonContainer}>
-                        <Button isLoading={isLoadingButtons[0]} text='Buscar reserva por DNI' type='primary' isFullWidth={true} onClickFunction={() => redirectPage('/queryReserve', 0)}></Button>
+                        <Button isLoading={isLoadingButtons[0]} text='Buscar reserva por DNI' type='primary' isFullWidth={true} onClickFunction={() => changeComponent('buscarReserva')}></Button>
                     </div>
                 </div>
                     

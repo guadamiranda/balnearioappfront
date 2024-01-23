@@ -1,29 +1,51 @@
+@import '../Variables/Colors/colors.module.scss';
+//@import '../Variables/Fonts/fonts.module.scss';
+
 .loginContainer {
     min-height: 100vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--lightGrey);
     color: black;
+    font-family: "Montserrat", sans-serif;
+    background-image: url('../../../public/Assets/LogoCecGrande.png');
+    background-repeat: space;
+    background-size: 120px 120px;
+
+    &__opacity{
+        align-items: center;
+        background-color: #0000006e;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        width: 100vw;
+    }
 
     &-login {
         display: flex;
-        box-shadow: var(--boxShadow);
+        box-shadow: 0px 3px 5px 5px rgba(0, 0, 0, 0.17);
         height: 380px;
         background-color: white;
         border-radius: 10px;
-        padding: 10px;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
+    }
+
+    &-subtitle {
+        color: #d1d1d1;
+        font-size: 13px;
+        //font-weight: $light-montserrat-weight;
     }
 
     &-headerSection {
         align-items: center;
+        background-color: $green-medium;
         display: flex;
         height: 100px;
         flex-direction: column;
         justify-content: center;
+        padding: 5px 5px; 
     }
 
     &-inputSection {
@@ -32,12 +54,14 @@
         height: 200px;
         align-items: center;
         flex-direction: column;
+        padding: 5px 5px;
     }
 
     &-buttonSection {
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 5px 5px;
     }
 
 }

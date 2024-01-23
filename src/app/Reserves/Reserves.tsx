@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import AlertServices from '@/utils/AlertServices';
 import GuardLogin from '@/utils/guardLogin';
 import { FaListAlt } from "react-icons/fa";
+import QueryReserve from '../queryReserve/page';
 
 interface IAllReservesData {
     id: string,
@@ -25,11 +26,11 @@ interface IAllReservesData {
     stayType: string
 }
 
-type IReservesComponent = {
+interface IReserves {
     changeComponent: any
 }
 
-export default function Reserves({changeComponent}:IReservesComponent) {
+const Reserves: React.FC<IReserves> = ({ changeComponent }) =>{
     const router = useRouter();
     const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
@@ -113,3 +114,5 @@ export default function Reserves({changeComponent}:IReservesComponent) {
         </GuardLogin>
     );
 };
+
+export default Reserves;

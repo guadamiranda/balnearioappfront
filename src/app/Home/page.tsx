@@ -15,7 +15,7 @@ import { IoMdExit } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import ABMPrice from "../ABMPrice/page";
 import style from './home2.module.scss';
-import Reserves from "../Reserves/page";
+import Reserves from "../Reserves/Reserves";
 import GuardLogin from "@/utils/guardLogin";
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import QueryReserve from "../queryReserve/page";

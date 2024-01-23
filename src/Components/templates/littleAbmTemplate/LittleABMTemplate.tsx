@@ -8,7 +8,7 @@ interface ILittleABMTemplate {
     title: string,
     subTitle: string,
     children: React.ReactNode,
-    icon: any
+    icon?: any
 }
 
 const LittleABMTemplate: React.FC<ILittleABMTemplate> = ({ title, subTitle, children, icon }) => {

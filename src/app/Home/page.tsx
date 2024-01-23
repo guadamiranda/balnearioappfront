@@ -19,6 +19,10 @@ import Reserves from "../Reserves/page";
 import GuardLogin from "@/utils/guardLogin";
 import Loader from "@/Components/Organism/loaderScreen/loader";
 import QueryReserve from "../queryReserve/page";
+import sessionServices from "@/Services/sessionServices";
+import AlertServices from "@/utils/AlertServices";
+import workshiftServices from "@/Services/workshiftServices";
+import Swal from "sweetalert2";
 
 
 const HomePrueba = () => {
@@ -26,6 +30,7 @@ const HomePrueba = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [roleName, setRoleName] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
     const [loading, setLoading] = useState(true)
     const router = useRouter()
   
@@ -61,10 +66,18 @@ const HomePrueba = () => {
             componentToRender = <ABMDiscount />;
             break;
         case 'Empleados':
-            componentToRender = <ABMEmployee />;
+            if(isAdmin) {
+                componentToRender = <ABMEmployee />;
+                return
+            }
+            AlertServices.renderAlertPermission();
             break;
         case 'Reportes':
-            componentToRender = <ABMEmployee />;
+            if(isAdmin) {
+                componentToRender = <ABMEmployee />;
+                return
+            }
+            AlertServices.renderAlertPermission();
             break;
         case 'buscarReserva':
             componentToRender = <QueryReserve />;
@@ -74,7 +87,29 @@ const HomePrueba = () => {
             break;
     }
 
+    const logout = async() => {
+        const {value: observacion, isConfirmed} = await Swal.fire({
+          title: "Cierre de turno",
+          text: "¿Está seguro de que desea finalizar su turno laboral?",
+          input: 'textarea',
+          inputLabel: 'Observación:',
+          inputPlaceholder: 'Alguna observación que considere',
+          confirmButtonText: 'Finalizar',
+          showCancelButton: true,
+          denyButtonText: `Cancelar`,
+          confirmButtonColor: "#568871",
+          cancelButtonColor: "#cf8700",
+        })
+        
+        if(isConfirmed) {
+          await workshiftServices.finish(observacion);
+          localStorage.removeItem('userData')
+          router.push('/login')
+        }
+      }
+
     useEffect(()=> {
+        setIsAdmin(sessionServices.isAdmin())
         setInformationUser()
         setLoading(false)
       },[])
@@ -116,14 +151,16 @@ const HomePrueba = () => {
                                 <FaUsers className={style.homeContainer__icons}/> 
                                 <span>Empleados</span> 
                             </div>
+                            {/* 
                             <div className={style.homeContainer__buttons} onClick={() => handleButtonClick('Reportes')}> 
                                 <TbReportSearch className={style.homeContainer__icons}/> 
                                 <span>Reportes</span> 
                             </div>
+                            */}
                         </div>
 
                         <div className={style.homeContainer__menuFooter}> 
-                            <div className={style.homeContainer__buttons}> <IoMdExit className={style.homeContainer__icons}/> <span>Finalizar turno</span> </div>
+                            <div className={style.homeContainer__buttons} onClick={()=> logout()}> <IoMdExit className={style.homeContainer__icons}/> <span>Finalizar turno</span> </div>
                         </div>
                     </div>
 

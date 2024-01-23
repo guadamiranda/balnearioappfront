@@ -11,7 +11,7 @@ export default {
             icon: typeAlert,
             text: message,
             confirmButtonText: 'Ok',
-            confirmButtonColor: "#568871",
+            confirmButtonColor: "#e49506",
           })
     },
 
@@ -21,7 +21,7 @@ export default {
             icon: 'info',
             text: 'Para acceder a esta opción es necesario tener permisos',
             confirmButtonText: 'Ok',
-            confirmButtonColor: "#568871",
+            confirmButtonColor: "#e49506",
         })
     },
 
@@ -31,7 +31,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Finalizar',
-            confirmButtonColor: "#568871",
+            confirmButtonColor: "#e49506",
             showCancelButton: true,
             denyButtonText: `Cancelar`,
           })
@@ -45,7 +45,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Ok',
-            confirmButtonColor: "#568871",
+            confirmButtonColor: "#e49506",
             showCancelButton: true,
           })
           
@@ -58,7 +58,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Finalizar',
-            confirmButtonColor: "#568871",
+            confirmButtonColor: "#e49506",
             showCancelButton: false,
             allowOutsideClick: false
         })

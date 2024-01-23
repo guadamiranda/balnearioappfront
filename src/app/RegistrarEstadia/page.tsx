@@ -280,12 +280,8 @@ const RegistrarEstadia = () => {
 
             <div className={style.registrarEstadiaContainer__buttonContainer}>
                 {step != 0 && <Button text='Atras' onClickFunction={() => setStep(step - 1)} type='primary'></Button >}
-                {step < 3 && <div className={buttonContainerStyle}>
-                    <Button text='Siguiente' onClickFunction={() => setStep(step + 1)} type='primary'></Button >
-                </div>}
-                {step === 3 && <div className={buttonContainerStyle}>
-                        <Button isLoading={isLoadingButtons} text='Realizar Reserva' onClickFunction={() => disableButton === false ? registerData() : console.log('hi')} type='primary'></Button >
-                </div>}
+                {step < 3 && <Button text='Siguiente' onClickFunction={() => setStep(step + 1)} type='primary'></Button >}
+                {step === 3 && <Button isLoading={isLoadingButtons} text='Realizar Reserva' onClickFunction={() => disableButton === false ? registerData() : console.log('hi')} type='primary'></Button >}
             </div>
             
         </ABMTemplate>

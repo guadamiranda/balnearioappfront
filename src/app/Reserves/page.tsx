@@ -29,7 +29,7 @@ type IReservesComponent = {
     changeComponent: any
 }
 
-const Reserves: React.FC<IReservesComponent> = ({ changeComponent }) =>{
+export default function Reserves({changeComponent}:IReservesComponent) {
     const router = useRouter();
     const [allReservesData, setAllReservesData] = useState<IAllReservesData[]>([])
     const [isLoadingButtons, setIsLoadingButton] = useState([false,false])
@@ -113,5 +113,3 @@ const Reserves: React.FC<IReservesComponent> = ({ changeComponent }) =>{
         </GuardLogin>
     );
 };
-
-export default Reserves;

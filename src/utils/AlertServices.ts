@@ -25,12 +25,12 @@ export default {
         })
     },
 
-    rederAlertWithConfirm: async (title: string, message: string, typeAlert: typeAlert, onConfirmFunction: () => void) => {
+    rederAlertWithConfirm: async (title: string, message: string, typeAlert: typeAlert, confirmText: string, onConfirmFunction: () => void) => {
         const {isConfirmed} = await Swal.fire({
             title: title,
             text: message,
             icon: typeAlert,
-            confirmButtonText: 'Finalizar',
+            confirmButtonText: confirmText,
             confirmButtonColor: "#e49506",
             showCancelButton: true,
             denyButtonText: `Cancelar`,

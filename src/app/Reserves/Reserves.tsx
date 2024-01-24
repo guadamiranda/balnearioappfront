@@ -52,6 +52,7 @@ const Reserves: React.FC<IReserves> = ({ changeComponent }) =>{
                 'Falla en el servidor',
                 'No se puede conectar con el servidor, contactese con el administrador',
                 'error',
+                'Finalizar',
                 () => {router.push('/')}
             )
             return

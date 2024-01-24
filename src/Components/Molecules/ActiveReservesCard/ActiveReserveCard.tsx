@@ -38,6 +38,7 @@ const ActiveReserveCard: React.FC<IActiveReserveCard> = ({
             '¿Esta seguro?', 
             'Esta a punto de eliminar una reserva y no es reversible', 
             'warning',
+            'Eliminar',
             async () => {
                 setIsEliminateReserve(true) 
                 await reserveServices.deleteReserve(id)

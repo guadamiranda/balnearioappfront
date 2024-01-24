@@ -1,6 +1,6 @@
 'use client'
 
-import RegistrarEstadia from "../RegistrarEstadia/page";
+import RegistrarEstadia from "../RegistrarEstadia/RegistrarEstadia";
 import { AiFillDollarCircle } from "react-icons/ai";
 import OnlyOneDayStay from "../OnlyOneDayStay/page";
 import { TbReportSearch } from "react-icons/tb";
@@ -54,7 +54,7 @@ const HomePrueba = () => {
             componentToRender = <OnlyOneDayStay />;
             break;
         case 'registrarCamping':
-            componentToRender = <RegistrarEstadia />;
+            componentToRender = <RegistrarEstadia changeComponent={handleButtonClick}/>;
             break;
         case 'verReservas':
             componentToRender = <Reserves changeComponent={handleButtonClick}/>;

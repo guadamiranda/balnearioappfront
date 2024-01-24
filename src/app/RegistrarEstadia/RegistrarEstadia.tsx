@@ -50,7 +50,11 @@ interface IDate {
     checkOneDay: boolean
 }
 
-const RegistrarEstadia = () => {
+interface IRegistrarEstadia {
+    changeComponent: any
+}
+
+const RegistrarEstadia: React.FC<IRegistrarEstadia> = ({ changeComponent }) => {
     const router = useRouter();
     const [step, setStep] = useState(0)
     const [visitors, setVisitors] = useState<IVisitors[]>([])
@@ -181,12 +185,13 @@ const RegistrarEstadia = () => {
             }
             
             const response = await reserveServices.postReserve(newReserve)
+            setIsLoadingButton(false)
             if (response?.status == 201) {
                 AlertServices.renderAlertWithOnlyButtonConfirmAndFunction(
                     'Completado',
                     'Se creo una reserva correctamente',
                     'success',
-                    () => router.push('/Home')
+                    () => changeComponent('verReservas')
                 )
                 return
             }

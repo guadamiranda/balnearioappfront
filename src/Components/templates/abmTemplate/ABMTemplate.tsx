@@ -9,17 +9,17 @@ import { useRouter } from 'next/navigation'
 interface IABMTemplate {
     title: string,
     subTitle: string,
-    children: React.ReactNode
+    children: React.ReactNode,
+    icon?: any
 }
 
-const ABMTemplate: React.FC<IABMTemplate> = ({ title, subTitle, children }) => {
+const ABMTemplate: React.FC<IABMTemplate> = ({ title, subTitle, children, icon }) => {
     const router = useRouter()
 
     return(
         <div className={style.ABMContainer}>
             <div className={style.ABMContainer__title}>
-                <Title icon={<BiLeaf/>} subTitle={subTitle} title={title}/>
-                <AiFillHome className={style.ABMContainer__homeIcon} onClick={() => router.push('/')}/>
+                <Title icon={icon} subTitle={subTitle} title={title}/>
             </div>
             
             <div className={style.ABMContainer__childContainer}>

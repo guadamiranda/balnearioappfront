@@ -1,9 +1,9 @@
-import HomeComponent from './Home/page'
+import NewHome from './Home/page'
 
 export default function Home() {
   return (
     <main>
-      <HomeComponent/>  
+      <NewHome/>  
     </main>
   )
 }

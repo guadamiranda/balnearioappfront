@@ -26,11 +26,11 @@
     white-space: nowrap;
 
     &-primary {
-        border: 1px solid $green;
-        color: $green;
+        background-color: $orange-bold;
+        color: white;
 
         &:hover {
-            background-color: $green;
+            background-color: $orange-hover;
             color: white;
         }
     }

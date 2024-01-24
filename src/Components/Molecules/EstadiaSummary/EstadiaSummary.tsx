@@ -140,10 +140,12 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                     </div>
                 </div>
 
-            <div className={style.estadiaSummary__title}>Visitantes</div>
+            <br></br>
+                    
+            <div className={style.estadiaSummary__title2}>Visitantes</div>
 
             {leaderFull.dniNumber === '' ?
-                <div> *No se agrego al responsable </div>
+                <div className={style.estadiaSummary__advertise}> *No se agrego al responsable </div>
                 :
                 <div className={style.estadiaSummary__visitantesContainer}>
                     <div className={style.estadiaSummary__visitantes}>
@@ -169,7 +171,7 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
             }
 
             {visitors.length === 0 ?
-                <div> *No se agrego visitantes </div>
+                <div className={style.estadiaSummary__advertise}> *No se agrego visitantes </div>
                 :
                 visitors.map((visitor,index) =>
                     <div className={style.estadiaSummary__visitantesContainer}>
@@ -194,7 +196,10 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                         </div>
                     </div>
                 )}
-            <div className={style.estadiaSummary__title}>Total de la Estadía</div>
+
+            <br></br>
+            
+            <div className={style.estadiaSummary__title2}>Total de la Estadía</div>
             <div className={style.estadiaSummary__priceContainer}>
                 <b className={style.estadiaSummary__price}>
                     {datosFechas.dateFromUnix === 0 ? '$' : `$ ${amountStay}`}

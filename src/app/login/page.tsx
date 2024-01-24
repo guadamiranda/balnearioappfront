@@ -45,17 +45,19 @@ const LoginPage = () => {
 
     return (
         <div className={style.loginContainer}>
-            <div className={style['loginContainer-login']}>
-                <div className={style['loginContainer-headerSection']}>
-                    <Title title="Bienvenido"></Title>
-                    <Encabezado title="Ingrese sus datos para comenzar su turno"></Encabezado>
-                </div>
-                <div className={style['loginContainer-inputSection']}>
-                    <Input isFullWidth={true} title="Dni" useStateFunction={setDni} placeholder="32856123" icon={undefined}></Input>
-                    <Input isFullWidth={true} title="Contraseña" useStateFunction={setPassword} placeholder="Mi Contraseña" icon={undefined}></Input>
-                </div>
-                <div className={style['loginContainer-buttonSection']}>
-                    <Button text={"Iniciar Turno"} type={"primary"} isLoading={isLoading} onClickFunction={() => logIn()}></Button>
+            <div className={style.loginContainer__opacity}>
+                <div className={style['loginContainer-login']}>
+                    <div className={style['loginContainer-headerSection']}>
+                        <div style={{display: 'flex', justifyContent: 'center'}}><Title title="Bienvenido"></Title></div>
+                        <span className={style['loginContainer-subtitle']}>Ingrese sus datos para comenzar su turno</span>
+                    </div>
+                    <div className={style['loginContainer-inputSection']}>
+                        <Input isFullWidth={true} title="Dni" useStateFunction={setDni} placeholder="32856123" icon={undefined}></Input>
+                        <Input isFullWidth={true} title="Contraseña" useStateFunction={setPassword} placeholder="Mi Contraseña" icon={undefined}></Input>
+                    </div>
+                    <div className={style['loginContainer-buttonSection']}>
+                        <Button text={"Iniciar Turno"} type={"primary"} isLoading={isLoading} onClickFunction={() => logIn()}></Button>
+                    </div>
                 </div>
             </div>
         </div>

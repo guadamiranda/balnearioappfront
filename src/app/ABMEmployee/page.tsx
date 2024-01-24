@@ -12,6 +12,7 @@ import AlertServices from "@/utils/AlertServices";
 import rolServices from "@/Services/rolServices";
 import style from './ABMEmployee.module.scss';
 import { useEffect, useState } from "react";
+import { FaUsers } from "react-icons/fa";
 
 
 type IAllEmployeesData = {
@@ -138,7 +139,7 @@ const ABMEmployee= () => {
         {
             isLoading? <Loader/> :
             <>
-            <LittleABMTemplate title="Administración de Empleados" subTitle="">
+            <LittleABMTemplate title="Administración de Empleados" subTitle="Crea y edita empleados" icon={<FaUsers />}>
                 <div className={style.abmPriceContainer}>
                     <div className={style.abmPriceContainer__tableContainer}>
                         <Table 

@@ -104,7 +104,7 @@ const AddEditRol: React.FC<IAddEditEmployee> = ({ fullElementToEdit, updateTable
                 <br/>
                 <Input icon={<ImPriceTag/>} value={newLastNameEmployee} placeholder="Apellido" title='Apellido del Empleado' useStateFunction={setNewLastNameEmployee} isFullWidth={true}></Input>
                 <br/>
-                <Input icon={<ImPriceTag/>} value={newDocumentNumberEmployee} placeholder="Documento" title='Documento de Identidad' useStateFunction={setNewDocumentNumberEmployee} isFullWidth={true}></Input>
+                {fullElementToEdit.id === '' ? <Input icon={<ImPriceTag/>} value={newDocumentNumberEmployee} placeholder="Documento" title='Documento de Identidad' useStateFunction={setNewDocumentNumberEmployee} isFullWidth={true}></Input> : null}
                 <br/>
                 <Dropdown title='Seleccione un Rol' options={allRoles} titleDropdown="Rol que ocupa el empleado" selectedValueFunction={selectedValue} />
                 <br/>

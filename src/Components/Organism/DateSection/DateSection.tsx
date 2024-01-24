@@ -79,20 +79,13 @@ const DateSection: React.FC<IDateSection> = ({
 
     return(
         <div className={style.registrarEstadiaContainer__section}>
-            <Checkbox
-                title='¿Se queda solo un día?' 
-                      onClickFunction={setPriceAndChecked}/>
-                              
-            {isCheckedOneDay? <></> : 
             <div className={style.registrarEstadiaContainer__estadia}>
                 <ReservationDays 
                     setFechaDesdeFunction={setDateFrom} 
                     setFechaHastaFunction={setDateTo}
                     valueDateFrom={dateFrom}
                     valueDateTo={dateTo} />
-            </div>
-            }
-            
+            </div> 
         </div>
     )
 }

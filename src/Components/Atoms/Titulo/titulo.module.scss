@@ -2,16 +2,18 @@
 @import '../../../app/Variables/Fonts/fonts.module.scss';
 
 .title{
+    color: white;
     display: flex;
-    justify-content: flex-start; 
-    padding-bottom: 12px;
+    justify-content: space-between;
+    width: 100%;
 
     &__iconContainer{
-        padding-right: 10px;
-
+        align-items: center;
+        display: flex;
+       
         &__icon{
-            font-size: 25px;
-            padding-top: 3px;
+            color: white;
+            font-size: 38px;
         }
     }
 
@@ -22,6 +24,7 @@
         font-family: $montserrat;
 
         &__subTitle{
+            color: #d1d1d1;
             font-size: 13px;
             font-weight: $light-montserrat-weight;
         }

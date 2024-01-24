@@ -1,9 +1,10 @@
 .loaderContainer{
-    height: 100px;
-    width: 100px;
+    display: flex;
+    height: 100%;
+    width: 100%;
 
     &__loader{
-        background-image: url('../../../Assets/loader100px.gif');
+        background-image: url('../../../../public/Assets/Spinner-1s-200px.svg');
         height: 100%;
         object-fit: cover;
         background-repeat: no-repeat; 

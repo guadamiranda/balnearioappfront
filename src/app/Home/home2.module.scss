@@ -1,0 +1,139 @@
+
+@import '../Variables/Colors/colors.module.scss';
+
+.homeContainer{ 
+    display: flex;
+    font-family: "Montserrat", sans-serif;
+    min-height: 100vh;
+    width: 100vw;
+    background-image: url('../../../public/Assets/LogoCecGrande.png');
+    background-repeat: space;
+    background-size: 120px 120px;
+
+    &__opacity{
+        background-color: #0000006e;
+        display: flex;
+        min-height: 100vh;
+        width: 100vw;
+    }
+
+    &__imgUserContainer{
+        align-items: center;
+        color: rgb(84 84 84 / 70%);
+        display: flex;
+        font-size: 20px;
+        flex-direction: column;
+        gap: 14px;
+        text-align: center
+    }
+
+    &__img{
+        background-color: $green-bold;
+        background-image: url('../../../public/Assets/LogoCecGrande.png');
+        background-size: cover;
+        box-shadow: 0px 3px 5px 5px rgb(0 0 0 / 17%);
+        height: 199px;
+        width: 200px;
+    }
+    
+    &__menuContainer{
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.842);
+        box-shadow: 6px 1px 5px 0px rgba(0, 0, 0, 0.514);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh;
+        width: 250px;
+    }
+
+    &__menuButtons{
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        height: 534px;
+        gap: 15px;
+    }
+
+    &__buttons{
+        align-items: center;
+        border-radius: 6px;
+        border: 2px solid transparent;
+        color: white;
+        background-color: $green-medium;
+        cursor: pointer;
+        display: flex;
+        gap: 10px;
+        padding: 15px 10px;
+        width: 220px;
+
+        span {
+            font-size: 16px;
+        }
+    }
+
+    &__buttons:hover{
+        background-color: $green-medium;
+        color: white;
+    }
+
+    &__icons {
+        color: white;
+        font-size: 26px;
+    }
+
+    &__menuFooter{
+        margin-bottom: 5px;
+    }
+
+    &__componentToRenderize{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        width: calc(100vw - 250px);
+    }
+}
+
+@media (max-width: 1060px) {
+
+    .homeContainer {
+
+        &__menuContainer{
+            width: 80px;
+        }
+
+        &__componentToRenderize{
+            width: calc(100vw - 80px);
+        }
+
+        &__buttons{
+            display: flex;
+            justify-content: center;
+            width: 65px;
+    
+            span {
+                display: none;
+            }
+        }
+
+        &__img{
+            background-color: $green-bold;
+            background-image: url('../../../public/Assets/LogoCecGrande.png');
+            background-size: cover;
+            box-shadow: none;
+            margin-top: 4px;
+            height: 73px;
+            width: 73px;
+        }
+
+        &__imgUserContainer{
+            align-items: center;
+            color: rgb(84 84 84 / 70%);
+            display: flex;
+            font-size: 0px;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+    }
+  }

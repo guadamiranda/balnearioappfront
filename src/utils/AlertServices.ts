@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 
+
 type typeAlert = 'success' | 'error' | 'warning' | 'info' | 'question'
 
 
@@ -10,6 +11,7 @@ export default {
             icon: typeAlert,
             text: message,
             confirmButtonText: 'Ok',
+            confirmButtonColor: "#e49506",
           })
     },
 
@@ -19,15 +21,17 @@ export default {
             icon: 'info',
             text: 'Para acceder a esta opción es necesario tener permisos',
             confirmButtonText: 'Ok',
+            confirmButtonColor: "#e49506",
         })
     },
 
-    rederAlertWithConfirm: async (title: string, message: string, typeAlert: typeAlert, onConfirmFunction: () => void) => {
+    rederAlertWithConfirm: async (title: string, message: string, typeAlert: typeAlert, confirmText: string, onConfirmFunction: () => void) => {
         const {isConfirmed} = await Swal.fire({
             title: title,
             text: message,
             icon: typeAlert,
-            confirmButtonText: 'Finalizar',
+            confirmButtonText: confirmText,
+            confirmButtonColor: "#e49506",
             showCancelButton: true,
             denyButtonText: `Cancelar`,
           })
@@ -41,6 +45,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Ok',
+            confirmButtonColor: "#e49506",
             showCancelButton: true,
           })
           
@@ -53,6 +58,7 @@ export default {
             text: message,
             icon: typeAlert,
             confirmButtonText: 'Finalizar',
+            confirmButtonColor: "#e49506",
             showCancelButton: false,
             allowOutsideClick: false
         })

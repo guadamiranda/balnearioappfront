@@ -3,7 +3,6 @@
 
 .buttonIconContainer {
     align-items: center;
-    border: 1px solid $borderGrey;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -14,21 +13,21 @@
     padding: 3px 4px;
 
     &-info {
-        border: 1px solid $info;
-        color: $info;
+        background-color: $orange-bold;
+        color: white;
 
         &:hover {
-            background-color: $info;
+            background-color: $orange-hover;
             color: white;
         }
     }
 
     &-danger {
-        border: 1px solid $danger;
-        color: $danger;
+        background-color: $green-medium;
+        color: white;
 
         &:hover {
-            background-color: $danger;
+            background-color: $green-hover;
             color: white;
         }
     }

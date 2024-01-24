@@ -2,13 +2,23 @@
 .addDatosEstadia{
     font-family: "Montserrat", sans-serif;
 
-    &__title {
+    &__title, &__titleStayDate {
         border-bottom: 1px solid rgba(145, 145, 145, 0.281);
         font-size: 15px;
-        padding-bottom: 3px;
+        background-color: #568871;
+        padding: 10px;
+        color: white;
+    }
+
+    &__title{
+        border-radius: 9px 10px 1px 0px;
     }
 
     &__checkBoxContainer{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
         margin: 10px 0px;
+        padding: 1px 12px;
     }
 }

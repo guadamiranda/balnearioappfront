@@ -10,13 +10,16 @@ interface ITitle{
 const Title: React.FC<ITitle> = ({title, icon, subTitle}) => {
     return(
         <div className={style.title}>
-            <div className={style.title__iconContainer}>
-                <div className={style.title__iconContainer__icon}>{icon}</div>
-            </div>
+
             <div className={style.title__titlesContainer}>
                 <span className={style.title__titlesContainer__title}><b>{title}</b></span>
                 <span className={style.title__titlesContainer__subTitle}>{subTitle}</span>
-            </div>  
+            </div> 
+
+            <div className={style.title__iconContainer}>
+                <div className={style.title__iconContainer__icon}>{icon}</div>
+            </div>
+
         </div>
     )
 }

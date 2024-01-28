@@ -54,6 +54,11 @@ interface IRegistrarEstadia {
     changeComponent: any
 }
 
+interface payTypeInterface {
+    name: string,
+    code: string
+}
+
 const RegistrarEstadia: React.FC<IRegistrarEstadia> = ({ changeComponent }) => {
     const router = useRouter();
     const [step, setStep] = useState(0)
@@ -68,6 +73,7 @@ const RegistrarEstadia: React.FC<IRegistrarEstadia> = ({ changeComponent }) => {
     const [prices, setPrices] = useState({})
     const [isLoadingButtons, setIsLoadingButton] = useState(false)
     const [disableButton, setDisableButton] = useState(false)
+    const [paidTypeSelected, setPaidDaySelected] = useState<payTypeInterface>({} as payTypeInterface);
 
     const [dayPrice, setDayPrice] = useState(0)
     const [campingPrice, setCampingPrice] = useState(0)
@@ -90,6 +96,7 @@ const RegistrarEstadia: React.FC<IRegistrarEstadia> = ({ changeComponent }) => {
         if (hasVehicule === true && vehiculePlate === '') allMissingData.push('Número de patente')
         if (datosFechas.dateFromUnix === 0) allMissingData.push('Fecha desde')
         if (datosFechas.dateToUnix === 0) allMissingData.push('Fecha hasta')
+        if (!paidTypeSelected.code) allMissingData.push('Método de pago')
         return allMissingData
     }
 
@@ -151,6 +158,7 @@ const RegistrarEstadia: React.FC<IRegistrarEstadia> = ({ changeComponent }) => {
                 initDate: (datosFechas.dateFromUnix * 1000).toString(),
                 finishDate: (datosFechas.dateToUnix * 1000).toString(),
                 amount: amountPrice,
+                payTypeCode: paidTypeSelected.code,
                 stayType: 'a5fa073e-8fb7-47ff-95b9-9a5de0590a6a',
                 group: {
                     idCampsite: '86abe192-f273-45ea-b2ac-103312791439',
@@ -279,7 +287,8 @@ const RegistrarEstadia: React.FC<IRegistrarEstadia> = ({ changeComponent }) => {
                             datosFechas={datosFechas}
                             vehiculePlate={vehiculePlate}
                             hasVehicule={hasVehicule}
-                            visitors={visitors as IVisitors[]} />
+                            visitors={visitors as IVisitors[]}
+                            setPayType={setPaidDaySelected} />
                 </div>
             </div>
 

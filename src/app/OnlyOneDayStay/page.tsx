@@ -23,12 +23,18 @@ interface IDiscount {
     percent: any
 }
 
+interface payTypeInterface {
+    name: string,
+    code: string
+}
+
 const OnlyOneDayStay = () => {
     const router = useRouter();
 
     const [discount, setDiscount] = useState<IDiscount>({} as IDiscount);
     const [allDiscounts, setAllDiscounts] = useState<IDiscount[]>([]);
     const [isLoadingButtons, setIsLoadingButtons] = useState(false);
+    const [paidTypeSelected, setPaidDaySelected] = useState<payTypeInterface>({} as payTypeInterface);
     const [disableButton, setDisableButton] = useState(false);
     const [partnerNumber, setPartnerNumber] = useState('');
     const [dateFromUnix, setDateFromUnix] = useState(0);
@@ -36,7 +42,10 @@ const OnlyOneDayStay = () => {
     const [dateToUnix, setDateToUnix] = useState(0);
     const [dniNumber, setDniNumber] = useState('');
     const [dayPrice, setDayPrice] = useState(0);
-    const prueba = true
+    
+    const paidType= [{name: 'Transferencia' , code: 'TRANS'}, {name: 'Efectivo', code: 'EFECT'}]
+
+    console.log('datos: ', paidTypeSelected.code)
 
     const buildVisitor = () => {
         return [
@@ -49,7 +58,7 @@ const OnlyOneDayStay = () => {
                 memberNumber: partnerNumber.toString(),
                 wristbandNumber: '',
                 idDiscount: Object.keys(discount).length === 0 ? '' : discount.id.toString(),
-                isManager: true
+                isManager: true,
             },
         ]
     }
@@ -59,6 +68,7 @@ const OnlyOneDayStay = () => {
             initDate: (dateFromUnix * 1000).toString(),
             finishDate: (dateToUnix * 1000).toString(),
             amount: amountPrice,
+            payTypeCode: paidTypeSelected.code,
             stayType: '2c9e4708-3f2b-4ae9-99ac-d68172d0bf0e',
             group: {
                 idCampsite: '86abe192-f273-45ea-b2ac-103312791439',
@@ -73,13 +83,13 @@ const OnlyOneDayStay = () => {
         setIsLoadingButtons(true)
         setDisableButton(true)
 
-        if(!dniNumber) {
+        if(!dniNumber || !paidTypeSelected.code) {
             setDisableButton(false)
             setIsLoadingButtons(false)
 
             AlertServices.renderAlert(
                 'Error',
-                'Falta ingresar el DNI',
+                'Faltan ingresar datos',
                 'error',
             )
             return
@@ -115,7 +125,7 @@ const OnlyOneDayStay = () => {
         const price = partnerNumber ? 0 : dayPrice
         const priceWithDiscount = price - (price * (discount.percent / 100))
         const priceWithoutDiscount = price
-        //setAmountPrice(0)
+
         setAmountPrice(Object.keys(discount).length === 0 ? priceWithoutDiscount : priceWithDiscount)
     }
     
@@ -204,12 +214,23 @@ const OnlyOneDayStay = () => {
 
                         <div className={style.onlyOneDatStay__inputDiscounts}>
                             <Dropdown
+                                title='Seleccione uno'
+                                options={paidType}
+                                titleDropdown="Método de pago (*)"
+                                selectedValueFunction={setPaidDaySelected}
+                                obligatory={true}
+                            />
+                        </div>
+
+                        <div className={style.onlyOneDatStay__inputDiscounts}>
+                            <Dropdown
                                 title='Ninguno'
                                 options={allDiscounts}
                                 titleDropdown="Seleccione un Descuento"
                                 selectedValueFunction={setDiscount}
                             />
                         </div>
+
                     </div>
 
                     <div className={style.onlyOneDatStay__containerPrice}>

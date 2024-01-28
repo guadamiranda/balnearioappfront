@@ -11,9 +11,10 @@ interface IDropdown {
     options: Array<Option>,
     titleDropdown?: string,
     selectedValueFunction: (name: any) => void,
+    obligatory?: boolean
 }
 
-const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selectedValueFunction }) => {
+const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selectedValueFunction, obligatory= false }) => {
     const className = `${dropdownStyle.dropdown}`
     const classNameTitle = `${dropdownStyle.dropdown} ${dropdownStyle[`dropdown__title`]}`
     const classNameTitleClicked = `${dropdownStyle.dropdown} ${dropdownStyle[`dropdown__title`]} ${dropdownStyle[`dropdown__titleClicked`]}`
@@ -56,7 +57,7 @@ const Dropdown: React.FC<IDropdown> = ({ title, options, titleDropdown, selected
                 <div className={dropdownStyle.dropdown__iconArrow}>{arrow}</div>
             </div>
             <div className={optionItemsClassName}>
-                <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue('Ninguno')} key='noOption'>Ninguno</div>
+                {!obligatory && <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue('Ninguno')} key='noOption'>Ninguno</div>}
                 {options.map(option => <div className={dropdownStyle.dropdown__options__item} onClick={() => closeAndSelectValue(option)} key={option.name}>{option.name}</div>)}
             </div>
         </div>

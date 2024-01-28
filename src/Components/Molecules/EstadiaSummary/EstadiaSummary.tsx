@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import style from './estadiaSummary.module.scss'
 import Input from '@/Components/Atoms/Input/input'
+import Dropdown from '@/Components/Atoms/DropDown/Dropdown'
 
 interface IDiscount {
     name: string,
@@ -28,12 +29,14 @@ interface IStaySummary {
     setAmountStayState: (value:any) => void,
     datosFechas: any,
     animalPrice: number,
-    vehiculePrice: number
+    vehiculePrice: number,
+    setPayType: any
 }
 
 const EstadiaSummary: React.FC<IStaySummary> = ({
     animalAmount,
     setAmountStayState,
+    setPayType,
     leader,
     animalPrice,
     vehiculePrice,
@@ -48,6 +51,8 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
     const [animalValue, setAnimalValue] = useState<any>(0)
     const [visitorPrices, setVisitorPrices] = useState([0]); 
     const [leaderFull, setLeaderFull] = useState<ILeader>({ discount: {} } as ILeader)
+
+    const paidType= [{name: 'Transferencia' , code: 'TRANS'}, {name: 'Efectivo', code: 'EFECT'}]
 
     useEffect(() => {
         setLeaderFull(leader)
@@ -182,6 +187,7 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
                                 {visitor.discount === undefined ? '-' : visitor.discount.percent}
                             </span>
                         </div>
+                       
                         <div className={style.estadiaSummary__price}>
                             {datosFechas.dateFromUnix === 0 ? null : 
                                 <Input
@@ -199,11 +205,22 @@ const EstadiaSummary: React.FC<IStaySummary> = ({
 
             <br></br>
             
-            <div className={style.estadiaSummary__title2}>Total de la Estadía</div>
-            <div className={style.estadiaSummary__priceContainer}>
+            <div className={style.estadiaSummary__title2}>
+                Total de la Estadía
                 <b className={style.estadiaSummary__price}>
                     {datosFechas.dateFromUnix === 0 ? '$' : `$ ${amountStay}`}
                 </b>
+                </div>
+            <div className={style.estadiaSummary__priceContainer}>
+                <div className={style.estadiaSummary__payTypeContainer}>
+                    <Dropdown
+                        title='Seleccione uno'
+                        options={paidType}
+                        titleDropdown="Método de pago (*)"
+                        selectedValueFunction={setPayType}
+                        obligatory={true}
+                    />
+                </div>
             </div>
 
         </div>
